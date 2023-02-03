@@ -1,26 +1,34 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Products } from "../component/products";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
-	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
-		</div>
-	);
+  return (
+    <div className="container">
+      <div
+        className="d-flex container mb-5"
+        style={{ overflowX: "scroll", height: "570px" }}
+      >
+        <h1>Catalogo de productos.</h1>
+        <div className="d-flex flex-nowrap row row-cols-4">
+          <Products />
+          {/* {store.productos.map((cadaProducto, index) => (
+            <Products
+              key={index}
+              id={index + 1}
+              nombre={cadaProducto.name}
+              categoria={cadaProducto.category}
+              precio={cadaProducto.price}
+              stock={cadaProducto.amount}
+              descripcion={cadaProducto.description}
+              condicion={cadaProducto.condition}
+            />
+          ))} */}
+        </div>
+      </div>
+    </div>
+  );
 };
