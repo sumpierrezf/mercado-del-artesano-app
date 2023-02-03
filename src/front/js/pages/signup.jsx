@@ -5,29 +5,38 @@ import { Navigate } from "react-router-dom";
 export const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [username, setUsername] = useState("");
   const { store, actions } = useContext(Context);
 
-  function enviarDatos(e) {
-    e.preventDefault();
-    actions.signup(email, password, username);
-    actions.login(email, password, username);
-    setEmail("");
-    setPassword("");
-    setUsername("");
-  }
+  // function enviarDatos(e) {
+  //   e.preventDefault();
+  //   actions.signup(email, password, username);
+  //   actions.login(email, password, username);
+  //   setEmail("");
+  //   setPassword("");
+  //   setUsername("");
+  // }
 
   return (
     <>
-      <h1>Registro de usuario.</h1>
-      {store.auth === true ? (
-        <Navigate to="/" />
-      ) : (
-        <div className="container">
+      <div style={{ backgroundColor: "#FDEEDC" }}>
+        <h2
+          className="d-flex justify-content-center"
+          style={{ backgroundColor: "#FDEEDC" }}
+        >
+          Registro de usuario
+        </h2>
+
+        <div
+          class="d-flex container w-75"
+          style={{ backgroundColor: "#FDEEDC" }}
+        >
           <form
-            className=" w-50 mx-auto container"
+            className="w-50 mx-auto row"
             // onSubmit={enviarDatos}
           >
+            <span class="border border-1"></span>
             {/* ______________________Nombre_______________________________________ */}
 
             <div class="col-md-6">
@@ -42,7 +51,8 @@ export const SignUp = (props) => {
                 //   onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            {/* __________________________Apellido_______________________________________________ */}
+
+            {/* __________________________Apellido________________________________________ */}
 
             <div class="col-md-6">
               <label
@@ -129,31 +139,22 @@ export const SignUp = (props) => {
 
             {/* ____________________________pais__________________________________________ */}
 
-            <div class="dropdown col-md-6">
-              <a
-                class="btn btn-secondary dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <div class="col-md-6">
+              <label
+                for="state"
+                class="form-label d-flex justify-content-start"
+              ></label>
+              <select
+                id="pais"
+                name="pais"
+                class="form-select"
+                aria-label="Default select example"
               >
-                Pais
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Uruguay
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Otro
-                  </a>
-                </li>
-              </ul>
+                <option selected>Selecciona un pais</option>
+                <option value="1">Uruguay</option>
+                <option value="2">Otro</option>
+              </select>
             </div>
-
             {/* _____________________Ciudad___________________________________________ */}
             <div class="col-md-6">
               <label
@@ -172,6 +173,7 @@ export const SignUp = (props) => {
             </div>
 
             {/* ________________________Codigo Postal______________________________________________ */}
+
             <div class="col-md-6">
               <label
                 htmlFor="exampleInputCodigo1"
@@ -204,10 +206,10 @@ export const SignUp = (props) => {
                 //   onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-
+            <span class="border border-1"></span>
             {/* ________________________botones______________________________________________ */}
-            <div>
-              <button type="submit" class="btn btn-secondary">
+            <div className="d-flex justify-content-center mt-4">
+              <button type="submit" class="btn btn-secondary me-3">
                 Cancelar
               </button>
               <button type="submit" class="btn btn-secondary">
@@ -216,7 +218,7 @@ export const SignUp = (props) => {
             </div>
           </form>
         </div>
-      )}
+      </div>
     </>
   );
 };
