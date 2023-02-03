@@ -6,14 +6,14 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    first_name = db.Column(db.String(120), unique=True, nullable=False)
-    last_name = db.Column(db.String(120), unique=True, nullable=False)
-    birth = db.Column(db.String(120), unique=True, nullable=False)
-    address = db.Column(db.String(120), unique=True, nullable=False)
-    country = db.Column(db.String(120), unique=True, nullable=False)
-    city = db.Column(db.String(120), unique=True, nullable=False)
-    postal_code = db.Column(db.String(120), unique=True, nullable=False)
-    phone_number = db.Column(db.String(120), unique=True, nullable=False)
+    first_name = db.Column(db.String(120), unique=False, nullable=False)
+    last_name = db.Column(db.String(120), unique=False, nullable=False)
+    birth = db.Column(db.String(120), unique=False, nullable=True)
+    address = db.Column(db.String(120), unique=False, nullable=True)
+    country = db.Column(db.String(120), unique=False, nullable=True)
+    city = db.Column(db.String(120), unique=False, nullable=True)
+    postal_code = db.Column(db.Integer, unique=False, nullable=True)
+    phone_number = db.Column(db.Integer, unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='user', lazy=True)
     cart = db.relationship('Cart', backref='user', lazy=True)
 
@@ -69,12 +69,12 @@ class Cart(db.Model):
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
-    category = db.Column(db.String(120), unique=True, nullable=False)
-    price = db.Column(db.String(120), unique=True, nullable=False)
-    amount = db.Column(db.String(120), unique=True, nullable=False)
-    description = db.Column(db.String(120), unique=True, nullable=False)
-    condition = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    category = db.Column(db.String(120), unique=False, nullable=False)
+    price = db.Column(db.Integer, unique=False, nullable=False)
+    amount = db.Column(db.Integer, unique=False, nullable=False)
+    description = db.Column(db.String(120), unique=False, nullable=False)
+    condition = db.Column(db.String(120), unique=False, nullable=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
 
@@ -90,7 +90,6 @@ class Products(db.Model):
             "amount": self.amount,
             "description": self.description,
             "condition": self.condition,
- 
             # do not serialize the password, its a security breach
         }
 
