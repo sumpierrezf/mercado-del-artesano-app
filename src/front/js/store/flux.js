@@ -18,71 +18,11 @@ const getState = ({
                 },
             ],
         },
-
-        //Viqui agrega espacio de memoria para setear los productos; agregar favoritos y agregar productos al carrito.
-        productos: [],
-        favoritos: [],
-        carrito: [],
-        //fin de creacion de espacios de memoria.
-
         actions: {
             // Use getActions to call a function within a fuction
             exampleFunction: () => {
                 getActions().changeColor(0, "green");
             },
-
-            //Viqui agrega funcion para obtener info de los productos
-            obtenerInfoProductos: () => {
-                fetch(
-                        "https://3000-sumpierrezf-mercadodela-8vn0534b2pc.ws-us85.gitpod.io/api/products"
-                    )
-                    .then((res) => res.json())
-                    .then((data) =>
-                        setStore({
-                            productos: data.results,
-                        })
-                    )
-                    .catch((err) => console.error(err));
-            },
-            //Viqui agrega funciones para agregar y eliminar de favoritos.
-            agregarFavorito: (favoritos) => {
-                // console.log("funciona")
-                let store = getStore();
-                if (favoritos !== "" && !store.favoritos.includes(favoritos))
-                    //agrega cada item solo una vez a fav.
-                    setStore({
-                        favoritos: [...store.favoritos, favoritos],
-                    });
-            },
-
-            borrarFavorito: (favoritos) => {
-                //console.log("funciona")
-                let store = getStore();
-                setStore({
-                    favoritos: store.favoritos.filter((fav) => fav !== favoritos),
-                });
-            },
-
-            //Viqui agrega funciones para agregar y eliminar productos del carrito.
-            agregarAlCarrito: (carrito) => {
-                // console.log("funciona")
-                let store = getStore();
-                if (carrito !== "" && !store.carrito.includes(carrito))
-                    //agrega cada item solo una vez al carrito.
-                    setStore({
-                        carrito: [...store.carrito, carrito],
-                    });
-            },
-
-            borrarDelCarrito: (carrito) => {
-                //console.log("funciona")
-                let store = getStore();
-                setStore({
-                    carrito: store.carrito.filter((item) => item !== carrito),
-                });
-            },
-            //FIN de funciones agregadas por Viqui.
-
             getMessage: async () => {
                 try {
                     // fetching data from the backend

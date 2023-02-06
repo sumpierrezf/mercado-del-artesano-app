@@ -15,12 +15,12 @@ export const Home = () => {
     >
       <div className="row mb-5">
         <div
-          className="col-2"
+          className="col-sm-4 col-lg-2"
           style={{
             backgroundColor: "#FFD8A9",
           }}
         >
-          <h3 className="p-3">Categorías:</h3>
+          <h3 className="col-sm-4 col-lg-2 p-3">Categorías:</h3>
           <div className="d-grid gap-2 col-6 mx-1">
             <button type="button" className="btn btn-link">
               Tazas
@@ -39,9 +39,9 @@ export const Home = () => {
             </button>
           </div>
         </div>
-        <div className="col-9">
+        <div className="col-sm-8 col-lg-10">
           <h1 className="text-center">Catálogo de productos.</h1>
-          <div className="container p-3 mb-3 ms-5">
+          <div className="container col-sm-1 col-lg-3 p-3 mb-3 ms-5">
             <Products />
             {/* {store.productos.map((cadaProducto, index) => (
               <Products

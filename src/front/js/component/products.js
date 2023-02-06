@@ -22,6 +22,7 @@ export const Products = ({
         }}
       >
         <img
+          class="img-fluid"
           src={"https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"}
           className="card-img-top"
           alt="..."
@@ -32,7 +33,7 @@ export const Products = ({
           <p className="card-text"> {precio} </p>
           <p className="card-text"> {stock} </p>
           <div className="hstack gap-5">
-            <Link to={"..." + id} className="btn btn-primary">
+            <Link to={"/detalleProducto/" + id} className="btn btn-primary">
               + Info:{id}
             </Link>
             <button
