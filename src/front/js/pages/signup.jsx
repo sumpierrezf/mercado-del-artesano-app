@@ -1,47 +1,57 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
+import { Redirect } from "react-router-dom";
+
 import { Navigate } from "react-router-dom";
 
 export const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [nacimiento, setNacimiento] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [ciudad, setCiudad] = useState("");
+  const [postal, setPostal] = useState("");
+  const [telefono, setTelefono] = useState("");
 
-  const [username, setUsername] = useState("");
   const { store, actions } = useContext(Context);
 
-  // function enviarDatos(e) {
-  //   e.preventDefault();
-  //   actions.signup(email, password, username);
-  //   actions.login(email, password, username);
-  //   setEmail("");
-  //   setPassword("");
-  //   setUsername("");
-  // }
+  function enviarDatos(e) {
+    e.preventDefault();
+    actions.signup(
+      email,
+      password,
+      nombre,
+      apellido,
+      nacimiento,
+      direccion,
+      ciudad,
+      postal,
+      telefono
+    );
+    return console.log("funciona");
+  }
 
   return (
     <>
       <div style={{ backgroundColor: "#FDEEDC" }}>
         <h2
           className="d-flex justify-content-center"
-          style={{
-            color: "#E89A5A",
-          }}
+          style={{ color: "#E89A5A" }}
         >
           Registro de usuario
         </h2>
 
         <div
-          class="d-flex container w-75"
+          className="d-flex container w-75"
           style={{ backgroundColor: "#FDEEDC" }}
         >
-          <form
-            className="w-50 mx-auto row"
-            // onSubmit={enviarDatos}
-          >
-            <span class="border border-1"></span>
+          <form className="w-50 mx-auto row" onSubmit={enviarDatos}>
+            <span className="border border-1"></span>
             {/* ______________________Nombre_______________________________________ */}
 
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label htmlFor="exampleInputName1" className="form-label"></label>
               <input
                 type="text"
@@ -49,14 +59,14 @@ export const SignUp = (props) => {
                 id="exampleInputName1"
                 aria-describedby="nameHelp"
                 placeholder="Nombre"
-                //   value={email}
-                //   onChange={(e) => setEmail(e.target.value)}
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
               />
             </div>
 
             {/* __________________________Apellido________________________________________ */}
 
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label
                 htmlFor="exampleInputApellido1"
                 className="form-label"
@@ -67,8 +77,8 @@ export const SignUp = (props) => {
                 id="exampleInputApellido1"
                 aria-describedby="apellidoHelp"
                 placeholder="Apellido"
-                //   value={email}
-                //   onChange={(e) => setEmail(e.target.value)}
+                value={apellido}
+                onChange={(e) => setApellido(e.target.value)}
               />
             </div>
 
@@ -116,8 +126,8 @@ export const SignUp = (props) => {
                 id="exampleInputFechal1"
                 aria-describedby="fechaHelp"
                 placeholder="Fecha de Nacimiento"
-                //   value={username}
-                //   onChange={(e) => setUsername(e.target.value)}
+                value={nacimiento}
+                onChange={(e) => setNacimiento(e.target.value)}
               />
             </div>
 
@@ -134,31 +144,31 @@ export const SignUp = (props) => {
                 id="exampleInputDireccionl1"
                 aria-describedby="direccionHelp"
                 placeholder="Direccion"
-                //   value={username}
-                //   onChange={(e) => setUsername(e.target.value)}
+                value={direccion}
+                onChange={(e) => setDireccion(e.target.value)}
               />
             </div>
 
             {/* ____________________________pais__________________________________________ */}
 
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label
-                for="state"
-                class="form-label d-flex justify-content-start"
+                htmlFor="state"
+                className="form-label d-flex justify-content-start"
               ></label>
               <select
                 id="pais"
                 name="pais"
-                class="form-select"
+                className="form-select"
                 aria-label="Default select example"
               >
-                <option selected>Selecciona un pais</option>
+                <option value>Selecciona un pais</option>
                 <option value="1">Uruguay</option>
                 <option value="2">Otro</option>
               </select>
             </div>
             {/* _____________________Ciudad___________________________________________ */}
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label
                 htmlFor="exampleInputCiudad1"
                 className="form-label"
@@ -169,14 +179,14 @@ export const SignUp = (props) => {
                 id="exampleInputCiudad1"
                 aria-describedby="ciduadHelp"
                 placeholder="Ciudad"
-                //   value={username}
-                //   onChange={(e) => setUsername(e.target.value)}
+                value={ciudad}
+                onChange={(e) => setCiudad(e.target.value)}
               />
             </div>
 
             {/* ________________________Codigo Postal______________________________________________ */}
 
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label
                 htmlFor="exampleInputCodigo1"
                 className="form-label"
@@ -187,13 +197,13 @@ export const SignUp = (props) => {
                 id="exampleInputCodigo1"
                 aria-describedby="codigoHelp"
                 placeholder="Codigo Postal"
-                //   value={username}
-                //   onChange={(e) => setUsername(e.target.value)}
+                value={postal}
+                onChange={(e) => setPostal(e.target.value)}
               />
             </div>
 
             {/* _______________________Telefono_______________________________________________ */}
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label
                 htmlFor="exampleInputTelefono1"
                 className="form-label"
@@ -204,16 +214,16 @@ export const SignUp = (props) => {
                 id="exampleInputTelefono1"
                 aria-describedby="telefonoHelp"
                 placeholder="Telefono"
-                //   value={username}
-                //   onChange={(e) => setUsername(e.target.value)}
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
               />
             </div>
-            <span class="border border-1"></span>
+            <span className="border border-1"></span>
             {/* ________________________botones______________________________________________ */}
             <div className="d-flex justify-content-center mt-4">
               <button
                 type="submit"
-                class="btn btn-secondary me-3"
+                className="btn btn-secondary me-3"
                 style={{
                   backgroundColor: "#FFD8A9",
                   color: "#E38B29",
@@ -222,8 +232,9 @@ export const SignUp = (props) => {
                 Cancelar
               </button>
               <button
+                onClick={(e) => enviarDatos(e)}
                 type="submit"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 style={{
                   backgroundColor: "#FFD8A9",
                   color: "#E38B29",
@@ -237,4 +248,42 @@ export const SignUp = (props) => {
       </div>
     </>
   );
+};
+
+const actions = {
+  signup: (
+    userEmail,
+    userPassword,
+    userNombre,
+    userApellido,
+    userNacimiento,
+    userDireccion,
+    userCiudad,
+    userPostal,
+    userTelefono
+  ) => {
+    fetch(
+      "https://3000-camilabur-proyecto24-85wu9tx8h2z.ws-us84.gitpod.io/signup",
+      {
+        method: "POST",
+        mode: "no-cors",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          password: userPassword,
+          nombre: userNombre,
+          apellido: userApellido,
+          nacimiento: userNacimiento,
+          direccion: userDireccion,
+          ciudad: userCiudad,
+          postal: userPostal,
+          telefono: userTelefono,
+        }), // body data type must match "Content-Type" header
+      }
+    ).catch((err) => console.log(err));
+  },
 };
