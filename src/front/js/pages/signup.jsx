@@ -23,7 +23,9 @@ export const SignUp = (props) => {
       <div style={{ backgroundColor: "#FDEEDC" }}>
         <h2
           className="d-flex justify-content-center"
-          style={{ backgroundColor: "#FDEEDC" }}
+          style={{
+            color: "#E89A5A",
+          }}
         >
           Registro de usuario
         </h2>
@@ -209,10 +211,24 @@ export const SignUp = (props) => {
             <span class="border border-1"></span>
             {/* ________________________botones______________________________________________ */}
             <div className="d-flex justify-content-center mt-4">
-              <button type="submit" class="btn btn-secondary me-3">
+              <button
+                type="submit"
+                class="btn btn-secondary me-3"
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              >
                 Cancelar
               </button>
-              <button type="submit" class="btn btn-secondary">
+              <button
+                type="submit"
+                class="btn btn-secondary"
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              >
                 Enviar
               </button>
             </div>
