@@ -51,6 +51,13 @@ class Favorites(db.Model):
             "user_id": self.user_id
             # do not serialize the password, its a security breach
         }
+    def serializeProducts(self):
+        results = Products.query.filter_by(id = self.product_id).first()
+        return{
+            "productsInfo": results.serialize()
+        }
+            
+        
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -76,6 +83,7 @@ class Products(db.Model):
     amount = db.Column(db.Integer, unique=False, nullable=False)
     description = db.Column(db.String(120), unique=False, nullable=False)
     condition = db.Column(db.String(120), unique=False, nullable=False)
+    img = db.Column(db.String(120), unique=False, nullable=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -93,6 +101,7 @@ class Products(db.Model):
             "description": self.description,
             "condition": self.condition,
             "user_id": self.user_id,
+            "img": self.img
             # do not serialize the password, its a security breach
         }
 

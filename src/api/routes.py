@@ -37,6 +37,14 @@ def get_product():
     print(results)
     return jsonify(results), 200
 
+@api.route('/user/favorites/<int:user_id>', methods=['GET'])
+def handle_user_favorites(user_id):
+    alluserfavs = Favorites.query.filter_by(user_id=user_id).all()
+
+    results = list(map(lambda item: { **item.serializeProducts(), **item.serialize()}, alluserfavs))
+
+    return jsonify(results), 200
+
 @api.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
@@ -78,7 +86,7 @@ def add_new_product(user_id):
     request_body = json.loads(request.data)
     print(request_body)
 
-    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], user_id=user_id)
+    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], img=request_body["img"], user_id=user_id)
     print(products.serialize())
 
     db.session.add(products)
