@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { Navigate } from "react-router-dom";
 
 export const Productos = (props) => {
   const [email, setEmail] = useState("");
@@ -141,7 +140,7 @@ export const Productos = (props) => {
                 <option value="2">Con detalles</option>
               </select>
             </div>
-            {/* ------------------------------------------ */}
+            {/* -----------------boton imagen------------------------- */}
 
             <div className="d-flex  mt-4">
               <button
@@ -153,6 +152,7 @@ export const Productos = (props) => {
                 }}
               >
                 Subir imagen
+                <i class="fas fa-cloud-download-alt ms-2"></i>
               </button>
             </div>
 
