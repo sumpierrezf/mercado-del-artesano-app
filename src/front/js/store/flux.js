@@ -18,6 +18,9 @@ const getState = ({
                 },
             ],
             productos: [],
+
+            //login
+            auth: false,
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -51,6 +54,37 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
+            // Login
+            login: (userEmail, userPassword) => {
+                fetch(
+                        "https://3001-sumpierrezf-mercadodela-nb1kqfi98gb.ws-us85.gitpod.io/api/login", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                email: userEmail,
+                                password: userPassword,
+                            }),
+                        }
+                    )
+                    .then((response) => {
+                        if (response.status === 200) {
+                            setStore({
+                                auth: true,
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
+                        if (data.msg === "Bad email or password") alert(data.msg);
+                        localStorage.setItem("token", data.access_token);
+                    })
+                    .catch((err) => console.log(err));
+            },
+
             changeColor: (index, color) => {
                 //get the store
                 const store = getStore();
@@ -70,5 +104,4 @@ const getState = ({
         },
     };
 };
-
 export default getState;

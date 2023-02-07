@@ -5,11 +5,14 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import injectContext from "./store/appContext";
 
+import injectContext from "./store/appContext";
+import { Favs } from "./pages/favs";
+
+import { Login } from "./pages/login.jsx";
+import { SignUp } from "./pages/signup.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { SignUp } from "./pages/signup.jsx";
 import { Favs } from "./pages/favs";
 import { DetalleProducto } from "./pages/detalleProducto";
 
@@ -38,6 +41,7 @@ const Layout = () => {
               element={<DetalleProducto />}
               path="/detalleProducto/:theid"
             />
+            <Route element={<Login />} path="/login" />
             <Route element={<h1> Not found! </h1>} />{" "}
           </Routes>{" "}
           <Footer />{" "}
