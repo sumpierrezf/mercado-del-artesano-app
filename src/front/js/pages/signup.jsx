@@ -19,18 +19,30 @@ export const SignUp = (props) => {
 
   function enviarDatos(e) {
     e.preventDefault();
-    actions.signup(
-      email,
-      password,
-      nombre,
-      apellido,
-      nacimiento,
-      direccion,
-      ciudad,
-      postal,
-      telefono
-    );
-    return console.log("funciona");
+
+    const data = {
+      email: email,
+      password: password,
+      nombre: nombre,
+      apellido: apellido,
+      nacimiento: nacimiento,
+      direccion: direccion,
+      ciudad: ciudad,
+      postal: postal,
+      telefono: telefono,
+    };
+
+    fetch("URL-API", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      });
   }
 
   return (
@@ -250,40 +262,37 @@ export const SignUp = (props) => {
   );
 };
 
-const actions = {
-  signup: (
-    userEmail,
-    userPassword,
-    userNombre,
-    userApellido,
-    userNacimiento,
-    userDireccion,
-    userCiudad,
-    userPostal,
-    userTelefono
-  ) => {
-    fetch(
-      "https://3000-camilabur-proyecto24-85wu9tx8h2z.ws-us84.gitpod.io/signup",
-      {
-        method: "POST",
-        mode: "no-cors",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-          nombre: userNombre,
-          apellido: userApellido,
-          nacimiento: userNacimiento,
-          direccion: userDireccion,
-          ciudad: userCiudad,
-          postal: userPostal,
-          telefono: userTelefono,
-        }), // body data type must match "Content-Type" header
-      }
-    ).catch((err) => console.log(err));
-  },
-};
+// const actions = {
+//   signup: (
+//     userEmail,
+//     userPassword,
+//     userNombre,
+//     userApellido,
+//     userNacimiento,
+//     userDireccion,
+//     userCiudad,
+//     userPostal,
+//     userTelefono
+//   ) => {
+//     fetch("", {
+//       method: "POST",
+//       mode: "no-cors",
+//       credentials: "include",
+//       headers: {
+//         "Content-Type": "application/json",
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//       body: JSON.stringify({
+//         email: userEmail,
+//         password: userPassword,
+//         nombre: userNombre,
+//         apellido: userApellido,
+//         nacimiento: userNacimiento,
+//         direccion: userDireccion,
+//         ciudad: userCiudad,
+//         postal: userPostal,
+//         telefono: userTelefono,
+//       }), // body data type must match "Content-Type" header
+//     }).catch((err) => console.log(err));
+//   },
+// };
