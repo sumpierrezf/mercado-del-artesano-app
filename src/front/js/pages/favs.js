@@ -10,10 +10,10 @@ export const Favs = () => {
   const params = useParams();
 
   useEffect(() => {
-    actions.getInfoProducts(params.theid);
-  }, []);
+    actions.getUserFavs(params.theid);
+  }, [store.fav_products]);
 
-  console.log(store.productos);
+  // console.log(store.fav_products);
 
   return (
     <div
@@ -24,7 +24,7 @@ export const Favs = () => {
         border: "1px solid #7B4812",
       }}
     >
-      <p className="text-end mb-1">{store.productos.length} favoritos</p>
+      <p className="text-end mb-1">{store.fav_products.length} favoritos</p>
       <div
         className="col-3 rounded"
         style={{ background: "#FDEEDC", border: "1px solid #7B4812" }}
@@ -76,13 +76,35 @@ export const Favs = () => {
             >
               <h4>Favoritos</h4>
             </li>
-            {store.productos.map((item, index) => (
-              <FavLi
+            {store.fav_products.map((item, index) => (
+              <li
                 key={index}
-                nombre={item.productsInfo.name}
-                precio={item.productsInfo.price}
-                imagen={item.productsInfo.img}
-              />
+                className="list-group-item d-flex"
+                style={{ background: "#FDEEDC", color: "#7b4812" }}
+              >
+                <FavLi
+                  nombre={item.productsInfo.name}
+                  precio={item.productsInfo.price}
+                  imagen={item.productsInfo.img}
+                />
+                <button
+                  className="float-end rounded"
+                  style={{
+                    background: "#FFD8A9",
+                    color: "#7b4812",
+                    border: "1px solid #7b4812",
+                    height: "35px",
+                    width: "230px",
+                    marginTop: "35px",
+                  }}
+                  onClick={() => {
+                    actions.borrarFavorito(params.theid, item.product_id),
+                      console.log(item.product_id, params.theid);
+                  }}
+                >
+                  Eliminar favorito
+                </button>
+              </li>
             ))}
           </ul>
         </div>
