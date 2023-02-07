@@ -18,6 +18,8 @@ const getState = ({
                 },
             ],
             productos: [],
+            //login
+            auth: false,
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -66,8 +68,19 @@ const getState = ({
                             }),
                         }
                     )
-                    .then((response) => response.json())
-                    .then((data) => console.log(data))
+                    .then((response) => {
+                        if (response.status === 200) {
+                            setStore({
+                                auth: true,
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
+                        if (data.msg === "Bad email or password") alert(data.msg);
+                        localStorage.setItem("token", data.access_token);
+                    })
                     .catch((err) => console.log(err));
             },
 
