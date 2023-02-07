@@ -37,11 +37,26 @@ def get_product():
     print(results)
     return jsonify(results), 200
 
+@api.route('/product/<int:product_id>', methods=['GET'])
+def get_info_characters(product_id):
+    product = Products.query.filter_by(id=product_id).first()
+    print(product.serialize())
+    
+    return jsonify(product.serialize()), 200
+
 @api.route('/user/favorites/<int:user_id>', methods=['GET'])
 def handle_user_favorites(user_id):
     alluserfavs = Favorites.query.filter_by(user_id=user_id).all()
 
     results = list(map(lambda item: { **item.serializeProducts(), **item.serialize()}, alluserfavs))
+
+    return jsonify(results), 200
+
+@api.route('/user/cart/<int:user_id>', methods=['GET'])
+def products_in_cart(user_id):
+    alluserproducts = Cart.query.filter_by(user_id=user_id).all()
+
+    results = list(map(lambda item: { **item.serializeProducts(), **item.serialize()}, alluserproducts))
 
     return jsonify(results), 200
 
@@ -94,7 +109,7 @@ def add_new_product(user_id):
 
     return jsonify({"msg": "Producto subido"}), 200
 
-@api.route('/user/<int:user_id>/favorites', methods=['POST'])
+@api.route('/user/favorites/<int:user_id>', methods=['POST'])
 def add_new_fav(user_id):
     
     request_body = request.json
@@ -123,3 +138,22 @@ def add_to_cart(user_id):
         return jsonify(cart.serialize()), 200
 
     return jsonify({"msg":"Ya tienes ese producto en el carrito"}),404
+
+@api.route('/user/favorites/<int:user_id>', methods=['DELETE'])
+def delete_planet(user_id):
+
+    request_body = request.json
+
+    print(request_body)
+
+    fav_planet = Favorites.query.filter_by(user_id=user_id,planets_id=request_body["planets_id"]).first()
+
+    print(fav_planet)
+
+    if fav_planet is None:
+        return jsonify({"msg":"El usuario seleccionado no tiene ese favorito"}),404
+    
+    db.session.delete(fav_planet)
+    db.session.commit()
+
+    return jsonify("El favorito ha sido eliminado"), 200

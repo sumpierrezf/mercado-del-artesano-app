@@ -12,14 +12,10 @@ export const FavLi = (props) => {
       style={{ background: "#FDEEDC", color: "#7b4812" }}
     >
       {/* <img src={props.imagen} alt="" /> */}
-      <img
-        src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/star-wars-episode-7/4/4b/Tatooine-3.jpg"
-        alt=""
-        style={{ height: 80, width: "auto" }}
-      />
+      <img src={props.imagen} alt="" style={{ height: 80, width: "auto" }} />
       <div className="mx-3 w-100">
-        <h5>Nombre del producto</h5>
-        <p>$000000</p>
+        <h5>{props.nombre}</h5>
+        <p>${props.precio}</p>
       </div>
       <button
         className="float-end rounded"

@@ -1,11 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 import "../../styles/home.css";
 
 import { FavLi } from "../component/favli";
 
 export const Favs = () => {
   const { store, actions } = useContext(Context);
+  const params = useParams();
+
+  useEffect(() => {
+    actions.getInfoProducts(params.theid);
+  }, []);
+
+  console.log(store.productos);
 
   return (
     <div
@@ -16,12 +24,12 @@ export const Favs = () => {
         border: "1px solid #7B4812",
       }}
     >
-      <p className="text-end mb-1">1 favorite/s</p>
+      <p className="text-end mb-1">{store.productos.length} favoritos</p>
       <div
         className="col-3 rounded"
         style={{ background: "#FDEEDC", border: "1px solid #7B4812" }}
       >
-        <h4 className="mt-3 text-center">Category</h4>
+        <h4 className="mt-3 text-center">Categoría</h4>
         <hr className="my-1" style={{ background: "#7B4812" }} />
         <ul className="list-group list-group-flush m-auto mb-3 p-0 text-center">
           <li
@@ -66,11 +74,16 @@ export const Favs = () => {
               className="list-group-item"
               style={{ background: "#FDEEDC", color: "#7b4812" }}
             >
-              <h4>Favorites</h4>
+              <h4>Favoritos</h4>
             </li>
-            {/* {store.productos.map((item, index) => ( */}
-            <FavLi />
-            {/* // ))} */}
+            {store.productos.map((item, index) => (
+              <FavLi
+                key={index}
+                nombre={item.productsInfo.name}
+                precio={item.productsInfo.price}
+                imagen={item.productsInfo.img}
+              />
+            ))}
           </ul>
         </div>
       </div>

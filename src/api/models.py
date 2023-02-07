@@ -74,6 +74,12 @@ class Cart(db.Model):
             "user_id": self.user_id
             # do not serialize the password, its a security breach
         }
+    
+    def serializeProducts(self):
+        results = Products.query.filter_by(id = self.product_id).first()
+        return{
+            "productsInfo": results.serialize()
+        }
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)

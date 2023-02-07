@@ -14,11 +14,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      productos: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+      getInfoProducts: (id) => {
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-7eh9bf6j1g9.ws-us85.gitpod.io/api/user/favorites/" +
+            id
+        )
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              productos: data,
+            })
+          )
+          .catch((err) => console.error(err));
       },
       getMessage: async () => {
         try {
