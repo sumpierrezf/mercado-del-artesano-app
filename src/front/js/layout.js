@@ -6,13 +6,18 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Favs } from "./pages/favs";
+<<<<<<< HEAD
 import { Productos } from "./pages/formproductos.jsx";
 
 import injectContext from "./store/appContext";
+=======
+>>>>>>> 9856aac6c55ae65435d547369885278888e4b447
 
+import { Login } from "./pages/login.jsx";
+import injectContext from "./store/appContext";
+import { SignUp } from "./pages/signup.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { SignUp } from "./pages/signup.jsx";
 
 // create your first component
 const Layout = () => {
@@ -35,7 +40,11 @@ const Layout = () => {
             <Route element={<SignUp />} path="/signup" />{" "}
             <Route element={<Single />} path="/single/:theid" />{" "}
             <Route element={<Favs />} path="/favs/:theid" />
+<<<<<<< HEAD
             <Route element={<Productos />} path="/form" />
+=======
+            <Route element={<Login />} path="/login" />
+>>>>>>> 9856aac6c55ae65435d547369885278888e4b447
             <Route element={<h1> Not found! </h1>} />{" "}
           </Routes>{" "}
           <Footer />{" "}
