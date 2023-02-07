@@ -3,50 +3,22 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const DetalleProducto = ({
-  id,
-  name,
-  category,
-  price,
-  amount,
-  description,
-  condition,
-  img,
-}) => {
+export const DetalleProducto = () => {
   const { store, actions } = useContext(Context);
   const [cantidad, setCantidad] = useState(0);
   const [carrito, setCarrito] = useState([]);
   const params = useParams();
 
-  // function agregarAlCarrito() {
-  //   // console.log("funciona");
-  //   let producto = cantidad;
-  //   setCarrito([...carrito, producto]);
-  //   console.log(producto);
+  function agregarAlCarrito() {
+    // console.log("funciona");
+    let producto = cantidad;
+    setCarrito([...carrito, producto]);
+    console.log(producto);
 
-  const agregarAlCarrito = () => {
-    setCarrito((carrito) => {
-      let productoExiste = carrito.find(
-        (cadaProducto) => cadaProducto.id === id
-      );
-      if (productoExiste) {
-        return carrito.map((cadaProducto) => {
-          if (cadaProducto.id === id) {
-            return { ...cadaProducto, cantidad: cadaProducto.cantidad + 1 };
-          } else {
-            return cadaProducto;
-          }
-        });
-      } else {
-        return [...carrito, { id, cantidad: 1, price }];
-      }
-    });
-  };
-
-  //   useEffect(() => {
-  //     actions.obtenerDetalleProducto(params.theid);
-  //   }, []);
-
+    //   useEffect(() => {
+    //     actions.obtenerDetalleProducto(params.theid);
+    //   }, []);
+  }
   return (
     <div
       className="container flex-wrap p-3 m-3 rounded-1"
@@ -63,23 +35,17 @@ export const DetalleProducto = ({
           <img
             className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
-            src={
-              "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
-            }
+            src={"url" + params.theid + ".jpg"}
           />
           <img
             className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
-            src={
-              "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
-            }
+            src={"url" + params.theid + ".jpg"}
           />
           <img
             className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
-            src={
-              "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
-            }
+            src={"url" + params.theid + ".jpg"}
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
@@ -89,9 +55,7 @@ export const DetalleProducto = ({
         >
           <img
             className="img-fluid m-1 rounded-1"
-            src={
-              "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
-            }
+            src={"url" + params.theid + ".jpg"}
           />
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}
@@ -103,23 +67,30 @@ export const DetalleProducto = ({
           }}
         >
           <div className="d-flex p-1 m-1">
-            <p className="me-1">Estado: {store.infoProducto.condition}</p>
+            <p className="me-1">Estado:</p>
+            {/*aca tengo q traer la condicion del producto*/}
             <p className="me-1">|</p>
             <p>Nro. veces vendido</p>
           </div>
           <div className="producto">
             <h4>
-              Nombre del producto: {store.infoProducto.name}
+              Nombre del producto:
               <button
                 className="btn text-danger"
-                onClick={() => actions.agregarFavorito(nombre)}
+                onClick={() => actions.agregarFavorito(id)}
               >
                 <i className="fa fa-heart" />
               </button>
             </h4>
             <p>Precio original tachado si el prod. esta en oferta</p>
-            <p>Precio/precio oferta: {store.infoProducto.price}</p>
-            <p>Stock disponible/no disponible: {store.infoProducto.amount}</p>
+            <p>
+              Precio/precio oferta:{" "}
+              {/*aca tengo q traer la condicion del producto*/}
+            </p>
+            <p>
+              Stock disponible/no disponible:{" "}
+              {/*aca tengo q traer la condicion del producto*/}
+            </p>
             {/* Seleccionar cantidad */}
             <div className="input-group mb-3 rounded-1">
               <button
@@ -141,27 +112,6 @@ export const DetalleProducto = ({
                 aria-describedby="button-addon1"
               />
             </div>
-            {/* <select
-              className="form-select"
-              aria-label="Default select example"
-              value={cantidad}
-              onChange={(e) => {
-                setCantidad(e.target.value);
-              }}
-              style={{ backgroundColor: "#FFD8A9" }}
-            >
-              <option value={0}>Cantidad</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select> */}
           </div>
           {/* Boton de agregar al carrito */}
           <div className=" text-center m-3">
@@ -180,7 +130,9 @@ export const DetalleProducto = ({
       {/* SEGUNDA SECCION O FILA*/}
       <div className="row justify-content-between">
         <div className="col-sm-7 m-2 p-3">
-          <h4>Descripción: {store.infoProducto.description}</h4>
+          <h4>
+            Descripción: {/*aca tengo q traer la condicion del producto*/}
+          </h4>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus odit
             corrupti enim quas. Natus, explicabo! Natus id voluptates aperiam
