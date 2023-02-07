@@ -13,8 +13,6 @@ export const Favs = () => {
     actions.getUserFavs(params.theid);
   }, [store.fav_products]);
 
-  // console.log(store.fav_products);
-
   return (
     <div
       className="m-auto rounded row p-5 pt-4 my-4"
