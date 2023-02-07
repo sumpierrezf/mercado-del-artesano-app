@@ -9,16 +9,16 @@ export const DetalleProducto = () => {
   const [carrito, setCarrito] = useState([]);
   const params = useParams();
 
-  function agregarAlCarrito() {
-    // console.log("funciona");
-    let producto = cantidad;
-    setCarrito([...carrito, producto]);
-    console.log(producto);
+  // function agregarAlCarrito() {
+  //   // console.log("funciona");
+  //   let producto = cantidad;
+  //   setCarrito([...carrito, producto]);
+  //   console.log(producto);
 
-    //   useEffect(() => {
-    //     actions.obtenerDetalleProducto(params.theid);
-    //   }, []);
-  }
+  // useEffect(() => {
+  //   actions.getDetalleProducts(params.theid);
+  // }, []);
+
   return (
     <div
       className="container flex-wrap p-3 m-3 rounded-1"
@@ -118,7 +118,7 @@ export const DetalleProducto = () => {
             <button
               type="button"
               className="btn btn-sm rounded-1"
-              onClick={() => agregarAlCarrito()}
+              onClick={() => actions.agregarAlCarrito()}
               style={{ backgroundColor: "#FFD8A9" }}
             >
               Agregar al carrito
