@@ -32,7 +32,7 @@ export const SignUp = (props) => {
       telefono: telefono,
     };
 
-    fetch("URL-API", {
+    fetch("Api url", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
