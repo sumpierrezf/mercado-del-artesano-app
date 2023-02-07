@@ -2,20 +2,37 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 
 export const Productos = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [stock, setStock] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [condicion, setCondicion] = useState("");
 
-  //   const [username, setUsername] = useState("");
-  //   const { store, actions } = useContext(Context);
+  function enviarDatos(e) {
+    e.preventDefault();
 
-  // function enviarDatos(e) {
-  //   e.preventDefault();
-  //   actions.signup(email, password, username);
-  //   actions.login(email, password, username);
-  //   setEmail("");
-  //   setPassword("");
-  //   setUsername("");
-  // }
+    const data = {
+      nombre: nombre,
+      categoria: categoria,
+      precio: precio,
+      stock: stock,
+      descripcion: descripcion,
+      condicion: condicion,
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      });
+  }
 
   return (
     <>
@@ -30,17 +47,14 @@ export const Productos = (props) => {
         </h2>
 
         <div
-          class="d-flex container w-75"
+          className="d-flex container w-75"
           style={{ backgroundColor: "#FDEEDC" }}
         >
-          <form
-            className="w-50 mx-auto row"
-            // onSubmit={enviarDatos}
-          >
-            <span class="border border-1"></span>
+          <form className="w-50 mx-auto row" onSubmit={enviarDatos}>
+            <span className="border border-1"></span>
             {/* ______________________Nombre_______________________________________ */}
 
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label htmlFor="exampleInputName1" className="form-label"></label>
               <input
                 type="text"
@@ -48,14 +62,14 @@ export const Productos = (props) => {
                 id="exampleInputName1"
                 aria-describedby="nameHelp"
                 placeholder="Nombre del producto"
-                //   value={email}
-                //   onChange={(e) => setEmail(e.target.value)}
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
               />
             </div>
 
             {/* __________________________Categoria________________________________________ */}
 
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label
                 htmlFor="exampleInputCategoria1"
                 className="form-label"
@@ -66,8 +80,8 @@ export const Productos = (props) => {
                 id="exampleInputCategoria1"
                 aria-describedby="categoriaHelp"
                 placeholder="Categoria"
-                //   value={email}
-                //   onChange={(e) => setEmail(e.target.value)}
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
               />
             </div>
 
@@ -80,11 +94,11 @@ export const Productos = (props) => {
               <input
                 type="number"
                 className="form-control"
-                id="exampleInputPrecoi1"
+                id="exampleInputPrecio1"
                 aria-describedby="precioHelp"
                 placeholder="Precio"
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
+                value={precio}
+                onChange={(e) => setPrecio(e.target.value)}
               />
             </div>
             {/* _________________________Stock___________________________________________ */}
@@ -98,8 +112,8 @@ export const Productos = (props) => {
                 className="form-control"
                 id="exampleInputStock1"
                 placeholder="Stock"
-                // value={password}
-                // onChange={(e) => setPassword(e.target.value)}
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
               />
             </div>
 
@@ -115,25 +129,25 @@ export const Productos = (props) => {
                 id="exampleInputDescripcion1"
                 aria-describedby="descripcionHelp"
                 placeholder="Descripcion del producto"
-                //   value={username}
-                //   onChange={(e) => setUsername(e.target.value)}
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
               />
             </div>
 
             {/* ___________________________Condicion__________________________________________ */}
 
-            <div class="col-md-12">
+            <div className="col-md-12">
               <label
-                for="state"
-                class="form-label d-flex justify-content-start"
+                htmlFor="state"
+                className="form-label d-flex justify-content-start"
               ></label>
               <select
                 id="pais"
                 name="pais"
-                class="form-select"
+                className="form-select"
                 aria-label="Default select example"
               >
-                <option selected>Selecciona en que estado se encuentra</option>
+                <option value>Selecciona en que estado se encuentra</option>
                 <option value="1">Nuevo</option>
                 <option value="2">Poco uso</option>
                 <option value="2">Usado</option>
@@ -145,14 +159,14 @@ export const Productos = (props) => {
             <div className="d-flex  mt-4">
               <button
                 type="submit"
-                class="btn btn-warning me-3"
+                className="btn btn-warning me-3"
                 style={{
                   backgroundColor: "#FFD8A9",
                   color: "#E38B29",
                 }}
               >
                 Subir imagen
-                <i class="fas fa-cloud-download-alt ms-2"></i>
+                <i className="fas fa-cloud-download-alt ms-2"></i>
               </button>
             </div>
 
@@ -160,7 +174,7 @@ export const Productos = (props) => {
             <div className="d-flex justify-content-center mt-4">
               <button
                 type="submit"
-                class="btn btn-warning me-3"
+                className="btn btn-warning me-3"
                 style={{
                   backgroundColor: "#FFD8A9",
                   color: "#E38B29",
@@ -169,8 +183,9 @@ export const Productos = (props) => {
                 Cancelar
               </button>
               <button
+                onClick={(e) => enviarDatos(e)}
                 type="submit"
-                class="btn btn-warning"
+                className="btn btn-warning"
                 style={{
                   backgroundColor: "#FFD8A9",
                   color: "#E38B29",
