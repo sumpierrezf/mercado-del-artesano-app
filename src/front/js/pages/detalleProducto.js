@@ -3,18 +3,45 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const DetalleProducto = (props) => {
+export const DetalleProducto = ({
+  id,
+  name,
+  category,
+  price,
+  amount,
+  description,
+  condition,
+  img,
+}) => {
   const { store, actions } = useContext(Context);
   const [cantidad, setCantidad] = useState(0);
   const [carrito, setCarrito] = useState([]);
   const params = useParams();
 
-  function agregarAlCarrito() {
-    // console.log("funciona");
-    let producto = cantidad;
-    setCarrito([...carrito, producto]);
-    console.log(producto);
-  }
+  // function agregarAlCarrito() {
+  //   // console.log("funciona");
+  //   let producto = cantidad;
+  //   setCarrito([...carrito, producto]);
+  //   console.log(producto);
+
+  const agregarAlCarrito = () => {
+    setCarrito((carrito) => {
+      let productoExiste = carrito.find(
+        (cadaProducto) => cadaProducto.id === id
+      );
+      if (productoExiste) {
+        return carrito.map((cadaProducto) => {
+          if (cadaProducto.id === id) {
+            return { ...cadaProducto, cantidad: cadaProducto.cantidad + 1 };
+          } else {
+            return cadaProducto;
+          }
+        });
+      } else {
+        return [...carrito, { id, cantidad: 1, price }];
+      }
+    });
+  };
 
   //   useEffect(() => {
   //     actions.obtenerDetalleProducto(params.theid);
@@ -22,7 +49,7 @@ export const DetalleProducto = (props) => {
 
   return (
     <div
-      className="container flex-wrap p-3 m-3"
+      className="container flex-wrap p-3 m-3 rounded-1"
       style={{
         backgroundColor: "#FFD8A9",
         border: "1px solid #7B4812",
@@ -32,23 +59,23 @@ export const DetalleProducto = (props) => {
       {/* PRIMERA SECCION O FILA*/}
       <div className="row">
         {/* PRIMER COLUMNA */}
-        <div className="container flex-direction-column col-sm-2">
+        <div className="container flex-direction-column col-sm-2 rounded-1">
           <img
-            className="img-fluid m-1"
+            className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
             src={
               "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
             }
           />
           <img
-            className="img-fluid m-1"
+            className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
             src={
               "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
             }
           />
           <img
-            className="img-fluid m-1"
+            className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
             src={
               "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
@@ -57,11 +84,11 @@ export const DetalleProducto = (props) => {
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
         <div
-          className="d-flex container col-sm-4"
+          className="d-flex container col-sm-4 rounded-1"
           style={{ border: "1px solid #7B4812" }}
         >
           <img
-            className="img-fluid m-1"
+            className="img-fluid m-1 rounded-1"
             src={
               "https://m.media-amazon.com/images/I/31PrcIMrQ2L._AC_SY350_.jpg"
             }
@@ -69,20 +96,20 @@ export const DetalleProducto = (props) => {
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}
         <div
-          className="col-sm-4 me-4 mb-3"
+          className="col-sm-4 me-4 mb-3 rounded-1"
           style={{
             backgroundColor: "#FDEEDC",
             border: "1px solid #7B4812",
           }}
         >
           <div className="d-flex p-1 m-1">
-            <p className="me-1">Estado</p>
+            <p className="me-1">Estado: {store.infoProducto.condition}</p>
             <p className="me-1">|</p>
             <p>Nro. veces vendido</p>
           </div>
           <div className="producto">
             <h4>
-              Nombre del producto
+              Nombre del producto: {store.infoProducto.name}
               <button
                 className="btn text-danger"
                 onClick={() => actions.agregarFavorito(nombre)}
@@ -91,10 +118,30 @@ export const DetalleProducto = (props) => {
               </button>
             </h4>
             <p>Precio original tachado si el prod. esta en oferta</p>
-            <p>Precio/precio oferta</p>
-            <p>Stock disponible/no disponible</p>
+            <p>Precio/precio oferta: {store.infoProducto.price}</p>
+            <p>Stock disponible/no disponible: {store.infoProducto.amount}</p>
             {/* Seleccionar cantidad */}
-            <select
+            <div className="input-group mb-3 rounded-1">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                id="button-addon1"
+              >
+                Cantidad
+              </button>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Ingrese la cantidad"
+                value={cantidad}
+                onChange={(e) => {
+                  setCantidad(e.target.value);
+                }}
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+              />
+            </div>
+            {/* <select
               className="form-select"
               aria-label="Default select example"
               value={cantidad}
@@ -114,13 +161,13 @@ export const DetalleProducto = (props) => {
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
-            </select>
+            </select> */}
           </div>
           {/* Boton de agregar al carrito */}
           <div className=" text-center m-3">
             <button
               type="button"
-              className="btn btn-sm"
+              className="btn btn-sm rounded-1"
               onClick={() => agregarAlCarrito()}
               style={{ backgroundColor: "#FFD8A9" }}
             >
@@ -133,7 +180,7 @@ export const DetalleProducto = (props) => {
       {/* SEGUNDA SECCION O FILA*/}
       <div className="row justify-content-between">
         <div className="col-sm-7 m-2 p-3">
-          <h4>Descripción.</h4>
+          <h4>Descripción: {store.infoProducto.description}</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus odit
             corrupti enim quas. Natus, explicabo! Natus id voluptates aperiam
@@ -143,7 +190,7 @@ export const DetalleProducto = (props) => {
         </div>
         {/* INFO DEL VENDEDOR */}
         <div
-          className="col-sm-4 me-4 mb-3 p-1"
+          className="col-sm-4 me-4 mb-3 p-1 rounded-1"
           style={{
             backgroundColor: "#FDEEDC",
             border: "1px solid #7B4812",
@@ -170,7 +217,7 @@ export const DetalleProducto = (props) => {
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
         <div
-          className="container col-sm-12 text-center"
+          className="container col-sm-12 text-center rounded-1"
           style={{
             backgroundColor: "#FDEEDC",
             border: "1px solid #7B4812",
