@@ -17,6 +17,7 @@ class User(db.Model):
     phone_number = db.Column(db.Integer, unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='user', lazy=True)
     cart = db.relationship('Cart', backref='user', lazy=True)
+    products = db.relationship('Products', backref='user', lazy=True)
 
     def __repr__(self):
         return f'<User {self.id}>'
@@ -78,6 +79,7 @@ class Products(db.Model):
     condition = db.Column(db.String(120), unique=False, nullable=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
         return f'<Products {self.id}>'
@@ -91,6 +93,7 @@ class Products(db.Model):
             "amount": self.amount,
             "description": self.description,
             "condition": self.condition,
+            "user_id": self.user_id,
             # do not serialize the password, its a security breach
         }
 
