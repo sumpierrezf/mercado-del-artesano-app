@@ -17,32 +17,31 @@ export const SignUp = (props) => {
 
   const { store, actions } = useContext(Context);
 
-  function enviarDatos(e) {
-    e.preventDefault();
-
-    const data = {
-      email: email,
-      password: password,
-      nombre: nombre,
-      apellido: apellido,
-      nacimiento: nacimiento,
-      direccion: direccion,
-      ciudad: ciudad,
-      postal: postal,
-      telefono: telefono,
-    };
-
-    fetch("Api url", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
+  function enviarDatos() {
+    fetch(
+      "https://3001-sumpierrezf-mercadodela-3mpo0szwfvg.ws-us85.gitpod.io/api/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          first_name: nombre,
+          last_name: apellido,
+        }),
+      }
+    )
+      .then((res) => res.json())
       .then((data) => {
-        console.log("Success:", data);
+        actions.setStore(data);
+      })
+      .catch((error) => {
+        console.error("Error al enviar datos:", error);
       });
+
+    return console.log("Datos enviados con éxito");
   }
 
   return (
@@ -296,3 +295,11 @@ export const SignUp = (props) => {
 //     }).catch((err) => console.log(err));
 //   },
 // };
+
+// birth: nacimiento,
+// address: direccion,
+// city: ciudad,
+// postal_code: postal,
+// phone_number: telefono,
+// birth=request_body["birth"], address=request_body["address"],
+//         city=request_body["city"], postal_code=request_body["postal_code"], phone_number=request_body["phone_number"])

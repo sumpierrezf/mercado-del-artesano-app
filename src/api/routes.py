@@ -84,7 +84,7 @@ def add_new_user():
     print(user)
 
     if user is None:
-        usuario = User(email=request_body["email"], password=request_body["password"], first_name=request_body["first_name"], last_name=request_body["last_name"])
+        usuario = User(email=request_body["email"], password=request_body["password"], first_name=request_body["first_name"], last_name=request_body["last_name"]),
         # print(usuario)
 
         db.session.add(usuario)

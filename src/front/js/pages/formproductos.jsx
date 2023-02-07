@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useSyncExternalStore } from "react";
 import { Context } from "../store/appContext.js";
 
 export const Productos = (props) => {
@@ -21,16 +21,22 @@ export const Productos = (props) => {
       condicion: condicion,
     };
 
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      "https://3001-sumpierrezf-mercadodela-3mpo0szwfvg.ws-us85.gitpod.io/api/user/form/" +
+        id,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        setStore({
+          formulario: data,
+        }).catch((err) => console.error(err));
       });
   }
 
@@ -157,7 +163,8 @@ export const Productos = (props) => {
             {/* -----------------boton imagen------------------------- */}
 
             <div className="d-flex  mt-4">
-              <button
+              {/* 
+               <button
                 type="submit"
                 className="btn btn-warning me-3"
                 style={{
@@ -167,7 +174,30 @@ export const Productos = (props) => {
               >
                 Subir imagen
                 <i className="fas fa-cloud-download-alt ms-2"></i>
-              </button>
+              </button> */}
+              <form
+                className="subida-imagenes"
+                type="POST"
+                encType="multipart/formdata"
+              >
+                <input
+                  type="file"
+                  name="Subir imagen "
+                  style={{
+                    backgroundColor: "#FFD8A9",
+                    color: "#E38B29",
+                  }}
+                />
+                <input
+                  type="submit"
+                  className="subir-imagen"
+                  value="Enviar imagen"
+                  style={{
+                    backgroundColor: "#FFD8A9",
+                    color: "#E38B29",
+                  }}
+                />
+              </form>
             </div>
 
             {/* ________________________botones______________________________________________ */}
@@ -184,7 +214,7 @@ export const Productos = (props) => {
               </button>
               <button
                 onClick={(e) => enviarDatos(e)}
-                type="submit"
+                type="file"
                 className="btn btn-warning"
                 style={{
                   backgroundColor: "#FFD8A9",
