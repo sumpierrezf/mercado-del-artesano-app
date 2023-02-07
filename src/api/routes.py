@@ -124,7 +124,7 @@ def add_new_fav(user_id):
 
     return jsonify({"msg":"Ya tienes ese producto en favoritos"}),404
 
-@api.route('/user/<int:user_id>/cart', methods=['POST'])
+@api.route('/user/cart/<int:user_id>', methods=['POST'])
 def add_to_cart(user_id):
     
     request_body = request.json
@@ -140,20 +140,18 @@ def add_to_cart(user_id):
     return jsonify({"msg":"Ya tienes ese producto en el carrito"}),404
 
 @api.route('/user/favorites/<int:user_id>', methods=['DELETE'])
-def delete_planet(user_id):
+def delete_favorite(user_id):
 
     request_body = request.json
-
     print(request_body)
 
-    fav_planet = Favorites.query.filter_by(user_id=user_id,planets_id=request_body["planets_id"]).first()
+    fav = Favorites.query.filter_by(user_id=user_id,product_id=request_body["product_id"]).first()
+    print(fav)
 
-    print(fav_planet)
-
-    if fav_planet is None:
+    if fav is None:
         return jsonify({"msg":"El usuario seleccionado no tiene ese favorito"}),404
     
-    db.session.delete(fav_planet)
+    db.session.delete(fav)
     db.session.commit()
 
-    return jsonify("El favorito ha sido eliminado"), 200
+    return jsonify({"msg":"El favorito ha sido eliminado"}), 200

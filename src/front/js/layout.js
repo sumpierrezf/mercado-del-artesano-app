@@ -1,42 +1,19 @@
 import React from "react";
-import {
-    BrowserRouter,
-    Route,
-    Routes
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-<<<<<<< HEAD
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Favs } from "./pages/favs";
-=======
-import {
-    Home
-} from "./pages/home";
-import {
-    Demo
-} from "./pages/demo";
-import {
-    Single
-} from "./pages/single";
->>>>>>> b435b599ca81a1369d65367dad4221b5a6e02d53
 import injectContext from "./store/appContext";
 
-import {
-    Navbar
-} from "./component/navbar";
-import {
-    Footer
-} from "./component/footer";
-import {
-    SignUp
-} from "./pages/signup.jsx";
+import { Navbar } from "./component/navbar";
+import { Footer } from "./component/footer";
+import { SignUp } from "./pages/signup.jsx";
 
 // create your first component
 const Layout = () => {
-<<<<<<< HEAD
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
@@ -49,8 +26,9 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Demo />} path="/demo" />
-            <Route element={<Favs />} path="/favs/:theid" />
             <Route element={<Single />} path="/single/:theid" />
+            <Route element={<SignUp />} path="/signup" />
+            <Route element={<Favs />} path="/favs/:theid" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
@@ -59,66 +37,5 @@ const Layout = () => {
     </div>
   );
 };
-=======
-        // the basename is used when your project is published in a subdirectory and not in the root of the domain
-        // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
-        const basename = process.env.BASENAME || "";
 
-        return ( <
-            div > {
-                " "
-            } <
-            BrowserRouter basename = {
-                basename
-            } > {
-                " "
-            } <
-            ScrollToTop > {
-                " "
-            } <
-            Navbar / > {
-                " "
-            } <
-            Routes > {
-                " "
-            } <
-            Route element = {
-                < Home / >
-            }
-            path = "/" / > {
-                " "
-            } <
-            Route element = {
-                < Demo / >
-            }
-            path = "/demo" / > {
-                " "
-            } <
-            Route element = {
-                < SignUp / >
-            }
-            path = "/signup" / > {
-                " "
-            } <
-            Route element = {
-                < Single / >
-            }
-            path = "/single/:theid" / > {
-                " "
-            } <
-            Route element = {
-                < h1 > Not found! < /h1>} / > {
-                    " "
-                } <
-                /Routes>{" "} <
-                Footer / > {
-                    " "
-                } <
-                /ScrollToTop>{" "} <
-                /BrowserRouter>{" "} <
-                /div>
-            );
-        };
->>>>>>> b435b599ca81a1369d65367dad4221b5a6e02d53
-
-        export default injectContext(Layout);
+export default injectContext(Layout);
