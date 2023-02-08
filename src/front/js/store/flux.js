@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getUserFavs: (id) => {
         fetch(
-          "https://3001-sumpierrezf-mercadodela-7eh9bf6j1g9.ws-us85.gitpod.io/api/user/favorites/" +
+          "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
             id
         )
           .then((res) => res.json())
@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       borrarFavorito: (id, id_product) => {
         fetch(
-          "https://3001-sumpierrezf-mercadodela-7eh9bf6j1g9.ws-us85.gitpod.io/api/user/favorites/" +
+          "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
             id,
           {
             method: "DELETE",

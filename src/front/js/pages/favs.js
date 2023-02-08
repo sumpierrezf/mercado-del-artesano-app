@@ -29,6 +29,20 @@ export const Favs = () => {
       >
         <h4 className="mt-3 text-center">Categoría</h4>
         <hr className="my-1" style={{ background: "#7B4812" }} />
+        <select
+          className="form-select m-auto my-3 p-0 text-center border-0"
+          size="6"
+          multiple
+          aria-label="multiple select example"
+          style={{ background: "#FDEEDC", color: "#7b4812" }}
+        >
+          <option defaultValue>Open this select menu</option>
+          <option value="1">Tazas</option>
+          <option value="2">Gorros</option>
+          <option value="3">Madera</option>
+          <option value="4">Tejidos</option>
+          <option value="5">Pintura</option>
+        </select>
         <ul className="list-group list-group-flush m-auto mb-3 p-0 text-center">
           <li
             className="list-group-item"

@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/14c208dbda3a_.py
-Revision ID: 14c208dbda3a
+Revision ID: 7e58897bf2db
 Revises: 
-Create Date: 2023-02-06 18:24:37.158607
-========
-Revision ID: 99f1b225f01a
-Revises: 
-Create Date: 2023-02-06 17:07:21.770238
->>>>>>>> 5f7e75f7764b3723114d5ef0b822a3a177d97d95:migrations/versions/99f1b225f01a_.py
+Create Date: 2023-02-08 12:22:06.185999
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/14c208dbda3a_.py
-revision = '14c208dbda3a'
-========
-revision = '99f1b225f01a'
->>>>>>>> 5f7e75f7764b3723114d5ef0b822a3a177d97d95:migrations/versions/99f1b225f01a_.py
+revision = '7e58897bf2db'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -56,24 +46,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<<< HEAD:migrations/versions/14c208dbda3a_.py
-    op.create_table('user',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('email', sa.String(length=120), nullable=False),
-    sa.Column('password', sa.String(length=80), nullable=False),
-    sa.Column('first_name', sa.String(length=120), nullable=False),
-    sa.Column('last_name', sa.String(length=120), nullable=False),
-    sa.Column('birth', sa.String(length=120), nullable=True),
-    sa.Column('address', sa.String(length=120), nullable=True),
-    sa.Column('country', sa.String(length=120), nullable=True),
-    sa.Column('city', sa.String(length=120), nullable=True),
-    sa.Column('postal_code', sa.Integer(), nullable=True),
-    sa.Column('phone_number', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email')
-    )
-========
->>>>>>>> 5f7e75f7764b3723114d5ef0b822a3a177d97d95:migrations/versions/99f1b225f01a_.py
     op.create_table('cart',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=True),
