@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const DetalleProducto = () => {
+export const DetalleProducto = ({ id }) => {
   const { store, actions } = useContext(Context);
   const [cantidad, setCantidad] = useState(0);
   const [carrito, setCarrito] = useState([]);
@@ -14,10 +14,12 @@ export const DetalleProducto = () => {
   //   let producto = cantidad;
   //   setCarrito([...carrito, producto]);
   //   console.log(producto);
-
-  // useEffect(() => {
-  //   actions.getDetalleProducts(params.theid);
-  // }, []);
+  // }
+  console.log(cantidad);
+  useEffect(() => {
+    actions.obtenerDetalleProducto(params.theid);
+  }, []);
+  console.log(store.detalleProducto);
 
   return (
     <div
@@ -35,17 +37,17 @@ export const DetalleProducto = () => {
           <img
             className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
-            src={"url" + params.theid + ".jpg"}
+            src={store.detalleProducto.img}
           />
           <img
             className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
-            src={"url" + params.theid + ".jpg"}
+            src={store.detalleProducto.img}
           />
           <img
             className="img-fluid m-1 rounded-1"
             style={{ border: "1px solid #7B4812" }}
-            src={"url" + params.theid + ".jpg"}
+            src={store.detalleProducto.img}
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
@@ -55,7 +57,7 @@ export const DetalleProducto = () => {
         >
           <img
             className="img-fluid m-1 rounded-1"
-            src={"url" + params.theid + ".jpg"}
+            src={store.detalleProducto.img}
           />
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}
@@ -67,29 +69,29 @@ export const DetalleProducto = () => {
           }}
         >
           <div className="d-flex p-1 m-1">
-            <p className="me-1">Estado:</p>
+            <p className="me-1">Estado: {store.detalleProducto.condition}</p>
             {/*aca tengo q traer la condicion del producto*/}
             <p className="me-1">|</p>
             <p>Nro. veces vendido</p>
           </div>
           <div className="producto">
             <h4>
-              Nombre del producto:
+              Nombre del producto: {store.detalleProducto.name}
               <button
                 className="btn text-danger"
-                onClick={() => actions.agregarFavorito(id)}
+                onClick={() => agregarFavorito(id)}
               >
                 <i className="fa fa-heart" />
               </button>
             </h4>
             <p>Precio original tachado si el prod. esta en oferta</p>
             <p>
-              Precio/precio oferta:{" "}
-              {/*aca tengo q traer la condicion del producto*/}
+              Precio: {store.detalleProducto.price} /precio oferta:{" "}
+              {/*aca tengo q traer el precio del producto*/}
             </p>
             <p>
-              Stock disponible/no disponible:{" "}
-              {/*aca tengo q traer la condicion del producto*/}
+              Stock disponible: {store.detalleProducto.amount} /no disponible:{" "}
+              {/*aca tengo q traer el stock del producto*/}
             </p>
             {/* Seleccionar cantidad */}
             <div className="input-group mb-3 rounded-1">
@@ -118,7 +120,17 @@ export const DetalleProducto = () => {
             <button
               type="button"
               className="btn btn-sm rounded-1"
-              onClick={() => actions.agregarAlCarrito()}
+              onClick={() =>
+                actions.agregarAlCarrito({
+                  name: store.detalleProducto.name,
+                  category: store.detalleProducto.category,
+                  price: store.detalleProducto.price,
+                  amount: store.detalleProducto.amount,
+                  description: store.detalleProducto.description,
+                  condition: store.detalleProducto.condition,
+                  img: store.detalleProducto.img,
+                })
+              }
               style={{ backgroundColor: "#FFD8A9" }}
             >
               Agregar al carrito
@@ -131,14 +143,9 @@ export const DetalleProducto = () => {
       <div className="row justify-content-between">
         <div className="col-sm-7 m-2 p-3">
           <h4>
-            Descripción: {/*aca tengo q traer la condicion del producto*/}
+            Descripción: {/*aca tengo q traer la descripcion del producto*/}
           </h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus odit
-            corrupti enim quas. Natus, explicabo! Natus id voluptates aperiam
-            similique vitae, facilis sed officia dignissimos ducimus? Est autem
-            corrupti cumque.
-          </p>
+          <p>{store.detalleProducto.description}</p>
         </div>
         {/* INFO DEL VENDEDOR */}
         <div
@@ -188,7 +195,6 @@ export const DetalleProducto = () => {
     </div>
   );
 };
-
 DetalleProducto.propTypes = {
   match: PropTypes.object,
 };
