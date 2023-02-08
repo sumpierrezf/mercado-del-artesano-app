@@ -7,7 +7,6 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 
 import injectContext from "./store/appContext";
-import { Favs } from "./pages/favs";
 
 import { Login } from "./pages/login.jsx";
 import { SignUp } from "./pages/signup.jsx";
