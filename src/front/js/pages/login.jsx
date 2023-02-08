@@ -18,13 +18,13 @@ export const Login = () => {
   }
   return (
     <>
-      <div className="container">
+      <div className="contenedor container d-flex align-items-center justify-content-center mt-5 w-25">
         <div className="d-flex justify-content-center">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
           {store.auth === true ? (
             <Navigate to="/demo" />
           ) : (
-            <form className="login pt-5" onSubmit={enviarDatos}>
+            <form className="login pt-5 w-100 pb-5" onSubmit={enviarDatos}>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">
                   Email address
@@ -68,7 +68,10 @@ export const Login = () => {
                 <Link to="/passrecover">Olvidé mi contraseña</Link>
               </div>
               <div className="d-flex justify-content-center">
-                <button type="submit" className="boton-login btn text-white">
+                <button
+                  type="submit"
+                  className="boton-login btn text-white fw-bold mt-5 p-3 align-items-center rounded-pill w-50"
+                >
                   Login
                 </button>
               </div>
