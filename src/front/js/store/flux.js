@@ -18,8 +18,7 @@ const getState = ({
                 },
             ],
             productos: [],
-
-            //login
+            fav_products: [],
             auth: false,
         },
         actions: {
@@ -27,19 +26,34 @@ const getState = ({
             exampleFunction: () => {
                 getActions().changeColor(0, "green");
             },
-            getInfoProducts: (id) => {
+            getUserFavs: (id) => {
                 fetch(
-                        "https://3001-sumpierrezf-mercadodela-7eh9bf6j1g9.ws-us85.gitpod.io/api/user/favorites/" +
+                        "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
                         id
                     )
                     .then((res) => res.json())
                     .then((data) =>
                         setStore({
-                            productos: data,
+                            fav_products: data,
                         })
                     )
                     .catch((err) => console.error(err));
             },
+            borrarFavorito: (id, id_product) => {
+                fetch(
+                    "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
+                    id, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            product_id: id_product,
+                        }), // body data type must match "Content-Type" header
+                    }
+                ).catch((err) => console.log(err));
+            },
+
             getMessage: async () => {
                 try {
                     // fetching data from the backend
@@ -54,8 +68,6 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-
-            // Login
             login: (userEmail, userPassword) => {
                 fetch(
                         "https://3001-sumpierrezf-mercadodela-nb1kqfi98gb.ws-us85.gitpod.io/api/login", {
@@ -84,7 +96,6 @@ const getState = ({
                     })
                     .catch((err) => console.log(err));
             },
-
             changeColor: (index, color) => {
                 //get the store
                 const store = getStore();
