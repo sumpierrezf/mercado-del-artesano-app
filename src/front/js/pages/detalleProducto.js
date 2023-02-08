@@ -22,52 +22,33 @@ export const DetalleProducto = ({ id }) => {
   console.log(store.detalleProducto);
 
   return (
-    <div
-      className="container flex-wrap p-3 m-3 rounded-1"
-      style={{
-        backgroundColor: "#FFD8A9",
-        border: "1px solid #7B4812",
-        color: "#7B4812",
-      }}
-    >
+    <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron h-100">
       {/* PRIMERA SECCION O FILA*/}
       <div className="row">
         {/* PRIMER COLUMNA */}
         <div className="container flex-direction-column col-sm-2 rounded-1">
           <img
-            className="img-fluid m-1 rounded-1"
-            style={{ border: "1px solid #7B4812" }}
+            className="img-fluid m-1 rounded-1 border-marron"
             src={store.detalleProducto.img}
           />
           <img
-            className="img-fluid m-1 rounded-1"
-            style={{ border: "1px solid #7B4812" }}
+            className="img-fluid m-1 rounded-1 border-marron"
             src={store.detalleProducto.img}
           />
           <img
-            className="img-fluid m-1 rounded-1"
-            style={{ border: "1px solid #7B4812" }}
+            className="img-fluid m-1 rounded-1 border-marron"
             src={store.detalleProducto.img}
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
-        <div
-          className="d-flex container col-sm-4 rounded-1"
-          style={{ border: "1px solid #7B4812" }}
-        >
+        <div className="d-flex container col-sm-4 rounded-1 border-marron">
           <img
             className="img-fluid m-1 rounded-1"
             src={store.detalleProducto.img}
           />
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}
-        <div
-          className="col-sm-4 me-4 mb-3 rounded-1"
-          style={{
-            backgroundColor: "#FDEEDC",
-            border: "1px solid #7B4812",
-          }}
-        >
+        <div className="col-sm-4 me-4 mb-3 rounded-1 border-marron bg-naranja-100">
           <div className="d-flex p-1 m-1">
             <p className="me-1">Estado: {store.detalleProducto.condition}</p>
             {/*aca tengo q traer la condicion del producto*/}
@@ -119,7 +100,7 @@ export const DetalleProducto = ({ id }) => {
           <div className=" text-center m-3">
             <button
               type="button"
-              className="btn btn-sm rounded-1"
+              className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
                 actions.agregarAlCarrito({
                   name: store.detalleProducto.name,
@@ -131,7 +112,6 @@ export const DetalleProducto = ({ id }) => {
                   img: store.detalleProducto.img,
                 })
               }
-              style={{ backgroundColor: "#FFD8A9" }}
             >
               Agregar al carrito
             </button>
@@ -148,13 +128,7 @@ export const DetalleProducto = ({ id }) => {
           <p>{store.detalleProducto.description}</p>
         </div>
         {/* INFO DEL VENDEDOR */}
-        <div
-          className="col-sm-4 me-4 mb-3 p-1 rounded-1"
-          style={{
-            backgroundColor: "#FDEEDC",
-            border: "1px solid #7B4812",
-          }}
-        >
+        <div className="col-sm-4 me-4 mb-3 p-1 rounded-1 border-marron bg-naranja-100">
           <h4>Nombre del vendedor.</h4>
           <div>
             {/* ICONO UBICACION */}
@@ -175,13 +149,7 @@ export const DetalleProducto = ({ id }) => {
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
-        <div
-          className="container col-sm-12 text-center rounded-1"
-          style={{
-            backgroundColor: "#FDEEDC",
-            border: "1px solid #7B4812",
-          }}
-        >
+        <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100">
           <h3>
             Califica este producto
             <i className="fa fa-star text-warning"></i>
