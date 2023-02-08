@@ -15,38 +15,33 @@ export const Favs = () => {
 
   return (
     <div
-      className="m-auto rounded row p-5 pt-4 my-4"
+      className="bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4 h-100"
       style={{
-        background: "#FFD8A9",
         width: "85%",
-        border: "1px solid #7B4812",
       }}
     >
-      <p className="text-end mb-1">{store.fav_products.length} favoritos</p>
-      <div
-        className="col-3 rounded"
-        style={{ background: "#FDEEDC", border: "1px solid #7B4812" }}
-      >
+      <p className="text-end mb-0" style={{ height: "20px" }}>
+        {store.fav_products.length} favoritos
+      </p>
+      <div className="bg-naranja-100 border-marron col-3 rounded">
         <h4 className="mt-3 text-center">Categoría</h4>
-        <hr className="my-1" style={{ background: "#7B4812" }} />
-        <button
-          className="rounded w-50 mt-3 mx-5"
-          style={{
-            background: "#FFD8A9",
-            color: "#7b4812",
-            border: "1px solid #7b4812",
-            height: "35px",
-          }}
-          onClick={actions.eliminarFiltro}
-        >
-          Todas
-        </button>
+        <hr className="my-1 border-marron" />
+        <div className="w-100 d-flex justify-content-center">
+          <button
+            className="text-marron bg-naranja-200 border-marron rounded w-50 mt-3"
+            style={{
+              height: "35px",
+            }}
+            onClick={actions.eliminarFiltro}
+          >
+            Todas
+          </button>
+        </div>
         <select
-          className="form-select m-auto my-3 p-0 text-center border-0"
+          className="bg-naranja-100 text-marron form-select m-auto my-3 p-0 text-center border-0"
           size="5"
           multiple
           aria-label="multiple select example"
-          style={{ background: "#FDEEDC", color: "#7b4812" }}
           onClick={actions.handleCategory}
         >
           <option value="Tazas">Tazas</option>
@@ -57,20 +52,14 @@ export const Favs = () => {
         </select>
       </div>
       <div className="col-9">
-        <div
-          className="rounded"
-          style={{ background: "#FDEEDC", border: "1px solid #7B4812" }}
-        >
+        <div className="bg-naranja-100 border-marron rounded">
           {/* __________________Lista_de_favoritos________________________ */}
-          <ul className="list-group list-group-flush m-auto my-1 p-0">
-            <li
-              className="list-group-item"
-              style={{ background: "#FDEEDC", color: "#7b4812" }}
-            >
+          <ul className=" list-group list-group-flush m-auto my-1 p-0">
+            <li className="list-group-item bg-naranja-100 text-marron border-marron">
               <h4>Favoritos</h4>
             </li>
+
             {/* __________________MAP________________________ */}
-            {/* store.categoria = "Todas" ? */}
             {store.fav_products
               .filter((item) =>
                 item.productsInfo.category.includes(store.categoria)
@@ -78,30 +67,27 @@ export const Favs = () => {
               .map((item, index) => (
                 <li
                   key={index}
-                  className="container list-group-item d-flex w-100"
-                  style={{ background: "#FDEEDC", color: "#7b4812" }}
+                  className="bg-naranja-100 border-marron text-marron container list-group-item d-flex w-100"
                 >
                   <FavLi
                     nombre={item.productsInfo.name}
                     precio={item.productsInfo.price}
                     imagen={item.productsInfo.img1}
                   />
-                  <button
-                    className="float-end rounded"
-                    style={{
-                      background: "#FFD8A9",
-                      color: "#7b4812",
-                      border: "1px solid #7b4812",
-                      height: "35px",
-                      width: "230px",
-                      marginTop: "35px",
-                    }}
-                    onClick={() =>
-                      actions.borrarFavorito(params.theid, item.product_id)
-                    }
-                  >
-                    Eliminar favorito
-                  </button>
+                  <div className="w-50">
+                    <button
+                      className="float-end rounded bg-naranja-200 text-marron border-marron"
+                      style={{
+                        height: "35px",
+                        marginTop: "35px",
+                      }}
+                      onClick={() =>
+                        actions.borrarFavorito(params.theid, item.product_id)
+                      }
+                    >
+                      Eliminar favorito
+                    </button>
+                  </div>
                 </li>
               ))}
             {/* __________________Cierre_de_MAP________________________ */}
