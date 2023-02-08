@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       fav_products: [],
       auth: false,
+      categoria: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -50,7 +51,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         ).catch((err) => console.log(err));
       },
-
+      handleCategory: (e) => {
+        const opcion = e.target.value;
+        setStore({
+          categoria: opcion,
+        });
+      },
+      eliminarFiltro: () => {
+        setStore({
+          categoria: [],
+        });
+      },
       getMessage: async () => {
         try {
           // fetching data from the backend

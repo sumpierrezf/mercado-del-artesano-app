@@ -2,7 +2,7 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
-.container {
+/* .container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,7 @@
   background-color: #fdeedc;
   border: solid #e38b29 0.5px;
   margin-top: 10px;
-}
+} */
 
 .navbar {
   background-color: #ffd8a9;
