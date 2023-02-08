@@ -1,26 +1,9 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/2744e626109d_.py
-<<<<<<< HEAD:migrations/versions/2744e626109d_.py
-Revision ID: 2744e626109d
+
+Revision ID: faa673d8d8e4
 Revises: 
-Create Date: 2023-02-07 18:48:54.441577
-=======
-<<<<<<<< HEAD:migrations/versions/14c208dbda3a_.py
-Revision ID: 14c208dbda3a
-Revises: 
-Create Date: 2023-02-06 18:24:37.158607
-========
-Revision ID: 99f1b225f01a
-Revises: 
-Create Date: 2023-02-06 17:07:21.770238
->>>>>>>> 5f7e75f7764b3723114d5ef0b822a3a177d97d95:migrations/versions/99f1b225f01a_.py
->>>>>>> 9856aac6c55ae65435d547369885278888e4b447:migrations/versions/99f1b225f01a_.py
-========
-Revision ID: 7e58897bf2db
-Revises: 
-Create Date: 2023-02-08 12:22:06.185999
->>>>>>>> 9ccb63524262cd51770321751a1c2af2905059a3:migrations/versions/7e58897bf2db_.py
+Create Date: 2023-02-08 17:39:20.745419
 
 """
 from alembic import op
@@ -28,19 +11,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/2744e626109d_.py
-<<<<<<< HEAD:migrations/versions/2744e626109d_.py
-revision = '2744e626109d'
-=======
-<<<<<<<< HEAD:migrations/versions/14c208dbda3a_.py
-revision = '14c208dbda3a'
-========
-revision = '99f1b225f01a'
->>>>>>>> 5f7e75f7764b3723114d5ef0b822a3a177d97d95:migrations/versions/99f1b225f01a_.py
->>>>>>> 9856aac6c55ae65435d547369885278888e4b447:migrations/versions/99f1b225f01a_.py
-========
-revision = '7e58897bf2db'
->>>>>>>> 9ccb63524262cd51770321751a1c2af2905059a3:migrations/versions/7e58897bf2db_.py
+
+revision = 'faa673d8d8e4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -71,7 +43,10 @@ def upgrade():
     sa.Column('amount', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=120), nullable=False),
     sa.Column('condition', sa.String(length=120), nullable=False),
-    sa.Column('img', sa.String(length=120), nullable=False),
+    sa.Column('img1', sa.String(length=120), nullable=False),
+    sa.Column('img2', sa.String(length=120), nullable=True),
+    sa.Column('img3', sa.String(length=120), nullable=True),
+    sa.Column('img4', sa.String(length=120), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
