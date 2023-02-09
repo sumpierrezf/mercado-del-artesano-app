@@ -44,7 +44,6 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i class="fa fa-gear"></i>
                   Opciones
                 </button>
                 <ul className="dropdown-menu">
