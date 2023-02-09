@@ -4,14 +4,20 @@ import "../../styles/index.css";
 export const ResetPassword = () => {
   return (
     <div className=" card bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 h-100">
+      <div class="badge bg-naranja-200 text-wrap">
+        <p className="fw-bold text-marron fs-4">Reestablecer contraseña</p>
+      </div>
       <form className="pt-5 w-100 pb-5">
-        <label for="exampleInputEmail1" className="form-label text-naranja-400">
+        <label
+          for="exampleInputEmail1"
+          className="form-label fw-bold text-naranja-400"
+        >
           Email address
         </label>
 
         <input
           type="email"
-          className="form-control border-naranja-400"
+          className="form-control border-naranja-400 text-marron"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           placeholder="Email"
