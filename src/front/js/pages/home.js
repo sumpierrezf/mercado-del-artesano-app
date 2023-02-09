@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { Products } from "../component/products";
+import { Catalogo } from "../component/catalogo";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -39,7 +39,7 @@ export const Home = () => {
           >
             <div className="d-flex flex-nowrap row row-cols-4">
               {store.productos.map((cadaProducto, index) => (
-                <Products
+                <Catalogo
                   key={index}
                   id={index + 1}
                   name={cadaProducto.name}

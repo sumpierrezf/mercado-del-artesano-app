@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Products = ({
+export const Catalogo = ({
   id,
   name,
   category,
@@ -10,7 +10,10 @@ export const Products = ({
   amount,
   description,
   condition,
-  img,
+  img1,
+  img2,
+  img3,
+  img4,
 }) => {
   const { actions, store } = useContext(Context);
 
@@ -24,7 +27,7 @@ export const Products = ({
       >
         <img
           className="img-fluid card-img-top"
-          src={store.detalleProducto.img}
+          src={store.detalleProducto.img1}
           alt="..."
         />
         <div className="card-body">
