@@ -1,3 +1,4 @@
+let back = "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -20,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       fav_products: [],
       auth: false,
       categoria: [],
+      products_in_cart: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -27,10 +29,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
       getUserFavs: (id) => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
-            id
-        )
+        // console.log(back);
+        fetch(back + "/api/user/favorites/" + id)
           .then((res) => res.json())
           .then((data) =>
             setStore({
@@ -40,19 +40,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((err) => console.error(err));
       },
       borrarFavorito: (id, id_product) => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
-            id,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              product_id: id_product,
-            }), // body data type must match "Content-Type" header
-          }
-        ).catch((err) => console.log(err));
+        fetch(back + "/api/user/favorites/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product_id: id_product,
+          }), // body data type must match "Content-Type" header
+        }).catch((err) => console.log(err));
       },
       handleCategory: (e) => {
         const opcion = e.target.value;
@@ -64,6 +60,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           categoria: [],
         });
+      },
+      getUserProductsInCart: (id) => {
+        fetch(back + "/api/user/cart/" + id)
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              products_in_cart: data,
+            })
+          )
+          .catch((err) => console.error(err));
+      },
+      borrarProductInCart: (id, id_product) => {
+        fetch(back + "/api/user/cart/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product_id: id_product,
+          }), // body data type must match "Content-Type" header
+        }).catch((err) => console.log(err));
       },
       getMessage: async () => {
         try {
@@ -132,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         telefono
       ) => {
         fetch(
-          "https://3001-sumpierrezf-mercadodela-2whridtfsv4.ws-us86.gitpod.io/api/signup",
+          back + "/api/signup",
           {
             method: "POST",
             mode: "no-cors",
@@ -164,19 +181,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         );
       },
       login: (userEmail, userPassword) => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-nb1kqfi98gb.ws-us86.gitpod.io/api/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: userEmail,
-              password: userPassword,
-            }),
-          }
-        )
+        fetch(back + "/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: userEmail,
+            password: userPassword,
+          }),
+        })
           .then((response) => {
             if (response.status === 200) {
               setStore({
@@ -194,9 +208,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/product"
-        )
+        fetch(back + "/api/product")
           .then((res) => res.json())
           .then((data) =>
             setStore({
@@ -206,10 +218,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((err) => console.error(err));
       },
       obtenerDetalleProducto: (id) => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/product/" +
-            id
-        )
+        fetch(back + "/api/product/" + id)
           .then((res) => res.json())
           .then((data) =>
             setStore({

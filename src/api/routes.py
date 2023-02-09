@@ -110,13 +110,13 @@ def add_new_product(user_id):
 
     return jsonify({"msg": "Producto subido"}), 200
 
-@api.route('/user/favorites/<int:user_id>', methods=['POST'])
-def add_new_fav(user_id):
+@api.route('/favorites', methods=['POST'])
+def add_new_fav():
     
     request_body = request.json
 
-    fav_products = Favorites.query.filter_by(user_id=user_id,product_id=request_body["product_id"]).first()
-    fav = Favorites(user_id=user_id, product_id=request_body["product_id"])
+    fav_products = Favorites.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).first()
+    fav = Favorites(user_id=request_body["user_id"], product_id=request_body["product_id"])
 
     if fav_products is None:
         db.session.add(fav)
@@ -125,13 +125,13 @@ def add_new_fav(user_id):
 
     return jsonify({"msg":"Ya tienes ese producto en favoritos"}),404
 
-@api.route('/user/cart/<int:user_id>', methods=['POST'])
-def add_to_cart(user_id):
+@api.route('/cart', methods=['POST'])
+def add_to_cart():
     
     request_body = request.json
 
-    cart_filter = Cart.query.filter_by(user_id=user_id,product_id=request_body["product_id"]).first()
-    cart = Cart(user_id=user_id, product_id=request_body["product_id"])
+    cart_filter = Cart.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).first()
+    cart = Cart(user_id=request_body["user_id"], product_id=request_body["product_id"])
 
     if cart_filter is None:
         db.session.add(cart)
@@ -150,9 +150,26 @@ def delete_favorite(user_id):
     print(fav)
 
     if fav is None:
-        return jsonify({"msg":"El usuario seleccionado no tiene ese favorito"}),404
+        return jsonify({"msg":"No tienes ese favorito"}),404
     
     db.session.delete(fav)
     db.session.commit()
 
     return jsonify({"msg":"El favorito ha sido eliminado"}), 200
+
+@api.route('/user/cart/<int:user_id>', methods=['DELETE'])
+def delete_product_in_cart(user_id):
+
+    request_body = request.json
+    print(request_body)
+
+    cart = Cart.query.filter_by(user_id=user_id,product_id=request_body["product_id"]).first()
+    print(cart)
+
+    if cart is None:
+        return jsonify({"msg":"No tienes ese producto en el carrito"}),404
+    
+    db.session.delete(cart)
+    db.session.commit()
+
+    return jsonify({"msg":"El producto ha sido eliminado del carrito"}), 200
