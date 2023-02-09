@@ -1,67 +1,35 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
-
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 750px;
-    background-color: #fdeedc;
-    border: solid #e38b29 0.5px;
-    margin-top: 10px;
+/* Los selectores a continuación representan la paleta de colores, el número indica que menor número hace referencia a los colores más claros, y cuanto mayor el número hace referencia a los colores más fuertes */
+.bg-naranja-100 {
+  background-color: #fdeedc;
 }
 
-.navbar {
-    background-color: #ffd8a9;
-    border: solid #e38b29 0.5px;
+.border-naranja-400 {
+  border: solid #e38b29 0.5px;
 }
 
-.boton-login {
-    background-color: #e38b29;
+.bg-naranja-200 {
+  background-color: #ffd8a9;
 }
 
-.footer {
-    background-color: #ffd8a9;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    border: solid #e38b29 0.5px;
+.bg-naranja-400 {
+  background-color: #e38b29;
 }
 
-.form-control {
-    border: solid #e38b29 0.5px;
+.text-naranja-400 {
+  color: #e38b29;
 }
 
-.form-label {
-    color: #e38b29;
+.border-marron {
+  border: 1px solid #7b4812;
 }
 
-.input-login {
-    border: solid #e38b29 0.5px;
+.text-marron {
+  color: #7b4812;
 }
 
-.login {
-    width: 350px;
-    padding: 30px;
-    padding-top: 186px;
-}
-
-.input-password #togglePassword {
-    user-select: none;
-    color: #e38b29;
-}
-
-.boton-login {
-    margin-top: 30px;
-    padding: 14px 18px;
-    border-radius: 23px;
-    text-transform: uppercase;
-    font-weight: 500;
-    align-items: center;
-    width: 30%;
-    color: #e38b29;
-    transition: 0.2s;
-    width: 100px;
+#togglePassword {
+  color: #e38b29;
 }

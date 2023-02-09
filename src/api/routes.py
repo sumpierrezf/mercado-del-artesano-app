@@ -84,7 +84,12 @@ def add_new_user():
     print(user)
 
     if user is None:
+<<<<<<< HEAD
         usuario = User(email=request_body["email"], password=request_body["password"], first_name=request_body["first_name"], last_name=request_body["last_name"]),
+=======
+        usuario = User(email=request_body["email"], password=request_body["password"], first_name=request_body["first_name"], last_name=request_body["last_name"], birth=request_body["birth"], address=request_body["address"], country=request_body["country"],
+        city=request_body["city"], postal_code=request_body["postal_code"], phone_number=request_body["phone_number"])
+>>>>>>> ec5973ebe76ee96fef9cd0391d18c845c3084cc4
         # print(usuario)
 
         db.session.add(usuario)
@@ -101,7 +106,7 @@ def add_new_product(user_id):
     request_body = json.loads(request.data)
     print(request_body)
 
-    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], img=request_body["img"], user_id=user_id)
+    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], img1=request_body["img1"], img2=request_body["img2"], img3=request_body["img3"], img4=request_body["img4"], user_id=user_id)
     print(products.serialize())
 
     db.session.add(products)

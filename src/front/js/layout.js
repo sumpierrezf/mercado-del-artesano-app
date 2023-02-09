@@ -23,28 +23,25 @@ const Layout = () => {
   const basename = process.env.BASENAME || "";
 
   return (
-    <div>
+    <BrowserRouter basename={basename}>
       {" "}
-      <BrowserRouter basename={basename}>
+      <ScrollToTop>
         {" "}
-        <ScrollToTop>
+        <Navbar />{" "}
+        <Routes>
           {" "}
-          <Navbar />{" "}
-          <Routes>
-            {" "}
-            <Route element={<Home />} path="/" />{" "}
-            <Route element={<Demo />} path="/demo" />{" "}
-            <Route element={<SignUp />} path="/signup" />{" "}
-            <Route element={<Single />} path="/single/:theid" />{" "}
-            <Route element={<Favs />} path="/favs/:theid" />
-            <Route element={<Productos />} path="/form" />
-            <Route element={<Login />} path="/login" />
-            <Route element={<h1> Not found! </h1>} />
-          </Routes>
-          <Footer />{" "}
-        </ScrollToTop>{" "}
-      </BrowserRouter>{" "}
-    </div>
+          <Route element={<Home />} path="/" />{" "}
+          <Route element={<Demo />} path="/demo" />{" "}
+          <Route element={<SignUp />} path="/signup" />{" "}
+          <Route element={<Single />} path="/single/:theid" />{" "}
+          <Route element={<Favs />} path="/favs/:theid" />
+          <Route element={<Productos />} path="/form" />
+          <Route element={<Login />} path="/login" />
+          <Route element={<h1> Not found! </h1>} />
+        </Routes>
+        <Footer />
+      </ScrollToTop>
+    </BrowserRouter>
   );
 };
 
