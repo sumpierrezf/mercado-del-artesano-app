@@ -109,7 +109,10 @@ export const DetalleProducto = ({ id }) => {
                   amount: store.detalleProducto.amount,
                   description: store.detalleProducto.description,
                   condition: store.detalleProducto.condition,
-                  img: store.detalleProducto.img,
+                  img1: store.detalleProducto.img1,
+                  img2: store.detalleProducto.img2,
+                  img3: store.detalleProducto.img3,
+                  img4: store.detalleProducto.img4,
                 })
               }
             >
