@@ -8,28 +8,24 @@ export const Catalogo = ({
   category,
   price,
   amount,
-  description,
-  condition,
+  // description,
+  // condition,
   img1,
-  img2,
-  img3,
-  img4,
+  // img2,
+  // img3,
+  // img4,
 }) => {
   const { actions, store } = useContext(Context);
 
   return (
     <>
       <div
-        className="card h-100"
+        className="card d-flex mx-3 my-3"
         style={{
           width: "18rem",
         }}
       >
-        <img
-          className="img-fluid card-img-top"
-          src={store.detalleProducto.img1}
-          alt="..."
-        />
+        <img className="img-fluid card-img-top" src={img1} alt="..." />
         <div className="card-body">
           <h5 className="card-title">Nombre: {name} </h5>
           <p className="card-text">Categoría: {category}</p>

@@ -5,12 +5,14 @@ import { Catalogo } from "../component/catalogo";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
   useEffect(() => {
     actions.obtenerInfoProductos();
   }, []);
+  console.log(store.productos);
 
   return (
-    <div className="container-fluid h-100 bg-naranja-100">
+    <div className="container-fluid bg-naranja-100">
       <div className="row mb-5">
         {/* COLUMNA IZQUIERDA */}
         <div className="col-sm-4 col-lg-2 bg-naranja-200">
@@ -34,14 +36,16 @@ export const Home = () => {
           </div>
         </div>
         {/* COLUMNA DERECHA */}
-        <div className="container col-sm-8 col-lg-10">
-          <h1 className="text-center">Catálogo de productos.</h1>
+        <div className="col-sm-8 col-lg-10">
+          <h1 className="col-sm-8 col-lg-10 p-3 text-center">
+            Catálogo de productos.
+          </h1>
           <div
-            className="d-flex container col-sm-1 col-lg-3 p-3 mb-3 ms-5"
-            style={{ overflowX: "scroll", height: "570px" }}
+            className="d-flex container col-sm-8 col-lg-10 p-3"
+            style={{ overflowX: "scroll", height: "660px" }}
           >
             <div className="d-flex flex-nowrap row row-cols-4">
-              {store.productos.map((cadaProducto, index) => (
+              {store.productos?.map((cadaProducto, index) => (
                 <Catalogo
                   key={index}
                   id={index + 1}
@@ -49,6 +53,7 @@ export const Home = () => {
                   category={cadaProducto.category}
                   price={cadaProducto.price}
                   amount={cadaProducto.amount}
+                  img1={cadaProducto.img1}
                 />
               ))}
             </div>
