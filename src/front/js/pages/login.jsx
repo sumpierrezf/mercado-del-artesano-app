@@ -18,7 +18,7 @@ export const Login = () => {
   }
   return (
     <>
-      <div className="bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 border-naranja-400">
+      <div className="bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 border-naranja-400 h-100">
         <div className="d-flex justify-content-center">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
           {store.auth === true ? (
@@ -30,7 +30,7 @@ export const Login = () => {
                   htmlFor="exampleInputEmail1"
                   className="form-label text-naranja-400 "
                 >
-                  Email address
+                  Email
                 </label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
@@ -47,12 +47,12 @@ export const Login = () => {
                   htmlFor="exampleInputPassword1"
                   className="form-label text-naranja-400"
                 >
-                  Password
+                  Contraseña
                 </label>
                 <input
                   type={`${switchShown == true ? "password" : "text"}`}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   value={password}
                   className="form-control border-naranja-400"
                   id="exampleInputPassword"
