@@ -74,7 +74,12 @@ export const Cart = () => {
       <div className="bg-naranja-100 border-marron col-4 rounded">
         <h4 className="mt-3 text-center">Total</h4>
         <hr className="my-1 border-marron opacity-75" />
-        <div className="w-100 d-flex justify-content-center"></div>
+        <br />
+        <h5>Subtotal:{}</h5>
+        <br />
+        <h5>Impuestos:{}</h5>
+        <hr className="my-3 border-marron opacity-75" />
+        <h4>TOTAL:</h4>
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getUserFavs: (id) => {
         fetch(
-          "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
+          "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io/api/user/favorites/" +
             id
         )
           .then((res) => res.json())
@@ -40,21 +40,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       borrarFavorito: (id, id_product) => {
         fetch(
           "https://3001-sumpierrezf-mercadodela-6f58p0ahex1.ws-us86.gitpod.io/api/user/favorites/" +
-            id,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              product_id: id_product,
-            }), // body data type must match "Content-Type" header
-          }
-        ).catch((err) => console.log(err));
-      },
-      borrarProductInCart: (id, id_product) => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io/api/user/cart/" +
             id,
           {
             method: "DELETE",
@@ -90,6 +75,21 @@ const getState = ({ getStore, getActions, setStore }) => {
             })
           )
           .catch((err) => console.error(err));
+      },
+      borrarProductInCart: (id, id_product) => {
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io/api/user/cart/" +
+            id,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              product_id: id_product,
+            }), // body data type must match "Content-Type" header
+          }
+        ).catch((err) => console.log(err));
       },
       getMessage: async () => {
         try {
