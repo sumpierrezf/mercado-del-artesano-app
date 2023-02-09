@@ -30,7 +30,7 @@ export const SignUp = (props) => {
       postal,
       telefono
     );
-    actions.login(email, password, nombre);
+    // actions.login(email, password);
     setEmail("");
     setPassword("");
     setNombre("");
@@ -45,6 +45,9 @@ export const SignUp = (props) => {
 
   return (
     <>
+      {/* {store.auth === true ? (
+        <Navigate to="/" />
+      ) : ( */}
       <div style={{ backgroundColor: "#FDEEDC" }}>
         <h2
           className="d-flex justify-content-center"
@@ -258,6 +261,7 @@ export const SignUp = (props) => {
           </form>
         </div>
       </div>
+      {/* )} */}
     </>
   );
 };
