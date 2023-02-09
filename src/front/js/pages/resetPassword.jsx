@@ -17,7 +17,7 @@ export const ResetPassword = () => {
 
         <input
           type="email"
-          className="form-control border-naranja-400 text-marron"
+          className="form-control border-naranja-400"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           placeholder="Email"
