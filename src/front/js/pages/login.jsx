@@ -30,7 +30,7 @@ export const Login = () => {
                   htmlFor="exampleInputEmail1"
                   className="form-label text-naranja-400 "
                 >
-                  Email address
+                  Email
                 </label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
@@ -47,12 +47,12 @@ export const Login = () => {
                   htmlFor="exampleInputPassword1"
                   className="form-label text-naranja-400"
                 >
-                  Password
+                  Contraseña
                 </label>
                 <input
                   type={`${switchShown == true ? "password" : "text"}`}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   value={password}
                   className="form-control border-naranja-400"
                   id="exampleInputPassword"
