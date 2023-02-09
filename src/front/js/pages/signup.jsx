@@ -2,8 +2,6 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Redirect } from "react-router-dom";
 
-import { Navigate } from "react-router-dom";
-
 export const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,6 +9,7 @@ export const SignUp = (props) => {
   const [apellido, setApellido] = useState("");
   const [nacimiento, setNacimiento] = useState("");
   const [direccion, setDireccion] = useState("");
+  const [pais, setPais] = useState("");
   const [ciudad, setCiudad] = useState("");
   const [postal, setPostal] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -19,34 +18,36 @@ export const SignUp = (props) => {
 
   function enviarDatos(e) {
     e.preventDefault();
-
-    const data = {
-      email: email,
-      password: password,
-      nombre: nombre,
-      apellido: apellido,
-      nacimiento: nacimiento,
-      direccion: direccion,
-      ciudad: ciudad,
-      postal: postal,
-      telefono: telefono,
-    };
-
-    fetch("Api url", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      });
+    actions.signup(
+      email,
+      password,
+      nombre,
+      apellido,
+      nacimiento,
+      direccion,
+      pais,
+      ciudad,
+      postal,
+      telefono
+    );
+    // actions.login(email, password);
+    setEmail("");
+    setPassword("");
+    setNombre("");
+    setApellido("");
+    setNacimiento("");
+    setDireccion("");
+    setPais("");
+    setCiudad("");
+    setPostal("");
+    setTelefono("");
   }
 
   return (
     <>
+      {/* {store.auth === true ? (
+        <Navigate to="/" />
+      ) : ( */}
       <div style={{ backgroundColor: "#FDEEDC" }}>
         <h2
           className="d-flex justify-content-center"
@@ -173,6 +174,8 @@ export const SignUp = (props) => {
                 name="pais"
                 className="form-select"
                 aria-label="Default select example"
+                value={pais}
+                onChange={(e) => setPais(e.target.value)}
               >
                 <option value>Selecciona un pais</option>
                 <option value="1">Uruguay</option>
@@ -258,6 +261,7 @@ export const SignUp = (props) => {
           </form>
         </div>
       </div>
+      {/* )} */}
     </>
   );
 };

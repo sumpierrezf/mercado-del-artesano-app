@@ -102,7 +102,7 @@ def add_new_product(user_id):
     request_body = json.loads(request.data)
     print(request_body)
 
-    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], img=request_body["img"], user_id=user_id)
+    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], img1=request_body["img1"], img2=request_body["img2"], img3=request_body["img3"], img4=request_body["img4"], user_id=user_id)
     print(products.serialize())
 
     db.session.add(products)

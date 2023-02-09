@@ -5,13 +5,15 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import { Favs } from "./pages/favs";
+
+import injectContext from "./store/appContext";
 
 import { Login } from "./pages/login.jsx";
-import injectContext from "./store/appContext";
 import { SignUp } from "./pages/signup.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Favs } from "./pages/favs";
+import { DetalleProducto } from "./pages/detalleProducto";
 import { ResetPassword } from "./pages/resetPassword.jsx";
 
 // create your first component
@@ -21,28 +23,24 @@ const Layout = () => {
   const basename = process.env.BASENAME || "";
 
   return (
-    <div>
-      {" "}
-      <BrowserRouter basename={basename}>
-        {" "}
-        <ScrollToTop>
+    <BrowserRouter basename={basename}>
+      <ScrollToTop>
+        <Navbar />
+        <Routes>
           {" "}
-          <Navbar />{" "}
-          <Routes>
-            {" "}
-            <Route element={<Home />} path="/" />{" "}
-            <Route element={<Demo />} path="/demo" />{" "}
-            <Route element={<SignUp />} path="/signup" />{" "}
-            <Route element={<Single />} path="/single/:theid" />{" "}
-            <Route element={<Favs />} path="/favs/:theid" />
-            <Route element={<Login />} path="/login" />
-            <Route element={<ResetPassword />} path="/resetPassword" />
-            <Route element={<h1> Not found! </h1>} />{" "}
-          </Routes>{" "}
-          <Footer />{" "}
-        </ScrollToTop>{" "}
-      </BrowserRouter>{" "}
-    </div>
+          <Route element={<Home />} path="/" />{" "}
+          <Route element={<Demo />} path="/demo" />{" "}
+          <Route element={<SignUp />} path="/signup" />{" "}
+          <Route element={<Single />} path="/single/:theid" />{" "}
+          <Route element={<Favs />} path="/favs/:theid" />
+          <Route element={<DetalleProducto />} path="/detalleProducto/:theid" />
+          <Route element={<ResetPassword />} path="/resetPassword" />
+          <Route element={<Login />} path="/login" />
+          <Route element={<h1> Not found! </h1>} />{" "}
+        </Routes>{" "}
+        <Footer />{" "}
+      </ScrollToTop>{" "}
+    </BrowserRouter>
   );
 };
 

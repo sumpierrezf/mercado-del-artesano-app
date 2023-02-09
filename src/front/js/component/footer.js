@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export const Footer = () => (
-  <footer className="footer mt-auto py-3 text-center">
+  <footer className="footer bg-naranja-200 border-naranja-400 mt-auto py-3 text-center w-100 h-auto">
     <p>
       Made with 🧡 by{" "}
       <a href="http://www.mercadodelartesano.com">Mercado del Artesano</a>
