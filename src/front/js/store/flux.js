@@ -52,6 +52,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         ).catch((err) => console.log(err));
       },
+      borrarProductInCart: (id, id_product) => {
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io/api/user/cart/" +
+            id,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              product_id: id_product,
+            }), // body data type must match "Content-Type" header
+          }
+        ).catch((err) => console.log(err));
+      },
       handleCategory: (e) => {
         const opcion = e.target.value;
         setStore({
