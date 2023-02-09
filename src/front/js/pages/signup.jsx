@@ -300,3 +300,11 @@ export const SignUp = (props) => {
 //     }).catch((err) => console.log(err));
 //   },
 // };
+
+// birth: nacimiento,
+// address: direccion,
+// city: ciudad,
+// postal_code: postal,
+// phone_number: telefono,
+// birth=request_body["birth"], address=request_body["address"],
+//         city=request_body["city"], postal_code=request_body["postal_code"], phone_number=request_body["phone_number"])
