@@ -178,51 +178,52 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      agregarAlCarrito: (
-        productName,
-        productCategory,
-        productPrice,
-        productAmount,
-        productDescription,
-        productCondition,
-        productImg1,
-        productImg2,
-        productImg3,
-        productImg4
-      ) => {
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/product/",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: productName,
-              category: productCategory,
-              price: productPrice,
-              amount: productAmount,
-              description: productDescription,
-              condition: productCondition,
-              img1: productImg1,
-              img2: productImg2,
-              img3: productImg3,
-              img4: productImg4,
-            }), // body data type must match "Content-Type" header
-          }
-        )
-          .then((response) => {
-            console.log(response.status);
-            if (response.status === 200) {
-              setStore({
-                carrito: [...store.carrito, carrito],
-              });
-              console.log(store.carrito);
-            }
-            return response.json();
-          })
-          .catch((err) => console.log(err));
-      },
+      // agregarAlCarrito: (
+      //   user_id,
+      //   name,
+      //   category,
+      //   price,
+      //   amount,
+      //   description,
+      //   condition,
+      //   img1,
+      //   img2,
+      //   img3,
+      //   img4
+      // ) => {
+      //   fetch(
+      //     "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/user/cart/1",
+      //     {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify({
+      //         name: name,
+      //         category: category,
+      //         price: price,
+      //         amount: amount,
+      //         description: description,
+      //         condition: condition,
+      //         img1: img1,
+      //         img2: img2,
+      //         img3: img3,
+      //         img4: img4,
+      //       }), // body data type must match "Content-Type" header
+      //     }
+      //   )
+      //     .then((response) => {
+      //       console.log(response.status);
+      //       if (response.status === 200) {
+      //         setStore({
+      //           carrito: [...store.carrito, carrito],
+      //         });
+      //         console.log(store.carrito);
+      //       }
+      //       return response.json();
+      //     })
+      //     .catch((err) => console.log(err));
+      // },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
       changeColor: (index, color) => {
         //get the store
