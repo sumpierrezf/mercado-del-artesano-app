@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
+    
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -51,6 +52,13 @@ class Favorites(db.Model):
             "user_id": self.user_id
             # do not serialize the password, its a security breach
         }
+    def serializeProducts(self):
+        results = Products.query.filter_by(id = self.product_id).first()
+        return{
+            "productsInfo": results.serialize()
+        }
+            
+        
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -67,6 +75,12 @@ class Cart(db.Model):
             "user_id": self.user_id
             # do not serialize the password, its a security breach
         }
+    
+    def serializeProducts(self):
+        results = Products.query.filter_by(id = self.product_id).first()
+        return{
+            "productsInfo": results.serialize()
+        }
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -76,6 +90,10 @@ class Products(db.Model):
     amount = db.Column(db.Integer, unique=False, nullable=False)
     description = db.Column(db.String(120), unique=False, nullable=False)
     condition = db.Column(db.String(120), unique=False, nullable=False)
+    img1 = db.Column(db.String(120), unique=False, nullable=False)
+    img2 = db.Column(db.String(120), unique=False, nullable=True)
+    img3 = db.Column(db.String(120), unique=False, nullable=True)
+    img4 = db.Column(db.String(120), unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -93,6 +111,10 @@ class Products(db.Model):
             "description": self.description,
             "condition": self.condition,
             "user_id": self.user_id,
+            "img1": self.img1,
+            "img2": self.img2,
+            "img3": self.img3,
+            "img4": self.img4
             # do not serialize the password, its a security breach
         }
 

@@ -37,6 +37,29 @@ def get_product():
     print(results)
     return jsonify(results), 200
 
+@api.route('/product/<int:product_id>', methods=['GET'])
+def get_info_characters(product_id):
+    product = Products.query.filter_by(id=product_id).first()
+    print(product.serialize())
+    
+    return jsonify(product.serialize()), 200
+
+@api.route('/user/favorites/<int:user_id>', methods=['GET'])
+def handle_user_favorites(user_id):
+    alluserfavs = Favorites.query.filter_by(user_id=user_id).all()
+
+    results = list(map(lambda item: { **item.serializeProducts(), **item.serialize()}, alluserfavs))
+
+    return jsonify(results), 200
+
+@api.route('/user/cart/<int:user_id>', methods=['GET'])
+def products_in_cart(user_id):
+    alluserproducts = Cart.query.filter_by(user_id=user_id).all()
+
+    results = list(map(lambda item: { **item.serializeProducts(), **item.serialize()}, alluserproducts))
+
+    return jsonify(results), 200
+
 @api.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
@@ -61,7 +84,8 @@ def add_new_user():
     print(user)
 
     if user is None:
-        usuario = User(email=request_body["email"], password=request_body["password"], first_name=request_body["first_name"], last_name=request_body["last_name"])
+        usuario = User(email=request_body["email"], password=request_body["password"], first_name=request_body["first_name"], last_name=request_body["last_name"], birth=request_body["birth"], address=request_body["address"], country=request_body["country"],
+        city=request_body["city"], postal_code=request_body["postal_code"], phone_number=request_body["phone_number"])
         # print(usuario)
 
         db.session.add(usuario)
@@ -78,7 +102,7 @@ def add_new_product(user_id):
     request_body = json.loads(request.data)
     print(request_body)
 
-    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], user_id=user_id)
+    products = Products(name=request_body["name"], category=request_body["category"], price=request_body["price"], amount=request_body["amount"], description=request_body["description"], condition=request_body["condition"], img1=request_body["img1"], img2=request_body["img2"], img3=request_body["img3"], img4=request_body["img4"], user_id=user_id)
     print(products.serialize())
 
     db.session.add(products)
@@ -86,7 +110,7 @@ def add_new_product(user_id):
 
     return jsonify({"msg": "Producto subido"}), 200
 
-@api.route('/user/<int:user_id>/favorites', methods=['POST'])
+@api.route('/user/favorites/<int:user_id>', methods=['POST'])
 def add_new_fav(user_id):
     
     request_body = request.json
@@ -101,7 +125,7 @@ def add_new_fav(user_id):
 
     return jsonify({"msg":"Ya tienes ese producto en favoritos"}),404
 
-@api.route('/user/<int:user_id>/cart', methods=['POST'])
+@api.route('/user/cart/<int:user_id>', methods=['POST'])
 def add_to_cart(user_id):
     
     request_body = request.json
@@ -115,3 +139,20 @@ def add_to_cart(user_id):
         return jsonify(cart.serialize()), 200
 
     return jsonify({"msg":"Ya tienes ese producto en el carrito"}),404
+
+@api.route('/user/favorites/<int:user_id>', methods=['DELETE'])
+def delete_favorite(user_id):
+
+    request_body = request.json
+    print(request_body)
+
+    fav = Favorites.query.filter_by(user_id=user_id,product_id=request_body["product_id"]).first()
+    print(fav)
+
+    if fav is None:
+        return jsonify({"msg":"El usuario seleccionado no tiene ese favorito"}),404
+    
+    db.session.delete(fav)
+    db.session.commit()
+
+    return jsonify({"msg":"El favorito ha sido eliminado"}), 200

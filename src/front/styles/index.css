@@ -1,3 +1,35 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+/* Los selectores a continuación representan la paleta de colores, el número indica que menor número hace referencia a los colores más claros, y cuanto mayor el número hace referencia a los colores más fuertes */
+.bg-naranja-100 {
+    background-color: #fdeedc;
+}
+
+.border-naranja-400 {
+    border: solid #e38b29 0.5px;
+}
+
+.bg-naranja-200 {
+    background-color: #ffd8a9;
+}
+
+.bg-naranja-400 {
+    background-color: #e38b29;
+}
+
+.text-naranja-400 {
+    color: #e38b29;
+}
+
+.border-marron {
+    border: 1px solid #7b4812;
+}
+
+.text-marron {
+    color: #7b4812;
+}
+
+#togglePassword {
+    color: #e38b29;
+}
