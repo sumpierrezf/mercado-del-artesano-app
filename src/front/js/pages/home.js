@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  useEffect(() => {
+    actions.obtenerInfoProductos();
+  }, []);
 
   return (
     <div className="container-fluid h-100 bg-naranja-100">
