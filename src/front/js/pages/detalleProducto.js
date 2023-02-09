@@ -22,29 +22,29 @@ export const DetalleProducto = ({ id }) => {
   console.log(store.detalleProducto);
 
   return (
-    <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron h-100">
+    <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
       <div className="row">
         {/* PRIMER COLUMNA */}
         <div className="container flex-direction-column col-sm-2 rounded-1">
           <img
             className="img-fluid m-1 rounded-1 border-marron"
-            src={store.detalleProducto.img}
+            src={store.detalleProducto.img1}
           />
           <img
             className="img-fluid m-1 rounded-1 border-marron"
-            src={store.detalleProducto.img}
+            src={store.detalleProducto.img2}
           />
           <img
             className="img-fluid m-1 rounded-1 border-marron"
-            src={store.detalleProducto.img}
+            src={store.detalleProducto.img3}
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
         <div className="d-flex container col-sm-4 rounded-1 border-marron">
           <img
             className="img-fluid m-1 rounded-1"
-            src={store.detalleProducto.img}
+            src={store.detalleProducto.img4}
           />
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}
@@ -60,7 +60,7 @@ export const DetalleProducto = ({ id }) => {
               Nombre del producto: {store.detalleProducto.name}
               <button
                 className="btn text-danger"
-                onClick={() => agregarFavorito(id)}
+                onClick={() => actions.agregarFavorito(id)}
               >
                 <i className="fa fa-heart" />
               </button>
