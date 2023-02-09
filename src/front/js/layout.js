@@ -11,10 +11,11 @@ import { Productos } from "./pages/formproductos.jsx";
 import injectContext from "./store/appContext";
 
 import { Login } from "./pages/login.jsx";
-
 import { SignUp } from "./pages/signup.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Favs } from "./pages/favs";
+import { DetalleProducto } from "./pages/detalleProducto";
 
 // create your first component
 const Layout = () => {
@@ -36,6 +37,7 @@ const Layout = () => {
           <Route element={<Single />} path="/single/:theid" />{" "}
           <Route element={<Favs />} path="/favs/:theid" />
           <Route element={<Productos />} path="/form" />
+          <Route element={<DetalleProducto />} path="/detalleProducto/:theid" />
           <Route element={<Login />} path="/login" />
           <Route element={<h1> Not found! </h1>} />
         </Routes>
