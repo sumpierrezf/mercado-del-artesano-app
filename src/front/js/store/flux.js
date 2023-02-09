@@ -167,6 +167,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((err) => console.log(err));
       },
+      logout: () => {
+        localStorage.removeItem("token");
+        setStore({
+          auth: false,
+        });
+      },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
         fetch(back + "/api/product")
