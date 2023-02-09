@@ -80,9 +80,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      form: (nombre, categoria, precio, stock, descripcion, condicion) => {
+      enviarForm: (
+        nombre,
+        categoria,
+        precio,
+        stock,
+        descripcion,
+        condicion,
+        img1,
+        img2,
+        img3,
+        img4,
+        user_id
+      ) => {
         fetch(
-          "https://3001-sumpierrezf-mercadodela-2whridtfsv4.ws-us86.gitpod.io/api/upload_product/<int:user_id>",
+          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/<int:user_id>",
           {
             method: "POST",
             mode: "no-cors",

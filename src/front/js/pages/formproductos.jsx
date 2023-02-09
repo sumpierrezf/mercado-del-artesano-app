@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 export const Productos = (props) => {
   const [nombre, setNombre] = useState("");
@@ -10,9 +8,6 @@ export const Productos = (props) => {
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [img1, setImg1] = useState("");
-  const [img2, setImg2] = useState("");
-  const [img3, setImg3] = useState("");
-  const [img4, setImg4] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
 
@@ -20,7 +15,7 @@ export const Productos = (props) => {
 
   function enviarForm(e) {
     e.preventDefault();
-    actions.form(
+    actions.enviarForm(
       nombre,
       categoria,
       precio,
@@ -28,9 +23,6 @@ export const Productos = (props) => {
       descripcion,
       condicion,
       img1,
-      img2,
-      img3,
-      img4,
       user_id
     );
   }
