@@ -184,7 +184,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
         fetch(
-          "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/product"
+          "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io/api/product"
         )
           .then((res) => res.json())
           .then((data) =>

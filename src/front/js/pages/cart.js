@@ -33,39 +33,32 @@ export const Cart = () => {
             </li>
 
             {/* __________________MAP________________________ */}
-            {store.products_in_cart
-              .filter((item) =>
-                item.productsInfo.category.includes(store.categoria)
-              )
-              .map((item, index) => (
-                <li
-                  key={index}
-                  className="bg-naranja-100 border-marron text-marron container list-group-item d-flex w-100"
-                >
-                  <CartLi
-                    nombre={item.productsInfo.name}
-                    precio={item.productsInfo.price}
-                    imagen={item.productsInfo.img1}
-                  />
-                  <div className="w-50">
-                    <button
-                      className="float-end rounded bg-naranja-200 text-marron border-marron"
-                      style={{
-                        height: "35px",
-                        marginTop: "35px",
-                      }}
-                      onClick={() =>
-                        actions.borrarProductInCart(
-                          params.theid,
-                          item.product_id
-                        )
-                      }
-                    >
-                      Eliminar del carrito
-                    </button>
-                  </div>
-                </li>
-              ))}
+            {store.products_in_cart.map((item, index) => (
+              <li
+                key={index}
+                className="bg-naranja-100 border-marron text-marron container list-group-item d-flex w-100"
+              >
+                <CartLi
+                  nombre={item.productsInfo.name}
+                  precio={item.productsInfo.price}
+                  imagen={item.productsInfo.img1}
+                />
+                <div className="w-50">
+                  <button
+                    className="float-end rounded bg-naranja-200 text-marron border-marron"
+                    style={{
+                      height: "35px",
+                      marginTop: "35px",
+                    }}
+                    onClick={() =>
+                      actions.borrarProductInCart(params.theid, item.product_id)
+                    }
+                  >
+                    Eliminar del carrito
+                  </button>
+                </div>
+              </li>
+            ))}
             {/* __________________Cierre_de_MAP________________________ */}
           </ul>
           {/* __________________Cierre_de_lista_de_favoritos________________________ */}
@@ -75,7 +68,10 @@ export const Cart = () => {
         <h4 className="mt-3 text-center">Total</h4>
         <hr className="my-1 border-marron opacity-75" />
         <br />
-        <h5>Subtotal:{}</h5>
+        <h5>
+          Subtotal:
+          {/* {store.products_in_cart.productsInfo.price} */}
+        </h5>
         <br />
         <h5>Impuestos:{}</h5>
         <hr className="my-3 border-marron opacity-75" />
