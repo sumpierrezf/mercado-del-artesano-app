@@ -105,17 +105,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         descripcion,
         condicion,
         img1,
-        img2,
-        img3,
-        img4,
+        // img2,
+        // img3,
+        // img4,
         user_id
       ) => {
+        console.log(user_id);
         fetch(
-          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/<int:user_id>",
+          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
+            user_id,
           {
             method: "POST",
-            mode: "no-cors",
-            credentials: "include",
+            // mode: "no-cors",
+            // credentials: "include",
             headers: {
               "Content-Type": "application/json",
             },
@@ -127,9 +129,9 @@ const getState = ({ getStore, getActions, setStore }) => {
               description: descripcion,
               condition: condicion,
               img1: img1,
-              img2: img2,
-              img3: img3,
-              img4: img4,
+              // img2: img2,
+              // img3: img3,
+              // img4: img4,
               user_id: user_id,
             }),
           }

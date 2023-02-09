@@ -15,7 +15,7 @@ export const Productos = (props) => {
 
   function enviarForm(e) {
     e.preventDefault();
-    actions.enviarForm(
+    console.log(
       nombre,
       categoria,
       precio,
@@ -24,6 +24,17 @@ export const Productos = (props) => {
       condicion,
       img1,
       user_id
+    );
+    actions.enviarForm(
+      nombre,
+      categoria,
+      precio,
+      stock,
+      descripcion,
+      condicion,
+      img1,
+      1
+      // user_id
     );
   }
 
@@ -149,60 +160,61 @@ export const Productos = (props) => {
             </div>
             {/* -----------------boton imagen------------------------- */}
 
-            <div className="d-flex  mt-4">
-              <form
-                className="subida-imagenes"
-                type="POST"
-                encType="multipart/formdata"
-              >
-                <input
-                  value={img1}
-                  onChange={(e) => setImg1(e.target.value)}
-                  type="file"
-                  name="Subir imagen "
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
-                />
-                <input
-                  onChange={(e) => setImg1(e.target.value)}
-                  type="submit"
-                  className="subir-imagen"
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
-                />
-              </form>
+            <div
+              className="d-flex  mt-4"
+              type="POST"
+              encType="multipart/formdata"
+            >
+              {" "}
             </div>
-
-            {/* ________________________botones______________________________________________ */}
-            <div className="d-flex justify-content-center mt-4">
-              <button
-                type="submit"
-                className="btn btn-warning me-3"
-                style={{
-                  backgroundColor: "#FFD8A9",
-                  color: "#E38B29",
-                }}
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={(e) => enviarForm(e)}
-                type="file"
-                className="btn btn-warning"
-                style={{
-                  backgroundColor: "#FFD8A9",
-                  color: "#E38B29",
-                }}
-              >
-                Publicar
-              </button>
-            </div>
+            <input
+              value={img1}
+              onChange={(e) => setImg1(e.target.value)}
+              type="file"
+              name="Subir imagen "
+              style={{
+                backgroundColor: "#FFD8A9",
+                color: "#E38B29",
+              }}
+            />
+            <input
+              onChange={(e) => setImg1(e.target.value)}
+              type="submit"
+              className="subir-imagen"
+              style={{
+                backgroundColor: "#FFD8A9",
+                color: "#E38B29",
+              }}
+            />
           </form>
         </div>
+
+        {/* ________________________botones______________________________________________ */}
+        <div className="d-flex justify-content-center mt-4">
+          <button
+            type="submit"
+            className="btn btn-warning me-3"
+            style={{
+              backgroundColor: "#FFD8A9",
+              color: "#E38B29",
+            }}
+          >
+            Cancelar
+          </button>
+          <button
+            onClick={(e) => enviarForm(e)}
+            type="file"
+            className="btn btn-warning"
+            style={{
+              backgroundColor: "#FFD8A9",
+              color: "#E38B29",
+            }}
+          >
+            Publicar
+          </button>
+        </div>
+
+        <div className="d-flex  mt-4"></div>
       </div>
     </>
   );
