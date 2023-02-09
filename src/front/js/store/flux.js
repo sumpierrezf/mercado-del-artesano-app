@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       fav_products: [],
       auth: false,
       categoria: [],
+      products_in_cart: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -61,6 +62,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           categoria: [],
         });
+      },
+      getUserProductsInCart: (id) => {
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io/api/user/cart/" +
+            id
+        )
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              products_in_cart: data,
+            })
+          )
+          .catch((err) => console.error(err));
       },
       getMessage: async () => {
         try {

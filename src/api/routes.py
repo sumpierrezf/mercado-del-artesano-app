@@ -150,9 +150,26 @@ def delete_favorite(user_id):
     print(fav)
 
     if fav is None:
-        return jsonify({"msg":"El usuario seleccionado no tiene ese favorito"}),404
+        return jsonify({"msg":"No tienes ese favorito"}),404
     
     db.session.delete(fav)
     db.session.commit()
 
     return jsonify({"msg":"El favorito ha sido eliminado"}), 200
+
+@api.route('/user/cart/<int:user_id>', methods=['DELETE'])
+def delete_product_in_cart(user_id):
+
+    request_body = request.json
+    print(request_body)
+
+    cart = Cart.query.filter_by(user_id=user_id,product_id=request_body["product_id"]).first()
+    print(cart)
+
+    if cart is None:
+        return jsonify({"msg":"No tienes ese producto en el carrito"}),404
+    
+    db.session.delete(cart)
+    db.session.commit()
+
+    return jsonify({"msg":"El producto ha sido eliminado del carrito"}), 200
