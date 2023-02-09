@@ -35,8 +35,28 @@ db.init_app(app)
 # Allow CORS requests to this API
 CORS(app)
 
-app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+# app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+# jwt = JWTManager(app)
+
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "cualquiercosa"
 jwt = JWTManager(app)
+
+#CONFIGURACION EMAIL
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT":  465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME":  'calle4cr2021@gmail.com', #ACA COLOQUEN EL CORREO DE LA APP DEL ALUMN
+    "MAIL_PASSWORD": 'C@lle42021$$', #PASSWORD DEL CORREO DE LA APP DEL ALUMNO
+    "MAIL_DEFAULT_SENDER": 'calle4cr2021@gmail.com'
+}
+app.config.update(mail_settings)
+mail = Mail(app)
+#agregan mail a la app y se va llamar en routes.py como current_app
+app.mail= mail
+#FIN CONFIGURACION EMAIL
 
 # add the admin
 setup_admin(app)
