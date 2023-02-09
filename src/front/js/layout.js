@@ -11,7 +11,7 @@ import { Productos } from "./pages/formproductos.jsx";
 import injectContext from "./store/appContext";
 
 import { Login } from "./pages/login.jsx";
-import injectContext from "./store/appContext";
+
 import { SignUp } from "./pages/signup.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
