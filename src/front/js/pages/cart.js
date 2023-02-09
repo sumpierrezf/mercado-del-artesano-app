@@ -73,9 +73,27 @@ export const Cart = () => {
           {/* {store.products_in_cart.productsInfo.price} */}
         </h5>
         <br />
-        <h5>Impuestos:{}</h5>
+        <h5>
+          Impuestos:
+          {/* {
+            store.products_in_cart.filter((item) =>
+              item.product_id.includes(params.theid)
+            ).productsInfo.price
+          } */}
+        </h5>
         <hr className="my-3 border-marron opacity-75" />
         <h4>TOTAL:</h4>
+        <hr
+          className="border-marron opacity-75"
+          style={{
+            marginTop: "200px",
+          }}
+        />
+        <div className="w-100 d-flex justify-content-center">
+          <button className="mt-4 mx-auto w-75 rounded bg-naranja-200 text-marron border-marron">
+            Continuar compra
+          </button>
+        </div>
       </div>
     </div>
   );
