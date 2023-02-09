@@ -1,6 +1,6 @@
 import React from "react";
 
-export const FavLi = (props) => {
+export const CartLi = (props) => {
   return (
     <div className="d-flex w-50">
       <img src={props.imagen} alt="" style={{ height: 80, width: "auto" }} />
