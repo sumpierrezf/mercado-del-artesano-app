@@ -90,6 +90,50 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+      signup: (
+        email,
+        password,
+        nombre,
+        apellido,
+        nacimiento,
+        direccion,
+        pais,
+        ciudad,
+        postal,
+        telefono
+      ) => {
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-2whridtfsv4.ws-us86.gitpod.io/api/signup",
+          {
+            method: "POST",
+            mode: "no-cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+              first_name: nombre,
+              last_name: apellido,
+              birth: nacimiento,
+              address: direccion,
+              country: pais,
+              city: ciudad,
+              postal_code: postal,
+              phone_number: telefono,
+            }),
+          }
+          // ).then((response) => {
+          //   if (response.status === 200) {
+          //     setStore({
+          //       auth: true,
+          //     });
+          //   }
+          //   return response.json();
+          // }
+        );
+      },
       login: (userEmail, userPassword) => {
         fetch(
           "https://3001-sumpierrezf-mercadodela-nb1kqfi98gb.ws-us85.gitpod.io/api/login",
