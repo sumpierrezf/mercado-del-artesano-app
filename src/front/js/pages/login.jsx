@@ -71,7 +71,7 @@ export const Login = () => {
               </div>
 
               <div className="mb-3 resetpassword">
-                <Link to="/passrecover">Forgot password</Link>
+                <Link to="/passrecover">Olvidé mi contraseña</Link>
               </div>
               <div className="d-flex justify-content-center">
                 <button
