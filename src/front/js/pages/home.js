@@ -42,7 +42,7 @@ export const Home = () => {
           </h1>
           <div
             className="d-flex container col-sm-8 col-lg-10 p-3"
-            style={{ overflowX: "scroll", height: "550px" }}
+            style={{ overflowX: "scroll", height: "55 0px" }}
           >
             <div className="d-flex flex-nowrap row row-cols-4">
               {store.productos?.map((cadaProducto, index) => (
