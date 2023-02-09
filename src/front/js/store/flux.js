@@ -76,6 +76,34 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      form: (nombre, categoria, precio, stock, descripcion, condicion) => {
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-2whridtfsv4.ws-us86.gitpod.io/api/upload_product/<int:user_id>",
+          {
+            method: "POST",
+            mode: "no-cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: nombre,
+              category: categoria,
+              price: precio,
+              amount: stock,
+              description: descripcion,
+              condition: condicion,
+              img1: img1,
+              img2: img2,
+              img3: img3,
+              img4: img4,
+              user_id: user_id,
+            }),
+          }
+        );
+      },
+
       signup: (
         email,
         password,

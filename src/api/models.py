@@ -90,7 +90,7 @@ class Products(db.Model):
     amount = db.Column(db.Integer, unique=False, nullable=False)
     description = db.Column(db.String(120), unique=False, nullable=False)
     condition = db.Column(db.String(120), unique=False, nullable=False)
-    img1 = db.Column(db.String(120), unique=False, nullable=False)
+    img1 = db.Column(db.String(120), unique=False, nullable=True)
     img2 = db.Column(db.String(120), unique=False, nullable=True)
     img3 = db.Column(db.String(120), unique=False, nullable=True)
     img4 = db.Column(db.String(120), unique=False, nullable=True)

@@ -1,5 +1,7 @@
-import React, { useState, useContext, useSyncExternalStore } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const Productos = (props) => {
   const [nombre, setNombre] = useState("");
@@ -7,37 +9,30 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
+  const [img1, setImg1] = useState("");
+  const [img2, setImg2] = useState("");
+  const [img3, setImg3] = useState("");
+  const [img4, setImg4] = useState("");
+  const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
 
-  function enviarDatos(e) {
+  const { store, actions } = useContext(Context);
+
+  function enviarForm(e) {
     e.preventDefault();
-
-    const data = {
-      nombre: nombre,
-      categoria: categoria,
-      precio: precio,
-      stock: stock,
-      descripcion: descripcion,
-      condicion: condicion,
-    };
-
-    fetch(
-      "https://3001-sumpierrezf-mercadodela-3mpo0szwfvg.ws-us85.gitpod.io/api/user/form/" +
-        id,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setStore({
-          formulario: data,
-        }).catch((err) => console.error(err));
-      });
+    actions.form(
+      nombre,
+      categoria,
+      precio,
+      stock,
+      descripcion,
+      condicion,
+      img1,
+      img2,
+      img3,
+      img4,
+      user_id
+    );
   }
 
   return (
@@ -56,7 +51,7 @@ export const Productos = (props) => {
           className="d-flex container w-75"
           style={{ backgroundColor: "#FDEEDC" }}
         >
-          <form className="w-50 mx-auto row" onSubmit={enviarDatos}>
+          <form className="w-50 mx-auto row" onSubmit={enviarForm}>
             <span className="border border-1"></span>
             {/* ______________________Nombre_______________________________________ */}
 
@@ -163,24 +158,14 @@ export const Productos = (props) => {
             {/* -----------------boton imagen------------------------- */}
 
             <div className="d-flex  mt-4">
-              {/* 
-               <button
-                type="submit"
-                className="btn btn-warning me-3"
-                style={{
-                  backgroundColor: "#FFD8A9",
-                  color: "#E38B29",
-                }}
-              >
-                Subir imagen
-                <i className="fas fa-cloud-download-alt ms-2"></i>
-              </button> */}
               <form
                 className="subida-imagenes"
                 type="POST"
                 encType="multipart/formdata"
               >
                 <input
+                  value={img1}
+                  onChange={(e) => setImg1(e.target.value)}
                   type="file"
                   name="Subir imagen "
                   style={{
@@ -189,9 +174,9 @@ export const Productos = (props) => {
                   }}
                 />
                 <input
+                  onChange={(e) => setImg1(e.target.value)}
                   type="submit"
                   className="subir-imagen"
-                  value="Enviar imagen"
                   style={{
                     backgroundColor: "#FFD8A9",
                     color: "#E38B29",
@@ -213,7 +198,7 @@ export const Productos = (props) => {
                 Cancelar
               </button>
               <button
-                onClick={(e) => enviarDatos(e)}
+                onClick={(e) => enviarForm(e)}
                 type="file"
                 className="btn btn-warning"
                 style={{
