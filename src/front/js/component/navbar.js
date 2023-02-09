@@ -23,6 +23,9 @@ export const Navbar = () => {
   function handleCart() {
     navigate("/cart/1"); //usamos navigate para redireccionar
   }
+  function handleForm() {
+    navigate("/form"); //usamos navigate para redireccionar
+  }
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
       <div className="container-fluid d-flex">
@@ -51,7 +54,7 @@ export const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#" onClick={handleForm}>
                       Vender
                     </a>
                   </li>

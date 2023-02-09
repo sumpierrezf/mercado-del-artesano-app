@@ -33,8 +33,8 @@ export const Productos = (props) => {
       descripcion,
       condicion,
       img1,
-      1
-      // user_id
+      // 1
+      user_id
     );
   }
 
