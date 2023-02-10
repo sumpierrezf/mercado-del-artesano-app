@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/index.css";
 
 export const ResetPassword = () => {
+  const [email, setEmail] = useState("");
+  function sendEmail(e) {
+    e.preventDefault();
+
+    // actions.resetPassword(email);
+    setEmail("");
+  }
   return (
     <div className=" card bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 h-100">
-      <div class="badge bg-naranja-200 text-wrap">
+      <div className="badge bg-naranja-200 text-wrap">
         <p className="fw-bold text-marron fs-4">Reestablecer contraseña</p>
       </div>
-      <form className="pt-5 w-100 pb-5">
+      <form className="pt-5 w-100 pb-5" onSubmit={sendEmail}>
         <label
-          for="exampleInputEmail1"
+          htmlFor="exampleInputEmail1"
           className="form-label fw-bold text-naranja-400"
         >
           Email address
         </label>
 
         <input
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           className="form-control border-naranja-400"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
+          value={email}
           placeholder="Email"
         />
         <div id="emailHelp" className="form-text text-marron">
