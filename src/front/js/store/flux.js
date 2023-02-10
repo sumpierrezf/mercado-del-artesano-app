@@ -40,6 +40,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
+      addToFavorites: (user_id, product_id) => {
+        fetch(back + "/api/favorites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+            product_id: product_id,
+          }),
+        });
+      },
       borrarFavorito: (id, id_product) => {
         fetch(back + "/api/user/favorites/" + id, {
           method: "DELETE",
