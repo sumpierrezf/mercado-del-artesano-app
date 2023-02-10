@@ -6,6 +6,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Favs } from "./pages/favs";
+import { Productos } from "./pages/formproductos.jsx";
 import injectContext from "./store/appContext";
 import { Login } from "./pages/login.jsx";
 import { SignUp } from "./pages/signup.jsx";
@@ -22,17 +23,15 @@ const Layout = () => {
 
   return (
     <BrowserRouter basename={basename}>
-      {" "}
       <ScrollToTop>
-        {" "}
-        <Navbar />{" "}
+        <Navbar />
         <Routes>
-          {" "}
-          <Route element={<Home />} path="/" />{" "}
-          <Route element={<Demo />} path="/demo" />{" "}
-          <Route element={<SignUp />} path="/signup" />{" "}
-          <Route element={<Single />} path="/single/:theid" />{" "}
+          <Route element={<Home />} path="/" />
+          <Route element={<Demo />} path="/demo" />
+          <Route element={<SignUp />} path="/signup" />
+          <Route element={<Single />} path="/single/:theid" />
           <Route element={<Favs />} path="/favs/:theid" />
+          <Route element={<Productos />} path="/form" />
           <Route element={<DetalleProducto />} path="/detalleProducto/:theid" />
           <Route element={<Login />} path="/login" />
           <Route element={<Cart />} path="/cart/:theid" />

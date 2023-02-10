@@ -22,7 +22,7 @@ export const Login = () => {
         <div className="d-flex justify-content-center">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
           {store.auth === true ? (
-            <Navigate to="/demo" />
+            <Navigate to="/" />
           ) : (
             <form className="login pt-5 w-100 pb-5" onSubmit={enviarDatos}>
               <div className="mb-3">

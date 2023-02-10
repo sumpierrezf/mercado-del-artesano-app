@@ -1,4 +1,4 @@
-let back = "https://3001-sumpierrezf-mercadodela-2e1gcx19xxx.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-wcu27d18tzl.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -23,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       categoria: [],
       products_in_cart: [],
     },
+
     actions: {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
@@ -96,6 +97,48 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      enviarForm: (
+        nombre,
+        categoria,
+        precio,
+        stock,
+        descripcion,
+        condicion,
+        img1,
+        // img2,
+        // img3,
+        // img4,
+        user_id
+      ) => {
+        console.log(user_id);
+        fetch(
+          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
+            user_id,
+          {
+            method: "POST",
+            // mode: "no-cors",
+            // credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: nombre,
+              category: categoria,
+              price: precio,
+              amount: stock,
+              description: descripcion,
+              condition: condicion,
+              img1: img1,
+              // img2: img2,
+              // img3: img3,
+              // img4: img4,
+              user_id: user_id,
+            }),
+          }
+        );
+      },
+
       signup: (
         email,
         password,
@@ -166,13 +209,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((err) => console.log(err));
       },
+      logout: () => {
+        localStorage.removeItem("token");
+        setStore({
+          auth: false,
+        });
+      },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
         fetch(back + "/api/product")
           .then((res) => res.json())
           .then((data) =>
             setStore({
-              productos: data.results,
+              productos: data,
             })
           )
           .catch((err) => console.error(err));
