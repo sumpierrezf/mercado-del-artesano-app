@@ -62,6 +62,7 @@ class Favorites(db.Model):
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Integer, unique=False, nullable=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
@@ -72,7 +73,8 @@ class Cart(db.Model):
         return {
             "id": self.id,
             "product_id": self.product_id,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "amount": self.amount
             # do not serialize the password, its a security breach
         }
     

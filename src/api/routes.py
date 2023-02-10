@@ -222,37 +222,19 @@ def delete_product_in_cart(user_id):
     db.session.delete(cart)
     db.session.commit()
 
-    return jsonify({"msg": "El producto ha sido eliminado del carrito"}), 200
+    return jsonify({"msg":"El producto ha sido eliminado del carrito"}), 200
 
-#     # RECUPERACION CONTRASEÑA OLVIDADA
+@api.route('/cart', methods=['PUT'])
+def select_product_amount():
+    
+    request_body = request.json
 
+    cart_filter = Cart.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).first()
+    
+    if cart_filter is None:
+        return jsonify({"msg":"No tienes ese producto en el carrito"}),404
 
-# @api.route("/forgotpassword", methods=["POST"])
-# def forgotpassword():
-#     recover_email = request.json["email"]
-#     recover_password = "".join(
-#         random.choice(string.ascii_uppercase + string.digits) for x in range(8)
-#     )  # clave aleatoria nueva
-
-#     if not recover_email:
-#         return jsonify({"msg": "Debe ingresar el correo"}), 401
-#     # busco si el correo existe en mi base de datos
-#     user = User.query.filter_by(email=recover_email).first()
-#     if recover_email != user.email:
-#         return (
-#             jsonify({"msg": "El correo ingresado no existe en nuestros registros"}),
-#             400,
-#         )
-#     # si existe guardo la nueva contraseña aleatoria
-#     user.password = recover_password
-#     db.session.commit()
-#     # luego se la envio al usuario por correo para que pueda ingresar
-#     msg = Message("Hi", recipients=[recover_email])
-#     msg.html = f"""<h1>Su nueva contraseña es: {recover_password}</h1>"""
-#     current_app.mail.send(msg)
-#     return (
-#         jsonify(
-#             {"msg": "Su nueva clave ha sido enviada al correo electrónico ingresado"}
-#         ),
-#         200,
-#     )
+    cart_filter.amount=request_body["amount"]
+    db.session.commit()
+    return jsonify(cart_filter.serialize()), 200
+    
