@@ -18,21 +18,29 @@ export const Home = () => {
         <div className="col-sm-4 col-lg-2 bg-naranja-200">
           <h3 className="col-sm-4 col-lg-2 p-3">Categorías:</h3>
           <div className="d-grid gap-2 col-6 mx-1">
-            <button type="button" className="btn btn-link">
-              Tazas
-            </button>
-            <button type="button" className="btn btn-link">
-              Gorros
-            </button>
-            <button type="button" className="btn btn-link">
-              Madera
-            </button>
-            <button type="button" className="btn btn-link">
-              Tejidos
-            </button>
-            <button type="button" className="btn btn-link">
-              Pinturas
-            </button>
+            <select
+              className=" d-grid gap-2 col-6 mx-1 bg-naranja-100 text-marron form-select text-center"
+              size="5"
+              multiple
+              aria-label="multiple select example"
+              onClick={actions.handleCategory}
+            >
+              <option className="btn btn-link" value="Tazas">
+                Tazas
+              </option>
+              <option className="btn btn-link" value="Gorros">
+                Gorros
+              </option>
+              <option className="btn btn-link" value="Madera">
+                Madera
+              </option>
+              <option className="btn btn-link" value="Tejidos">
+                Tejidos
+              </option>
+              <option className="btn btn-link" value="Pinturas">
+                Pinturas
+              </option>
+            </select>
           </div>
         </div>
         {/* COLUMNA DERECHA */}

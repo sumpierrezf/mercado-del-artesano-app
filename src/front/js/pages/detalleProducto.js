@@ -8,7 +8,7 @@ export const DetalleProducto = ({ id }) => {
   const [cantidad, setCantidad] = useState(0);
   const [carrito, setCarrito] = useState([]);
   const params = useParams();
-
+  console.log(store.detalleProducto.id);
   // function agregarAlCarrito() {
   //   // console.log("funciona");
   //   let producto = cantidad;
@@ -101,20 +101,9 @@ export const DetalleProducto = ({ id }) => {
             <button
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200"
-              // onClick={() =>
-              //   actions.agregarAlCarrito({
-              //     name: store.detalleProducto.name,
-              //     category: store.detalleProducto.category,
-              //     price: store.detalleProducto.price,
-              //     amount: store.detalleProducto.amount,
-              //     description: store.detalleProducto.description,
-              //     condition: store.detalleProducto.condition,
-              //     img1: store.detalleProducto.img1,
-              //     img2: store.detalleProducto.img2,
-              //     img3: store.detalleProducto.img3,
-              //     img4: store.detalleProducto.img4,
-              //   })
-              // }
+              onClick={() =>
+                actions.agregarAlCarrito(1, store.detalleProducto.id)
+              }
             >
               Agregar al carrito
             </button>
