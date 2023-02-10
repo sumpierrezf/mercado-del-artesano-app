@@ -19,7 +19,7 @@ export const Home = () => {
           <h3 className="col-sm-4 col-lg-2 p-3">Categorías:</h3>
           <div className="d-grid gap-2 col-6 mx-1">
             <select
-              className=" d-grid gap-2 col-6 mx-1 bg-naranja-100 text-marron form-select text-center"
+              className="d-grid gap-2 col-6 mx-1 bg-naranja-100 text-marron form-select m-auto text-center"
               size="5"
               multiple
               aria-label="multiple select example"
