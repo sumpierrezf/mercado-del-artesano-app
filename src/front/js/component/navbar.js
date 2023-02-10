@@ -10,16 +10,6 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   fetch(
-  //     "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io/api/products"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setProducts(data);
-  //     });
-  // }, []);
-
   function handleLogout() {
     actions.logout(); //cerrar la sesion
     navigate("/login"); //usamos navigate para redireccionar
@@ -39,19 +29,9 @@ export const Navbar = () => {
   function handleForm() {
     navigate("/form"); //usamos navigate para redireccionar
   }
-  // function filteredProducts() {
-  //   fetch(
-  //     "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io/api/products"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const filteredProducts = data.filter((product) =>
-  //         product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //       );
-  //       console.log("aqui esta tu producto" + filteredProducts);
-  //     });
-  // }
-  function filteredProducts() {
+
+  function filteredProducts(event) {
+    event.preventDefault();
     fetch(
       "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io/api/products"
     )
@@ -60,9 +40,11 @@ export const Navbar = () => {
         const filteredProducts = data.filter((product) =>
           product.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
+        console.log(filteredProducts);
+        setProducts(filteredProducts);
       });
-    // console.log(setProducts(filteredProducts));
   }
+
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
       <div>
@@ -78,14 +60,19 @@ export const Navbar = () => {
         </Link>
         <div className="d-flex w-100 justify-center">
           <form onSubmit={filteredProducts}>
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Buscar producto"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
-            <button type="submit">Buscar</button>
+            <button type="submit">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    filteredProducts(event);
+                  }
+                }}
+              />
+              Buscar
+            </button>
           </form>
         </div>
       </div>
