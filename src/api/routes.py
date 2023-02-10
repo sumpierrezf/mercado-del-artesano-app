@@ -176,3 +176,18 @@ def delete_product_in_cart(user_id):
     db.session.commit()
 
     return jsonify({"msg":"El producto ha sido eliminado del carrito"}), 200
+
+@api.route('/cart', methods=['PUT'])
+def select_product_amount():
+    
+    request_body = request.json
+
+    cart_filter = Cart.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).first()
+    
+    if cart_filter is None:
+        return jsonify({"msg":"No tienes ese producto en el carrito"}),404
+
+    cart_filter.amount=request_body["amount"]
+    db.session.commit()
+    return jsonify(cart_filter.serialize()), 200
+    

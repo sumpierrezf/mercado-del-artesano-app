@@ -87,6 +87,19 @@ const getState = ({
                     }), // body data type must match "Content-Type" header
                 }).catch((err) => console.log(err));
             },
+            setAmountInCart: (user_id, product_id, amount) => {
+                fetch(back + "/api/cart", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        user_id: user_id,
+                        product_id: product_id,
+                        amount: amount,
+                    }),
+                });
+            },
             getMessage: async () => {
                 try {
                     // fetching data from the backend
