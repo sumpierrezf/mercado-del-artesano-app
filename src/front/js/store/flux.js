@@ -1,4 +1,4 @@
-let back = "https://3001-sumpierrezf-mercadodela-wcu27d18tzl.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-08a01jg2p24.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -63,6 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
       },
       getUserProductsInCart: (id) => {
+        const store = getStore();
         fetch(back + "/api/user/cart/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -82,6 +83,27 @@ const getState = ({ getStore, getActions, setStore }) => {
             product_id: id_product,
           }), // body data type must match "Content-Type" header
         }).catch((err) => console.log(err));
+      },
+      // cantidad_a_comprar: (e) => {
+      //   const input = e.target.value;
+      //   const store = getStore();
+      //   store.products_in_cart[e].amount;
+      //   setStore({
+      //     categoria: opcion,
+      //   });
+      // },
+      setAmountInCart: (user_id, product_id, amount) => {
+        fetch(back + "/api/cart", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+            product_id: product_id,
+            amount: amount,
+          }),
+        });
       },
       getMessage: async () => {
         try {
@@ -112,31 +134,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
-            user_id,
-          {
-            method: "POST",
-            // mode: "no-cors",
-            // credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: nombre,
-              category: categoria,
-              price: precio,
-              amount: stock,
-              description: descripcion,
-              condition: condicion,
-              img1: img1,
-              // img2: img2,
-              // img3: img3,
-              // img4: img4,
-              user_id: user_id,
-            }),
-          }
-        );
+        fetch(back + "/api/upload_product/" + user_id, {
+          method: "POST",
+          // mode: "no-cors",
+          // credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: nombre,
+            category: categoria,
+            price: precio,
+            amount: stock,
+            description: descripcion,
+            condition: condicion,
+            img1: img1,
+            // img2: img2,
+            // img3: img3,
+            // img4: img4,
+            user_id: user_id,
+          }),
+        });
       },
 
       signup: (
