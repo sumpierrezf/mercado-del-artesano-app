@@ -1,4 +1,4 @@
-let back = "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-08a01jg2p24.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -82,6 +82,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             product_id: id_product,
           }), // body data type must match "Content-Type" header
         }).catch((err) => console.log(err));
+      },
+      setAmountInCart: (user_id, product_id, amount) => {
+        fetch(back + "/api/cart", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+            product_id: product_id,
+            amount: amount,
+          }),
+        });
       },
       getMessage: async () => {
         try {
