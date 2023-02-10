@@ -14,7 +14,6 @@ export const Cart = () => {
     subtotal +=
       store.products_in_cart[i].productsInfo.price *
       store.products_in_cart[i].amount;
-    // subtotal *= store.products_in_cart[i].amount;
   }
 
   useEffect(() => {
@@ -28,7 +27,7 @@ export const Cart = () => {
         width: "85%",
       }}
     >
-      <p className="text-end mb-2" style={{ height: "20px" }}>
+      <p className="mb-3" style={{ height: "20px" }}>
         {store.products_in_cart.length} productos en el carrito
       </p>
 

@@ -63,7 +63,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
       },
       getUserProductsInCart: (id) => {
-        const store = getStore();
         fetch(back + "/api/user/cart/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -84,14 +83,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }), // body data type must match "Content-Type" header
         }).catch((err) => console.log(err));
       },
-      // cantidad_a_comprar: (e) => {
-      //   const input = e.target.value;
-      //   const store = getStore();
-      //   store.products_in_cart[e].amount;
-      //   setStore({
-      //     categoria: opcion,
-      //   });
-      // },
       setAmountInCart: (user_id, product_id, amount) => {
         fetch(back + "/api/cart", {
           method: "PUT",
