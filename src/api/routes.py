@@ -30,13 +30,18 @@ def handle_hello():
 
 
 @api.route("/user", methods=["GET"])
-def get_user():
+def get_users():
     allusers = User.query.all()
     print(allusers)
     results = list(map(lambda item: item.serialize(), allusers))
     print(results)
     return jsonify(results), 200
 
+@api.route("/user/<int:user_id>", methods=["GET"])
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+
+    return jsonify(user.serialize()), 200
 
 @api.route("/product", methods=["GET"])
 def get_product():

@@ -9,7 +9,6 @@ export const Home = () => {
   useEffect(() => {
     actions.obtenerInfoProductos();
   }, []);
-  console.log(store.productos[0]);
 
   return (
     <div className="container-fluid bg-naranja-100">

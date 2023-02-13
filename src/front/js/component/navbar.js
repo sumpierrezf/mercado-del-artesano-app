@@ -26,6 +26,9 @@ export const Navbar = () => {
   function handleForm() {
     navigate("/form"); //usamos navigate para redireccionar
   }
+  function handleProfile() {
+    navigate("/profile/" + store.user_id); //usamos navigate para redireccionar
+  }
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
       <div className="container-fluid d-flex">
@@ -44,7 +47,6 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i class="fa fa-gear"></i>
                   Opciones
                 </button>
                 <ul className="dropdown-menu">
@@ -56,6 +58,15 @@ export const Navbar = () => {
                   <li>
                     <a className="dropdown-item" href="#" onClick={handleForm}>
                       Vender
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={handleProfile}
+                    >
+                      Perfil
                     </a>
                   </li>
                   <li>
