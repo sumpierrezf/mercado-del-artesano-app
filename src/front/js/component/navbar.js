@@ -11,28 +11,16 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(
-      "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/products"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    const filtered = products.filter((product) =>
+  function filterProducts(event) {
+    event.preventDefault();
+    const filtered = store.productos.filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [searchTerm, products]);
-
-  function filterProducts(event) {
-    event.preventDefault();
-    console.log(filteredProducts);
     setSearchTerm("");
   }
+  // console.log(store.productos);
+  console.log(filteredProducts);
 
   function handleLogout() {
     actions.logout(); //cerrar la sesion
@@ -56,13 +44,6 @@ export const Navbar = () => {
 
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
-      <div>
-        {filteredProducts.map((product, index) => (
-          <p key={index} className="mx-3 my-3 text-naranja-900 font-medium">
-            {product.name}
-          </p>
-        ))}
-      </div>
       <div className="container-fluid d-flex">
         <Link to="/">
           <span className="navbar-brand mb-0 h1">
@@ -88,6 +69,7 @@ export const Navbar = () => {
           </form>
         </div>
       </div>
+      {/* ----------------Opciones------------------------- */}
       <div className="d-flex w-100 justify-content-end">
         {store.auth === true ? (
           <>
@@ -101,16 +83,19 @@ export const Navbar = () => {
                 Opciones
               </button>
               <ul className="dropdown-menu">
+                {/* -------- -------Favoritos----------------------- */}
                 <li>
                   <a className="dropdown-item" href="#" onClick={handleFavs}>
                     Favoritos
                   </a>
                 </li>
+                {/* ----------------vender--------- */}
                 <li>
                   <a className="dropdown-item" href="#" onClick={handleForm}>
                     Vender
                   </a>
                 </li>
+                {/* ----------cerrar sesion-------------- */}
                 <li>
                   <a className="dropdown-item" href="#" onClick={handleLogout}>
                     Cerrar sesión
@@ -118,6 +103,7 @@ export const Navbar = () => {
                 </li>
               </ul>
             </div>
+
             <button
               className="btn bg-naranja-100 text-marron border-marron mx-2 my-auto border-2"
               onClick={handleCart}
@@ -127,6 +113,7 @@ export const Navbar = () => {
           </>
         ) : (
           <>
+            {/* --------------- iniciar sesion -------------- */}
             <button
               className="btn bg-naranja-100 text-marron my-auto border-marron me-2 border-2 justify-content-end"
               onClick={handleLogin}

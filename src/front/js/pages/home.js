@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
+import { Navbar } from "../component/navbar";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -10,6 +11,10 @@ export const Home = () => {
     actions.obtenerInfoProductos();
   }, []);
   console.log(store.productos[0]);
+
+  // useEffect(() => {
+  //   actions.filteredProducts();
+  // }, []);
 
   return (
     <div className="container-fluid bg-naranja-100">
