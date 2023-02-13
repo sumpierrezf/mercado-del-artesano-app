@@ -43,7 +43,11 @@ export const Catalogo = ({
             </Link>
             <button
               className="btn text-warning"
-              onClick={() => actions.agregarAlCarrito(name)}
+              onClick={() =>
+                store.user_id == null
+                  ? alert("Debes iniciar sesión")
+                  : actions.agregarAlCarrito(user_id, product_id)
+              }
             >
               <i className="fa fa-cart-arrow-down"></i>
             </button>
