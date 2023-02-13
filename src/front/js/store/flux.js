@@ -1,4 +1,4 @@
-let back = "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -126,7 +126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ) => {
         console.log(user_id);
         fetch(
-          "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io/api/upload_product/" +
+          "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/upload_product/" +
             user_id,
           {
             method: "POST",

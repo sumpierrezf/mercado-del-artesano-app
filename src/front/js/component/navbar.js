@@ -6,9 +6,33 @@ import logo3 from "../../img/logo3.png";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(
+      "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/products"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  }, [searchTerm, products]);
+
+  function filterProducts(event) {
+    event.preventDefault();
+    console.log(filteredProducts);
+    setSearchTerm("");
+  }
 
   function handleLogout() {
     actions.logout(); //cerrar la sesion
@@ -30,26 +54,13 @@ export const Navbar = () => {
     navigate("/form"); //usamos navigate para redireccionar
   }
 
-  function filteredProducts(event) {
-    event.preventDefault();
-    fetch(
-      "https://3001-sumpierrezf-mercadodela-zm7bvmnma0m.ws-us86.gitpod.io/api/products"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const filteredProducts = data.filter((product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        console.log(filteredProducts);
-        setProducts(filteredProducts);
-      });
-  }
-
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
       <div>
-        {products.map((product, index) => (
-          <p key={index}>{product.name}</p>
+        {filteredProducts.map((product, index) => (
+          <p key={index} className="mx-3 my-3 text-naranja-900 font-medium">
+            {product.name}
+          </p>
         ))}
       </div>
       <div className="container-fluid d-flex">
@@ -59,18 +70,19 @@ export const Navbar = () => {
           </span>
         </Link>
         <div className="d-flex w-100 justify-center">
-          <form onSubmit={filteredProducts}>
-            <button type="submit">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-                onKeyPress={(event) => {
-                  if (event.key === "Enter") {
-                    filteredProducts(event);
-                  }
-                }}
-              />
+          <form onSubmit={filterProducts} className="form-inline">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Buscar"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+            <button
+              className="btn btn-outline-naranja-900 my-2 my-sm-0"
+              type="submit"
+            >
               Buscar
             </button>
           </form>
