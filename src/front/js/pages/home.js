@@ -25,21 +25,11 @@ export const Home = () => {
               aria-label="multiple select example"
               onClick={actions.handleCategory}
             >
-              <option className="btn btn-link" value="Tazas">
-                Tazas
-              </option>
-              <option className="btn btn-link" value="Gorros">
-                Gorros
-              </option>
-              <option className="btn btn-link" value="Madera">
-                Madera
-              </option>
-              <option className="btn btn-link" value="Tejidos">
-                Tejidos
-              </option>
-              <option className="btn btn-link" value="Pinturas">
-                Pinturas
-              </option>
+              <option value="Tazas">Tazas</option>
+              <option value="Gorros">Gorros</option>
+              <option value="Madera">Madera</option>
+              <option value="Tejidos">Tejidos</option>
+              <option value="Pinturas">Pinturas</option>
             </select>
           </div>
         </div>
@@ -53,17 +43,21 @@ export const Home = () => {
             style={{ overflowX: "scroll", height: "55 0px" }}
           >
             <div className="d-flex flex-nowrap row row-cols-4">
-              {store.productos?.map((cadaProducto, index) => (
-                <Catalogo
-                  key={index}
-                  id={index + 1}
-                  name={cadaProducto.name}
-                  category={cadaProducto.category}
-                  price={cadaProducto.price}
-                  amount={cadaProducto.amount}
-                  img1={cadaProducto.img1}
-                />
-              ))}
+              {store.productos
+                .filter((item) =>
+                  item.obtenerInfoProductos.category.includes(store.categoria)
+                )
+                .map((cadaProducto, index) => (
+                  <Catalogo
+                    key={index}
+                    id={index + 1}
+                    name={cadaProducto.name}
+                    category={cadaProducto.category}
+                    price={cadaProducto.price}
+                    amount={cadaProducto.amount}
+                    img1={cadaProducto.img1}
+                  />
+                ))}
             </div>
           </div>
         </div>

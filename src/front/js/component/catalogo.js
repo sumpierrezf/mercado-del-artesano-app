@@ -41,7 +41,9 @@ export const Catalogo = ({
             </Link>
             <button
               className="btn text-warning"
-              onClick={() => actions.agregarAlCarrito(name)}
+              onClick={() =>
+                actions.agregarAlCarrito(1, store.detalleProducto.id)
+              }
             >
               <i className="fa fa-cart-arrow-down"></i>
             </button>
