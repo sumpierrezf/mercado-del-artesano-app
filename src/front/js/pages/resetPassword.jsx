@@ -1,14 +1,19 @@
 import React, { useState, useContext } from "react";
 import "../../styles/index.css";
+import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
 
 export const ResetPassword = () => {
-  const [email, setEmail] = useState("");
-  function sendEmail(e) {
+  const [resetearPassword, setResetearPassword] = useState("");
+
+  const { store, actions } = useContext(Context);
+  const sendEmail = async (e) => {
     e.preventDefault();
+    actions.changePassword(resetearPassword);
 
     // actions.resetPassword(email);
-    setEmail("");
-  }
+    // setEmail("");
+  };
   return (
     <div className=" card bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 h-100">
       <div className="badge bg-naranja-200 text-wrap">
