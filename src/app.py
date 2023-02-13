@@ -12,7 +12,10 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
-# from flask_mail import Mail
+from flask_mail import Mail #IMPORTAR LA FUNCION Mail() de flask_mail
+
+from flask_bcrypt import Bcrypt
+
 
 # from models import Person
 
@@ -20,8 +23,11 @@ ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)), "../public/"
 )
-app = Flask(__name__)
-app.url_map.strict_slashes = False
+# app = Flask(__name__)
+# app.url_map.strict_slashes = False
+
+app = Flask(app_name) # pick the name
+mail = Mail(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -42,25 +48,29 @@ CORS(app)
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 jwt = JWTManager(app)
 
-# # Setup the Flask-JWT-Extended extension
-# app.config["JWT_SECRET_KEY"] = "cualquiercosa"
-# jwt = JWTManager(app)
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "cualquiercosa"
+jwt = JWTManager(app)
 
-# # CONFIGURACION EMAIL
-# mail_settings = {
-#     "MAIL_SERVER": "smtp.gmail.com",
-#     "MAIL_PORT": 465,
-#     "MAIL_USE_TLS": False,
-#     "MAIL_USE_SSL": True,
-#     "MAIL_USERNAME": "calle4cr2021@gmail.com",  # ACA COLOQUEN EL CORREO DE LA APP DEL ALUMN
-#     "MAIL_PASSWORD": "C@lle42021$$",  # PASSWORD DEL CORREO DE LA APP DEL ALUMNO
-#     "MAIL_DEFAULT_SENDER": "calle4cr2021@gmail.com",
-# }
-# app.config.update(mail_settings)
-# mail = Mail(app)
-# # agregan mail a la app y se va llamar en routes.py como current_app
-# app.mail = mail
-# # FIN CONFIGURACION EMAIL
+#encriptación password
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
+
+# CONFIGURACION EMAIL
+mail_settings = {
+    "MAIL_SERVER": "smtp.gmail.com",
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": "calle4cr2021@gmail.com",  # ACA COLOQUEN EL CORREO DE LA APP DEL ALUMN
+    "MAIL_PASSWORD": "C@lle42021$$",  # PASSWORD DEL CORREO DE LA APP DEL ALUMNO
+    "MAIL_DEFAULT_SENDER": "calle4cr2021@gmail.com",
+}
+app.config.update(mail_settings)
+mail = Mail(app)
+# agregan mail a la app y se va llamar en routes.py como current_app
+app.mail = mail
+# FIN CONFIGURACION EMAIL
 
 # add the admin
 setup_admin(app)
