@@ -1,4 +1,5 @@
-let back = "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io";
+import axios from "axios";
+let back = "https://3001-sumpierrezf-mercadodela-5uevyjy9nnn.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -151,7 +152,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ) => {
         console.log(user_id);
         fetch(
-          "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/upload_product/" +
+          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
             user_id,
           {
             method: "POST",
@@ -280,52 +281,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      // agregarAlCarrito: (
-      //   user_id,
-      //   name,
-      //   category,
-      //   price,
-      //   amount,
-      //   description,
-      //   condition,
-      //   img1,
-      //   img2,
-      //   img3,
-      //   img4
-      // ) => {
-      //   fetch(
-      //     "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/user/cart/1",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         name: name,
-      //         category: category,
-      //         price: price,
-      //         amount: amount,
-      //         description: description,
-      //         condition: condition,
-      //         img1: img1,
-      //         img2: img2,
-      //         img3: img3,
-      //         img4: img4,
-      //       }), // body data type must match "Content-Type" header
-      //     }
-      //   )
-      //     .then((response) => {
-      //       console.log(response.status);
-      //       if (response.status === 200) {
-      //         setStore({
-      //           carrito: [...store.carrito, carrito],
-      //         });
-      //         console.log(store.carrito);
-      //       }
-      //       return response.json();
-      //     })
-      //     .catch((err) => console.log(err));
-      // },
+      agregarAlCarrito: async (user_id, product_id, amount) => {
+        console.log(user_id, product_id, amount);
+        try {
+          let response = await axios.post(back + "/api/cart", {
+            user_id: user_id,
+            product_id: product_id,
+            amount: amount,
+          });
+          console.log(response.data);
+          alert("Producto agregado al carrito");
+        } catch (error) {
+          console.log(error);
+          alert("Ya tienes ese producto en el carrito");
+        }
+      },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
       changeColor: (index, color) => {
         //get the store
