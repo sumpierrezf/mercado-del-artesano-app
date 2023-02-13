@@ -18,21 +18,19 @@ export const Home = () => {
         <div className="col-sm-4 col-lg-2 bg-naranja-200">
           <h3 className="col-sm-4 col-lg-2 p-3">Categorías:</h3>
           <div className="d-grid gap-2 col-6 mx-1">
-            <button type="button" className="btn btn-link">
-              Tazas
-            </button>
-            <button type="button" className="btn btn-link">
-              Gorros
-            </button>
-            <button type="button" className="btn btn-link">
-              Madera
-            </button>
-            <button type="button" className="btn btn-link">
-              Tejidos
-            </button>
-            <button type="button" className="btn btn-link">
-              Pinturas
-            </button>
+            <select
+              className="d-grid gap-2 col-6 mx-1 bg-naranja-100 text-marron form-select m-auto text-center"
+              size="5"
+              multiple
+              aria-label="multiple select example"
+              onClick={actions.handleCategory}
+            >
+              <option value="Tazas">Tazas</option>
+              <option value="Gorros">Gorros</option>
+              <option value="Madera">Madera</option>
+              <option value="Tejidos">Tejidos</option>
+              <option value="Pinturas">Pinturas</option>
+            </select>
           </div>
         </div>
         {/* COLUMNA DERECHA */}
@@ -45,19 +43,21 @@ export const Home = () => {
             style={{ overflowX: "scroll", height: "55 0px" }}
           >
             <div className="d-flex flex-nowrap row row-cols-4">
-              {store.productos?.map((cadaProducto, index) => (
-                <Catalogo
-                  key={index}
-                  id={index + 1}
-                  name={cadaProducto.name}
-                  category={cadaProducto.category}
-                  price={cadaProducto.price}
-                  amount={cadaProducto.amount}
-                  img1={cadaProducto.img1}
-                  user_id={store.user_id}
-                  product_id={cadaProducto.id}
-                />
-              ))}
+              {store.productos
+                ?.filter((item) => item.category.includes(store.categoria))
+                .map((cadaProducto, index) => (
+                  <Catalogo
+                    key={index}
+                    id={index + 1}
+                    name={cadaProducto.name}
+                    category={cadaProducto.category}
+                    price={cadaProducto.price}
+                    amount={cadaProducto.amount}
+                    img1={cadaProducto.img1}
+                    user_id={store.user_id}
+                    product_id={cadaProducto.id}
+                  />
+                ))}
             </div>
           </div>
         </div>

@@ -134,7 +134,7 @@ def add_to_cart():
     request_body = request.json
 
     cart_filter = Cart.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).first()
-    cart = Cart(user_id=request_body["user_id"], product_id=request_body["product_id"])
+    cart = Cart(user_id=request_body["user_id"], product_id=request_body["product_id"], amount=request_body["amount"])
 
     if cart_filter is None:
         db.session.add(cart)
