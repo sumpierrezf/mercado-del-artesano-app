@@ -44,9 +44,7 @@ export const Home = () => {
           >
             <div className="d-flex flex-nowrap row row-cols-4">
               {store.productos
-                ?.filter((item) =>
-                  item.obtenerInfoProductos.category.includes(store.categoria)
-                )
+                ?.filter((item) => item.category.includes(store.categoria))
                 .map((cadaProducto, index) => (
                   <Catalogo
                     key={index}

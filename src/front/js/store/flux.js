@@ -281,17 +281,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      agregarAlCarrito: async (user_id, product_id) => {
-        console.log(user_id, product_id);
+      agregarAlCarrito: async (user_id, product_id, amount) => {
+        console.log(user_id, product_id, amount);
         try {
           let response = await axios.post(back + "/api/cart", {
             user_id: user_id,
             product_id: product_id,
+            amount: amount,
           });
           console.log(response.data);
           alert("Producto agregado al carrito");
         } catch (error) {
           console.log(error);
+          alert("Ya tienes ese producto en el carrito");
         }
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI

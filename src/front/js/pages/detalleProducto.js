@@ -102,7 +102,13 @@ export const DetalleProducto = ({ id }) => {
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
-                actions.agregarAlCarrito(1, store.detalleProducto.id)
+                store.user_id == null
+                  ? alert("Debes iniciar sesión")
+                  : actions.agregarAlCarrito(
+                      store.user_id,
+                      store.detalleProducto.id,
+                      cantidad
+                    )
               }
             >
               Agregar al carrito
