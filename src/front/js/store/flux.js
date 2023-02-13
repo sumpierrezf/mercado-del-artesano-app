@@ -290,6 +290,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           auth: false,
         });
       },
+      // CAMBIAR CONTRASEÑA
+      changePassword: async (email) => {
+        try {
+          const response = await axios.post(back + "/api/resetPassword", {
+            email: email,
+          });
+          if (response.status === 200) {
+            console.log("La contraseña ha sido enviada");
+          }
+        } catch (error) {
+          if (error.code === "ERR_BAD_REQUEST") {
+            console.log(error.response.data.msg);
+          }
+        }
+      },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
         fetch(back + "/api/product")
