@@ -60,7 +60,14 @@ export const DetalleProducto = ({ id }) => {
               Nombre del producto: {store.detalleProducto.name}
               <button
                 className="btn text-danger"
-                onClick={() => actions.agregarFavorito(id)}
+                onClick={() =>
+                  store.user_id == null
+                    ? alert("Debes iniciar sesión")
+                    : actions.addToFavorites(
+                        store.user_id,
+                        store.detalleProducto.id
+                      )
+                }
               >
                 <i className="fa fa-heart" />
               </button>
