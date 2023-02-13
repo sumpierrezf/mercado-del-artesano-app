@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import logo3 from "../../img/logo3.png";
+import { Catalogo } from "./catalogo";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
 
@@ -127,6 +127,25 @@ export const Navbar = () => {
               Crear usuario
             </button>
           </>
+        )}
+      </div>
+      <div className="d-flex container col-sm-8 col-lg-10 p-3">
+        {filteredProducts.length === 0 ? (
+          <p>No se encontraron resultados</p>
+        ) : (
+          filteredProducts.map((product) => (
+            <Catalogo
+              key={product.id}
+              id={product + 1}
+              name={product.name}
+              category={product.category}
+              price={product.price}
+              amount={product.amount}
+              img1={product.img1}
+              user_id={store.user_id}
+              product_id={product.id}
+            />
+          ))
         )}
       </div>
     </nav>

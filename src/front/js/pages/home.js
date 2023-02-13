@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
@@ -6,6 +6,7 @@ import { Navbar } from "../component/navbar";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     actions.obtenerInfoProductos();
@@ -13,7 +14,7 @@ export const Home = () => {
   console.log(store.productos[0]);
 
   // useEffect(() => {
-  //   actions.filteredProducts();
+  //   filteredProducts();
   // }, []);
 
   return (
@@ -63,6 +64,27 @@ export const Home = () => {
                     product_id={cadaProducto.id}
                   />
                 ))}
+            </div>
+            <div className="d-flex container col-sm-8 col-lg-10 p-3">
+              {/* <div className="d-flex flex-nowrap row row-cols-4">
+                {filteredProducts.length === 0 ? (
+                  <p>No se encontraron resultados</p>
+                ) : (
+                  filteredProducts.map((product) => (
+                    <Catalogo
+                      key={product.id}
+                      id={product + 1}
+                      name={product.name}
+                      category={product.category}
+                      price={product.price}
+                      amount={product.amount}
+                      img1={product.img1}
+                      user_id={store.user_id}
+                      product_id={product.id}
+                    />
+                  ))
+                )}
+              </div> */}
             </div>
           </div>
         </div>
