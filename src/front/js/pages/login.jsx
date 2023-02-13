@@ -10,7 +10,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
 
-  function enviarDatos(e) {
+  function sendData(e) {
     e.preventDefault();
     actions.login(email, password);
     setEmail("");
@@ -24,7 +24,7 @@ export const Login = () => {
           {store.auth === true ? (
             <Navigate to="/" />
           ) : (
-            <form className="login pt-5 w-100 pb-5" onSubmit={enviarDatos}>
+            <form className="login pt-5 w-100 pb-5" onSubmit={sendData}>
               <div className="mb-3">
                 <label
                   htmlFor="exampleInputEmail1"
@@ -71,7 +71,7 @@ export const Login = () => {
               </div>
 
               <div className="mb-3 resetpassword">
-                <Link to="/passrecover">Olvidé mi contraseña</Link>
+                <Link to="/resetPassword">Olvidé mi contraseña</Link>
               </div>
               <div className="d-flex justify-content-center">
                 <button
