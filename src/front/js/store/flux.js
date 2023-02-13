@@ -1,4 +1,5 @@
-let back = "https://3001-sumpierrezf-mercadodela-wcu27d18tzl.ws-us86.gitpod.io";
+import axios from "axios";
+let back = "https://3001-sumpierrezf-mercadodela-5uevyjy9nnn.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -22,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       auth: false,
       categoria: [],
       products_in_cart: [],
+      user_id: null,
     },
 
     actions: {
@@ -39,6 +41,30 @@ const getState = ({ getStore, getActions, setStore }) => {
             })
           )
           .catch((err) => console.error(err));
+      },
+      addToFavorites: (user_id, product_id) => {
+        fetch(back + "/api/favorites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+            product_id: product_id,
+          }),
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              alert("Producto agregado a favoritos");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.msg === "Ya tienes ese producto en favoritos")
+              alert(data.msg);
+          })
+          .catch((err) => console.log(err));
       },
       borrarFavorito: (id, id_product) => {
         fetch(back + "/api/user/favorites/" + id, {
@@ -82,6 +108,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             product_id: id_product,
           }), // body data type must match "Content-Type" header
         }).catch((err) => console.log(err));
+      },
+      setAmountInCart: (user_id, product_id, amount) => {
+        fetch(back + "/api/cart", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+            product_id: product_id,
+            amount: amount,
+          }),
+        });
       },
       getMessage: async () => {
         try {
@@ -206,14 +245,35 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
             if (data.msg === "Bad email or password") alert(data.msg);
             localStorage.setItem("token", data.access_token);
+            setStore({
+              user_id: data.user_id,
+            });
           })
           .catch((err) => console.log(err));
       },
       logout: () => {
         localStorage.removeItem("token");
         setStore({
+          user_id: null,
+        });
+        setStore({
           auth: false,
         });
+      },
+      // CAMBIAR CONTRASEÑA
+      changePassword: async (email) => {
+        try {
+          const response = await axios.post(back + "/api/resetPassword", {
+            email: email,
+          });
+          if (response.status === 200) {
+            console.log("La contraseña ha sido enviada");
+          }
+        } catch (error) {
+          if (error.code === "ERR_BAD_REQUEST") {
+            console.log(error.response.data.msg);
+          }
+        }
       },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
@@ -236,52 +296,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      // agregarAlCarrito: (
-      //   user_id,
-      //   name,
-      //   category,
-      //   price,
-      //   amount,
-      //   description,
-      //   condition,
-      //   img1,
-      //   img2,
-      //   img3,
-      //   img4
-      // ) => {
-      //   fetch(
-      //     "https://3001-sumpierrezf-mercadodela-kpc2aj1wfms.ws-us86.gitpod.io/api/user/cart/1",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         name: name,
-      //         category: category,
-      //         price: price,
-      //         amount: amount,
-      //         description: description,
-      //         condition: condition,
-      //         img1: img1,
-      //         img2: img2,
-      //         img3: img3,
-      //         img4: img4,
-      //       }), // body data type must match "Content-Type" header
-      //     }
-      //   )
-      //     .then((response) => {
-      //       console.log(response.status);
-      //       if (response.status === 200) {
-      //         setStore({
-      //           carrito: [...store.carrito, carrito],
-      //         });
-      //         console.log(store.carrito);
-      //       }
-      //       return response.json();
-      //     })
-      //     .catch((err) => console.log(err));
-      // },
+      agregarAlCarrito: async (user_id, product_id, amount) => {
+        console.log(user_id, product_id, amount);
+        try {
+          let response = await axios.post(back + "/api/cart", {
+            user_id: user_id,
+            product_id: product_id,
+            amount: amount,
+          });
+          console.log(response.data);
+          alert("Producto agregado al carrito");
+        } catch (error) {
+          console.log(error);
+          alert("Ya tienes ese producto en el carrito");
+        }
+      },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
       changeColor: (index, color) => {
         //get the store

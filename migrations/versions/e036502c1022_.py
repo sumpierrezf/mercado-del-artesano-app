@@ -1,8 +1,14 @@
 """empty message
 
+<<<<<<<< HEAD:migrations/versions/5f9823221f06_.py
 Revision ID: 5f9823221f06
 Revises: 
 Create Date: 2023-02-13 18:02:41.170171
+========
+Revision ID: e036502c1022
+Revises: 
+Create Date: 2023-02-13 15:30:56.779923
+>>>>>>>> 9679634e7cef546446dfe6d5c6b0c60ceda1ec2f:migrations/versions/e036502c1022_.py
 
 """
 from alembic import op
@@ -10,7 +16,11 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<<< HEAD:migrations/versions/5f9823221f06_.py
 revision = '5f9823221f06'
+========
+revision = 'e036502c1022'
+>>>>>>>> 9679634e7cef546446dfe6d5c6b0c60ceda1ec2f:migrations/versions/e036502c1022_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,6 +61,7 @@ def upgrade():
     )
     op.create_table('cart',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('amount', sa.Integer(), nullable=True),
     sa.Column('product_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
