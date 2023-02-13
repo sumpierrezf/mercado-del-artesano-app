@@ -9,7 +9,7 @@ export const Home = () => {
   useEffect(() => {
     actions.obtenerInfoProductos();
   }, []);
-  console.log(store.productos);
+  console.log(store.productos[0]);
 
   return (
     <div className="container-fluid bg-naranja-100">
@@ -44,7 +44,7 @@ export const Home = () => {
           >
             <div className="d-flex flex-nowrap row row-cols-4">
               {store.productos
-                .filter((item) =>
+                ?.filter((item) =>
                   item.obtenerInfoProductos.category.includes(store.categoria)
                 )
                 .map((cadaProducto, index) => (
@@ -56,6 +56,8 @@ export const Home = () => {
                     price={cadaProducto.price}
                     amount={cadaProducto.amount}
                     img1={cadaProducto.img1}
+                    user_id={store.user_id}
+                    product_id={cadaProducto.id}
                   />
                 ))}
             </div>

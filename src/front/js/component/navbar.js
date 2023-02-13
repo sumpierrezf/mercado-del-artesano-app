@@ -18,10 +18,10 @@ export const Navbar = () => {
     navigate("/signup"); //usamos navigate para redireccionar
   }
   function handleFavs() {
-    navigate("/favs/1"); //usamos navigate para redireccionar
+    navigate("/favs/" + store.user_id); //usamos navigate para redireccionar
   }
   function handleCart() {
-    navigate("/cart/1"); //usamos navigate para redireccionar
+    navigate("/cart/" + store.user_id); //usamos navigate para redireccionar
   }
   function handleForm() {
     navigate("/form"); //usamos navigate para redireccionar

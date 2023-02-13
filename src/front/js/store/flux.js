@@ -23,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       auth: false,
       categoria: [],
       products_in_cart: [],
+      user_id: null,
     },
 
     actions: {
@@ -40,6 +41,30 @@ const getState = ({ getStore, getActions, setStore }) => {
             })
           )
           .catch((err) => console.error(err));
+      },
+      addToFavorites: (user_id, product_id) => {
+        fetch(back + "/api/favorites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+            product_id: product_id,
+          }),
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              alert("Producto agregado a favoritos");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.msg === "Ya tienes ese producto en favoritos")
+              alert(data.msg);
+          })
+          .catch((err) => console.log(err));
       },
       borrarFavorito: (id, id_product) => {
         fetch(back + "/api/user/favorites/" + id, {
@@ -220,11 +245,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
             if (data.msg === "Bad email or password") alert(data.msg);
             localStorage.setItem("token", data.access_token);
+            setStore({
+              user_id: data.user_id,
+            });
           })
           .catch((err) => console.log(err));
       },
       logout: () => {
         localStorage.removeItem("token");
+        setStore({
+          user_id: null,
+        });
         setStore({
           auth: false,
         });

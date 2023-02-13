@@ -14,6 +14,8 @@ export const Catalogo = ({
   // img2,
   // img3,
   // img4,
+  user_id,
+  product_id,
 }) => {
   const { actions, store } = useContext(Context);
 
@@ -49,7 +51,11 @@ export const Catalogo = ({
             </button>
             <button
               className="btn text-danger"
-              onClick={() => actions.agregarFavorito(name)}
+              onClick={() =>
+                store.user_id == null
+                  ? alert("Debes iniciar sesión")
+                  : actions.addToFavorites(user_id, product_id)
+              }
             >
               <i className="fa fa-heart" />
             </button>
