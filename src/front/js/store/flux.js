@@ -1,4 +1,4 @@
-let back = "https://3001-sumpierrezf-mercadodela-08a01jg2p24.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-dxo5hyoyyo5.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       auth: false,
       categoria: [],
       products_in_cart: [],
+      user_id: null,
     },
 
     actions: {
@@ -50,7 +51,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             user_id: user_id,
             product_id: product_id,
           }),
-        });
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              alert("Producto agregado a favoritos");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.msg === "Ya tienes ese producto en favoritos")
+              alert(data.msg);
+          })
+          .catch((err) => console.log(err));
       },
       borrarFavorito: (id, id_product) => {
         fetch(back + "/api/user/favorites/" + id, {
@@ -227,11 +240,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
             if (data.msg === "Bad email or password") alert(data.msg);
             localStorage.setItem("token", data.access_token);
+            setStore({
+              user_id: data.user_id,
+            });
           })
           .catch((err) => console.log(err));
       },
       logout: () => {
         localStorage.removeItem("token");
+        setStore({
+          user_id: null,
+        });
         setStore({
           auth: false,
         });
