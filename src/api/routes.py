@@ -190,4 +190,27 @@ def select_product_amount():
     cart_filter.amount=request_body["amount"]
     db.session.commit()
     return jsonify(cart_filter.serialize()), 200
+
+@api.route('/profile', methods=['PUT'])
+def edit_profile():
+    
+    request_body = request.json
+
+    profile = User.query.filter_by(id=request_body["id"]).first()
+    
+    if profile is None:
+        return jsonify({"msg":"Este usuario no existe"}),404
+
+    profile.password=request_body["password"]
+    profile.first_name=request_body["first_name"]
+    profile.last_name=request_body["last_name"]
+    profile.birth=request_body["birth"]
+    profile.address=request_body["address"]
+    profile.country=request_body["country"]
+    profile.city=request_body["city"]
+    profile.postal_code=request_body["postal_code"]
+    profile.phone_number=request_body["phone_number"]
+
+    db.session.commit()
+    return jsonify(profile.serialize()), 200
     

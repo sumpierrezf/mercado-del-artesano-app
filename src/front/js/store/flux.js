@@ -32,7 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
       getUserFavs: (id) => {
-        // console.log(back);
         fetch(back + "/api/user/favorites/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -119,6 +118,37 @@ const getState = ({ getStore, getActions, setStore }) => {
             user_id: user_id,
             product_id: product_id,
             amount: amount,
+          }),
+        });
+      },
+      editProfile: (
+        id,
+        password,
+        nombre,
+        apellido,
+        nacimiento,
+        direccion,
+        pais,
+        ciudad,
+        postal,
+        telefono
+      ) => {
+        fetch(back + "/api/profile", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+            password: password,
+            first_name: nombre,
+            last_name: apellido,
+            birth: nacimiento,
+            address: direccion,
+            country: pais,
+            city: ciudad,
+            postal_code: postal,
+            phone_number: telefono,
           }),
         });
       },
