@@ -12,6 +12,18 @@ export const Profile = () => {
   const [ciudad, setCiudad] = useState("");
   const [postal, setPostal] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [foto, setFoto] = useState();
+
+  const subirFoto = (selectorFiles) => {
+    if (selectorFiles) {
+      setFoto(selectorFiles);
+    }
+  };
+  console.log(foto);
+  // let filepreview = null;
+  // console.log(filepreview);
+
+  const [switchShown, setSwitchShown] = useState(true);
 
   const { store, actions } = useContext(Context);
 
@@ -32,7 +44,8 @@ export const Profile = () => {
       pais,
       ciudad,
       postal,
-      telefono
+      telefono,
+      foto
     );
   }
   //   console.log(store.user_info.first_name);
@@ -45,6 +58,89 @@ export const Profile = () => {
         <div className="bg-naranja-200 border-marron w-50 mx-auto my-5 p-4 rounded">
           <h2 className="d-flex justify-content-center text-marron">Perfil</h2>
           <form className="w-100 mx-auto row" onSubmit={enviarDatos}>
+            <span className="opacity-75 border-marron"></span>
+            {/* <!-- Button trigger modal --> */}
+            <div className="w-50 mx-auto row">
+              <img
+                className="rounded-circle my-2"
+                src={store.user_info.profile_picture}
+                alt=""
+                width={"160px"}
+                height={"auto"}
+              />
+              <button
+                type="button"
+                className="btn bg-naranja-100 border-marron text-marron mx-auto my-2 w-75 col-12"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Cambiar foto
+              </button>
+            </div>
+
+            {/* <!-- Modal --> */}
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">
+                      Cambiar foto de perfil
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    {foto && (
+                      <div className="mb-3 d-flex">
+                        <img
+                          className="rounded-circle mx-auto my-2"
+                          // src={filepreview}
+                          src={URL.createObjectURL(foto)}
+                          alt=""
+                          width={"200px"}
+                          height={"auto"}
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      className="bg-naranja-100 border-marron text-marron"
+                      placeholder="Subir imágen"
+                      // accept=".jpg .png .gif"
+                      // value={foto}
+                      // onChange={(e) => setFoto(e.target.value)}
+                      onChange={(e) => {
+                        // filepreview = URL.createObjectURL(e.target.files);
+                        subirFoto(e.target.files);
+                      }}
+                    />
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
+                    <button type="button" className="btn bg-success text-light">
+                      Aceptar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <!-- Modal end --> */}
             <span className="opacity-75 border-marron"></span>
             {/* ______________________Nombre_______________________________________ */}
 
@@ -83,19 +179,28 @@ export const Profile = () => {
               />
             </div>
             {/* __________________________Password____________________________________________ */}
-            <div className="mb-3 container">
+            <div className="container">
               <label
                 htmlFor="exampleInputPassword1"
                 className="form-label"
               ></label>
               <input
-                type="password"
+                type={`${switchShown == true ? "password" : "text"}`}
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="Contraseña"
                 value={password || store.user_info.password || ""}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <i
+                className={`far fa-eye${switchShown == true ? "" : "-slash"} `}
+                onClick={() =>
+                  switchShown == true
+                    ? setSwitchShown(false)
+                    : setSwitchShown(true)
+                }
+                id="togglePassword"
+              ></i>
             </div>
 
             {/* _________________________Fecha de nacimiento_____________________________________ */}
@@ -135,7 +240,7 @@ export const Profile = () => {
 
             {/* ____________________________pais__________________________________________ */}
 
-            <div className="col-md-6">
+            <div className="col-md-6 pt-3">
               <label
                 htmlFor="state"
                 className="form-label d-flex justify-content-start"
@@ -210,7 +315,7 @@ export const Profile = () => {
               <button
                 onClick={(e) => enviarDatos(e)}
                 type="submit"
-                className="btn btn-secondary bg-naranja-100 border-marron text-marron"
+                className="btn bg-naranja-100 border-marron text-marron"
               >
                 Guardar
               </button>

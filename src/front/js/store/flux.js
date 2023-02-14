@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-5rf1au6l4f7.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-a38vdw7ge71.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -141,7 +141,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         pais,
         ciudad,
         postal,
-        telefono
+        telefono,
+        foto
       ) => {
         fetch(back + "/api/profile", {
           method: "PUT",
@@ -159,6 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             city: ciudad,
             postal_code: postal,
             phone_number: telefono,
+            profile_picture: foto,
           }),
         });
       },

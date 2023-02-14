@@ -262,6 +262,7 @@ def edit_profile():
     profile.city=request_body["city"] or profile.city or None
     profile.postal_code=request_body["postal_code"] or profile.postal_code or None
     profile.phone_number=request_body["phone_number"] or profile.phone_number or None
+    profile.profile_picture=request_body["profile_picture"] or profile.profile_picture or None
     # if request_body["phone_number"] is not None:
     
     db.session.commit()
