@@ -29,7 +29,7 @@ export const DetalleProducto = ({ id }) => {
         <div className="container flex-direction-column col-sm-2 rounded-1">
           <img
             className="img-fluid m-1 rounded-1 border-marron"
-            src={store.detalleProducto.img1}
+            src={store.detalleProducto.img4}
           />
           <img
             className="img-fluid m-1 rounded-1 border-marron"
@@ -44,7 +44,7 @@ export const DetalleProducto = ({ id }) => {
         <div className="d-flex container col-sm-4 rounded-1 border-marron">
           <img
             className="img-fluid m-1 rounded-1"
-            src={store.detalleProducto.img4}
+            src={store.detalleProducto.img1}
           />
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}

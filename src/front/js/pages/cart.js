@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../../styles/home.css";
 
 import { CartLi } from "../component/cartli";
@@ -111,9 +111,12 @@ export const Cart = () => {
         </div>
         <hr className="border-marron opacity-75" />
         <div className="w-100 d-flex justify-content-center">
-          <button className="mb-3 mx-auto w-75 rounded bg-naranja-200 text-marron border-marron">
+          <Link
+            to={"/formPago/" + params.theid}
+            className="mb-3 mx-auto w-75 rounded bg-naranja-200 text-marron border-marron"
+          >
             Continuar compra
-          </button>
+          </Link>
         </div>
       </div>
     </div>

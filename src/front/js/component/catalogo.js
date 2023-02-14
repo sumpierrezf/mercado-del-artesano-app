@@ -46,7 +46,7 @@ export const Catalogo = ({
               onClick={() =>
                 store.user_id == null
                   ? alert("Debes iniciar sesión")
-                  : actions.agregarAlCarrito(user_id, product_id)
+                  : actions.agregarAlCarrito(user_id, product_id, 1)
               }
             >
               <i className="fa fa-cart-arrow-down"></i>

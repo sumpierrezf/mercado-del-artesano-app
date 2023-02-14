@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-5ir5qec1ozf.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -177,6 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         );
       },
+
       signup: (
         email,
         password,
