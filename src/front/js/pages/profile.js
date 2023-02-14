@@ -12,7 +12,9 @@ export const Profile = () => {
   const [ciudad, setCiudad] = useState("");
   const [postal, setPostal] = useState("");
   const [telefono, setTelefono] = useState("");
+
   const [foto, setFoto] = useState();
+  const [url, setUrl] = useState("");
 
   const [switchShown, setSwitchShown] = useState(true);
 
@@ -48,8 +50,8 @@ export const Profile = () => {
   //   }
   // };
   // console.log(foto);
-  let filepreview = null;
-  console.log(filepreview);
+  // let filepreview = null;
+  // console.log(filepreview);
 
   return (
     <>
@@ -110,7 +112,7 @@ export const Profile = () => {
                         className="rounded-circle mx-auto my-2"
                         // src={filepreview}
                         // src={URL.createObjectURL(foto)}
-                        src={foto}
+                        // src={foto}
                         alt=""
                         width={"200px"}
                         height={"auto"}
@@ -125,7 +127,7 @@ export const Profile = () => {
                       // value={foto}
                       // onChange={(e) => setFoto(e.target.value)}
                       onChange={(e) => {
-                        filepreview = URL.createObjectURL(e.target.files);
+                        // filepreview = URL.createObjectURL(e.target.files);
                         // subirFoto(e.target.files);
                       }}
                     />
@@ -246,7 +248,7 @@ export const Profile = () => {
 
             {/* ____________________________pais__________________________________________ */}
 
-            <div className="col-md-6 pt-3">
+            <div className="col-md-6">
               <label
                 htmlFor="state"
                 className="form-label d-flex justify-content-start"
