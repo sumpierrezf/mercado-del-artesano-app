@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-5ir5qec1ozf.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       categoria: [],
       products_in_cart: [],
       user_id: null,
+      productosName: [],
     },
 
     actions: {
@@ -152,7 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ) => {
         console.log(user_id);
         fetch(
-          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
+          "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/upload_product/" +
             user_id,
           {
             method: "POST",
@@ -215,7 +216,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(back + "/api/products")
           .then((response) => response.json())
           .then((data) => {
-            setProducts(data);
+            setStore({
+              productosName: data.results,
+            });
           });
       },
 
