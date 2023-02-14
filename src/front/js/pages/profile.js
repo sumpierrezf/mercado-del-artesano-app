@@ -14,22 +14,15 @@ export const Profile = () => {
   const [telefono, setTelefono] = useState("");
   const [foto, setFoto] = useState();
 
-  const subirFoto = (selectorFiles) => {
-    if (selectorFiles) {
-      setFoto(selectorFiles);
-    }
-  };
-  console.log(foto);
-  // let filepreview = null;
-  // console.log(filepreview);
-
   const [switchShown, setSwitchShown] = useState(true);
 
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
     actions.getUserInfo(store.user_id);
-    // setNombre(store.user_info.first_name);
+    setFoto(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+    );
   }, []);
 
   function enviarDatos(e) {
@@ -48,7 +41,15 @@ export const Profile = () => {
       foto
     );
   }
-  //   console.log(store.user_info.first_name);
+
+  // const subirFoto = (selectorFiles) => {
+  //   if (selectorFiles) {
+  //     setFoto(selectorFiles);
+  //   }
+  // };
+  // console.log(foto);
+  let filepreview = null;
+  console.log(filepreview);
 
   return (
     <>
@@ -63,14 +64,17 @@ export const Profile = () => {
             <div className="w-50 mx-auto row">
               <img
                 className="rounded-circle my-2"
-                src={store.user_info.profile_picture}
+                src={
+                  store.user_info.profile_picture ||
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+                }
                 alt=""
                 width={"160px"}
                 height={"auto"}
               />
               <button
                 type="button"
-                className="btn bg-naranja-100 border-marron text-marron mx-auto my-2 w-75 col-12"
+                className="btn bg-naranja-100 border-marron text-marron mx-auto mb-2 w-75 col-12"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -87,8 +91,8 @@ export const Profile = () => {
               aria-hidden="true"
             >
               <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
+                <div className="modal-content bg-naranja-100 border-marron">
+                  <div className="modal-header border-marron">
                     <h1 className="modal-title fs-5" id="exampleModalLabel">
                       Cambiar foto de perfil
                     </h1>
@@ -99,19 +103,20 @@ export const Profile = () => {
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div className="modal-body">
-                    {foto && (
-                      <div className="mb-3 d-flex">
-                        <img
-                          className="rounded-circle mx-auto my-2"
-                          // src={filepreview}
-                          src={URL.createObjectURL(foto)}
-                          alt=""
-                          width={"200px"}
-                          height={"auto"}
-                        />
-                      </div>
-                    )}
+                  <div className="modal-body border-marron">
+                    {/* {foto && ( */}
+                    <div className="mb-3 d-flex">
+                      <img
+                        className="rounded-circle mx-auto my-2"
+                        // src={filepreview}
+                        // src={URL.createObjectURL(foto)}
+                        src={foto}
+                        alt=""
+                        width={"200px"}
+                        height={"auto"}
+                      />
+                    </div>
+                    {/* )} */}
                     <input
                       type="file"
                       className="bg-naranja-100 border-marron text-marron"
@@ -120,12 +125,12 @@ export const Profile = () => {
                       // value={foto}
                       // onChange={(e) => setFoto(e.target.value)}
                       onChange={(e) => {
-                        // filepreview = URL.createObjectURL(e.target.files);
-                        subirFoto(e.target.files);
+                        filepreview = URL.createObjectURL(e.target.files);
+                        // subirFoto(e.target.files);
                       }}
                     />
                   </div>
-                  <div className="modal-footer">
+                  <div className="modal-footer border-marron">
                     <button
                       type="button"
                       className="btn btn-secondary"
@@ -133,7 +138,10 @@ export const Profile = () => {
                     >
                       Cerrar
                     </button>
-                    <button type="button" className="btn bg-success text-light">
+                    <button
+                      type="button"
+                      className="btn bg-naranja-200 border-marron text-marron"
+                    >
                       Aceptar
                     </button>
                   </div>
@@ -145,7 +153,9 @@ export const Profile = () => {
             {/* ______________________Nombre_______________________________________ */}
 
             <div className="col-md-6">
-              <label htmlFor="exampleInputName1" className="form-label"></label>
+              <label htmlFor="exampleInputName1" className="form-label">
+                Nombre
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -164,10 +174,9 @@ export const Profile = () => {
             {/* __________________________Apellido________________________________________ */}
 
             <div className="col-md-6">
-              <label
-                htmlFor="exampleInputApellido1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputApellido1" className="form-label">
+                Apellido
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -180,10 +189,9 @@ export const Profile = () => {
             </div>
             {/* __________________________Password____________________________________________ */}
             <div className="container">
-              <label
-                htmlFor="exampleInputPassword1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Contraseña
+              </label>
               <input
                 type={`${switchShown == true ? "password" : "text"}`}
                 className="form-control"
@@ -205,10 +213,9 @@ export const Profile = () => {
 
             {/* _________________________Fecha de nacimiento_____________________________________ */}
             <div className="mb-3 container">
-              <label
-                htmlFor="exampleInputFecha1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputFecha1" className="form-label">
+                Fecha de Nacimiento
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -223,16 +230,15 @@ export const Profile = () => {
             {/* ____________________________Direccion__________________________________________ */}
 
             <div className="mb-3 container">
-              <label
-                htmlFor="exampleInputDireccion1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputDireccion1" className="form-label">
+                Dirección
+              </label>
               <input
                 type="text"
                 className="form-control"
                 id="exampleInputDireccionl1"
                 aria-describedby="direccionHelp"
-                placeholder="Direccion"
+                placeholder="Dirección"
                 value={direccion || store.user_info.address || ""}
                 onChange={(e) => setDireccion(e.target.value)}
               />
@@ -244,7 +250,9 @@ export const Profile = () => {
               <label
                 htmlFor="state"
                 className="form-label d-flex justify-content-start"
-              ></label>
+              >
+                País
+              </label>
               <select
                 id="pais"
                 name="pais"
@@ -253,17 +261,16 @@ export const Profile = () => {
                 value={pais || store.user_info.country || ""}
                 onChange={(e) => setPais(e.target.value)}
               >
-                <option value>País</option>
+                <option value>Seleccionar país</option>
                 <option value="Uruguay">Uruguay</option>
                 <option value="Otro">Otro</option>
               </select>
             </div>
             {/* _____________________Ciudad___________________________________________ */}
             <div className="col-md-6">
-              <label
-                htmlFor="exampleInputCiudad1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputCiudad1" className="form-label">
+                Ciudad
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -278,10 +285,9 @@ export const Profile = () => {
             {/* ________________________Codigo Postal______________________________________________ */}
 
             <div className="col-md-6">
-              <label
-                htmlFor="exampleInputCodigo1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputCodigo1" className="form-label">
+                Codigo Postal
+              </label>
               <input
                 type="number"
                 className="form-control"
@@ -295,10 +301,9 @@ export const Profile = () => {
 
             {/* _______________________Telefono_______________________________________________ */}
             <div className="col-md-6">
-              <label
-                htmlFor="exampleInputTelefono1"
-                className="form-label"
-              ></label>
+              <label htmlFor="exampleInputTelefono1" className="form-label">
+                Telefono
+              </label>
               <input
                 type="number"
                 className="form-control"
