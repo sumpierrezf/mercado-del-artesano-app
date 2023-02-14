@@ -78,7 +78,7 @@ export const Profile = () => {
                 id="exampleInputApellido1"
                 aria-describedby="apellidoHelp"
                 placeholder="Apellido"
-                value={apellido}
+                value={apellido || store.user_info.last_name || ""}
                 onChange={(e) => setApellido(e.target.value)}
               />
             </div>
@@ -93,7 +93,7 @@ export const Profile = () => {
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="Contraseña"
-                value={password}
+                value={password || store.user_info.password || ""}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -110,7 +110,7 @@ export const Profile = () => {
                 id="exampleInputFechal1"
                 aria-describedby="fechaHelp"
                 placeholder="Fecha de Nacimiento"
-                value={nacimiento}
+                value={nacimiento || store.user_info.birth || ""}
                 onChange={(e) => setNacimiento(e.target.value)}
               />
             </div>
@@ -128,7 +128,7 @@ export const Profile = () => {
                 id="exampleInputDireccionl1"
                 aria-describedby="direccionHelp"
                 placeholder="Direccion"
-                value={direccion}
+                value={direccion || store.user_info.address || ""}
                 onChange={(e) => setDireccion(e.target.value)}
               />
             </div>
@@ -145,7 +145,7 @@ export const Profile = () => {
                 name="pais"
                 className="form-select"
                 aria-label="Default select example"
-                value={pais}
+                value={pais || store.user_info.country || ""}
                 onChange={(e) => setPais(e.target.value)}
               >
                 <option value>País</option>
@@ -165,7 +165,7 @@ export const Profile = () => {
                 id="exampleInputCiudad1"
                 aria-describedby="ciduadHelp"
                 placeholder="Ciudad"
-                value={ciudad}
+                value={ciudad || store.user_info.city || ""}
                 onChange={(e) => setCiudad(e.target.value)}
               />
             </div>
@@ -183,7 +183,7 @@ export const Profile = () => {
                 id="exampleInputCodigo1"
                 aria-describedby="codigoHelp"
                 placeholder="Codigo Postal"
-                value={postal}
+                value={postal || store.user_info.postal_code || ""}
                 onChange={(e) => setPostal(e.target.value)}
               />
             </div>
@@ -200,7 +200,7 @@ export const Profile = () => {
                 id="exampleInputTelefono1"
                 aria-describedby="telefonoHelp"
                 placeholder="Telefono"
-                value={telefono}
+                value={telefono || store.user_info.phone_number || ""}
                 onChange={(e) => setTelefono(e.target.value)}
               />
             </div>

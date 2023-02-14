@@ -33,7 +33,8 @@ class User(db.Model):
             "country": self.country,
             "city": self.city,
             "postal_code": self.postal_code,
-            "phone_number": self.phone_number
+            "phone_number": self.phone_number,
+            "password": self.password
             # do not serialize the password, its a security breach
         }
 
