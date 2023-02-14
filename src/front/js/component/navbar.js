@@ -61,7 +61,7 @@ export const Navbar = () => {
               onChange={(event) => setSearchTerm(event.target.value)}
             />
             <button
-              className="btn btn-outline-naranja-900 my-2 my-sm-0"
+              className="btn bg-naranja-100 text-marron border-marron my-auto me-2 border-2 justify-content-end"
               type="submit"
             >
               Buscar
@@ -130,7 +130,7 @@ export const Navbar = () => {
         )}
       </div>
       <div className="d-flex container col-sm-8 col-lg-10 p-3">
-        {filteredProducts.length != { filterProducts } ? (
+        {filteredProducts.length == 0 ? (
           <p>No se encontraron resultados</p>
         ) : (
           filteredProducts.map((product) => (
