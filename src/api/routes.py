@@ -10,7 +10,6 @@ from flask_jwt_extended import jwt_required
 import json
 # importamos Message() de flask_mail
 from flask_mail import Message
-from flask_cors import CORS
 # importamos ramdom y string para generar una clave aleatoria nueva
 import random
 import string
@@ -235,20 +234,22 @@ def select_product_amount():
     return jsonify(cart_filter.serialize()), 200
 #RECUPERACION CONTRASEÑA OLVIDADA 
 @api.route("/resetPassword", methods=["POST"])
-def forgotpassword():
+def resetPassword():
     recover_email = request.json['email']
-    recover_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(8)) #clave aleatoria nueva
-   
+    recover_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(8)) 
+    #clave aleatoria nueva
     if not recover_email:
         return jsonify({"msg": "Debe ingresar el correo"}), 401
-	  #busco si el correo existe en mi base de datos
+	#   #busco si el correo existe en mi base de datos
     user = User.query.filter_by(email=recover_email).first()
-    if recover_email != user.email:
+    if not user:
+    # recover_email != user.email:
         return jsonify({"msg": "El correo ingresado no existe en nuestros registros"}), 400
-    #si existe guardo la nueva contraseña aleatoria
+    # #si existe guardo la nueva contraseña aleatoria
     user.password = recover_password
     db.session.commit()
 	  #luego se la envio al usuario por correo para que pueda ingresar
+    
     msg = Message("Hi", recipients=[recover_email])
     msg.recipients=[recover_email]
     msg.html = f"""<h1>Su nueva contraseña es: {recover_password}</h1>"""
