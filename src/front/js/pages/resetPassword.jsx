@@ -12,8 +12,8 @@ export const ResetPassword = () => {
     e.preventDefault();
     actions.changePassword(resetearPassword);
 
-    let correo = resetearPassword;
-    console.log(correo);
+    let mail = resetearPassword;
+    console.log(mail);
     if (sendEmail) {
       navegation("/");
     } else {
