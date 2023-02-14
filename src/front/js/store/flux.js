@@ -1,5 +1,9 @@
 import axios from "axios";
+<<<<<<< HEAD
 let back = "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io";
+=======
+let back = "https://3001-sumpierrezf-mercadodela-zht4q37yybs.ws-us86.gitpod.io";
+>>>>>>> 513aac621481c05ce066ae54dfe4676d39186470
 const getState = ({
     getStore,
     getActions,
@@ -155,7 +159,11 @@ const getState = ({
             ) => {
                 console.log(user_id);
                 fetch(
+<<<<<<< HEAD
                     "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/upload_product/" +
+=======
+                    "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
+>>>>>>> 513aac621481c05ce066ae54dfe4676d39186470
                     user_id, {
                         method: "POST",
                         // mode: "no-cors",
@@ -179,7 +187,11 @@ const getState = ({
                     }
                 );
             },
+<<<<<<< HEAD
             //  __________________Funciones de cami____________
+=======
+
+>>>>>>> 513aac621481c05ce066ae54dfe4676d39186470
             signup: (
                 email,
                 password,
@@ -192,6 +204,7 @@ const getState = ({
                 postal,
                 telefono
             ) => {
+<<<<<<< HEAD
                 fetch(back + "/api/signup", {
                     method: "POST",
                     mode: "no-cors",
@@ -222,6 +235,39 @@ const getState = ({
             },
 
             // _____________________________________________________
+=======
+                fetch(
+                    back + "/api/signup", {
+                        method: "POST",
+                        mode: "no-cors",
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password,
+                            first_name: nombre,
+                            last_name: apellido,
+                            birth: nacimiento,
+                            address: direccion,
+                            country: pais,
+                            city: ciudad,
+                            postal_code: postal,
+                            phone_number: telefono,
+                        }),
+                    }
+                    // ).then((response) => {
+                    //   if (response.status === 200) {
+                    //     setStore({
+                    //       auth: true,
+                    //     });
+                    //   }
+                    //   return response.json();
+                    // }
+                );
+            },
+>>>>>>> 513aac621481c05ce066ae54dfe4676d39186470
             login: (userEmail, userPassword) => {
                 fetch(back + "/api/login", {
                         method: "POST",
