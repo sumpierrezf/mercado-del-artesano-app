@@ -26,6 +26,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       user_id: null,
       mercadoPago: {},
       productosName: [],
+      user_info: [],
+      image: "",
+      url: "",
     },
 
     actions: {
@@ -34,7 +37,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
       getUserFavs: (id) => {
-        // console.log(back);
         fetch(back + "/api/user/favorites/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -123,6 +125,66 @@ const getState = ({ getStore, getActions, setStore }) => {
             amount: amount,
           }),
         });
+      },
+      getUserInfo: (id) => {
+        fetch(back + "/api/user/" + id)
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              user_info: data,
+            })
+          );
+      },
+      editProfile: (
+        id,
+        password,
+        nombre,
+        apellido,
+        nacimiento,
+        direccion,
+        pais,
+        ciudad,
+        postal,
+        telefono,
+        foto
+      ) => {
+        fetch(back + "/api/profile", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+            password: password,
+            first_name: nombre,
+            last_name: apellido,
+            birth: nacimiento,
+            address: direccion,
+            country: pais,
+            city: ciudad,
+            postal_code: postal,
+            phone_number: telefono,
+            profile_picture: foto,
+          }),
+        });
+      },
+      uploadImage: () => {
+        const store = getStore();
+        const data = new FormData();
+        data.append("file", store.image);
+        data.append("upload_preset", "pdnsjg41");
+        data.append("cloud_name", "dlesv1phq");
+        fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
+          method: "POST",
+          body: data,
+        })
+          .then((resp) => resp.json())
+          .then((data) =>
+            setStore({
+              url: data.url,
+            })
+          )
+          .catch((err) => console.log(err));
       },
       getMessage: async () => {
         try {
@@ -268,6 +330,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.removeItem("token");
         setStore({
           user_id: null,
+        });
+        setStore({
+          user_info: [],
         });
         setStore({
           auth: false,
