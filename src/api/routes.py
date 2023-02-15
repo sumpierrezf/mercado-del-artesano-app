@@ -14,6 +14,12 @@ from flask_mail import Message
 import random
 import string
 
+# SDK de Mercado Pago
+import mercadopago
+# Agrega credenciales
+sdk = mercadopago.SDK("APP_USR-2815099995655791-092911-c238fdac299eadc66456257445c5457d-1160950667")
+
+
 api = Blueprint("api", __name__)
 
 
@@ -256,5 +262,32 @@ def resetPassword():
     current_app.mail.send(msg)
     return jsonify({"msg": "Su nueva clave ha sido enviada al correo electrónico ingresado"}), 200
 
+@api.route("/preference", methods=["POST"])
+def preference():
+    body = json.loads(request.data)
+    total = body["total"]
+    # Crea un ítem en la preferencia
+    preference_data = {
+        "items": [
+            {
+                "title": "Mercado del Artesano",
+                "quantity": 1,
+                "unit_price": total,
+            }
+        ],
+        "payer":{
+            "email":"test_user_17805074@testuser.com"
+        },
+        "back_urls": {
+	     	"success": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io",
+	 		"failure": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io",
+	 		"pending": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io"
+	     },
+        "auto_return": "approved"
+    }
+
+    preference_response = sdk.preference().create(preference_data)
+    preference = preference_response["response"]
+    return preference, 200
 
     

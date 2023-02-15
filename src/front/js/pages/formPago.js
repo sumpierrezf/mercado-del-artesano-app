@@ -21,11 +21,20 @@ export const FormPago = () => {
 
   console.log(store.products_in_cart);
 
+  const pagar = async () => {
+    let total = subtotal * 1.22;
+    console.log(total);
+    await actions.pagoMercadoPago(total);
+    let direccion = await store.mercadoPago.init_point;
+    // console.log(direccion);
+    window.location.replace(direccion);
+  };
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-sm-6 col-lg-8 mt-5">
-          <h5 className="text-center">Método de pago.</h5>
+          <h5 className="text-center">Pagar.</h5>
           <hr />
           <div className="d-flex container justify-content-between bg-naranja-200 border-marron p-3 mb-5">
             <div className="form-check col-sm-7">
@@ -59,6 +68,7 @@ export const FormPago = () => {
             <button
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-3 px-3"
+              onClick={pagar}
             >
               Pagar
             </button>
