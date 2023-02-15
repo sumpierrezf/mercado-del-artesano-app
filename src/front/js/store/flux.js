@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-speizu7b8qx.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -212,15 +212,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
-      filterProducts: () => {
-        fetch(back + "/api/products")
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({
-              productosName: data.results,
-            });
-          });
+      filterProducts(searchTerm) {
+        const store = getStore();
+        const filtered = store.productos.filter((product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        console.log(filtered);
+        setStore({
+          productos: filtered,
+        });
       },
+
+      // filterProducts: () => {
+      //   fetch(back + "/api/products")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       setStore({
+      //         productos: data.results,
+      //       });
+      //     });
+      // },
 
       // _____________________________________________________
       login: (userEmail, userPassword) => {

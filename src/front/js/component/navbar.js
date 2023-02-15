@@ -7,20 +7,23 @@ import { Catalogo } from "./catalogo";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  // const [filteredProducts, setFilteredProducts] = useState([]);
 
   const navigate = useNavigate();
 
-  function filterProducts(event) {
-    event.preventDefault();
-    const filtered = store.productos.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-    setSearchTerm("");
-  }
-  // console.log(store.productos);
-  console.log(filteredProducts);
+  const handleImput = (e) => {
+    setSearchTerm(e.target.value);
+    console.log(e.target.value);
+    if (e.target.value === "") {
+      actions.obtenerInfoProductos();
+    } else {
+      actions.filterProducts(e.target.value);
+    }
+    // actions.filterProducts(searchTerm);
+  };
+  
+  console.log(searchTerm);
+
 
   function handleLogout() {
     actions.logout(); //cerrar la sesion
@@ -51,21 +54,15 @@ export const Navbar = () => {
           </span>
         </Link>
         <div className="d-flex w-100 justify-center">
-          <form onSubmit={filterProducts} className="form-inline">
+          <form className="form-inline">
             <input
               className="form-control mr-sm-2"
               type="search"
               placeholder="Buscar"
               aria-label="Search"
               value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
+              onChange={handleImput}
             />
-            <button
-              className="btn bg-naranja-100 text-marron border-marron my-auto me-2 border-2 justify-content-end"
-              type="submit"
-            >
-              Buscar
-            </button>
           </form>
         </div>
       </div>
@@ -129,25 +126,7 @@ export const Navbar = () => {
           </>
         )}
       </div>
-      <div className="d-flex container col-sm-8 col-lg-10 p-3">
-        {filteredProducts.length == 0 ? (
-          <p>No se encontraron resultados</p>
-        ) : (
-          filteredProducts.map((product) => (
-            <Catalogo
-              key={product.id}
-              id={product + 1}
-              name={product.name}
-              category={product.category}
-              price={product.price}
-              amount={product.amount}
-              img1={product.img1}
-              user_id={store.user_id}
-              product_id={product.id}
-            />
-          ))
-        )}
-      </div>
+    
     </nav>
   );
 };
