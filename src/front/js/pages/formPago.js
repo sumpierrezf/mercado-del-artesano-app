@@ -64,7 +64,7 @@ export const FormPago = () => {
             </div>
           </div>
           <hr />
-          <div className="m-3">
+          {/* <div className="m-3">
             <button
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-3 px-3"
@@ -78,7 +78,7 @@ export const FormPago = () => {
             >
               Cancelar
             </button>
-          </div>
+          </div> */}
         </div>
         {/* COLUMNA DERECHA */}
         <div className="col-sm-6 col-lg-4 mt-5">

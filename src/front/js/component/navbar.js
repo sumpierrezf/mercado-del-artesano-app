@@ -22,7 +22,7 @@ export const Navbar = () => {
     // actions.filterProducts(searchTerm);
   };
 
-  console.log(searchTerm);
+  // console.log(searchTerm);
 
   function handleLogout() {
     actions.logout(); //cerrar la sesion
