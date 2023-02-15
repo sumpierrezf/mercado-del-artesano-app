@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       categoria: [],
       products_in_cart: [],
       user_id: null,
+      productosName: [],
       user_info: [],
       image: "",
       url: "",
@@ -214,7 +215,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ) => {
         console.log(user_id);
         fetch(
-          "https://3001-sumpierrezf-mercadodela-0sh1ijmenqa.ws-us86.gitpod.io/api/upload_product/" +
+          "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/upload_product/" +
             user_id,
           {
             method: "POST",
@@ -252,38 +253,49 @@ const getState = ({ getStore, getActions, setStore }) => {
         postal,
         telefono
       ) => {
-        fetch(
-          back + "/api/signup",
-          {
-            method: "POST",
-            mode: "no-cors",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              password: password,
-              first_name: nombre,
-              last_name: apellido,
-              birth: nacimiento,
-              address: direccion,
-              country: pais,
-              city: ciudad,
-              postal_code: postal,
-              phone_number: telefono,
-            }),
-          }
-          // ).then((response) => {
-          //   if (response.status === 200) {
-          //     setStore({
-          //       auth: true,
-          //     });
-          //   }
-          //   return response.json();
-          // }
-        );
+        fetch(back + "/api/signup", {
+          method: "POST",
+          mode: "no-cors",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            first_name: nombre,
+            last_name: apellido,
+            birth: nacimiento,
+            address: direccion,
+            country: pais,
+            city: ciudad,
+            postal_code: postal,
+            phone_number: telefono,
+          }),
+        });
       },
+      filterProducts(searchTerm) {
+        const store = getStore();
+        const filtered = store.productos.filter((product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        console.log(filtered);
+        setStore({
+          productos: filtered,
+        });
+      },
+
+      // filterProducts: () => {
+      //   fetch(back + "/api/products")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       setStore({
+      //         productos: data.results,
+      //       });
+      //     });
+      // },
+
+      // _____________________________________________________
       login: (userEmail, userPassword) => {
         fetch(back + "/api/login", {
           method: "POST",

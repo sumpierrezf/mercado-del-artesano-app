@@ -122,7 +122,7 @@ export const Profile = () => {
                       onClick={() => {
                         actions.uploadImage();
                         alert(
-                          "No olvides darle a guardar en el fondo del formulario para actualizar tu foto"
+                          "Debes darle a guardar en el fondo del formulario para actualizar tu foto"
                         );
                       }}
                     >
