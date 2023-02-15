@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { Home } from "./pages/home";
+import { Home } from "./pages/home.js";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Favs } from "./pages/favs";
@@ -14,6 +14,9 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Cart } from "./pages/cart";
 import { DetalleProducto } from "./pages/detalleProducto";
+import { FormPago } from "./pages/formPago";
+import { ResetPassword } from "./pages/resetPassword.jsx";
+import { Profile } from "./pages/profile";
 
 // create your first component
 const Layout = () => {
@@ -33,8 +36,11 @@ const Layout = () => {
           <Route element={<Favs />} path="/favs/:theid" />
           <Route element={<Productos />} path="/form" />
           <Route element={<DetalleProducto />} path="/detalleProducto/:theid" />
+          <Route element={<ResetPassword />} path="/resetPassword" />
           <Route element={<Login />} path="/login" />
           <Route element={<Cart />} path="/cart/:theid" />
+          <Route element={<FormPago />} path="/formPago/:theid" />
+          <Route element={<Profile />} path="/profile/:theid" />
           <Route element={<h1> Not found! </h1>} />{" "}
         </Routes>{" "}
         <Footer />{" "}

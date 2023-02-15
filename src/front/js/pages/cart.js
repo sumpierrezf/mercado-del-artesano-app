@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../../styles/home.css";
 
 import { CartLi } from "../component/cartli";
@@ -8,6 +8,13 @@ import { CartLi } from "../component/cartli";
 export const Cart = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  let subtotal = 0;
+
+  for (let i = 0; i < store.products_in_cart.length; i++) {
+    subtotal +=
+      store.products_in_cart[i].productsInfo.price *
+      store.products_in_cart[i].amount;
+  }
 
   useEffect(() => {
     actions.getUserProductsInCart(params.theid);
@@ -20,7 +27,7 @@ export const Cart = () => {
         width: "85%",
       }}
     >
-      <p className="text-end mb-0" style={{ height: "20px" }}>
+      <p className="mb-3" style={{ height: "20px" }}>
         {store.products_in_cart.length} productos en el carrito
       </p>
 
@@ -43,18 +50,32 @@ export const Cart = () => {
                   precio={item.productsInfo.price}
                   imagen={item.productsInfo.img1}
                 />
-                <div className="w-50">
+                <div className="w-50 d-flex">
+                  <input
+                    type="number"
+                    className="form-control h-50 my-auto me-2"
+                    placeholder="Cantidad"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    value={item.amount == null ? 0 : item.amount}
+                    onChange={(e) =>
+                      actions.setAmountInCart(
+                        item.user_id,
+                        item.product_id,
+                        e.target.value
+                      )
+                    }
+                  />
                   <button
-                    className="float-end rounded bg-naranja-200 text-marron border-marron"
+                    className="float-end my-auto rounded bg-naranja-200 text-marron border-marron"
                     style={{
                       height: "35px",
-                      marginTop: "35px",
                     }}
                     onClick={() =>
                       actions.borrarProductInCart(params.theid, item.product_id)
                     }
                   >
-                    Eliminar del carrito
+                    <i className="fa fa-trash"></i>
                   </button>
                 </div>
               </li>
@@ -68,14 +89,35 @@ export const Cart = () => {
         <h4 className="mt-3 text-center">Total</h4>
         <hr className="my-1 border-marron opacity-75" />
         <br />
-        <h5>
-          Subtotal:
-          {/* {store.products_in_cart.productsInfo.price} */}
-        </h5>
+        <div className="d-flex">
+          <h4 className="w-50">Subtotal:</h4>
+          <h4 className="text-end w-50">${subtotal}</h4>
+        </div>
+
         <br />
-        <h5>Impuestos:{}</h5>
+        <div className="d-flex">
+          <h4 className="w-50">Impuestos:</h4>
+          <h4 className="text-end w-50">${subtotal * 0.22}</h4>
+        </div>
         <hr className="my-3 border-marron opacity-75" />
-        <h4>TOTAL:</h4>
+        <div
+          className="d-flex"
+          style={{
+            marginTop: "160px",
+          }}
+        >
+          <h4 className="w-50">TOTAL:</h4>
+          <h4 className="text-end w-50">${subtotal * 1.22}</h4>
+        </div>
+        <hr className="border-marron opacity-75" />
+        <div className="w-100 d-flex justify-content-center">
+          <Link
+            to={"/formPago/" + params.theid}
+            className="mb-3 mx-auto w-75 rounded bg-naranja-200 text-marron border-marron"
+          >
+            Continuar compra
+          </Link>
+        </div>
       </div>
     </div>
   );
