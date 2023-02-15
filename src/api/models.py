@@ -15,6 +15,7 @@ class User(db.Model):
     city = db.Column(db.String(120), unique=False, nullable=True)
     postal_code = db.Column(db.Integer, unique=False, nullable=True)
     phone_number = db.Column(db.Integer, unique=False, nullable=True)
+    profile_picture = db.Column(db.String(120), unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='user', lazy=True)
     cart = db.relationship('Cart', backref='user', lazy=True)
     products = db.relationship('Products', backref='user', lazy=True)
@@ -33,7 +34,9 @@ class User(db.Model):
             "country": self.country,
             "city": self.city,
             "postal_code": self.postal_code,
-            "phone_number": self.phone_number
+            "phone_number": self.phone_number,
+            "password": self.password,
+            "profile_picture": self.profile_picture
             # do not serialize the password, its a security breach
         }
 
@@ -62,6 +65,7 @@ class Favorites(db.Model):
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Integer, unique=False, nullable=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
@@ -72,7 +76,8 @@ class Cart(db.Model):
         return {
             "id": self.id,
             "product_id": self.product_id,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "amount": self.amount
             # do not serialize the password, its a security breach
         }
     
