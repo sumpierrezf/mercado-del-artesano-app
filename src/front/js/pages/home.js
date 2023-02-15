@@ -2,15 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
-
 export const Home = () => {
   const { store, actions } = useContext(Context);
-
   useEffect(() => {
     actions.obtenerInfoProductos();
   }, []);
   console.log(store.productos[0]);
-
   return (
     <div className="container-fluid bg-naranja-100">
       <div className="row mb-5">
