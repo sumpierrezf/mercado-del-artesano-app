@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
+// Importar la clase Cloudinary.
+// import { Cloudinary } from " @cloudinary/url-gen ";
 
 export const Productos = (props) => {
   const [nombre, setNombre] = useState("");
@@ -37,6 +39,17 @@ export const Productos = (props) => {
       user_id
     );
   }
+  // Cree una instancia de Cloudinary y establezca su nombre de nube.
+  // const cld = new Cloudinary({
+  //   cloud: {
+  //     cloudName: "demo",
+  //   },
+  // });
+  // // cld.image devuelve una CloudinaryImage con la configuración establecida.
+  // const myImage = cld.image("sample"); // muestra es el ID público de la imagen.
+
+  // // Esto devuelve: https://res.cloudinary.com/demo/image/upload/sample
+  // const myURL = myImage.toURL();
 
   return (
     <>
@@ -160,7 +173,7 @@ export const Productos = (props) => {
             </div>
             {/* -----------------boton imagen------------------------- */}
 
-            <div
+            {/* <div
               className="d-flex  mt-4"
               type="POST"
               encType="multipart/formdata"
@@ -185,10 +198,9 @@ export const Productos = (props) => {
                 backgroundColor: "#FFD8A9",
                 color: "#E38B29",
               }}
-            />
-          </form>
-        </div>
+            /> */}
 
+           
         {/* ________________________botones______________________________________________ */}
         <div className="d-flex justify-content-center mt-4">
           <button
