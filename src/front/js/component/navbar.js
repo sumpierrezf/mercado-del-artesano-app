@@ -1,11 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import logo3 from "../../img/logo3.png";
+import { Catalogo } from "./catalogo";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const [searchTerm, setSearchTerm] = useState("");
+  // const [filteredProducts, setFilteredProducts] = useState([]);
+
   const navigate = useNavigate();
+
+  const handleImput = (e) => {
+    setSearchTerm(e.target.value);
+    console.log(e.target.value);
+    if (e.target.value === "") {
+      actions.obtenerInfoProductos();
+    } else {
+      actions.filterProducts(e.target.value);
+    }
+    // actions.filterProducts(searchTerm);
+  };
+  
+  console.log(searchTerm);
+
 
   function handleLogout() {
     actions.logout(); //cerrar la sesion
@@ -26,6 +44,7 @@ export const Navbar = () => {
   function handleForm() {
     navigate("/form"); //usamos navigate para redireccionar
   }
+
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
       <div className="container-fluid d-flex">
@@ -34,66 +53,80 @@ export const Navbar = () => {
             <img className="logo" src={logo3} width="200" height="80" />
           </span>
         </Link>
-        <div className="d-flex w-100 justify-content-end">
-          {store.auth === true ? (
-            <>
-              <div className="float-end dropdown my-auto">
-                <button
-                  className="btn bg-naranja-100 text-marron border-marron dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-gear"></i>
-                  Opciones
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#" onClick={handleFavs}>
-                      Favoritos
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#" onClick={handleForm}>
-                      Vender
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="dropdown-item"
-                      href="#"
-                      onClick={handleLogout}
-                    >
-                      Cerrar sesión
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <button
-                className="btn bg-naranja-100 text-marron border-marron mx-2 my-auto border-2"
-                onClick={handleCart}
-              >
-                <i className="fa fa-cart-arrow-down"></i>
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                className="btn bg-naranja-100 text-marron my-auto border-marron me-2 border-2 justify-content-end"
-                onClick={handleLogin}
-              >
-                Iniciar sesión
-              </button>
-              <button
-                className="btn bg-naranja-100 text-marron border-marron my-auto me-2 border-2 justify-content-end"
-                onClick={handleSignup}
-              >
-                Crear usuario
-              </button>
-            </>
-          )}
+        <div className="d-flex w-100 justify-center">
+          <form className="form-inline">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Buscar"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={handleImput}
+            />
+          </form>
         </div>
       </div>
+      {/* ----------------Opciones------------------------- */}
+      <div className="d-flex w-100 justify-content-end">
+        {store.auth === true ? (
+          <>
+            <div className="float-end dropdown my-auto">
+              <button
+                className="btn bg-naranja-100 text-marron border-marron dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Opciones
+              </button>
+              <ul className="dropdown-menu">
+                {/* -------- -------Favoritos----------------------- */}
+                <li>
+                  <a className="dropdown-item" href="#" onClick={handleFavs}>
+                    Favoritos
+                  </a>
+                </li>
+                {/* ----------------vender--------- */}
+                <li>
+                  <a className="dropdown-item" href="#" onClick={handleForm}>
+                    Vender
+                  </a>
+                </li>
+                {/* ----------cerrar sesion-------------- */}
+                <li>
+                  <a className="dropdown-item" href="#" onClick={handleLogout}>
+                    Cerrar sesión
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <button
+              className="btn bg-naranja-100 text-marron border-marron mx-2 my-auto border-2"
+              onClick={handleCart}
+            >
+              <i className="fa fa-cart-arrow-down"></i>
+            </button>
+          </>
+        ) : (
+          <>
+            {/* --------------- iniciar sesion -------------- */}
+            <button
+              className="btn bg-naranja-100 text-marron my-auto border-marron me-2 border-2 justify-content-end"
+              onClick={handleLogin}
+            >
+              Iniciar sesión
+            </button>
+            <button
+              className="btn bg-naranja-100 text-marron border-marron my-auto me-2 border-2 justify-content-end"
+              onClick={handleSignup}
+            >
+              Crear usuario
+            </button>
+          </>
+        )}
+      </div>
+    
     </nav>
   );
 };
