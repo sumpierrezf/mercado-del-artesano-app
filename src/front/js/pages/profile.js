@@ -157,7 +157,7 @@ export const Profile = () => {
 
             {/* __________________________Apellido________________________________________ */}
 
-            <div className="col-md-6">
+            <div className="col-md-6 mt-2">
               <label htmlFor="exampleInputApellido1" className="form-label">
                 Apellido
               </label>
@@ -172,7 +172,7 @@ export const Profile = () => {
               />
             </div>
             {/* __________________________Password____________________________________________ */}
-            <div className="container">
+            <div className="container mt-2">
               <label htmlFor="exampleInputPassword1" className="form-label">
                 Contraseña
               </label>
@@ -196,7 +196,7 @@ export const Profile = () => {
             </div>
 
             {/* _________________________Fecha de nacimiento_____________________________________ */}
-            <div className="mb-3 container">
+            <div className="container mt-2">
               <label htmlFor="exampleInputFecha1" className="form-label">
                 Fecha de Nacimiento
               </label>
@@ -213,7 +213,7 @@ export const Profile = () => {
 
             {/* ____________________________Direccion__________________________________________ */}
 
-            <div className="mb-3 container">
+            <div className="container mt-2">
               <label htmlFor="exampleInputDireccion1" className="form-label">
                 Dirección
               </label>
@@ -230,7 +230,7 @@ export const Profile = () => {
 
             {/* ____________________________pais__________________________________________ */}
 
-            <div className="col-md-6">
+            <div className="col-md-6 mt-2">
               <label
                 htmlFor="state"
                 className="form-label d-flex justify-content-start"
@@ -251,7 +251,7 @@ export const Profile = () => {
               </select>
             </div>
             {/* _____________________Ciudad___________________________________________ */}
-            <div className="col-md-6">
+            <div className="col-md-6 mt-2">
               <label htmlFor="exampleInputCiudad1" className="form-label">
                 Ciudad
               </label>
@@ -268,7 +268,7 @@ export const Profile = () => {
 
             {/* ________________________Codigo Postal______________________________________________ */}
 
-            <div className="col-md-6">
+            <div className="col-md-6 mt-2">
               <label htmlFor="exampleInputCodigo1" className="form-label">
                 Codigo Postal
               </label>
@@ -284,7 +284,7 @@ export const Profile = () => {
             </div>
 
             {/* _______________________Telefono_______________________________________________ */}
-            <div className="col-md-6">
+            <div className="col-md-6 mt-2">
               <label htmlFor="exampleInputTelefono1" className="form-label">
                 Telefono
               </label>
