@@ -13,19 +13,13 @@ export const Profile = () => {
   const [postal, setPostal] = useState("");
   const [telefono, setTelefono] = useState("");
 
-  const [foto, setFoto] = useState();
-  const [url, setUrl] = useState("");
-
   const [switchShown, setSwitchShown] = useState(true);
 
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
     actions.getUserInfo(store.user_id);
-    setFoto(
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
-    );
-  }, []);
+  }, [store.user_info]);
 
   function enviarDatos(e) {
     e.preventDefault();
@@ -40,18 +34,9 @@ export const Profile = () => {
       ciudad,
       postal,
       telefono,
-      foto
+      store.url
     );
   }
-
-  // const subirFoto = (selectorFiles) => {
-  //   if (selectorFiles) {
-  //     setFoto(selectorFiles);
-  //   }
-  // };
-  // console.log(foto);
-  // let filepreview = null;
-  // console.log(filepreview);
 
   return (
     <>
@@ -65,7 +50,7 @@ export const Profile = () => {
             {/* <!-- Button trigger modal --> */}
             <div className="w-50 mx-auto row">
               <img
-                className="rounded-circle my-2"
+                className="rounded-circle my-3 border-marron px-0"
                 src={
                   store.user_info.profile_picture ||
                   "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
@@ -73,15 +58,10 @@ export const Profile = () => {
                 alt=""
                 width={"160px"}
                 height={"auto"}
-              />
-              <button
                 type="button"
-                className="btn bg-naranja-100 border-marron text-marron mx-auto mb-2 w-75 col-12"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-              >
-                Cambiar foto
-              </button>
+              />
             </div>
 
             {/* <!-- Modal --> */}
@@ -106,29 +86,25 @@ export const Profile = () => {
                     ></button>
                   </div>
                   <div className="modal-body border-marron">
-                    {/* {foto && ( */}
                     <div className="mb-3 d-flex">
                       <img
-                        className="rounded-circle mx-auto my-2"
-                        // src={filepreview}
-                        // src={URL.createObjectURL(foto)}
-                        // src={foto}
+                        className="rounded-circle mx-auto my-2 px-0 border-marron"
+                        src={
+                          store.url ||
+                          store.user_info.profile_picture ||
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+                        }
                         alt=""
                         width={"200px"}
                         height={"auto"}
                       />
                     </div>
-                    {/* )} */}
                     <input
+                      className="btn bg-naranja-200 border-marron text-marron"
                       type="file"
-                      className="bg-naranja-100 border-marron text-marron"
                       placeholder="Subir imágen"
-                      // accept=".jpg .png .gif"
-                      // value={foto}
-                      // onChange={(e) => setFoto(e.target.value)}
                       onChange={(e) => {
-                        // filepreview = URL.createObjectURL(e.target.files);
-                        // subirFoto(e.target.files);
+                        store.image = e.target.files[0];
                       }}
                     />
                   </div>
@@ -143,6 +119,12 @@ export const Profile = () => {
                     <button
                       type="button"
                       className="btn bg-naranja-200 border-marron text-marron"
+                      onClick={() => {
+                        actions.uploadImage();
+                        alert(
+                          "No olvides darle a guardar en el fondo del formulario para actualizar tu foto"
+                        );
+                      }}
                     >
                       Aceptar
                     </button>
@@ -154,7 +136,7 @@ export const Profile = () => {
             <span className="opacity-75 border-marron"></span>
             {/* ______________________Nombre_______________________________________ */}
 
-            <div className="col-md-6">
+            <div className="col-md-6 mt-2">
               <label htmlFor="exampleInputName1" className="form-label">
                 Nombre
               </label>

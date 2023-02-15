@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-a38vdw7ge71.ws-us86.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-57kfulhonxb.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -25,6 +25,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       products_in_cart: [],
       user_id: null,
       user_info: [],
+      image: "",
+      url: "",
     },
 
     actions: {
@@ -163,6 +165,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             profile_picture: foto,
           }),
         });
+      },
+      uploadImage: () => {
+        const store = getStore();
+        const data = new FormData();
+        data.append("file", store.image);
+        data.append("upload_preset", "pdnsjg41");
+        data.append("cloud_name", "dlesv1phq");
+        fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
+          method: "POST",
+          body: data,
+        })
+          .then((resp) => resp.json())
+          .then((data) =>
+            setStore({
+              url: data.url,
+            })
+          )
+          .catch((err) => console.log(err));
       },
       getMessage: async () => {
         try {
