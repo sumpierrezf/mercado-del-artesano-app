@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-57kfulhonxb.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-jw9i39ttekr.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -208,37 +208,33 @@ const getState = ({ getStore, getActions, setStore }) => {
         descripcion,
         condicion,
         img1,
-        // img2,
-        // img3,
-        // img4,
+        img2,
+        img3,
+        img4,
         user_id
       ) => {
         console.log(user_id);
-        fetch(
-          "https://3001-sumpierrezf-mercadodela-tr3yhm59nig.ws-us86.gitpod.io/api/upload_product/" +
-            user_id,
-          {
-            method: "POST",
-            // mode: "no-cors",
-            // credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: nombre,
-              category: categoria,
-              price: precio,
-              amount: stock,
-              description: descripcion,
-              condition: condicion,
-              img1: img1,
-              // img2: img2,
-              // img3: img3,
-              // img4: img4,
-              user_id: user_id,
-            }),
-          }
-        );
+        fetch(back + "/api/upload_product/" + user_id, {
+          method: "POST",
+          // mode: "no-cors",
+          // credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: nombre,
+            category: categoria,
+            price: precio,
+            amount: stock,
+            description: descripcion,
+            condition: condicion,
+            img1: img1,
+            img2: img2,
+            img3: img3,
+            img4: img4,
+            user_id: user_id,
+          }),
+        });
       },
 
       signup: (

@@ -9,47 +9,61 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [img1, setImg1] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
 
   const { store, actions } = useContext(Context);
 
-  function enviarForm(e) {
+  async function enviarForm(e) {
     e.preventDefault();
-    console.log(
-      nombre,
-      categoria,
-      precio,
-      stock,
-      descripcion,
-      condicion,
-      img1,
-      user_id
-    );
-    actions.enviarForm(
-      nombre,
-      categoria,
-      precio,
-      stock,
-      descripcion,
-      condicion,
-      img1,
-      // 1
-      user_id
-    );
-  }
-  // Cree una instancia de Cloudinary y establezca su nombre de nube.
-  // const cld = new Cloudinary({
-  //   cloud: {
-  //     cloudName: "demo",
-  //   },
-  // });
-  // // cld.image devuelve una CloudinaryImage con la configuración establecida.
-  // const myImage = cld.image("sample"); // muestra es el ID público de la imagen.
 
-  // // Esto devuelve: https://res.cloudinary.com/demo/image/upload/sample
-  // const myURL = myImage.toURL();
+    const data = new FormData();
+    data.append("file", imageUrl);
+    data.append("upload_preset", "ml_default");
+    data.append("cloud_name", "dwxvlozfr");
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dwxvlozfr/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const cloudinaryData = await res.json();
+      const imageUrl = cloudinaryData.secure_url;
+      console.log(
+        nombre,
+        categoria,
+        precio,
+        stock,
+        descripcion,
+        condicion,
+        imageUrl
+        // store.user_id
+      );
+      actions.enviarForm(
+        nombre,
+        categoria,
+        precio,
+        stock,
+        descripcion,
+        condicion,
+        imageUrl,
+        "",
+        "",
+        "",
+        // 1
+        store.user_id
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // dwxvlozfr - cloudname
+  // upload - ml_default
 
   return (
     <>
@@ -173,7 +187,7 @@ export const Productos = (props) => {
             </div>
             {/* -----------------boton imagen------------------------- */}
 
-            {/* <div
+            <div
               className="d-flex  mt-4"
               type="POST"
               encType="multipart/formdata"
@@ -181,8 +195,8 @@ export const Productos = (props) => {
               {" "}
             </div>
             <input
-              value={img1}
-              onChange={(e) => setImg1(e.target.value)}
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
               type="file"
               name="Subir imagen "
               style={{
@@ -191,16 +205,17 @@ export const Productos = (props) => {
               }}
             />
             <input
-              onChange={(e) => setImg1(e.target.value)}
+              onChange={(e) => setImageUrl(e.target.value)}
               type="submit"
               className="subir-imagen"
               style={{
                 backgroundColor: "#FFD8A9",
                 color: "#E38B29",
               }}
-            /> */}
+            />
+          </form>
+        </div>
 
-           
         {/* ________________________botones______________________________________________ */}
         <div className="d-flex justify-content-center mt-4">
           <button
