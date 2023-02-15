@@ -6,8 +6,9 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
     actions.obtenerInfoProductos();
+    actions.getUserInfo(store.user_id);
   }, []);
-  console.log(store.productos[0]);
+  // console.log(store.productos[0]);
   return (
     <div className="container-fluid bg-naranja-100">
       <div className="row mb-5">
