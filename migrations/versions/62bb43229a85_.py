@@ -1,8 +1,14 @@
 """empty message
 
+<<<<<<<< HEAD:migrations/versions/ecd872d37ffd_.py
+Revision ID: ecd872d37ffd
+Revises: 
+Create Date: 2023-02-15 12:18:44.998020
+========
 Revision ID: 62bb43229a85
 Revises: 
 Create Date: 2023-02-15 13:47:08.774761
+>>>>>>>> 201aa4fb0b2b667d7c748a65cef798170a6c50c4:migrations/versions/62bb43229a85_.py
 
 """
 from alembic import op
@@ -10,7 +16,11 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<<< HEAD:migrations/versions/ecd872d37ffd_.py
+revision = 'ecd872d37ffd'
+========
 revision = '62bb43229a85'
+>>>>>>>> 201aa4fb0b2b667d7c748a65cef798170a6c50c4:migrations/versions/62bb43229a85_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,6 +40,7 @@ def upgrade():
     sa.Column('city', sa.String(length=120), nullable=True),
     sa.Column('postal_code', sa.Integer(), nullable=True),
     sa.Column('phone_number', sa.Integer(), nullable=True),
+    sa.Column('profile_picture', sa.String(length=120), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )

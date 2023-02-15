@@ -21,9 +21,8 @@ export const Navbar = () => {
     }
     // actions.filterProducts(searchTerm);
   };
-  
-  console.log(searchTerm);
 
+  console.log(searchTerm);
 
   function handleLogout() {
     actions.logout(); //cerrar la sesion
@@ -44,7 +43,9 @@ export const Navbar = () => {
   function handleForm() {
     navigate("/form"); //usamos navigate para redireccionar
   }
-
+  function handleProfile() {
+    navigate("/profile/" + store.user_id); //usamos navigate para redireccionar
+  }
   return (
     <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
       <div className="container-fluid d-flex">
@@ -92,6 +93,12 @@ export const Navbar = () => {
                     Vender
                   </a>
                 </li>
+                {/* ----------perfil-------------- */}
+                <li>
+                  <a className="dropdown-item" href="#" onClick={handleProfile}>
+                    Perfil
+                  </a>
+                </li>
                 {/* ----------cerrar sesion-------------- */}
                 <li>
                   <a className="dropdown-item" href="#" onClick={handleLogout}>
@@ -126,7 +133,6 @@ export const Navbar = () => {
           </>
         )}
       </div>
-    
     </nav>
   );
 };

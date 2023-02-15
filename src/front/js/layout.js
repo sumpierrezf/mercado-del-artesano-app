@@ -16,6 +16,7 @@ import { Cart } from "./pages/cart";
 import { DetalleProducto } from "./pages/detalleProducto";
 import { FormPago } from "./pages/formPago";
 import { ResetPassword } from "./pages/resetPassword.jsx";
+import { Profile } from "./pages/profile";
 
 // create your first component
 const Layout = () => {
@@ -39,6 +40,7 @@ const Layout = () => {
           <Route element={<Login />} path="/login" />
           <Route element={<Cart />} path="/cart/:theid" />
           <Route element={<FormPago />} path="/formPago/:theid" />
+          <Route element={<Profile />} path="/profile/:theid" />
           <Route element={<h1> Not found! </h1>} />{" "}
         </Routes>{" "}
         <Footer />{" "}

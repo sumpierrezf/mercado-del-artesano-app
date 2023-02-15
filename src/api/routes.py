@@ -27,13 +27,18 @@ def handle_hello():
 
 
 @api.route("/user", methods=["GET"])
-def get_user():
+def get_users():
     allusers = User.query.all()
     print(allusers)
     results = list(map(lambda item: item.serialize(), allusers))
     print(results)
     return jsonify(results), 200
 
+@api.route("/user/<int:user_id>", methods=["GET"])
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+
+    return jsonify(user.serialize()), 200
 
 @api.route("/product", methods=["GET"])
 def get_product():
@@ -106,12 +111,12 @@ def add_new_user():
             password=request_body["password"],
             first_name=request_body["first_name"],
             last_name=request_body["last_name"],
-            birth=request_body["birth"],
-            address=request_body["address"],
-            country=request_body["country"],
-            city=request_body["city"],
-            postal_code=request_body["postal_code"],
-            phone_number=request_body["phone_number"],
+            birth=request_body["birth"] or None,
+            address=request_body["address"] or None,
+            country=request_body["country"] or None,
+            city=request_body["city"] or None,
+            postal_code=request_body["postal_code"] or None,
+            phone_number=request_body["phone_number"] or None,
         )
         # print(usuario)
 
@@ -137,7 +142,9 @@ def add_new_product(user_id):
         description=request_body["description"],
         condition=request_body["condition"],
         img1=request_body["img1"],
-        # img2=request_body["img2"], img3=request_body["img3"], img4=request_body["img4"],
+        img2=request_body["img2"] or None,
+        img3=request_body["img3"] or None,
+        img4=request_body["img4"] or None,
         user_id=user_id,
     )
     print(products.serialize())
@@ -232,6 +239,7 @@ def select_product_amount():
     cart_filter.amount=request_body["amount"]
     db.session.commit()
     return jsonify(cart_filter.serialize()), 200
+    
 #RECUPERACION CONTRASEÑA OLVIDADA 
 @api.route("/resetPassword", methods=["POST"])
 def resetPassword():
@@ -255,6 +263,33 @@ def resetPassword():
     msg.html = f"""<h1>Su nueva contraseña es: {recover_password}</h1>"""
     current_app.mail.send(msg)
     return jsonify({"msg": "Su nueva clave ha sido enviada al correo electrónico ingresado"}), 200
+
+@api.route('/profile', methods=['PUT'])
+def edit_profile():
+    
+    request_body = request.json
+
+    profile = User.query.filter_by(id=request_body["id"]).first()
+    
+    if profile is None:
+        return jsonify({"msg":"Este usuario no existe"}),404
+
+    print(request_body["phone_number"])
+
+    profile.password=request_body["password"] or profile.password
+    profile.first_name=request_body["first_name"] or profile.first_name
+    profile.last_name=request_body["last_name"] or profile.last_name
+    profile.birth=request_body["birth"] or profile.birth or None
+    profile.address=request_body["address"] or profile.address or None
+    profile.country=request_body["country"] or profile.country or None
+    profile.city=request_body["city"] or profile.city or None
+    profile.postal_code=request_body["postal_code"] or profile.postal_code or None
+    profile.phone_number=request_body["phone_number"] or profile.phone_number or None
+    profile.profile_picture=request_body["profile_picture"] or profile.profile_picture or None
+    # if request_body["phone_number"] is not None:
+    
+    db.session.commit()
+    return jsonify(profile.serialize()), 200
 
 
     
