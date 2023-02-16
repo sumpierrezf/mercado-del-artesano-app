@@ -63,7 +63,8 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {store.user_info.profile_picture != null ? (
+                  {store.user_id != null &&
+                  store.user_info.profile_picture != null ? (
                     <img
                       className="rounded-circle border-marron me-2 px-0"
                       src={store.user_info.profile_picture}
@@ -97,11 +98,7 @@ export const Navbar = () => {
                   </li>
                   {/* ----------perfil-------------- */}
                   <li>
-                    <Link
-                      to={"/profile/" + store.user_id}
-                      className="dropdown-item"
-                      href="#"
-                    >
+                    <Link to="/profile" className="dropdown-item" href="#">
                       Perfil
                     </Link>
                   </li>

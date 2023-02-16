@@ -119,7 +119,7 @@ export const Cart = () => {
             <hr className="border-marron opacity-75" />
             <div className="w-100 d-flex justify-content-center">
               <Link
-                to={"/formPago/" + store.user_id}
+                to="/formPago"
                 className="mb-3 mx-auto w-75 rounded bg-naranja-200 text-marron border-marron"
               >
                 Continuar compra

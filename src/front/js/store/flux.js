@@ -331,9 +331,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           user_id: null,
         });
         setStore({
-          user_info: [],
-        });
-        setStore({
           auth: false,
         });
       },

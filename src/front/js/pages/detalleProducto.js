@@ -134,9 +134,7 @@ export const DetalleProducto = ({ id }) => {
         </div>
         {/* INFO DEL VENDEDOR */}
         <div className="col-sm-4 me-4 mb-3 p-1 rounded-1 border-marron bg-naranja-100">
-          <Link to={"/profile/" + store.detalleProducto.user_id}>
-            {store.detalleProducto.user_id}
-          </Link>
+          <h4>Nombre del vendedor.</h4>
           <div>
             {/* ICONO UBICACION */}
             <p>

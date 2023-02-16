@@ -87,7 +87,7 @@ export const Favs = () => {
                           }}
                           onClick={() =>
                             actions.borrarFavorito(
-                              params.theid,
+                              store.user_id,
                               item.product_id
                             )
                           }
