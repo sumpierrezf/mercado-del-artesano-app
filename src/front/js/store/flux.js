@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-57kfulhonxb.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-dxmll81f6ir.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       categoria: [],
       products_in_cart: [],
       user_id: null,
+      mercadoPago: {},
       productosName: [],
       user_info: [],
       image: "",
@@ -386,6 +387,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
           alert("Ya tienes ese producto en el carrito");
+        }
+      },
+      vaciarCarrito: async (user_id) => {
+        try {
+          let response = await axios.delete(
+            back + "/api/user/cart/delete/" + user_id
+          );
+          console.log(response.data);
+          alert("Has vaciado el carrito");
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      pagoMercadoPago: async (total) => {
+        try {
+          const response = await axios.post(back + "/api/preference", {
+            total: total,
+          });
+          console.log(response.data);
+          setStore({
+            mercadoPago: response.data,
+          });
+        } catch (error) {
+          console.log(error);
         }
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
