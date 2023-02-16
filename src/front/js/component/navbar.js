@@ -21,6 +21,7 @@ export const Navbar = () => {
     // actions.filterProducts(searchTerm);
   };
 
+  // console.log(searchTerm);
   useEffect(() => {
     actions.getUserInfo(store.user_id);
   }, []);
