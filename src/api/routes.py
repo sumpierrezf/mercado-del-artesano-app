@@ -142,9 +142,9 @@ def add_new_product(user_id):
         description=request_body["description"],
         condition=request_body["condition"],
         img1=request_body["img1"],
-        img2=request_body["img2"] or None,
-        img3=request_body["img3"] or None,
-        img4=request_body["img4"] or None,
+        # img2=request_body["img2"] or None,
+        # img3=request_body["img3"] or None,
+        # img4=request_body["img4"] or None,
         user_id=user_id,
     )
     print(products.serialize())

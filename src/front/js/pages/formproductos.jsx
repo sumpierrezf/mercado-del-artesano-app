@@ -9,61 +9,79 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [img1, setImageUrl] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const { store, actions } = useContext(Context);
+  const [image, setImage] = useState("");
 
   async function enviarForm(e) {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("file", imageUrl);
-    data.append("upload_preset", "ml_default");
-    data.append("cloud_name", "dwxvlozfr");
+    // const data = new FormData();
+    // data.append("file", img1);
+    // data.append("upload_preset", "pdnsjg41");
+    // data.append("cloud_name", "dlesv1phq");
 
-    try {
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dwxvlozfr/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
-      const cloudinaryData = await res.json();
-      const imageUrl = cloudinaryData.secure_url;
-      console.log(
-        nombre,
-        categoria,
-        precio,
-        stock,
-        descripcion,
-        condicion,
-        imageUrl
-        // store.user_id
-      );
-      actions.enviarForm(
-        nombre,
-        categoria,
-        precio,
-        stock,
-        descripcion,
-        condicion,
-        imageUrl,
-        "",
-        "",
-        "",
-        // 1
-        store.user_id
-      );
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   const res = await fetch(
+    //     "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+    //     {
+    //       method: "POST",
+    //       body: data,
+    //     }
+    //   );
+    //   const cloudinaryData = await res.json();
+    //   const img1 = cloudinaryData.secure_url;
+    console.log(
+      nombre,
+      categoria,
+      precio,
+      stock,
+      descripcion,
+      condicion,
+      img1
+      // store.user_id
+    );
+    actions.enviarForm(
+      nombre,
+      categoria,
+      precio,
+      stock,
+      descripcion,
+      condicion,
+      img1,
+      // "",
+      // "",
+      // "",
+      // 1
+      store.user_id
+    );
   }
+  // catch (err) {
+  //   console.error(err);
+  // }
 
   // dwxvlozfr - cloudname
   // upload - ml_default
+  const submitImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "pdnsjg41");
+    // data.append("cloud_name", "dlesv1phq");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    setLoading(false);
+  };
 
   return (
     <>
@@ -192,19 +210,18 @@ export const Productos = (props) => {
               type="POST"
               encType="multipart/formdata"
             >
-              {" "}
+
+              <input
+                onChange={submitImage}
+                type="file"
+                name="Subir imagen "
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              />
             </div>
-            <input
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              type="file"
-              name="Subir imagen "
-              style={{
-                backgroundColor: "#FFD8A9",
-                color: "#E38B29",
-              }}
-            />
-            <input
+            {/* <input
               onChange={(e) => setImageUrl(e.target.value)}
               type="submit"
               className="subir-imagen"
@@ -212,36 +229,33 @@ export const Productos = (props) => {
                 backgroundColor: "#FFD8A9",
                 color: "#E38B29",
               }}
-            />
+            /> */}
+            {/* ________________________botones______________________________________________ */}
+            <div className="d-flex justify-content-center mt-4">
+              <button
+                type="submit"
+                className="btn btn-warning me-3"
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              >
+                Cancelar
+              </button>
+              <button
+                // onClick={(e) => enviarForm(e)}
+                type="Onsubmit"
+                className="btn btn-warning"
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              >
+                Publicar
+              </button>
+            </div>
           </form>
         </div>
-
-        {/* ________________________botones______________________________________________ */}
-        <div className="d-flex justify-content-center mt-4">
-          <button
-            type="submit"
-            className="btn btn-warning me-3"
-            style={{
-              backgroundColor: "#FFD8A9",
-              color: "#E38B29",
-            }}
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={(e) => enviarForm(e)}
-            type="file"
-            className="btn btn-warning"
-            style={{
-              backgroundColor: "#FFD8A9",
-              color: "#E38B29",
-            }}
-          >
-            Publicar
-          </button>
-        </div>
-
-        <div className="d-flex  mt-4"></div>
       </div>
     </>
   );
