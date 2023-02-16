@@ -167,24 +167,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
-      uploadImage: () => {
-        const store = getStore();
-        const data = new FormData();
-        data.append("file", store.image);
-        data.append("upload_preset", "pdnsjg41");
-        data.append("cloud_name", "dlesv1phq");
-        fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
-          method: "POST",
-          body: data,
-        })
-          .then((resp) => resp.json())
-          .then((data) =>
-            setStore({
-              url: data.url,
-            })
-          )
-          .catch((err) => console.log(err));
-      },
+      // uploadImage: () => {
+      //   const store = getStore();
+      //   const data = new FormData();
+      //   data.append("file", store.image);
+      //   data.append("upload_preset", "pdnsjg41");
+      //   data.append("cloud_name", "dlesv1phq");
+      //   fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
+      //     method: "POST",
+      //     body: data,
+      //   })
+      //     .then((resp) => resp.json())
+      //     .then((data) =>
+      //       setStore({
+      //         url: data.url,
+      //       })
+      //     )
+      //     .catch((err) => console.log(err));
+      // },
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -200,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      enviarForm: (
+      createProduct: (
         nombre,
         categoria,
         precio,
@@ -211,7 +211,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
-        fetch("https://3001-sumpierrezf-mercadodela-jw9i39ttekr.ws-us87.gitpod.io/api/upload_product/" + user_id,{
+        fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id,{
             method: "POST",
             // mode: "no-cors",
             // credentials: "include",
@@ -229,7 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               // img2: img2,
               // img3: img3,
               // img4: img4,
-              user_id: user_id,
+              user_id: user_id, 
             }),
           }
         );

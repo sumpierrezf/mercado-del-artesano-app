@@ -9,7 +9,7 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [img1, setImageUrl] = useState("");
+  // const [img1, setImg1] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,22 +18,6 @@ export const Productos = (props) => {
 
   async function enviarForm(e) {
     e.preventDefault();
-
-    // const data = new FormData();
-    // data.append("file", img1);
-    // data.append("upload_preset", "pdnsjg41");
-    // data.append("cloud_name", "dlesv1phq");
-
-    // try {
-    //   const res = await fetch(
-    //     "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
-    //     {
-    //       method: "POST",
-    //       body: data,
-    //     }
-    //   );
-    //   const cloudinaryData = await res.json();
-    //   const img1 = cloudinaryData.secure_url;
     console.log(
       nombre,
       categoria,
@@ -41,24 +25,21 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      img1
+      image
       // store.user_id
     );
-    actions.enviarForm(
+    await actions.createProduct(
       nombre,
       categoria,
       precio,
       stock,
       descripcion,
       condicion,
-      img1,
-      // "",
-      // "",
-      // "",
-      // 1
+      image,
       store.user_id
     );
   }
+
   // catch (err) {
   //   console.error(err);
   // }
@@ -70,7 +51,8 @@ export const Productos = (props) => {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "pdnsjg41");
-    // data.append("cloud_name", "dlesv1phq");
+    data.append("cloud_name", "dlesv1phq");
+    setLoading(true);
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
       {
@@ -82,7 +64,9 @@ export const Productos = (props) => {
     setImage(file.secure_url);
     setLoading(false);
   };
-
+  const handleChange = (event) => {
+    setCondicion(event.target.value);
+  };
   return (
     <>
       <div style={{ backgroundColor: "#FDEEDC" }}>
@@ -195,12 +179,14 @@ export const Productos = (props) => {
                 name="pais"
                 className="form-select"
                 aria-label="Default select example"
+                value={condicion}
+                onChange={handleChange}
               >
                 <option value>Selecciona en que estado se encuentra</option>
-                <option value="1">Nuevo</option>
-                <option value="2">Poco uso</option>
-                <option value="2">Usado</option>
-                <option value="2">Con detalles</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="poco uso">Poco uso</option>
+                <option value="usado">Usado</option>
+                <option value="con detalles">Con detalles</option>
               </select>
             </div>
             {/* -----------------boton imagen------------------------- */}
@@ -210,9 +196,12 @@ export const Productos = (props) => {
               type="POST"
               encType="multipart/formdata"
             >
-
               <input
-                onChange={submitImage}
+                // value={image}
+                onChange={(e) => {
+                  setImage(e.target.files);
+                  submitImage(e);
+                }}
                 type="file"
                 name="Subir imagen "
                 style={{
@@ -220,6 +209,7 @@ export const Productos = (props) => {
                   color: "#E38B29",
                 }}
               />
+              <button></button>
             </div>
             {/* <input
               onChange={(e) => setImageUrl(e.target.value)}
@@ -244,7 +234,7 @@ export const Productos = (props) => {
               </button>
               <button
                 // onClick={(e) => enviarForm(e)}
-                type="Onsubmit"
+                type="submit"
                 className="btn btn-warning"
                 style={{
                   backgroundColor: "#FFD8A9",
