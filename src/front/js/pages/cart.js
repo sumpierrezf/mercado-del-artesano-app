@@ -20,13 +20,22 @@ export const Cart = () => {
     actions.getUserProductsInCart(store.user_id);
   }, [store.products_in_cart]);
 
+  const pagar = async () => {
+    let total = subtotal * 1.22;
+    console.log(total);
+    await actions.pagoMercadoPago(total);
+    let direccion = await store.mercadoPago.init_point;
+    // console.log(direccion);
+    window.location.replace(direccion);
+  };
+
   return (
     <>
       {store.auth === false ? (
         <Navigate to="/login" />
       ) : (
         <div
-          className="bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4 h-100"
+          className="container bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4 h-100"
           style={{
             width: "85%",
           }}
@@ -35,7 +44,7 @@ export const Cart = () => {
             {store.products_in_cart.length} productos en el carrito
           </p>
 
-          <div className="col-8">
+          <div className="col-sm-8">
             <div className="bg-naranja-100 border-marron rounded">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
@@ -92,7 +101,7 @@ export const Cart = () => {
               {/* __________________Cierre_de_lista_de_favoritos________________________ */}
             </div>
           </div>
-          <div className="bg-naranja-100 border-marron col-4 rounded">
+          <div className="bg-naranja-100 border-marron col-sm-4 rounded">
             <h4 className="mt-3 text-center">Total</h4>
             <hr className="my-1 border-marron opacity-75" />
             <br />
@@ -117,13 +126,30 @@ export const Cart = () => {
               <h4 className="text-end w-50">${subtotal * 1.22}</h4>
             </div>
             <hr className="border-marron opacity-75" />
-            <div className="w-100 d-flex justify-content-center">
-              <Link
-                to="/formPago"
-                className="mb-3 mx-auto w-75 rounded bg-naranja-200 text-marron border-marron"
-              >
-                Continuar compra
-              </Link>
+            <div className="d-flex row">
+              <div className="logo col-sm-3">
+                <img
+                  className="img-fluid"
+                  src="https://www.leccionesdearmonica.com/wp-content/uploads/2018/03/Logo-Mercado-Pago-fondocrema.png"
+                  alt="Logo de Mercado Pago"
+                />
+              </div>
+              <div className="container col-sm-8 row">
+                <button
+                  type="button"
+                  className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-1"
+                  onClick={pagar}
+                >
+                  Pagar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-sm rounded-1 bg-naranja-100 border-marron m-1"
+                  onClick={() => actions.vaciarCarrito(store.user_id)}
+                >
+                  Vaciar carrito.
+                </button>
+              </div>
             </div>
           </div>
         </div>
