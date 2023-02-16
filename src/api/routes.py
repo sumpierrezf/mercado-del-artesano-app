@@ -14,6 +14,12 @@ from flask_mail import Message
 import random
 import string
 
+# SDK de Mercado Pago
+import mercadopago
+# Agrega credenciales
+sdk = mercadopago.SDK("APP_USR-2815099995655791-092911-c238fdac299eadc66456257445c5457d-1160950667")
+
+
 api = Blueprint("api", __name__)
 
 
@@ -226,20 +232,19 @@ def delete_product_in_cart(user_id):
 
     return jsonify({"msg":"El producto ha sido eliminado del carrito"}), 200
 
-# @api.route("/user/cart/delete/<int:user_id>", methods=["DELETE"])
-# def delete_all_products_in_cart(user_id):
+@api.route("/user/cart/delete/<int:user_id>", methods=["DELETE"])
+def delete_all_products_in_cart(user_id):
 
-#     cart = Cart.query.filter_by(
-#         user_id=user_id).all()
-#     print(cart)
+    cart = Cart.query.filter_by(
+        user_id=user_id).all()
+    print(cart)
 
-#     if cart is None:
-#         return jsonify({"msg": "No tienes productos en el carrito"}), 404
+    if cart is None:
+        return jsonify({"msg": "No tienes productos en el carrito"}), 404
+    list(map(lambda item: db.session.delete(item), cart))
+    db.session.commit()
 
-#     db.session.delete(cart)
-#     db.session.commit()
-
-#     return jsonify({"msg":"Los productos han sido eliminados del carrito"}), 200
+    return jsonify({"msg":"Los productos han sido eliminados del carrito"}), 200
 
 @api.route('/cart', methods=['PUT'])
 def select_product_amount():
@@ -278,6 +283,36 @@ def resetPassword():
     msg.html = f"""<h1>Su nueva contraseña es: {recover_password}</h1>"""
     current_app.mail.send(msg)
     return jsonify({"msg": "Su nueva clave ha sido enviada al correo electrónico ingresado"}), 200
+
+# ACA CREAMOS LA RUTA PARA PAGAR CON MERCADO PAGO
+@api.route("/preference", methods=["POST"])
+def preference():
+    body = json.loads(request.data)
+    total = body["total"]
+    # Crea un ítem en la preferencia
+    preference_data = {
+        "items": [
+            {
+                "title": "Mercado del Artesano",
+                "quantity": 1,
+                "unit_price": total,
+            }
+        ],
+        "payer":{
+            "email":"test_user_17805074@testuser.com"
+        },
+        "back_urls": {
+            "success": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io",
+            "failure": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io",
+            "pending": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io"
+	},
+        "auto_return": "approved"
+    }
+
+    preference_response = sdk.preference().create(preference_data)
+    preference = preference_response["response"]
+    return preference, 200
+    # FIN RUTA DE PAGO MERCADO PAGO
 
 @api.route('/profile', methods=['PUT'])
 def edit_profile():

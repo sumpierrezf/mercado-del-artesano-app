@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-jw9i39ttekr.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-dxmll81f6ir.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       categoria: [],
       products_in_cart: [],
       user_id: null,
+      mercadoPago: {},
       productosName: [],
       user_info: [],
       image: "",
@@ -211,30 +212,28 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
-        fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id,{
-            method: "POST",
-            // mode: "no-cors",
-            // credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: nombre,
-              category: categoria,
-              price: precio,
-              amount: stock,
-              description: descripcion,
-              condition: condicion,
-              img1: imagen,
-              // img2: img2,
-              // img3: img3,
-              // img4: img4,
-              user_id: user_id, 
-            }),
-          }
-        );
+        fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id, {
+          method: "POST",
+          // mode: "no-cors",
+          // credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: nombre,
+            category: categoria,
+            price: precio,
+            amount: stock,
+            description: descripcion,
+            condition: condicion,
+            img1: imagen,
+            // img2: img2,
+            // img3: img3,
+            // img4: img4,
+            user_id: user_id,
+          }),
+        });
       },
-      
 
       signup: (
         email,
@@ -381,6 +380,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
           alert("Ya tienes ese producto en el carrito");
+        }
+      },
+      vaciarCarrito: async (user_id) => {
+        try {
+          let response = await axios.delete(
+            back + "/api/user/cart/delete/" + user_id
+          );
+          console.log(response.data);
+          alert("Has vaciado el carrito");
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      pagoMercadoPago: async (total) => {
+        try {
+          const response = await axios.post(back + "/api/preference", {
+            total: total,
+          });
+          console.log(response.data);
+          setStore({
+            mercadoPago: response.data,
+          });
+        } catch (error) {
+          console.log(error);
         }
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
