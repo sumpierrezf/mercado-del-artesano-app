@@ -35,7 +35,7 @@ export const Cart = () => {
         <Navigate to="/login" />
       ) : (
         <div
-          className="container bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4 h-100"
+          className="container bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4"
           style={{
             width: "85%",
           }}
