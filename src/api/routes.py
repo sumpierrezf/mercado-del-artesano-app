@@ -302,9 +302,9 @@ def preference():
             "email":"test_user_17805074@testuser.com"
         },
         "back_urls": {
-            "success": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io",
-            "failure": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io",
-            "pending": "https://3000-sumpierrezf-mercadodela-7ms2um6rmsm.ws-us87.gitpod.io"
+            "success": "https://3000-sumpierrezf-mercadodela-xzfnves887n.ws-us87.gitpod.io",#esta url es del front
+            "failure": "https://3000-sumpierrezf-mercadodela-xzfnves887n.ws-us87.gitpod.io",#esta url es del front
+            "pending": "https://3000-sumpierrezf-mercadodela-xzfnves887n.ws-us87.gitpod.io"#esta url es del front
 	},
         "auto_return": "approved"
     }
