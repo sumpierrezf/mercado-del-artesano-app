@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
+// Importar la clase Cloudinary.
+// import { Cloudinary } from " @cloudinary/url-gen ";
 
 export const Productos = (props) => {
   const [nombre, setNombre] = useState("");
@@ -7,13 +9,14 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [img1, setImg1] = useState("");
+  // const [img1, setImg1] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const { store, actions } = useContext(Context);
+  const [image, setImage] = useState("");
 
-  function enviarForm(e) {
+  async function enviarForm(e) {
     e.preventDefault();
     console.log(
       nombre,
@@ -22,22 +25,48 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      img1,
-      user_id
+      image
+      // store.user_id
     );
-    actions.enviarForm(
+    await actions.createProduct(
       nombre,
       categoria,
       precio,
       stock,
       descripcion,
       condicion,
-      img1,
-      // 1
-      user_id
+      image,
+      store.user_id
     );
   }
 
+  // catch (err) {
+  //   console.error(err);
+  // }
+
+  // dwxvlozfr - cloudname
+  // upload - ml_default
+  const submitImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "pdnsjg41");
+    data.append("cloud_name", "dlesv1phq");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    setLoading(false);
+  };
+  const handleChange = (event) => {
+    setCondicion(event.target.value);
+  };
   return (
     <>
       <div style={{ backgroundColor: "#FDEEDC" }}>
@@ -150,12 +179,14 @@ export const Productos = (props) => {
                 name="pais"
                 className="form-select"
                 aria-label="Default select example"
+                value={condicion}
+                onChange={handleChange}
               >
                 <option value>Selecciona en que estado se encuentra</option>
-                <option value="1">Nuevo</option>
-                <option value="2">Poco uso</option>
-                <option value="2">Usado</option>
-                <option value="2">Con detalles</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="poco uso">Poco uso</option>
+                <option value="usado">Usado</option>
+                <option value="con detalles">Con detalles</option>
               </select>
             </div>
             {/* -----------------boton imagen------------------------- */}
@@ -165,56 +196,56 @@ export const Productos = (props) => {
               type="POST"
               encType="multipart/formdata"
             >
-              {" "}
+              <input
+                // value={image}
+                onChange={(e) => {
+                  setImage(e.target.files);
+                  submitImage(e);
+                }}
+                type="file"
+                name="Subir imagen "
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              />
+              <button></button>
             </div>
-            <input
-              value={img1}
-              onChange={(e) => setImg1(e.target.value)}
-              type="file"
-              name="Subir imagen "
-              style={{
-                backgroundColor: "#FFD8A9",
-                color: "#E38B29",
-              }}
-            />
-            <input
-              onChange={(e) => setImg1(e.target.value)}
+            {/* <input
+              onChange={(e) => setImageUrl(e.target.value)}
               type="submit"
               className="subir-imagen"
               style={{
                 backgroundColor: "#FFD8A9",
                 color: "#E38B29",
               }}
-            />
+            /> */}
+            {/* ________________________botones______________________________________________ */}
+            <div className="d-flex justify-content-center mt-4">
+              <button
+                type="submit"
+                className="btn btn-warning me-3"
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              >
+                Cancelar
+              </button>
+              <button
+                // onClick={(e) => enviarForm(e)}
+                type="submit"
+                className="btn btn-warning"
+                style={{
+                  backgroundColor: "#FFD8A9",
+                  color: "#E38B29",
+                }}
+              >
+                Publicar
+              </button>
+            </div>
           </form>
         </div>
-
-        {/* ________________________botones______________________________________________ */}
-        <div className="d-flex justify-content-center mt-4">
-          <button
-            type="submit"
-            className="btn btn-warning me-3"
-            style={{
-              backgroundColor: "#FFD8A9",
-              color: "#E38B29",
-            }}
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={(e) => enviarForm(e)}
-            type="file"
-            className="btn btn-warning"
-            style={{
-              backgroundColor: "#FFD8A9",
-              color: "#E38B29",
-            }}
-          >
-            Publicar
-          </button>
-        </div>
-
-        <div className="d-flex  mt-4"></div>
       </div>
     </>
   );

@@ -96,9 +96,9 @@ class Products(db.Model):
     description = db.Column(db.String(120), unique=False, nullable=False)
     condition = db.Column(db.String(120), unique=False, nullable=False)
     img1 = db.Column(db.String(120), unique=False)
-    img2 = db.Column(db.String(120), unique=False)
-    img3 = db.Column(db.String(120), unique=False)
-    img4 = db.Column(db.String(120), unique=False)
+    # img2 = db.Column(db.String(120), unique=False)
+    # img3 = db.Column(db.String(120), unique=False)
+    # img4 = db.Column(db.String(120), unique=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -116,10 +116,10 @@ class Products(db.Model):
             "description": self.description,
             "condition": self.condition,
             "user_id": self.user_id,
-            "img1": self.img1,
-            "img2": self.img2,
-            "img3": self.img3,
-            "img4": self.img4
+            "img1": self.img1
+            # "img2": self.img2,
+            # "img3": self.img3,
+            # "img4": self.img4
             # do not serialize the password, its a security breach
         }
 
