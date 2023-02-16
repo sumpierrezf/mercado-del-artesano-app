@@ -85,11 +85,7 @@ export const Navbar = () => {
                 <ul className="dropdown-menu">
                   {/* -------- -------Favoritos----------------------- */}
                   <li>
-                    <Link
-                      to={"/favs/" + store.user_id}
-                      className="dropdown-item"
-                      href="#"
-                    >
+                    <Link to="/favs" className="dropdown-item" href="#">
                       Favoritos
                     </Link>
                   </li>
@@ -124,7 +120,7 @@ export const Navbar = () => {
 
               <Link
                 className="btn text-marron mx-2 my-auto border-2"
-                to={"/cart/" + store.user_id}
+                to="/cart"
               >
                 <i className="fa fa-cart-arrow-down"></i>
               </Link>
