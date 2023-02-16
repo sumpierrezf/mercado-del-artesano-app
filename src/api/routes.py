@@ -232,20 +232,19 @@ def delete_product_in_cart(user_id):
 
     return jsonify({"msg":"El producto ha sido eliminado del carrito"}), 200
 
-# @api.route("/user/cart/delete/<int:user_id>", methods=["DELETE"])
-# def delete_all_products_in_cart(user_id):
+@api.route("/user/cart/delete/<int:user_id>", methods=["DELETE"])
+def delete_all_products_in_cart(user_id):
 
-#     cart = Cart.query.filter_by(
-#         user_id=user_id).all()
-#     print(cart)
+    cart = Cart.query.filter_by(
+        user_id=user_id).all()
+    print(cart)
 
-#     if cart is None:
-#         return jsonify({"msg": "No tienes productos en el carrito"}), 404
+    if cart is None:
+        return jsonify({"msg": "No tienes productos en el carrito"}), 404
+    list(map(lambda item: db.session.delete(item), cart))
+    db.session.commit()
 
-#     db.session.delete(cart)
-#     db.session.commit()
-
-#     return jsonify({"msg":"Los productos han sido eliminados del carrito"}), 200
+    return jsonify({"msg":"Los productos han sido eliminados del carrito"}), 200
 
 @api.route('/cart', methods=['PUT'])
 def select_product_amount():

@@ -138,7 +138,7 @@ export const Cart = () => {
             <button
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-100 border-marron m-1"
-              onClick={() => actions}
+              onClick={() => actions.vaciarCarrito(params.theid)}
             >
               Vaciar carrito.
             </button>
