@@ -18,7 +18,7 @@ export const Login = () => {
   }
   return (
     <>
-      <div className="bg-naranja-100 container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron h-100 bg-naranja-200 rounded">
+      <div className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron h-100 bg-naranja-200 rounded">
         <div className="d-flex justify-content-center w-75">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
           {store.auth === true ? (
@@ -80,7 +80,7 @@ export const Login = () => {
               <div className="d-flex justify-content-center">
                 <button
                   type="submit"
-                  className="boton-login bg-naranja-400 btn text-white fw-bold mt-5 p-3 align-items-center rounded-pill w-50 text-uppercase"
+                  className="boton-login bg-naranja-400 btn text-white fw-bold mt-4 p-3 align-items-center rounded-pill w-50 text-uppercase"
                 >
                   Login
                 </button>
