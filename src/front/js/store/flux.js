@@ -212,7 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
-        fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id, {
+        fetch(back + "/api/upload_product/" + user_id, {
           method: "POST",
           // mode: "no-cors",
           // credentials: "include",
