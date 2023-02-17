@@ -56,7 +56,7 @@ def get_product():
 
 
 @api.route("/product/<int:product_id>", methods=["GET"])
-def get_info_characters(product_id):
+def get_info_product(product_id):
     product = Products.query.filter_by(id=product_id).first()
     print(product.serialize())
 
@@ -340,6 +340,19 @@ def edit_profile():
     
     db.session.commit()
     return jsonify(profile.serialize()), 200
+
+    #RUTAS PARA LAS REVIEWS DE USUARIOS
+
+@api.route('/reviews/product/<int:product_id>', methods=['POST'])
+def add_new_review(product_id):
+    request_body = request.json
+    print(request_body)
+    products = Products.query.filter_by(id=product_id).first()
+    products.reviews = request_body["reviews"]
+    
+    db.session.commit()
+
+    return jsonify({"msg": "Comentario subido"}), 200
 
 
     

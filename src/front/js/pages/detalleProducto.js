@@ -203,6 +203,7 @@ export const DetalleProducto = ({ id }) => {
           </button>
           <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 m-1">
             <div className="container">
+              <p>Comentarios de los clientes:</p>
               {reviews.map((item, index) => (
                 <div
                   className="container col-sm-12 rounded-1 border-marron bg-naranja-100 m-1 text-start"
