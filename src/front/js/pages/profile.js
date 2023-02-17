@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export const Profile = () => {
   const [password, setPassword] = useState("");
@@ -16,10 +16,11 @@ export const Profile = () => {
   const [switchShown, setSwitchShown] = useState(true);
 
   const { store, actions } = useContext(Context);
+  const params = useParams();
 
   useEffect(() => {
     actions.getUserInfo(store.user_id);
-  }, [store.user_info]);
+  }, []);
 
   function enviarDatos(e) {
     e.preventDefault();
@@ -41,7 +42,7 @@ export const Profile = () => {
   return (
     <>
       {store.auth === false ? (
-        <Navigate to="/" />
+        <Navigate to="/login" />
       ) : (
         <div className="bg-naranja-200 border-marron w-50 mx-auto my-5 p-4 rounded">
           <h2 className="d-flex justify-content-center text-marron">Perfil</h2>
@@ -302,7 +303,12 @@ export const Profile = () => {
             {/* ________________________botones______________________________________________ */}
             <div className="d-flex justify-content-center">
               <button
-                onClick={(e) => enviarDatos(e)}
+                onClick={(e) => {
+                  enviarDatos(e);
+                  alert(
+                    "Puede que tengas que recargar la página para que se actualice tu foto de perfil"
+                  );
+                }}
                 type="submit"
                 className="btn bg-naranja-100 border-marron text-marron"
               >

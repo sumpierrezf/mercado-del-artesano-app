@@ -33,14 +33,14 @@ const Layout = () => {
           <Route element={<Demo />} path="/demo" />
           <Route element={<SignUp />} path="/signup" />
           <Route element={<Single />} path="/single/:theid" />
-          <Route element={<Favs />} path="/favs/:theid" />
+          <Route element={<Favs />} path="/favs" />
           <Route element={<Productos />} path="/form" />
           <Route element={<DetalleProducto />} path="/detalleProducto/:theid" />
           <Route element={<ResetPassword />} path="/resetPassword" />
           <Route element={<Login />} path="/login" />
-          <Route element={<Cart />} path="/cart/:theid" />
-          <Route element={<FormPago />} path="/formPago/:theid" />
-          <Route element={<Profile />} path="/profile/:theid" />
+          <Route element={<Cart />} path="/cart" />
+          <Route element={<FormPago />} path="/formPago" />
+          <Route element={<Profile />} path="/profile" />
           <Route element={<h1> Not found! </h1>} />{" "}
         </Routes>{" "}
         <Footer />{" "}
