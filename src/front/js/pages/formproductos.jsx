@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
+import { Navigate } from "react-router-dom";
 // Importar la clase Cloudinary.
 // import { Cloudinary } from " @cloudinary/url-gen ";
 
