@@ -216,7 +216,7 @@ const getState = ({
                 user_id
             ) => {
                 console.log(user_id);
-                fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id, {
+                fetch(back + "/api/upload_product/" + user_id, {
                     method: "POST",
                     // mode: "no-cors",
                     // credentials: "include",
@@ -411,7 +411,7 @@ const getState = ({
                 }
             },
             obtenerReviews: () => {
-                fetch(back + "/reviews/product/" + product_id)
+                fetch(back + "/api/reviews/product/" + product_id)
                     .then((res) => res.json())
                     .then((data) =>
                         setStore({
@@ -420,17 +420,26 @@ const getState = ({
                     )
                     .catch((err) => console.error(err));
             },
-            crearReviews: () => {
-                fetch(back + "/reviews/product/" + product_id, reviews, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        product_id: product_id,
-                        reviews: reviews,
-                    }),
-                });
+            crearReviews: (product_id, reviews, user_id) => {
+                fetch(back + "/api/reviews/product/" + product_id, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            reviews: reviews,
+                            calification: 4,
+                            user: user_id,
+                        }),
+                    })
+                    .then((res) => res.json())
+                    .then(
+                        (data) => console.log(data)
+                        // setStore({
+                        //     getReviews: data,
+                        // })
+                    )
+                    .catch((err) => console.error(err));
             },
             //FIN DE FUNCIONES AGREGADAS POR VIQUI
             changeColor: (index, color) => {

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Products, Favorites, Cart
+from api.models import db, User, Products, Favorites, Cart, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -342,17 +342,30 @@ def edit_profile():
     return jsonify(profile.serialize()), 200
 
     #RUTAS PARA LAS REVIEWS DE USUARIOS
+@api.route("/reviews/product/<int:product_id>", methods=["GET"])
+def get_product_reviews(product_id):
+    reviews = Reviews.query.filter_by(product_id=product_id).all()
+
+    results = list(
+        map(lambda item:item.serialize(), reviews)
+    )
+    return jsonify(results), 200
 
 @api.route('/reviews/product/<int:product_id>', methods=['POST'])
 def add_new_review(product_id):
     request_body = request.json
     print(request_body)
-    products = Products.query.filter_by(id=product_id).first()
-    products.reviews = request_body["reviews"]
+    query_review = Reviews.query.filter_by(user_id=request_body["user"], product_id=product_id).first()
+    if query_review is None:
+        new_review = Reviews(reviews=request_body["reviews"],calification=4, product_id=product_id, user_id=request_body["user"])
+        db.session.add(new_review)
+        db.session.commit()
+        return jsonify({"msg": "Comentario subido"}), 200
+    else:
+        return jsonify({"msg": "Ya hiciste un comentario sobre este producto"}), 400
     
-    db.session.commit()
 
-    return jsonify({"msg": "Comentario subido"}), 200
+    
 
 
     

@@ -15,6 +15,7 @@ export const DetalleProducto = ({ id }) => {
     e.preventDefault();
     setReviews(reviews.concat({ label: comment }));
     setComment("");
+    actions.crearReviews(params.theid, reviews, store.user_id);
   }
   console.log(comment);
   console.log(reviews);
