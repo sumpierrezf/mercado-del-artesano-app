@@ -18,17 +18,19 @@ export const Login = () => {
   }
   return (
     <>
-      <div className="bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 border-naranja-400 h-100">
-        <div className="d-flex justify-content-center">
+      <div className="bg-naranja-100 container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron h-100 bg-naranja-200 rounded">
+        <div className="d-flex justify-content-center w-75">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
           {store.auth === true ? (
             <Navigate to="/" />
           ) : (
-            <form className="login pt-5 w-100 pb-5" onSubmit={sendData}>
+            <form className="login pt-3 w-100 pb-3" onSubmit={sendData}>
               <div className="mb-3">
+                <h2 className="text-center mb-2">Login</h2>
+                <hr className="border-marron" />
                 <label
                   htmlFor="exampleInputEmail1"
-                  className="form-label text-naranja-400 "
+                  className="form-label text-marron"
                 >
                   Email
                 </label>
@@ -36,7 +38,7 @@ export const Login = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                   type="email"
-                  className="form-control border-naranja-400"
+                  className="form-control border-marron"
                   id="exampleInputEmail1"
                   value={email}
                   aria-describedby="emailHelp"
@@ -45,7 +47,7 @@ export const Login = () => {
               <div className="input-password mb-3">
                 <label
                   htmlFor="exampleInputPassword1"
-                  className="form-label text-naranja-400"
+                  className="form-label text-marron"
                 >
                   Contraseña
                 </label>
@@ -54,7 +56,7 @@ export const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Contraseña"
                   value={password}
-                  className="form-control border-naranja-400"
+                  className="form-control border-marron"
                   id="exampleInputPassword"
                 />
                 <i
@@ -71,7 +73,9 @@ export const Login = () => {
               </div>
 
               <div className="mb-3 resetpassword">
-                <Link to="/resetPassword">Olvidé mi contraseña</Link>
+                <Link className="text-naranja-400" to="/resetPassword">
+                  Olvidé mi contraseña
+                </Link>
               </div>
               <div className="d-flex justify-content-center">
                 <button
