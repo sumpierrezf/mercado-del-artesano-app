@@ -24,7 +24,7 @@ export const Catalogo = ({
       <div
         className="card d-flex mx-3 my-3"
         style={{
-          width: "18rem",
+          width: "17rem",
         }}
       >
         <img
@@ -38,8 +38,11 @@ export const Catalogo = ({
           <p className="card-text">Precio: $ {price} </p>
           <p className="card-text">Cantidad: {amount} </p>
           <div className="justify-content-between">
-            <Link to={"/detalleProducto/" + id} className="btn btn-primary">
-              + Info:{id}
+            <Link
+              to={"/detalleProducto/" + id}
+              className="btn bg-naranja-200 text-marron"
+            >
+              + Info
             </Link>
             <button
               className="btn text-warning"
