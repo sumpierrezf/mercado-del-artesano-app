@@ -32,7 +32,7 @@ export const Favs = () => {
             <hr className="my-1 border-marron" />
             <div className="w-100 d-flex justify-content-center">
               <button
-                className="text-marron bg-naranja-200 border-marron rounded w-50 mt-3"
+                className="btn text-marron bg-naranja-100 rounded w-50 mt-3"
                 style={{
                   height: "35px",
                 }}
@@ -42,7 +42,7 @@ export const Favs = () => {
               </button>
             </div>
             <select
-              className="bg-naranja-100 text-marron form-select m-auto my-3 p-0 text-center border-0"
+              className="scroll-select bg-naranja-100 text-marron form-select m-auto mb-3 p-0 text-center border-0"
               size="5"
               multiple
               aria-label="multiple select example"
