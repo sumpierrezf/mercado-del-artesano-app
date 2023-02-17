@@ -3,33 +3,49 @@
 */
 /* Los selectores a continuación representan la paleta de colores, el número indica que menor número hace referencia a los colores más claros, y cuanto mayor el número hace referencia a los colores más fuertes */
 .bg-naranja-100 {
-    background-color: #fdeedc;
+  background-color: #fdeedc;
 }
 
 .border-naranja-400 {
-    border: solid #e38b29 0.5px;
+  border: solid #e38b29 0.5px;
 }
 
 .bg-naranja-200 {
-    background-color: #ffd8a9;
+  background-color: #ffd8a9;
 }
 
 .bg-naranja-400 {
-    background-color: #e38b29;
+  background-color: #e38b29;
+}
+.bg-marron {
+  background-color: #7b4812;
 }
 
 .text-naranja-400 {
-    color: #e38b29;
+  color: #e38b29;
 }
 
 .border-marron {
-    border: 1px solid #7b4812;
+  border: 1px solid #7b4812;
 }
 
 .text-marron {
-    color: #7b4812;
+  color: #7b4812;
 }
 
 #togglePassword {
-    color: #e38b29;
+  color: #e38b29;
+}
+
+.scroll-select::-webkit-scrollbar {
+  display: none;
+}
+.border-marron-bot {
+  border-bottom: 1px solid #7b4812;
+}
+.border-marron-top {
+  border-top: 1px solid #7b4812;
+}
+.border-marron-end {
+  border-right: 1px solid #7b4812;
 }

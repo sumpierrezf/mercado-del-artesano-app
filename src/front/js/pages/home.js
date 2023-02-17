@@ -11,36 +11,50 @@ export const Home = () => {
   // console.log(store.productos[0]);
   return (
     <div className="container-fluid bg-naranja-100">
-      <div className="row mb-5">
+      <div className="row">
         {/* COLUMNA IZQUIERDA */}
-        <div className="col-sm-4 col-lg-2 bg-naranja-200">
-          <h3 className="col-sm-4 col-lg-2 p-3">Categorías:</h3>
-          <div className="d-grid gap-2 col-6 mx-1">
+        <div className="col-sm-3 col-lg-2 bg-naranja-200 border-marron-end">
+          <h4 className="text-center py-3 mx-auto px-1">Categorías:</h4>
+          <div className="d-grid gap-2 col-12 mx-auto">
+            <button
+              className="btn mx-auto w-75 text-marron bg-naranja-100 rounded"
+              onClick={actions.eliminarFiltro}
+            >
+              Todas
+            </button>
             <select
-              className="d-grid gap-2 col-6 mx-1 bg-naranja-100 text-marron form-select m-auto text-center"
-              size="5"
+              className="scroll-select w-75 d-grid gap-2 col-6 bg-naranja-100 text-marron form-select m-auto py-3 text-center"
+              size="6"
               multiple
               aria-label="multiple select example"
               onClick={actions.handleCategory}
             >
-              <option value="Tazas">Tazas</option>
-              <option value="Gorros">Gorros</option>
-              <option value="Madera">Madera</option>
-              <option value="Tejidos">Tejidos</option>
+              <option className="mb-2" value="Tazas">
+                Tazas
+              </option>
+              <option className="mb-2" value="Gorros">
+                Gorros
+              </option>
+              <option className="mb-2" value="Madera">
+                Madera
+              </option>
+              <option className="mb-2" value="Tejidos">
+                Tejidos
+              </option>
               <option value="Pinturas">Pinturas</option>
             </select>
           </div>
         </div>
         {/* COLUMNA DERECHA */}
-        <div className="col-sm-8 col-lg-10">
-          <h1 className="col-sm-8 col-lg-10 p-3 text-center">
-            Catálogo de productos.
-          </h1>
+        <div className="col-sm-9 col-lg-10">
+          <h2 className="col-sm-8 col-lg-10 p-3 pb-0 mx-auto text-center">
+            Catálogo de productos
+          </h2>
           <div
-            className="d-flex container col-sm-8 col-lg-10 p-3"
-            style={{ overflowX: "scroll", height: "55 0px" }}
+            className="d-flex mx-auto w-100 col-sm-8 col-lg-10 p-3 pt-0"
+            // style={{ overflowX: "scroll", height: "55 0px" }}
           >
-            <div className="d-flex flex-nowrap row row-cols-4">
+            <div className="d-flex justify-content-center row row-cols-4">
               {store.productos
                 ?.filter((item) => item.category.includes(store.categoria))
                 .map((cadaProducto, index) => (

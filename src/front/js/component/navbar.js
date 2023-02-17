@@ -32,7 +32,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
+    <nav className="bg-naranja-200 border-marron-bot navbar-light">
       <div className="container-fluid d-flex">
         <Link className="justify-content-center" to="/">
           <span className="navbar-brand mb-0 h1 mx-5">
