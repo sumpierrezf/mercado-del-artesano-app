@@ -119,7 +119,7 @@ class Products(db.Model):
             "condition": self.condition,
             "user_id": self.user_id,
             "img1": self.img1,
-            "reviews": self.reviews,
+            "reviews": list(map(lambda item: item.serialize(), self.reviews)),
             # "img2": self.img2,
             # "img3": self.img3,
             # "img4": self.img4
