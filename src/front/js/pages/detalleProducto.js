@@ -7,7 +7,19 @@ export const DetalleProducto = ({ id }) => {
   const { store, actions } = useContext(Context);
   const [cantidad, setCantidad] = useState(0);
   const [carrito, setCarrito] = useState([]);
+  const [comment, setComment] = useState("");
+  const [reviews, setReviews] = useState([]);
   const params = useParams();
+
+  function agregarComentario(e) {
+    e.preventDefault();
+    setReviews(reviews.concat({ label: comment }));
+    setComment("");
+    actions.crearReviews(params.theid, reviews, store.user_id);
+  }
+  console.log(comment);
+  console.log(reviews);
+
   console.log(store.detalleProducto.id);
   // function agregarAlCarrito() {
   //   // console.log("funciona");
@@ -19,7 +31,7 @@ export const DetalleProducto = ({ id }) => {
   useEffect(() => {
     actions.obtenerDetalleProducto(params.theid);
   }, []);
-  console.log(store.detalleProducto);
+  // console.log(store.detalleProducto);
 
   return (
     <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
@@ -157,12 +169,52 @@ export const DetalleProducto = ({ id }) => {
         <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100">
           <h3>
             Califica este producto
-            <i className="fa fa-star text-warning"></i>
-            <i className="fa fa-star text-warning"></i>
-            <i className="fa fa-star text-warning"></i>
-            <i className="fa fa-star text-warning"></i>
-            <i className="fa fa-star text-warning"></i>
+            <form>
+              <p className="clasificacion">
+                <input id="radio1" type="radio" name="estrellas" value="5" />
+                <label htmlFor="radio1">★</label>
+                <input id="radio2" type="radio" name="estrellas" value="4" />
+                <label htmlFor="radio2">★</label>
+                <input id="radio3" type="radio" name="estrellas" value="3" />
+                <label htmlFor="radio3">★</label>
+                <input id="radio4" type="radio" name="estrellas" value="2" />
+                <label htmlFor="radio4">★</label>
+                <input id="radio5" type="radio" name="estrellas" value="1" />
+                <label htmlFor="radio5">★</label>
+              </p>
+            </form>
           </h3>
+          <div className="form-floating border-marron bg-naranja-100 mb-2">
+            <textarea
+              className="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea"
+              value={comment}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+            ></textarea>
+            <label htmlFor="floatingTextarea">Comentarios</label>
+          </div>
+          <button
+            className="btn bg-naranja-200 mb-2"
+            onClick={agregarComentario}
+          >
+            <small>Agregar comentario.</small>
+          </button>
+          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 m-1">
+            <div className="container">
+              <p>Comentarios de los clientes:</p>
+              {reviews.map((item, index) => (
+                <div
+                  className="container col-sm-12 rounded-1 border-marron bg-naranja-100 m-1 text-start"
+                  key={index}
+                >
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
