@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/d51f35594513_.py
-Revision ID: d51f35594513
+Revision ID: 994208e5fecd
 Revises: 
-Create Date: 2023-02-15 18:28:36.688702
-========
-Revision ID: 4662bf9a4cf3
-Revises: 
-Create Date: 2023-02-15 17:12:44.104506
->>>>>>>> bb72473967259a41c5e555331c00e5da5979a686:migrations/versions/4662bf9a4cf3_.py
+Create Date: 2023-02-20 12:44:21.626559
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/d51f35594513_.py
-revision = 'd51f35594513'
-========
-revision = '4662bf9a4cf3'
->>>>>>>> bb72473967259a41c5e555331c00e5da5979a686:migrations/versions/4662bf9a4cf3_.py
+revision = '994208e5fecd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,9 +43,6 @@ def upgrade():
     sa.Column('description', sa.String(length=120), nullable=False),
     sa.Column('condition', sa.String(length=120), nullable=False),
     sa.Column('img1', sa.String(length=120), nullable=True),
-    sa.Column('img2', sa.String(length=120), nullable=True),
-    sa.Column('img3', sa.String(length=120), nullable=True),
-    sa.Column('img4', sa.String(length=120), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')

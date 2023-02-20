@@ -153,7 +153,7 @@ def add_new_product(user_id):
         # img4=request_body["img4"] or None,
         user_id=user_id,
     )
-    print(products.serialize())
+    # print(products.serialize())
 
     db.session.add(products)
     db.session.commit()

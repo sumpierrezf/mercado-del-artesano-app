@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-dxmll81f6ir.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-83xbuipetoe.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -212,7 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
-        fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id, {
+        fetch(back + "/api/upload_product/" + user_id, {
           method: "POST",
           // mode: "no-cors",
           // credentials: "include",
@@ -227,12 +227,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             description: descripcion,
             condition: condicion,
             img1: imagen,
-            // img2: img2,
-            // img3: img3,
-            // img4: img4,
-            user_id: user_id,
+            // user_id: user_id,
           }),
-        });
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => console.log(error));
       },
 
       signup: (
