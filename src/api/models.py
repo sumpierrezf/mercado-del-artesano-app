@@ -126,6 +126,12 @@ class Products(db.Model):
             # do not serialize the password, its a security breach
         }
 
+    def serializeUser(self):
+        results = User.query.filter_by(id = self.user_id).first()
+        return{
+            "sellerInfo": results.serialize()
+        }
+
 class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reviews = db.Column(db.String(220), unique=False, nullable=True)

@@ -50,7 +50,7 @@ def get_user(user_id):
 def get_product():
     allproducts = Products.query.all()
     print(allproducts)
-    results = list(map(lambda item: item.serialize(), allproducts))
+    results = list(map(lambda item: {**item.serializeUser(), **item.serialize()}, allproducts))
     print(results)
     return jsonify(results), 200
 
@@ -60,7 +60,9 @@ def get_info_product(product_id):
     product = Products.query.filter_by(id=product_id).first()
     print(product.serialize())
 
-    return jsonify(product.serialize()), 200
+    results = {**product.serializeUser(), **product.serialize()}
+
+    return jsonify(results), 200
 
 
 @api.route("/user/favorites/<int:user_id>", methods=["GET"])
