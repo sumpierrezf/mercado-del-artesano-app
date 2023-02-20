@@ -6,7 +6,7 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
     actions.obtenerInfoProductos();
-    actions.getUserInfo(store.user_id);
+    actions.getUserInfo(localStorage.user_id);
   }, []);
   // console.log(store.productos[0]);
   return (
@@ -66,7 +66,7 @@ export const Home = () => {
                     price={cadaProducto.price}
                     amount={cadaProducto.amount}
                     img1={cadaProducto.img1}
-                    user_id={store.user_id}
+                    user_id={localStorage.user_id}
                     product_id={cadaProducto.id}
                   />
                 ))}

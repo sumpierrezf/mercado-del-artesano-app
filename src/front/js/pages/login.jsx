@@ -19,12 +19,12 @@ export const Login = () => {
   return (
     <>
       <div
-        className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded"
+        className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4"
         style={{ height: "auto" }}
       >
         <div className="d-flex justify-content-center w-75">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
-          {store.auth === true ? (
+          {localStorage.user_id != null ? (
             <Navigate to="/" />
           ) : (
             <form className="login pt-3 w-100 pb-3" onSubmit={sendData}>

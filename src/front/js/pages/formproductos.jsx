@@ -27,7 +27,7 @@ export const Productos = (props) => {
       descripcion,
       condicion,
       image
-      // store.user_id
+      // localStorage.user_id
     );
     await actions.createProduct(
       nombre,
@@ -37,7 +37,7 @@ export const Productos = (props) => {
       descripcion,
       condicion,
       image,
-      store.user_id
+      localStorage.user_id
     );
   }
 
@@ -73,7 +73,7 @@ export const Productos = (props) => {
   };
   return (
     <>
-      {store.auth === false ? (
+      {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
         <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4">

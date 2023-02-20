@@ -10,12 +10,12 @@ export const Favs = () => {
   const params = useParams();
 
   useEffect(() => {
-    actions.getUserFavs(store.user_id);
+    actions.getUserFavs(localStorage.user_id);
   }, [store.fav_products]);
 
   return (
     <>
-      {store.auth === false ? (
+      {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
         <div className="col-11 row bg-naranja-200 border-marron m-auto rounded p-5 pt-4 my-4">
@@ -27,9 +27,9 @@ export const Favs = () => {
             <hr className="my-1 border-marron" />
             <div className="w-100 d-flex justify-content-center">
               <button
-                className="btn text-marron bg-naranja-100 rounded mt-3"
+                className="btn text-marron bg-naranja-100 rounded p-0"
                 style={{
-                  height: "35px",
+                  height: "22.54px",
                 }}
                 onClick={actions.eliminarFiltro}
               >
@@ -51,13 +51,14 @@ export const Favs = () => {
             </select>
           </div>
 
-          <div className="col-sm-9 col-lg-10" style={{ minHeight: "234" }}>
-            <div className="bg-naranja-100 border-marron rounded h-100">
+          <div className="col-sm-9 col-lg-10">
+            <div className="bg-naranja-100 border-marron rounded">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
                 <li className="list-group-item bg-naranja-100 text-marron border-marron">
                   <h4>Favoritos</h4>
                 </li>
+                <hr className="m-0 border-marron opacity-0" />
 
                 {/* __________________MAP________________________ */}
                 {store.fav_products
@@ -74,7 +75,7 @@ export const Favs = () => {
                         precio={item.productsInfo.price}
                         imagen={item.productsInfo.img1}
                       />
-                      <div className="w-50">
+                      <div className="col-1 justify-content-end">
                         <button
                           className="float-end rounded bg-naranja-200 text-marron border-marron"
                           style={{
@@ -83,7 +84,7 @@ export const Favs = () => {
                           }}
                           onClick={() =>
                             actions.borrarFavorito(
-                              store.user_id,
+                              localStorage.user_id,
                               item.product_id
                             )
                           }
