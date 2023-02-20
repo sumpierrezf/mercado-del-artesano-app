@@ -19,13 +19,13 @@ export const Profile = () => {
   const params = useParams();
 
   useEffect(() => {
-    actions.getUserInfo(store.user_id);
+    actions.getUserInfo(localStorage.user_id);
   }, []);
 
   function enviarDatos(e) {
     e.preventDefault();
     actions.editProfile(
-      store.user_id,
+      localStorage.user_id,
       password,
       nombre,
       apellido,
@@ -41,10 +41,10 @@ export const Profile = () => {
 
   return (
     <>
-      {store.auth === false ? (
+      {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div className="bg-naranja-200 border-marron w-50 mx-auto my-5 p-4 rounded">
+        <div className="bg-naranja-200 border-marron col-sm-8 col-lg-7 mx-auto my-5 p-4 rounded">
           <h2 className="d-flex justify-content-center text-marron">Perfil</h2>
           <form className="w-100 mx-auto row" onSubmit={enviarDatos}>
             <span className="opacity-75 border-marron"></span>

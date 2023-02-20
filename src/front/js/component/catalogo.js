@@ -47,7 +47,7 @@ export const Catalogo = ({
             <button
               className="btn text-warning"
               onClick={() =>
-                store.user_id == null
+                localStorage.user_id == null
                   ? alert("Debes iniciar sesión")
                   : actions.agregarAlCarrito(user_id, product_id, 1)
               }
@@ -57,7 +57,7 @@ export const Catalogo = ({
             <button
               className="btn text-danger"
               onClick={() =>
-                store.user_id == null
+                localStorage.user_id == null
                   ? alert("Debes iniciar sesión")
                   : actions.addToFavorites(user_id, product_id)
               }

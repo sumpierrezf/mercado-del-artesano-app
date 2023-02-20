@@ -2,7 +2,7 @@ import React from "react";
 
 export const FavLi = (props) => {
   return (
-    <div className="d-flex w-50">
+    <div className="d-flex col-11">
       <img src={props.imagen} alt="" style={{ height: 80, width: "auto" }} />
       <div className="mx-3">
         <h5>{props.nombre}</h5>
