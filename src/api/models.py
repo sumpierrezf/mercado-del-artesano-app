@@ -97,7 +97,7 @@ class Products(db.Model):
     description = db.Column(db.String(120), unique=False, nullable=False)
     condition = db.Column(db.String(120), unique=False, nullable=False)
     img1 = db.Column(db.String(120), unique=False)
-    # img2 = db.Column(db.String(120), unique=False)
+    img2 = db.Column(db.String(120), unique=False)
     # img3 = db.Column(db.String(120), unique=False)
     # img4 = db.Column(db.String(120), unique=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)

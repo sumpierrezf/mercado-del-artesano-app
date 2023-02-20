@@ -55,7 +55,7 @@ export const Navbar = () => {
 
         {/* ----------------Opciones------------------------- */}
         <div className="d-flex w-50 justify-content-end me-5">
-          {localStorage.user_id === null ? (
+          {localStorage.user_id == null ? (
             <>
               {/* --------------- iniciar sesion -------------- */}
               <Link

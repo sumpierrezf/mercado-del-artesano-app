@@ -52,25 +52,49 @@ export const Productos = (props) => {
     e.preventDefault();
     const files = e.target.files;
     const data = new FormData();
-    const imagenes = [];
-    for (let i = 0; i < files.length; i++) {
-      data.append("file", files[i]);
-      data.append("upload_preset", "pdnsjg41");
-      data.append("cloud_name", "dlesv1phq");
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
+    try {
+      const imagenes = Object.values(files);
+      console.log(files);
+
+      console.log(imagenes);
+      const response = await Promise.all(
+        imagenes.map((item) => {
+          data.append("file", item);
+          data.append("upload_preset", "pdnsjg41");
+          return fetch(
+            "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+            {
+              method: "POST",
+              body: data,
+            }
+          ).then((respons) => respons.json());
+        })
       );
-      const file = await res.json();
-      console.log(file.secure_url);
-      imagenes.concat(file.secure_url);
-      // setUrl(file.secure_url);
+      console.log(files);
+      const uploadUrls = response.map((res) => res.secure_url);
+      setUrls(uploadUrls);
+    } catch (error) {
+      console.log(error);
     }
-    setUrls(imagenes);
-    console.log(imagenes);
+
+    // for (let i = 0; i < files.length; i++) {
+    //   data.append("file", files[i]);
+    //   data.append("upload_preset", "pdnsjg41");
+    //   data.append("cloud_name", "dlesv1phq");
+    //   const res = await fetch(
+    //     "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+    //     {
+    //       method: "POST",
+    //       body: data,
+    //     }
+    //   );
+    //   const file = await res.json();
+    //   console.log(file.secure_url);
+    //   imagenes.concat(file.secure_url);
+    //   // setUrl(file.secure_url);
+    // }
+    // setUrls(imagenes);
+    // console.log(imagenes);
   };
   const handleChange = (event) => {
     setCondicion(event.target.value);
@@ -78,6 +102,7 @@ export const Productos = (props) => {
   const handleCategoria = (event) => {
     setCategoria(event.target.value);
   };
+  console.log(urls);
   return (
     <>
       {localStorage.user_id === null ? (
