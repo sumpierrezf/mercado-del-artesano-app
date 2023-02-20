@@ -18,7 +18,10 @@ export const Login = () => {
   }
   return (
     <>
-      <div className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron h-100 bg-naranja-200 rounded">
+      <div
+        className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded"
+        style={{ height: "auto" }}
+      >
         <div className="d-flex justify-content-center w-75">
           {/* direccioné a la vista demo pero luego que tengamos la vista del catálogo debemos en caso de que el login sea validado direccionarlo a la vista correspondiente  */}
           {store.auth === true ? (

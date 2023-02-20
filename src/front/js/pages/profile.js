@@ -44,7 +44,7 @@ export const Profile = () => {
       {store.auth === false ? (
         <Navigate to="/login" />
       ) : (
-        <div className="bg-naranja-200 border-marron w-50 mx-auto my-5 p-4 rounded">
+        <div className="bg-naranja-200 border-marron col-sm-8 col-lg-7 mx-auto my-5 p-4 rounded">
           <h2 className="d-flex justify-content-center text-marron">Perfil</h2>
           <form className="w-100 mx-auto row" onSubmit={enviarDatos}>
             <span className="opacity-75 border-marron"></span>

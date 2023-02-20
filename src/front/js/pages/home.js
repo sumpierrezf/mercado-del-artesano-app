@@ -51,10 +51,10 @@ export const Home = () => {
             Catálogo de productos
           </h2>
           <div
-            className="d-flex mx-auto w-100 col-sm-8 col-lg-10 p-3 pt-0"
+            className="d-flex justify-content-center mx-auto w-100 col-sm-8 col-lg-10 p-3 pt-0"
             // style={{ overflowX: "scroll", height: "55 0px" }}
           >
-            <div className="d-flex justify-content-center row row-cols-4">
+            <div className="d-flex justify-content-center row">
               {store.productos
                 ?.filter((item) => item.category.includes(store.categoria))
                 .map((cadaProducto, index) => (

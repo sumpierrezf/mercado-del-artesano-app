@@ -51,8 +51,8 @@ export const Favs = () => {
             </select>
           </div>
 
-          <div className="col-sm-9 col-lg-10">
-            <div className="bg-naranja-100 border-marron rounded">
+          <div className="col-sm-9 col-lg-10" style={{ minHeight: "234" }}>
+            <div className="bg-naranja-100 border-marron rounded h-100">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
                 <li className="list-group-item bg-naranja-100 text-marron border-marron">
