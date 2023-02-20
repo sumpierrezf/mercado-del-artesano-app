@@ -123,3 +123,10 @@ class Products(db.Model):
             # do not serialize the password, its a security breach
         }
 
+
+    def serializeUser(self):
+        results = User.query.filter_by(id = self.user_id).first()
+        return{
+            "sellerInfo": results.serialize()
+        }
+
