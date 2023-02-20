@@ -203,6 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
       createProduct: (
         nombre,
         categoria,
@@ -409,7 +410,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
         }
       },
-      obtenerReviews: () => {
+      obtenerReviews: (product_id) => {
         fetch(back + "/api/reviews/product/" + product_id)
           .then((res) => res.json())
           .then((data) =>
@@ -419,7 +420,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      crearReviews: (product_id, reviews, user) => {
+      //   crearReviews: async (user_id, product_id, reviews) => {
+      //     console.log(user_id, product_id, reviews);
+      //     try {
+      //       let response = await axios.post(
+      //         back + "/api/reviews/product/" + product_id,
+      //         {
+      //           user: user_id,
+      //           reviews: reviews,
+      //           calification: 4,
+      //         }
+      //       );
+      //       console.log(response.data);
+      //       alert("Comentario agregado a reviews");
+      //     } catch (error) {
+      //       console.log(error);
+      //       alert("Ya escribiste un comentario de ese producto");
+      //     }
+      //   },
+      crearReviews: (product_id, reviews, stars) => {
         fetch(back + "/api/reviews/product/" + product_id, {
           method: "POST",
           headers: {
@@ -427,17 +446,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             reviews: reviews,
-            calification: 4,
+            calification: stars,
             user: localStorage.getItem("user_id"),
           }),
         })
           .then((res) => res.json())
-          .then(
-            (data) => console.log(data)
+          .then((data) => {
+            console.log(data);
+            if (data.msg === "Comentario subido") {
+              getActions().obtenerReviews(product_id);
+            }
             // setStore({
             //     getReviews: data,
             // })
-          )
+          })
           .catch((err) => console.error(err));
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
