@@ -245,8 +245,7 @@ export const DetalleProducto = ({ id }) => {
                   className="container col-sm-12 rounded-1 bg-naranja-100 m-1 text-start p-1"
                   key={index}
                 >
-                  {store.user_info.first_name}
-                  <br />
+                  {store.user_info.first_name} calificó {""}
                   {item.calification} estrellas
                   <br />
                   {item.reviews}

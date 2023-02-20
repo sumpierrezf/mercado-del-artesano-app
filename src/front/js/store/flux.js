@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-llyn12ej4w0.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -420,24 +420,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      //   crearReviews: async (user_id, product_id, reviews) => {
-      //     console.log(user_id, product_id, reviews);
-      //     try {
-      //       let response = await axios.post(
-      //         back + "/api/reviews/product/" + product_id,
-      //         {
-      //           user: user_id,
-      //           reviews: reviews,
-      //           calification: 4,
-      //         }
-      //       );
-      //       console.log(response.data);
-      //       alert("Comentario agregado a reviews");
-      //     } catch (error) {
-      //       console.log(error);
-      //       alert("Ya escribiste un comentario de ese producto");
-      //     }
-      //   },
       crearReviews: (product_id, reviews, stars) => {
         fetch(back + "/api/reviews/product/" + product_id, {
           method: "POST",
@@ -456,9 +438,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (data.msg === "Comentario subido") {
               getActions().obtenerReviews(product_id);
             }
-            // setStore({
-            //     getReviews: data,
-            // })
           })
           .catch((err) => console.error(err));
       },
