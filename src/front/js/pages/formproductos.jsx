@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Navigate } from "react-router-dom";
+// Importar la clase Cloudinary.
+// import { Cloudinary } from " @cloudinary/url-gen ";
 
 export const Productos = (props) => {
   const [nombre, setNombre] = useState("");
@@ -8,12 +10,13 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
+  // const [img1, setImg1] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
   const [loading, setLoading] = useState(false);
   const { store, actions } = useContext(Context);
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  const [urls, setUrls] = useState([]);
 
   async function enviarForm(e) {
     e.preventDefault();
@@ -24,7 +27,7 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      url
+      urls
       // store.user_id
     );
     await actions.createProduct(
@@ -34,7 +37,7 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      url,
+      urls,
       store.user_id
     );
   }
@@ -62,10 +65,12 @@ export const Productos = (props) => {
         }
       );
       const file = await res.json();
-      // imagenes.concat(file.secure_url);
-      setUrl(file.secure_url);
+      console.log(file.secure_url);
+      imagenes.concat(file.secure_url);
+      // setUrl(file.secure_url);
     }
-    // console.log(imagenes);
+    setUrls(imagenes);
+    console.log(imagenes);
   };
   const handleChange = (event) => {
     setCondicion(event.target.value);
@@ -214,6 +219,7 @@ export const Productos = (props) => {
                   }}
                   type="file"
                   name="Subir imagen "
+                  multiple
                   style={{
                     backgroundColor: "#FFD8A9",
                     color: "#E38B29",
