@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user_info: [],
       image: "",
       url: "",
+      getReviews: [],
     },
 
     actions: {
@@ -126,7 +127,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
-      getUserInfo: (id) => {
+      getUserInfo: () => {
+        let id = localStorage.getItem("user_id");
+        console.log(id);
         fetch(back + "/api/user/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -200,7 +203,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
-
       createProduct: (
         nombre,
         categoria,
@@ -227,6 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             description: descripcion,
             condition: condicion,
             img1: imagen,
+            img2: imagen,
             // user_id: user_id,
           }),
         })
@@ -315,6 +318,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
             if (data.msg === "Bad email or password") alert(data.msg);
             localStorage.setItem("token", data.access_token);
+            localStorage.setItem("user_id", data.user_id);
             setStore({
               user_id: data.user_id,
             });
@@ -323,9 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       logout: () => {
         localStorage.removeItem("token");
-        setStore({
-          user_id: null,
-        });
+        localStorage.removeItem("user_id");
         setStore({
           user_info: [],
         });
@@ -407,6 +409,37 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
         }
+      },
+      obtenerReviews: () => {
+        fetch(back + "/api/reviews/product/" + product_id)
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              getReviews: data,
+            })
+          )
+          .catch((err) => console.error(err));
+      },
+      crearReviews: (product_id, reviews, user) => {
+        fetch(back + "/api/reviews/product/" + product_id, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reviews: reviews,
+            calification: 4,
+            user: localStorage.getItem("user_id"),
+          }),
+        })
+          .then((res) => res.json())
+          .then(
+            (data) => console.log(data)
+            // setStore({
+            //     getReviews: data,
+            // })
+          )
+          .catch((err) => console.error(err));
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
       changeColor: (index, color) => {

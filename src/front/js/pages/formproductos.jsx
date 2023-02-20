@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Navigate } from "react-router-dom";
-// Importar la clase Cloudinary.
-// import { Cloudinary } from " @cloudinary/url-gen ";
 
 export const Productos = (props) => {
   const [nombre, setNombre] = useState("");
@@ -10,26 +8,17 @@ export const Productos = (props) => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  // const [img1, setImg1] = useState("");
   const [user_id, setUserid] = useState("");
   const [condicion, setCondicion] = useState("");
   const [loading, setLoading] = useState(false);
   const { store, actions } = useContext(Context);
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  const [url1, setUrl1] = useState("");
+  const [url2, setUrl2] = useState("");
 
   async function enviarForm(e) {
     e.preventDefault();
-    console.log(
-      nombre,
-      categoria,
-      precio,
-      stock,
-      descripcion,
-      condicion,
-      url
-      // store.user_id
-    );
+    console.log(nombre, categoria, precio, stock, descripcion, condicion, url);
     await actions.createProduct(
       nombre,
       categoria,
@@ -37,8 +26,9 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      url,
-      store.user_id
+      url1,
+      url2
+      // store.user_id
     );
   }
 
@@ -48,12 +38,32 @@ export const Productos = (props) => {
 
   // dwxvlozfr - cloudname
   // upload - ml_default
-  const submitImage = async (e) => {
-    e.preventDefault();
-    const files = e.target.files;
-    const data = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      data.append("file", files[i]);
+  // const submitImage = async (e) => {
+  //   e.preventDefault();
+  //   const files = e.target.files;
+  //   const data = new FormData();
+  //   for (let i = 0; i < files.length; i++) {
+  //     data.append("file", files[i]);
+  //     data.append("upload_preset", "pdnsjg41");
+  //     data.append("cloud_name", "dlesv1phq");
+  //     const res = await fetch(
+  //       "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+  //       {
+  //         method: "POST",
+  //         body: data,
+  //       }
+  //     );
+  //     const file = await res.json();
+  //     setUrl(file.secure_url);
+  //   }
+  // };
+  // const handleChange = (event) => {
+  //   setCondicion(event.target.value);
+  // };
+  const submitImage = async (file1, file2) => {
+    const uploadImage = async (file) => {
+      const data = new FormData();
+      data.append("file", file);
       data.append("upload_preset", "pdnsjg41");
       data.append("cloud_name", "dlesv1phq");
       const res = await fetch(
@@ -64,11 +74,12 @@ export const Productos = (props) => {
         }
       );
       const file = await res.json();
-      setUrl(file.secure_url);
-    }
-  };
-  const handleChange = (event) => {
-    setCondicion(event.target.value);
+      return file.secure_url;
+    };
+
+    const url1 = await uploadImage(file1);
+    const url2 = await uploadImage(file2);
+    return [url1, url2];
   };
 
   return (
@@ -214,7 +225,6 @@ export const Productos = (props) => {
                   }}
                   type="file"
                   name="Subir imagen "
-                  multiple
                   style={{
                     backgroundColor: "#FFD8A9",
                     color: "#E38B29",

@@ -32,7 +32,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="bg-naranja-200 border-naranja-400 navbar-light ">
+    <nav className="bg-naranja-200 border-marron-bot navbar-light">
       <div className="container-fluid d-flex">
         <Link className="justify-content-center" to="/">
           <span className="navbar-brand mb-0 h1 mx-5">
@@ -64,7 +64,8 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {store.user_info.profile_picture != null ? (
+                  {store.user_id != null &&
+                  store.user_info.profile_picture != null ? (
                     <img
                       className="rounded-circle border-marron me-2 px-0"
                       src={store.user_info.profile_picture}
@@ -86,11 +87,7 @@ export const Navbar = () => {
                 <ul className="dropdown-menu">
                   {/* -------- -------Favoritos----------------------- */}
                   <li>
-                    <Link
-                      to={"/favs/" + store.user_id}
-                      className="dropdown-item"
-                      href="#"
-                    >
+                    <Link to="/favs" className="dropdown-item" href="#">
                       Favoritos
                     </Link>
                   </li>
@@ -102,11 +99,7 @@ export const Navbar = () => {
                   </li>
                   {/* ----------perfil-------------- */}
                   <li>
-                    <Link
-                      to={"/profile/" + store.user_id}
-                      className="dropdown-item"
-                      href="#"
-                    >
+                    <Link to="/profile" className="dropdown-item" href="#">
                       Perfil
                     </Link>
                   </li>
@@ -125,7 +118,7 @@ export const Navbar = () => {
 
               <Link
                 className="btn text-marron mx-2 my-auto border-2"
-                to={"/cart/" + store.user_id}
+                to="/cart"
               >
                 <i className="fa fa-cart-arrow-down"></i>
               </Link>
