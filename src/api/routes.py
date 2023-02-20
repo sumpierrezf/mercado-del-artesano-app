@@ -355,9 +355,10 @@ def get_product_reviews(product_id):
 def add_new_review(product_id):
     request_body = request.json
     print(request_body)
+    print(request_body["reviews"])
     query_review = Reviews.query.filter_by(user_id=request_body["user"], product_id=product_id).first()
     if query_review is None:
-        new_review = Reviews(reviews=request_body["reviews"],calification=4, product_id=product_id, user_id=request_body["user"])
+        new_review = Reviews(reviews=request_body["reviews"],calification=request_body["calification"], product_id=product_id, user_id=request_body["user"])
         db.session.add(new_review)
         db.session.commit()
         return jsonify({"msg": "Comentario subido"}), 200

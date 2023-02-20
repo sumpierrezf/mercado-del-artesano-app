@@ -171,24 +171,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
-      // uploadImage: () => {
-      //   const store = getStore();
-      //   const data = new FormData();
-      //   data.append("file", store.image);
-      //   data.append("upload_preset", "pdnsjg41");
-      //   data.append("cloud_name", "dlesv1phq");
-      //   fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
-      //     method: "POST",
-      //     body: data,
-      //   })
-      //     .then((resp) => resp.json())
-      //     .then((data) =>
-      //       setStore({
-      //         url: data.url,
-      //       })
-      //     )
-      //     .catch((err) => console.log(err));
-      // },
+      uploadImage: () => {
+        const store = getStore();
+        const data = new FormData();
+        data.append("file", store.image);
+        data.append("upload_preset", "pdnsjg41");
+        data.append("cloud_name", "dlesv1phq");
+        fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
+          method: "POST",
+          body: data,
+        })
+          .then((resp) => resp.json())
+          .then((data) =>
+            setStore({
+              url: data.url,
+            })
+          )
+          .catch((err) => console.log(err));
+      },
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -203,6 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
       createProduct: (
         nombre,
         categoria,
@@ -410,7 +411,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
         }
       },
-      obtenerReviews: () => {
+      obtenerReviews: (product_id) => {
         fetch(back + "/api/reviews/product/" + product_id)
           .then((res) => res.json())
           .then((data) =>
@@ -420,7 +421,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      crearReviews: (product_id, reviews, user) => {
+      crearReviews: (product_id, reviews, stars) => {
         fetch(back + "/api/reviews/product/" + product_id, {
           method: "POST",
           headers: {
@@ -428,17 +429,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             reviews: reviews,
-            calification: 4,
+            calification: stars,
             user: localStorage.getItem("user_id"),
           }),
         })
           .then((res) => res.json())
-          .then(
-            (data) => console.log(data)
-            // setStore({
-            //     getReviews: data,
-            // })
-          )
+          .then((data) => {
+            console.log(data);
+            if (data.msg === "Comentario subido") {
+              getActions().obtenerReviews(product_id);
+            }
+          })
           .catch((err) => console.error(err));
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI

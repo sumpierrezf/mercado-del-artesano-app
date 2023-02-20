@@ -40,14 +40,15 @@ export const ResetPassword = () => {
 
   return (
     <>
-      <div className=" card bg-naranja-100 container d-flex align-items-center justify-content-center mt-5 w-25 h-100">
+      <div className="card bg-naranja-200 container d-flex align-items-center justify-content-center my-5 w-50 py-5 h-75 border-marron">
         <div className="badge bg-naranja-200 text-wrap">
-          <p className="fw-bold text-marron fs-4">Reestablecer contraseña</p>
+          <h2 className="fw-bold text-marron fs-4">Reestablecer contraseña</h2>
+          <hr className="border-marron m-0"></hr>
         </div>
-        <form className="pt-5 w-100 pb-5" onSubmit={sendEmail}>
+        <form className="pt-5 w-75" onSubmit={sendEmail}>
           <label
             htmlFor="exampleInputEmail1"
-            className="form-label fw-bold text-naranja-400"
+            className="form-label fw-bold text-marron"
           >
             Email
           </label>
@@ -55,7 +56,7 @@ export const ResetPassword = () => {
           <input
             onChange={(e) => setResetearPassword(e.target.value)}
             type="email"
-            className="form-control border-naranja-400"
+            className="form-control border-marron"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             value={resetearPassword}
@@ -67,7 +68,7 @@ export const ResetPassword = () => {
           <div className="d-flex justify-content-center">
             <button
               type="submit"
-              className="boton-login bg-naranja-400 btn text-white fw-bold mt-5 p-3 align-items-center"
+              className="boton-login bg-naranja-100 btn text-marron border-marron fw-bold mt-5 px-5 align-items-center"
               onClick={sendEmail}
             >
               Enviar

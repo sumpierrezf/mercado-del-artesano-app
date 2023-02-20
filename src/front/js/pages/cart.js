@@ -17,7 +17,7 @@ export const Cart = () => {
   }
 
   useEffect(() => {
-    actions.getUserProductsInCart(store.user_id);
+    actions.getUserProductsInCart(localStorage.user_id);
   }, [store.products_in_cart]);
 
   const pagar = async () => {
@@ -31,26 +31,22 @@ export const Cart = () => {
 
   return (
     <>
-      {store.auth === false ? (
+      {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div
-          className="container bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4"
-          style={{
-            width: "85%",
-          }}
-        >
+        <div className="bg-naranja-200 border-marron m-auto rounded row col-sm-11 col-lg-10 p-4 pt-4 my-4">
           <p className="mb-3" style={{ height: "20px" }}>
             {store.products_in_cart.length} productos en el carrito
           </p>
 
-          <div className="col-sm-8">
-            <div className="bg-naranja-100 border-marron rounded">
+          <div className="col-sm-8 ps-0">
+            <div className="bg-naranja-100 border-marron rounded h-100">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
-                <li className="list-group-item bg-naranja-100 text-marron border-marron">
+                <li className="list-group-item bg-naranja-100 text-marron border-marron-bot">
                   <h4>Carrito de compras</h4>
                 </li>
+                <hr className="m-0 border-marron opacity-0" />
 
                 {/* __________________MAP________________________ */}
                 {store.products_in_cart.map((item, index) => (
@@ -63,10 +59,11 @@ export const Cart = () => {
                       precio={item.productsInfo.price}
                       imagen={item.productsInfo.img1}
                     />
-                    <div className="w-50 d-flex">
+                    <div className="col-lg-6 col-sm-4 d-flex justify-content-end">
                       <input
                         type="number"
-                        className="form-control h-50 my-auto me-2"
+                        className="form-controlmy-auto me-2 my-auto col-lg-11 col-sm-6"
+                        style={{ height: "36px" }}
                         placeholder="Cantidad"
                         aria-label="Username"
                         aria-describedby="basic-addon1"
@@ -86,7 +83,7 @@ export const Cart = () => {
                         }}
                         onClick={() =>
                           actions.borrarProductInCart(
-                            store.user_id,
+                            localStorage.user_id,
                             item.product_id
                           )
                         }
@@ -106,14 +103,14 @@ export const Cart = () => {
             <hr className="my-1 border-marron opacity-75" />
             <br />
             <div className="d-flex">
-              <h4 className="w-50">Subtotal:</h4>
-              <h4 className="text-end w-50">${subtotal}</h4>
+              <h5 className="w-50">Subtotal:</h5>
+              <h5 className="text-end w-50">${subtotal}</h5>
             </div>
 
             <br />
             <div className="d-flex">
-              <h4 className="w-50">Impuestos:</h4>
-              <h4 className="text-end w-50">${subtotal * 0.22}</h4>
+              <h6 className="w-50">Impuestos:</h6>
+              <h5 className="text-end w-50">${subtotal * 0.22}</h5>
             </div>
             <hr className="my-3 border-marron opacity-75" />
             <div
@@ -127,14 +124,14 @@ export const Cart = () => {
             </div>
             <hr className="border-marron opacity-75" />
             <div className="d-flex row">
-              <div className="logo col-sm-3">
+              <div className="logo col-lg-4 col-sm-12">
                 <img
                   className="img-fluid"
                   src="https://www.leccionesdearmonica.com/wp-content/uploads/2018/03/Logo-Mercado-Pago-fondocrema.png"
                   alt="Logo de Mercado Pago"
                 />
               </div>
-              <div className="container col-sm-8 row">
+              <div className="container col-lg-8 row mx-auto justify-content-center">
                 <button
                   type="button"
                   className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-1"
@@ -144,8 +141,8 @@ export const Cart = () => {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-sm rounded-1 bg-naranja-100 border-marron m-1"
-                  onClick={() => actions.vaciarCarrito(store.user_id)}
+                  className="btn btn-sm rounded-1 bg-naranja-100 border-marron m-1 mb-3"
+                  onClick={() => actions.vaciarCarrito(localStorage.user_id)}
                 >
                   Vaciar carrito.
                 </button>

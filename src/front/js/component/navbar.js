@@ -23,7 +23,7 @@ export const Navbar = () => {
 
   // console.log(searchTerm);
   useEffect(() => {
-    actions.getUserInfo(store.user_id);
+    actions.getUserInfo(localStorage.user_id);
   }, []);
 
   function handleLogout() {
@@ -55,7 +55,24 @@ export const Navbar = () => {
 
         {/* ----------------Opciones------------------------- */}
         <div className="d-flex w-50 justify-content-end me-5">
-          {store.auth === true ? (
+          {localStorage.user_id === null ? (
+            <>
+              {/* --------------- iniciar sesion -------------- */}
+              <Link
+                className="btn text-marron my-auto me-2 border-2 justify-content-end"
+                to="/login"
+              >
+                Iniciar sesión
+              </Link>
+              {/* --------------- signup -------------- */}
+              <Link
+                className="btn text-marron my-auto me-2 border-2 justify-content-end"
+                to="/signup"
+              >
+                Crear usuario
+              </Link>
+            </>
+          ) : (
             <>
               <div className="float-end dropdown my-auto">
                 <button
@@ -64,8 +81,7 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {store.user_id != null &&
-                  store.user_info.profile_picture != null ? (
+                  {store.user_info.profile_picture != null ? (
                     <img
                       className="rounded-circle border-marron me-2 px-0"
                       src={store.user_info.profile_picture}
@@ -121,23 +137,6 @@ export const Navbar = () => {
                 to="/cart"
               >
                 <i className="fa fa-cart-arrow-down"></i>
-              </Link>
-            </>
-          ) : (
-            <>
-              {/* --------------- iniciar sesion -------------- */}
-              <Link
-                className="btn text-marron my-auto me-2 border-2 justify-content-end"
-                to="/login"
-              >
-                Iniciar sesión
-              </Link>
-              {/* --------------- signup -------------- */}
-              <Link
-                className="btn text-marron my-auto me-2 border-2 justify-content-end"
-                to="/signup"
-              >
-                Crear usuario
               </Link>
             </>
           )}

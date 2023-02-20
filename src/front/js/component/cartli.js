@@ -2,10 +2,10 @@ import React from "react";
 
 export const CartLi = (props) => {
   return (
-    <div className="d-flex w-50">
-      <img src={props.imagen} alt="" style={{ height: 80, width: "auto" }} />
-      <div className="mx-3">
-        <h5>{props.nombre}</h5>
+    <div className="d-flex col-lg-6 col-sm-8">
+      <img src={props.imagen} alt="" className="col-lg-4 col-sm-5" />
+      <div className="mx-3 col-lg-8 col-sm-7">
+        <h6>{props.nombre}</h6>
         <p>${props.precio}</p>
       </div>
     </div>

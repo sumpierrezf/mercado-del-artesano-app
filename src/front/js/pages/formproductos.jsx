@@ -38,7 +38,7 @@ export const Productos = (props) => {
       descripcion,
       condicion,
       urls,
-      store.user_id
+      localStorage.user_id
     );
   }
 
@@ -75,28 +75,20 @@ export const Productos = (props) => {
   const handleChange = (event) => {
     setCondicion(event.target.value);
   };
-
+  const handleCategoria = (event) => {
+    setCategoria(event.target.value);
+  };
   return (
     <>
-      {store.auth === false ? (
+      {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div style={{ backgroundColor: "#FDEEDC" }}>
-          <h2
-            className="d-flex justify-content-center"
-            style={{
-              color: "#E89A5A",
-            }}
-          >
-            Publica tu producto
-          </h2>
+        <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4">
+          <h2 className="d-flex justify-content-center">Publica tu producto</h2>
 
-          <div
-            className="d-flex container w-75"
-            style={{ backgroundColor: "#FDEEDC" }}
-          >
-            <form className="w-50 mx-auto row" onSubmit={enviarForm}>
-              <span className="border border-1"></span>
+          <div className="container w-75">
+            <form className="mx-auto row" onSubmit={enviarForm}>
+              <hr className="border-marron mt-4"></hr>
               {/* ______________________Nombre_______________________________________ */}
 
               <div className="col-md-6">
@@ -122,15 +114,21 @@ export const Productos = (props) => {
                   htmlFor="exampleInputCategoria1"
                   className="form-label"
                 ></label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="exampleInputCategoria1"
-                  aria-describedby="categoriaHelp"
-                  placeholder="Categoria"
+                <select
+                  id="categoria"
+                  name="categoria"
+                  className="form-select"
+                  aria-label="Default select example"
                   value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
-                />
+                  onChange={handleCategoria}
+                >
+                  <option value>Selecciona la categoría</option>
+                  <option value="Tazas">Tazas</option>
+                  <option value="Gorros">Gorros</option>
+                  <option value="Madera">Madera</option>
+                  <option value="Tejidos">Tejidos</option>
+                  <option value="Pinturas">Pinturas</option>
+                </select>
               </div>
 
               {/* ________________________Precio______________________________________________ */}
@@ -220,10 +218,7 @@ export const Productos = (props) => {
                   type="file"
                   name="Subir imagen "
                   multiple
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
+                  className="btn text-marron bg-naranja-100 w-100 border-marron"
                 />
               </div>
               {/* <input
@@ -239,22 +234,14 @@ export const Productos = (props) => {
               <div className="d-flex justify-content-center mt-4">
                 <button
                   type="submit"
-                  className="btn btn-warning me-3"
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
+                  className="btn me-3 text-marron bg-naranja-100 border-marron"
                 >
                   Cancelar
                 </button>
                 <button
                   // onClick={(e) => enviarForm(e)}
                   type="submit"
-                  className="btn btn-warning"
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
+                  className="btn text-marron bg-naranja-100 border-marron"
                 >
                   Publicar
                 </button>
