@@ -18,6 +18,7 @@ class User(db.Model):
     profile_picture = db.Column(db.String(120), unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='user', lazy=True)
     cart = db.relationship('Cart', backref='user', lazy=True)
+    reviews = db.relationship('Reviews', backref='user', lazy=True)
     products = db.relationship('Products', backref='user', lazy=True)
 
     def __repr__(self):
@@ -101,6 +102,7 @@ class Products(db.Model):
     # img4 = db.Column(db.String(120), unique=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
+    reviews = db.relationship('Reviews', backref='products', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
@@ -116,10 +118,31 @@ class Products(db.Model):
             "description": self.description,
             "condition": self.condition,
             "user_id": self.user_id,
-            "img1": self.img1
+            "img1": self.img1,
+            "reviews": list(map(lambda item: item.serialize(), self.reviews)),
             # "img2": self.img2,
             # "img3": self.img3,
             # "img4": self.img4
             # do not serialize the password, its a security breach
         }
 
+class Reviews(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    reviews = db.Column(db.String(220), unique=False, nullable=True)
+    calification = db.Column(db.Integer, unique=False, nullable=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+
+    def __repr__(self):
+        return f'<Reviews {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "reviews": self.reviews,
+            "calification": self.calification,
+            "product_id": self.product_id,
+            "user_id": self.user_id,
+            # do not serialize the password, its a security breach
+        }
+    
