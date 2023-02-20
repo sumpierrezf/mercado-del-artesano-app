@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-t1yu65lv4kf.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user_info: [],
       image: "",
       url: "",
+      getReviews: [],
     },
 
     actions: {
@@ -126,7 +127,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
-      getUserInfo: (id) => {
+      getUserInfo: () => {
+        let id = localStorage.getItem("user_id");
+        console.log(id);
         fetch(back + "/api/user/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -168,24 +171,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
-      uploadImage: () => {
-        const store = getStore();
-        const data = new FormData();
-        data.append("file", store.image);
-        data.append("upload_preset", "pdnsjg41");
-        data.append("cloud_name", "dlesv1phq");
-        fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
-          method: "POST",
-          body: data,
-        })
-          .then((resp) => resp.json())
-          .then((data) =>
-            setStore({
-              url: data.url,
-            })
-          )
-          .catch((err) => console.log(err));
-      },
+      // uploadImage: () => {
+      //   const store = getStore();
+      //   const data = new FormData();
+      //   data.append("file", store.image);
+      //   data.append("upload_preset", "pdnsjg41");
+      //   data.append("cloud_name", "dlesv1phq");
+      //   fetch("https://api.cloudinary.com/v1_1/dlesv1phq/image/upload", {
+      //     method: "POST",
+      //     body: data,
+      //   })
+      //     .then((resp) => resp.json())
+      //     .then((data) =>
+      //       setStore({
+      //         url: data.url,
+      //       })
+      //     )
+      //     .catch((err) => console.log(err));
+      // },
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -200,7 +203,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
-
       createProduct: (
         nombre,
         categoria,
@@ -212,7 +214,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
-        fetch(process.env.BACKEND_URL + "/api/upload_product/" + user_id, {
+        fetch(back + "/api/upload_product/" + user_id, {
           method: "POST",
           // mode: "no-cors",
           // credentials: "include",
@@ -227,12 +229,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             description: descripcion,
             condition: condicion,
             img1: imagen,
-            // img2: img2,
-            // img3: img3,
-            // img4: img4,
-            user_id: user_id,
+            // user_id: user_id,
           }),
-        });
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => console.log(error));
       },
 
       signup: (
@@ -313,6 +317,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
             if (data.msg === "Bad email or password") alert(data.msg);
             localStorage.setItem("token", data.access_token);
+            localStorage.setItem("user_id", data.user_id);
             setStore({
               user_id: data.user_id,
             });
@@ -321,8 +326,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       logout: () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
         setStore({
-          user_id: null,
+          user_info: [],
         });
         setStore({
           auth: false,
@@ -402,6 +408,37 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
         }
+      },
+      obtenerReviews: () => {
+        fetch(back + "/api/reviews/product/" + product_id)
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              getReviews: data,
+            })
+          )
+          .catch((err) => console.error(err));
+      },
+      crearReviews: (product_id, reviews, user) => {
+        fetch(back + "/api/reviews/product/" + product_id, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            reviews: reviews,
+            calification: 4,
+            user: localStorage.getItem("user_id"),
+          }),
+        })
+          .then((res) => res.json())
+          .then(
+            (data) => console.log(data)
+            // setStore({
+            //     getReviews: data,
+            // })
+          )
+          .catch((err) => console.error(err));
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
       changeColor: (index, color) => {
