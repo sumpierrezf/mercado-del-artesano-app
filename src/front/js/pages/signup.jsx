@@ -48,20 +48,13 @@ export const SignUp = (props) => {
       {store.auth === true ? (
         <Navigate to="/" />
       ) : (
-        <div style={{ backgroundColor: "#FDEEDC" }}>
-          <h2
-            className="d-flex justify-content-center"
-            style={{ color: "#E89A5A" }}
-          >
+        <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-5">
+          <h2 className="d-flex text-marron justify-content-center">
             Registro de usuario
           </h2>
-
-          <div
-            className="d-flex container w-75"
-            style={{ backgroundColor: "#FDEEDC" }}
-          >
-            <form className="w-50 mx-auto row" onSubmit={enviarDatos}>
-              <span className="border border-1"></span>
+          <div className="d-flex container w-75">
+            <form className="w-100 mx-auto row" onSubmit={enviarDatos}>
+              <hr className="border-marron m-0"></hr>
               {/* ______________________Nombre_______________________________________ */}
 
               <div className="col-md-6">
@@ -236,27 +229,19 @@ export const SignUp = (props) => {
                   onChange={(e) => setTelefono(e.target.value)}
                 />
               </div>
-              <span className="border border-1"></span>
+              <hr className="border-marron mt-4"></hr>
               {/* ________________________botones______________________________________________ */}
-              <div className="d-flex justify-content-center mt-4">
+              <div className="d-flex justify-content-center mt-2">
                 <button
                   type="submit"
-                  className="btn btn-secondary me-3"
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
+                  className="btn me-3 text-marron bg-naranja-100 border-marron"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={(e) => enviarDatos(e)}
                   type="submit"
-                  className="btn btn-secondary"
-                  style={{
-                    backgroundColor: "#FFD8A9",
-                    color: "#E38B29",
-                  }}
+                  className="btn text-marron bg-naranja-100 border-marron"
                 >
                   Enviar
                 </button>

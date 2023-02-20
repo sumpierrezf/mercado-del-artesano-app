@@ -6,7 +6,7 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
     actions.obtenerInfoProductos();
-    actions.getUserInfo(store.user_id);
+    actions.getUserInfo(localStorage.user_id);
   }, []);
   // console.log(store.productos[0]);
   return (
@@ -51,10 +51,10 @@ export const Home = () => {
             Catálogo de productos
           </h2>
           <div
-            className="d-flex mx-auto w-100 col-sm-8 col-lg-10 p-3 pt-0"
+            className="d-flex justify-content-center mx-auto w-100 col-sm-8 col-lg-10 p-3 pt-0"
             // style={{ overflowX: "scroll", height: "55 0px" }}
           >
-            <div className="d-flex justify-content-center row row-cols-4">
+            <div className="d-flex justify-content-center row">
               {store.productos
                 ?.filter((item) => item.category.includes(store.categoria))
                 .map((cadaProducto, index) => (
@@ -66,7 +66,7 @@ export const Home = () => {
                     price={cadaProducto.price}
                     amount={cadaProducto.amount}
                     img1={cadaProducto.img1}
-                    user_id={store.user_id}
+                    user_id={localStorage.user_id}
                     product_id={cadaProducto.id}
                   />
                 ))}

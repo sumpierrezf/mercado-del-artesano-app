@@ -10,31 +10,26 @@ export const Favs = () => {
   const params = useParams();
 
   useEffect(() => {
-    actions.getUserFavs(store.user_id);
+    actions.getUserFavs(localStorage.user_id);
   }, [store.fav_products]);
 
   return (
     <>
-      {store.auth === false ? (
+      {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div
-          className="bg-naranja-200 border-marron m-auto rounded row p-5 pt-4 my-4 h-100"
-          style={{
-            width: "85%",
-          }}
-        >
-          <p className="text-end mb-0" style={{ height: "20px" }}>
+        <div className="col-11 row bg-naranja-200 border-marron m-auto rounded p-5 pt-4 my-4">
+          <p className="col-12 text-end mb-3" style={{ height: "20px" }}>
             {store.fav_products.length} favoritos
           </p>
-          <div className="bg-naranja-100 border-marron col-3 rounded">
-            <h4 className="mt-3 text-center">Categoría</h4>
+          <div className="bg-naranja-100 border-marron col-sm-3 col-lg-2 rounded">
+            <h5 className="mt-3 text-center">Categoría</h5>
             <hr className="my-1 border-marron" />
             <div className="w-100 d-flex justify-content-center">
               <button
-                className="btn text-marron bg-naranja-100 rounded w-50 mt-3"
+                className="btn text-marron bg-naranja-100 rounded p-0"
                 style={{
-                  height: "35px",
+                  height: "22.54px",
                 }}
                 onClick={actions.eliminarFiltro}
               >
@@ -55,13 +50,15 @@ export const Favs = () => {
               <option value="Pintura">Pintura</option>
             </select>
           </div>
-          <div className="col-9">
+
+          <div className="col-sm-9 col-lg-10">
             <div className="bg-naranja-100 border-marron rounded">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
                 <li className="list-group-item bg-naranja-100 text-marron border-marron">
                   <h4>Favoritos</h4>
                 </li>
+                <hr className="m-0 border-marron opacity-0" />
 
                 {/* __________________MAP________________________ */}
                 {store.fav_products
@@ -78,7 +75,7 @@ export const Favs = () => {
                         precio={item.productsInfo.price}
                         imagen={item.productsInfo.img1}
                       />
-                      <div className="w-50">
+                      <div className="col-1 justify-content-end">
                         <button
                           className="float-end rounded bg-naranja-200 text-marron border-marron"
                           style={{
@@ -87,12 +84,12 @@ export const Favs = () => {
                           }}
                           onClick={() =>
                             actions.borrarFavorito(
-                              store.user_id,
+                              localStorage.user_id,
                               item.product_id
                             )
                           }
                         >
-                          Eliminar favorito
+                          <i className="fa fa-trash"></i>
                         </button>
                       </div>
                     </li>
