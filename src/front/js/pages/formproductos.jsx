@@ -13,12 +13,20 @@ export const Productos = (props) => {
   const [loading, setLoading] = useState(false);
   const { store, actions } = useContext(Context);
   const [image, setImage] = useState("");
-  const [url1, setUrl1] = useState("");
-  const [url2, setUrl2] = useState("");
+  const [url, setUrl] = useState("");
 
   async function enviarForm(e) {
     e.preventDefault();
-    console.log(nombre, categoria, precio, stock, descripcion, condicion, url);
+    console.log(
+      nombre,
+      categoria,
+      precio,
+      stock,
+      descripcion,
+      condicion,
+      url
+      // store.user_id
+    );
     await actions.createProduct(
       nombre,
       categoria,
@@ -26,9 +34,8 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      url1,
-      url2
-      // store.user_id
+      url,
+      store.user_id
     );
   }
 
@@ -38,32 +45,13 @@ export const Productos = (props) => {
 
   // dwxvlozfr - cloudname
   // upload - ml_default
-  // const submitImage = async (e) => {
-  //   e.preventDefault();
-  //   const files = e.target.files;
-  //   const data = new FormData();
-  //   for (let i = 0; i < files.length; i++) {
-  //     data.append("file", files[i]);
-  //     data.append("upload_preset", "pdnsjg41");
-  //     data.append("cloud_name", "dlesv1phq");
-  //     const res = await fetch(
-  //       "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
-  //       {
-  //         method: "POST",
-  //         body: data,
-  //       }
-  //     );
-  //     const file = await res.json();
-  //     setUrl(file.secure_url);
-  //   }
-  // };
-  // const handleChange = (event) => {
-  //   setCondicion(event.target.value);
-  // };
-  const submitImage = async (file1, file2) => {
-    const uploadImage = async (file) => {
-      const data = new FormData();
-      data.append("file", file);
+  const submitImage = async (e) => {
+    e.preventDefault();
+    const files = e.target.files;
+    const data = new FormData();
+    const imagenes = [];
+    for (let i = 0; i < files.length; i++) {
+      data.append("file", files[i]);
       data.append("upload_preset", "pdnsjg41");
       data.append("cloud_name", "dlesv1phq");
       const res = await fetch(
@@ -74,12 +62,13 @@ export const Productos = (props) => {
         }
       );
       const file = await res.json();
-      return file.secure_url;
-    };
-
-    const url1 = await uploadImage(file1);
-    const url2 = await uploadImage(file2);
-    return [url1, url2];
+      // imagenes.concat(file.secure_url);
+      setUrl(file.secure_url);
+    }
+    // console.log(imagenes);
+  };
+  const handleChange = (event) => {
+    setCondicion(event.target.value);
   };
 
   return (

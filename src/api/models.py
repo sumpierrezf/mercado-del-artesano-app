@@ -97,7 +97,7 @@ class Products(db.Model):
     description = db.Column(db.String(120), unique=False, nullable=False)
     condition = db.Column(db.String(120), unique=False, nullable=False)
     img1 = db.Column(db.String(120), unique=False)
-    img2 = db.Column(db.String(120), unique=False)
+    # img2 = db.Column(db.String(120), unique=False)
     # img3 = db.Column(db.String(120), unique=False)
     # img4 = db.Column(db.String(120), unique=False)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
@@ -120,16 +120,10 @@ class Products(db.Model):
             "user_id": self.user_id,
             "img1": self.img1,
             "reviews": list(map(lambda item: item.serialize(), self.reviews)),
-            "img2": self.img2,
+            # "img2": self.img2,
             # "img3": self.img3,
             # "img4": self.img4
             # do not serialize the password, its a security breach
-        }
-
-    def serializeUser(self):
-        results = User.query.filter_by(id = self.user_id).first()
-        return{
-            "sellerInfo": results.serialize()
         }
 
 class Reviews(db.Model):
