@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-f0v767qpyso.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -30,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       image: "",
       url: "",
       getReviews: [],
+      sellerProducts: [],
     },
 
     actions: {
@@ -349,6 +350,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error.response.data.msg);
           }
         }
+      },
+      getSellerProducts: (id) => {
+        fetch(back + "/api/seller/products/" + id)
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              sellerProducts: data,
+            })
+          )
+          .catch((err) => console.error(err));
       },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {

@@ -64,6 +64,16 @@ def get_info_product(product_id):
 
     return jsonify(results), 200
 
+@api.route("/seller/products/<int:user_id>", methods=["GET"])
+def get_seller_products(user_id):
+    products = Products.query.filter_by(user_id=user_id).all()
+    print(products)
+
+    results = list(map(lambda item: {**item.serializeUser(), **item.serialize()}, products))
+    print(results)
+
+    return jsonify(results), 200
+
 
 @api.route("/user/favorites/<int:user_id>", methods=["GET"])
 def handle_user_favorites(user_id):

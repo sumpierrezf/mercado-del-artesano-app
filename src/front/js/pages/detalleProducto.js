@@ -35,8 +35,20 @@ export const DetalleProducto = ({ id }) => {
   useEffect(() => {
     actions.obtenerDetalleProducto(params.theid);
     actions.obtenerReviews(params.theid);
+    actions.getSellerProducts(store.detalleProducto.user_id);
   }, []);
-  // console.log(store.detalleProducto);
+  console.log(store.sellerProducts);
+  console.log(store.detalleProducto.user_id);
+
+  let sellerCalification = 0;
+
+  for (let i = 0; i < store.sellerProducts.length; i++) {
+    sellerCalification += store.sellerProducts[i]?.reviews[i]?.calification;
+    // /
+    // store.sellerProducts.length;
+  }
+  console.log(store.sellerProducts[0]?.reviews[0]?.calification);
+  console.log(sellerCalification);
 
   return (
     <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
@@ -74,14 +86,14 @@ export const DetalleProducto = ({ id }) => {
           </div>
           <div className="producto">
             <h4>
-              Nombre del producto: {store.detalleProducto.name}
+              {store.detalleProducto.name}
               <button
-                className="btn text-danger"
+                className="btn text-danger float-end"
                 onClick={() =>
-                  store.user_id == null
+                  localStorage.user_id == null
                     ? alert("Debes iniciar sesión")
                     : actions.addToFavorites(
-                        store.user_id,
+                        localStorage.user_id,
                         store.detalleProducto.id
                       )
                 }
@@ -95,7 +107,7 @@ export const DetalleProducto = ({ id }) => {
               {/*aca tengo q traer el precio del producto*/}
             </p>
             <p>
-              Stock disponible: {store.detalleProducto.amount} /no disponible:{" "}
+              Stock disponible: {store.detalleProducto.amount} unidades
               {/*aca tengo q traer el stock del producto*/}
             </p>
             {/* Seleccionar cantidad */}
@@ -126,10 +138,10 @@ export const DetalleProducto = ({ id }) => {
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
-                store.user_id == null
+                localStorage.user_id == null
                   ? alert("Debes iniciar sesión")
                   : actions.agregarAlCarrito(
-                      store.user_id,
+                      localStorage.user_id,
                       store.detalleProducto.id,
                       cantidad
                     )
@@ -150,13 +162,15 @@ export const DetalleProducto = ({ id }) => {
           <p>{store.detalleProducto.description}</p>
         </div>
         {/* INFO DEL VENDEDOR */}
-        <div className="col-sm-4 me-4 mb-3 p-1 rounded-1 border-marron bg-naranja-100">
-          <h4>Nombre del vendedor.</h4>
+        <div className="col-sm-4 me-4 mb-3 p-2 rounded-1 border-marron bg-naranja-100">
+          <h4>{store.detalleProducto.sellerInfo?.first_name}</h4>
           <div>
             {/* ICONO UBICACION */}
             <p>
               <i className="fas fa-map-marker-alt m-1"></i>
-              Ubicación:
+              {store.detalleProducto.sellerInfo?.city}
+              {", "}
+              {store.detalleProducto.sellerInfo?.country}
             </p>
           </div>
           <div>
