@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-llyn12ej4w0.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -203,6 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
       createProduct: (
         nombre,
         categoria,
@@ -409,7 +410,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
         }
       },
-      obtenerReviews: () => {
+      obtenerReviews: (product_id) => {
         fetch(back + "/api/reviews/product/" + product_id)
           .then((res) => res.json())
           .then((data) =>
@@ -419,7 +420,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
           .catch((err) => console.error(err));
       },
-      crearReviews: (product_id, reviews, user) => {
+      crearReviews: (product_id, reviews, stars) => {
         fetch(back + "/api/reviews/product/" + product_id, {
           method: "POST",
           headers: {
@@ -427,17 +428,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             reviews: reviews,
-            calification: 4,
+            calification: stars,
             user: localStorage.getItem("user_id"),
           }),
         })
           .then((res) => res.json())
-          .then(
-            (data) => console.log(data)
-            // setStore({
-            //     getReviews: data,
-            // })
-          )
+          .then((data) => {
+            console.log(data);
+            if (data.msg === "Comentario subido") {
+              getActions().obtenerReviews(product_id);
+            }
+          })
           .catch((err) => console.error(err));
       },
       //FIN DE FUNCIONES AGREGADAS POR VIQUI
