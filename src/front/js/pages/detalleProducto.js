@@ -35,11 +35,44 @@ export const DetalleProducto = ({ id }) => {
   useEffect(() => {
     actions.obtenerDetalleProducto(params.theid);
     actions.obtenerReviews(params.theid);
+    actions.getSellerProducts(store.detalleProducto.user_id);
   }, []);
-  // console.log(store.detalleProducto);
 
+  // ___________________Calificación del vendedor__________________________
+
+  let sellerCalificationSum = 0;
+  let sellerCalificationCount = 0;
+
+  for (let i = 0; i < store.sellerProducts.length; i++) {
+    const product = store.sellerProducts[i];
+    for (let j = 0; j < product.reviews.length; j++) {
+      const review = product.reviews[j];
+      if (review?.calification != null) {
+        sellerCalificationSum += review.calification;
+        sellerCalificationCount++;
+      }
+    }
+  }
+
+  const sellerCalificationAverage =
+    sellerCalificationCount > 0
+      ? sellerCalificationSum / sellerCalificationCount
+      : 0;
+
+  // ___________________Cierre de: Calificación del vendedor__________________________
+
+  // ___________________Ventas del vendedor_________________________________________
+  let sellerSales = 0;
+
+  for (let i = 0; i < store.sellerProducts.length; i++) {
+    sellerSales += store.sellerProducts[i].sales;
+  }
+  console.log(sellerSales);
+  // ___________________Cierre de: Ventas del vendedor__________________________
+
+  console.log(store.detalleProducto);
   return (
-    <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
+    <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
       <div className="row">
         {/* PRIMER COLUMNA */}
@@ -58,9 +91,9 @@ export const DetalleProducto = ({ id }) => {
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
-        <div className="d-flex container col-sm-4 rounded-1 border-marron">
+        <div className="d-flex container col-sm-4 rounded-1">
           <img
-            className="img-fluid m-1 rounded-1"
+            className="img-fluid m-1 rounded-1 border-marron"
             src={store.detalleProducto.img1}
           />
         </div>
@@ -70,18 +103,18 @@ export const DetalleProducto = ({ id }) => {
             <p className="me-1">Estado: {store.detalleProducto.condition}</p>
             {/*aca tengo q traer la condicion del producto*/}
             <p className="me-1">|</p>
-            <p>Nro. veces vendido</p>
+            <p>N° de ventas: {store.detalleProducto.sales || "0"}</p>
           </div>
           <div className="producto">
             <h4>
-              Nombre del producto: {store.detalleProducto.name}
+              {store.detalleProducto.name}
               <button
-                className="btn text-danger"
+                className="btn text-danger float-end"
                 onClick={() =>
-                  store.user_id == null
+                  localStorage.user_id == null
                     ? alert("Debes iniciar sesión")
                     : actions.addToFavorites(
-                        store.user_id,
+                        localStorage.user_id,
                         store.detalleProducto.id
                       )
                 }
@@ -95,7 +128,7 @@ export const DetalleProducto = ({ id }) => {
               {/*aca tengo q traer el precio del producto*/}
             </p>
             <p>
-              Stock disponible: {store.detalleProducto.amount} /no disponible:{" "}
+              Stock disponible: {store.detalleProducto.amount} unidades
               {/*aca tengo q traer el stock del producto*/}
             </p>
             {/* Seleccionar cantidad */}
@@ -126,10 +159,10 @@ export const DetalleProducto = ({ id }) => {
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
-                store.user_id == null
+                localStorage.user_id == null
                   ? alert("Debes iniciar sesión")
                   : actions.agregarAlCarrito(
-                      store.user_id,
+                      localStorage.user_id,
                       store.detalleProducto.id,
                       cantidad
                     )
@@ -150,28 +183,30 @@ export const DetalleProducto = ({ id }) => {
           <p>{store.detalleProducto.description}</p>
         </div>
         {/* INFO DEL VENDEDOR */}
-        <div className="col-sm-4 me-4 mb-3 p-1 rounded-1 border-marron bg-naranja-100">
-          <h4>Nombre del vendedor.</h4>
+        <div className="col-sm-4 me-4 mb-3 p-2 rounded-1 border-marron bg-naranja-100">
+          <h4>{store.detalleProducto.sellerInfo?.first_name}</h4>
           <div>
             {/* ICONO UBICACION */}
             <p>
               <i className="fas fa-map-marker-alt m-1"></i>
-              Ubicación:
+              {store.detalleProducto.sellerInfo?.city}
+              {", "}
+              {store.detalleProducto.sellerInfo?.country}
             </p>
           </div>
           <div>
             {/* ICONO barra de progreso? */}
             <p>
               <i className="fas fa-bars m-1"></i>
-              Calificación:
+              Calificación: {Math.round(sellerCalificationAverage)} /5
             </p>
           </div>
           <div>
-            <p>Ventas:</p>
+            <p>Ventas: {sellerSales}</p>
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
-        <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100">
+        <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100 pt-2">
           <h3>
             Califica este producto
             <form>
@@ -219,9 +254,9 @@ export const DetalleProducto = ({ id }) => {
               </p>
             </form>
           </h3>
-          <div className="form-floating border-marron bg-naranja-100 mb-2">
+          <div className="form-floating bg-naranja-100 mb-1">
             <textarea
-              className="form-control"
+              className="form-control border-marron"
               placeholder="Leave a comment here"
               id="floatingTextarea"
               value={comment}
@@ -232,20 +267,20 @@ export const DetalleProducto = ({ id }) => {
             <label htmlFor="floatingTextarea">Comentarios</label>
           </div>
           <button
-            className="btn bg-naranja-200 mb-2"
+            className="btn bg-naranja-200 my-2"
             onClick={agregarComentario}
           >
             <small>Agregar comentario.</small>
           </button>
-          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 m-1 pb-2">
+          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pt-2">
             <div className="container">
               <p>Comentarios de los clientes:</p>
               {store.getReviews.map((item, index) => (
                 <div
-                  className="container col-sm-12 rounded-1 bg-naranja-100 m-1 text-start p-1"
+                  className="container col-sm-12 rounded-1 bg-naranja-100 text-start px-2 mb-3 py-1"
                   key={index}
                 >
-                  {store.user_info.first_name} calificó {""}
+                  {item.userInfo.first_name} calificó {""}
                   {item.calification} estrellas
                   <br />
                   {item.reviews}
