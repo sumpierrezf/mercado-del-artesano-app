@@ -33,13 +33,15 @@ export const Cart = () => {
     actions.getUserProductsInCart(localStorage.user_id);
   }, [store.products_in_cart]);
 
-  const pagar = async () => {
+  const pagar = async (e) => {
+    e.preventDefault();
     let total = subtotal * 1.22;
     console.log(total);
-    await actions.pagoMercadoPago(total);
+    await actions.pagoMercadoPago(total, localStorage.user_id);
     let direccion = await store.mercadoPago.init_point;
     // console.log(direccion);
     window.location.replace(direccion);
+    // console.log("funciona");
   };
 
   return (
