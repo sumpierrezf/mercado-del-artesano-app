@@ -40,15 +40,30 @@ export const DetalleProducto = ({ id }) => {
   console.log(store.sellerProducts);
   console.log(store.detalleProducto.user_id);
 
-  let sellerCalification = 0;
+  // ___________________Calificación del vendedor__________________________
+
+  let sellerCalificationSum = 0;
+  let sellerCalificationCount = 0;
 
   for (let i = 0; i < store.sellerProducts.length; i++) {
-    sellerCalification += store.sellerProducts[i]?.reviews[i]?.calification;
-    // /
-    // store.sellerProducts.length;
+    const product = store.sellerProducts[i];
+    for (let j = 0; j < product.reviews.length; j++) {
+      const review = product.reviews[j];
+      if (review?.calification != null) {
+        sellerCalificationSum += review.calification;
+        sellerCalificationCount++;
+      }
+    }
   }
-  console.log(store.sellerProducts[0]?.reviews[0]?.calification);
-  console.log(sellerCalification);
+
+  const sellerCalificationAverage =
+    sellerCalificationCount > 0
+      ? sellerCalificationSum / sellerCalificationCount
+      : 0;
+
+  console.log(sellerCalificationAverage);
+
+  // ___________________Cierre de: Calificación del vendedor__________________________
 
   return (
     <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
@@ -177,7 +192,7 @@ export const DetalleProducto = ({ id }) => {
             {/* ICONO barra de progreso? */}
             <p>
               <i className="fas fa-bars m-1"></i>
-              Calificación:
+              Calificación: {sellerCalificationAverage} /5
             </p>
           </div>
           <div>
