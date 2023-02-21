@@ -303,9 +303,9 @@ def preference():
             "email":"test_user_17805074@testuser.com"
         },
         "back_urls": {
-            "success": "https://3000-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io",#esta url es del front
-            "failure": "https://3000-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io",#esta url es del front
-            "pending": "https://3000-sumpierrezf-mercadodela-urfrqnxtob6.ws-us87.gitpod.io"#esta url es del front
+            "success": "https://3000-sumpierrezf-mercadodela-bbmztxwdm6h.ws-us87.gitpod.io",#esta url es del front
+            "failure": "https://3000-sumpierrezf-mercadodela-bbmztxwdm6h.ws-us87.gitpod.io",#esta url es del front
+            "pending": "https://3000-sumpierrezf-mercadodela-bbmztxwdm6h.ws-us87.gitpod.io"#esta url es del front
 	},
         "auto_return": "approved"
     }
@@ -365,6 +365,20 @@ def add_new_review(product_id):
         return jsonify({"msg": "Comentario subido"}), 200
     else:
         return jsonify({"msg": "Ya hiciste un comentario sobre este producto"}), 400
+
+@api.route('/sales', methods=['PUT'])
+def update_product_sales():
+    
+    request_body = request.json
+
+    product = Products.query.filter_by(id=request_body["id"]).first()
+    
+    if product is None:
+        return jsonify({"msg":"Producto no encontrado"}),404
+
+    product.sales=request_body["sales"]
+    db.session.commit()
+    return jsonify(product.serialize()), 200
     
 
     
