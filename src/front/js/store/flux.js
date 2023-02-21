@@ -228,6 +228,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
+        console.log(imagen[1]);
         fetch(back + "/api/upload_product/" + user_id, {
           method: "POST",
           // mode: "no-cors",
