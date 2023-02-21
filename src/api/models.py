@@ -122,9 +122,9 @@ class Products(db.Model):
             "img1": self.img1,
             "reviews": list(map(lambda item: item.serialize(), self.reviews)),
             "sales": self.sales,
-            # "img2": self.img2,
-            # "img3": self.img3,
-            # "img4": self.img4
+            "img2": self.img2,
+            "img3": self.img3,
+            "img4": self.img4
             # do not serialize the password, its a security breach
         }
 

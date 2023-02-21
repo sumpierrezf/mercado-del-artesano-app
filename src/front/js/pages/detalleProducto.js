@@ -103,7 +103,7 @@ export const DetalleProducto = ({ id }) => {
             <p className="me-1">Estado: {store.detalleProducto.condition}</p>
             {/*aca tengo q traer la condicion del producto*/}
             <p className="me-1">|</p>
-            <p>N° de ventas: {store.detalleProducto.sales}</p>
+            <p>N° de ventas: {store.detalleProducto.sales || "0"}</p>
           </div>
           <div className="producto">
             <h4>
