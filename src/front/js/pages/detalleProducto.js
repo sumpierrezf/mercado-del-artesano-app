@@ -91,9 +91,9 @@ export const DetalleProducto = ({ id }) => {
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
-        <div className="d-flex container col-sm-4 rounded-1 border-marron">
+        <div className="d-flex container col-sm-4 rounded-1">
           <img
-            className="img-fluid m-1 rounded-1"
+            className="img-fluid m-1 rounded-1 border-marron"
             src={store.detalleProducto.img1}
           />
         </div>
@@ -272,12 +272,12 @@ export const DetalleProducto = ({ id }) => {
           >
             <small>Agregar comentario.</small>
           </button>
-          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pb-3 pt-2">
+          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pt-2">
             <div className="container">
               <p>Comentarios de los clientes:</p>
               {store.getReviews.map((item, index) => (
                 <div
-                  className="container col-sm-12 rounded-1 bg-naranja-100 text-start px-2 py-1"
+                  className="container col-sm-12 rounded-1 bg-naranja-100 text-start px-2 mb-3 py-1"
                   key={index}
                 >
                   {store.user_info.first_name} calificó {""}
