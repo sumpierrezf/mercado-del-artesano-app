@@ -122,10 +122,16 @@ class Products(db.Model):
             "img1": self.img1,
             "reviews": list(map(lambda item: item.serialize(), self.reviews)),
             "sales": self.sales,
-            # "img2": self.img2,
-            # "img3": self.img3,
-            # "img4": self.img4
+            "img2": self.img2,
+            "img3": self.img3,
+            "img4": self.img4
             # do not serialize the password, its a security breach
+        }
+
+    def serializeUser(self):
+        results = User.query.filter_by(id = self.user_id).first()
+        return{
+            "sellerInfo": results.serialize()
         }
 
 class Reviews(db.Model):
@@ -146,5 +152,10 @@ class Reviews(db.Model):
             "product_id": self.product_id,
             "user_id": self.user_id,
             # do not serialize the password, its a security breach
+        }
+    def serializeUser(self):
+        results = User.query.filter_by(id = self.user_id).first()
+        return{
+            "userInfo": results.serialize()
         }
     

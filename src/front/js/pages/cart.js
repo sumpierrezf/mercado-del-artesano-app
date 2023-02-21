@@ -8,13 +8,26 @@ import { CartLi } from "../component/cartli";
 export const Cart = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
-  let subtotal = 0;
 
+  // _______________________________Cálculo_del_subtotal__________________________________
+
+  let subtotal = 0;
   for (let i = 0; i < store.products_in_cart.length; i++) {
     subtotal +=
       store.products_in_cart[i].productsInfo.price *
       store.products_in_cart[i].amount;
   }
+  // _______________________________Cierre_de:Cálculo_del_subtotal__________________________________
+
+  // _______________________________Update_number_of_sales__________________________________
+
+  const updateSales = () => {
+    store.products_in_cart.forEach((cartItem) => {
+      const { product_id, amount } = cartItem;
+      actions.updateProductSales(product_id, amount);
+    });
+  };
+  // _______________________________Cierre_de:Update_number_of_sales__________________________________
 
   useEffect(() => {
     actions.getUserProductsInCart(localStorage.user_id);
@@ -137,7 +150,10 @@ export const Cart = () => {
                 <button
                   type="button"
                   className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-1"
-                  onClick={pagar}
+                  onClick={() => {
+                    pagar();
+                    updateSales();
+                  }}
                 >
                   Pagar
                 </button>
