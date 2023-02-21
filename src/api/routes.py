@@ -60,7 +60,9 @@ def get_info_product(product_id):
     product = Products.query.filter_by(id=product_id).first()
     print(product.serialize())
 
-    return jsonify(product.serialize()), 200
+    results = {**product.serializeUser(), **product.serialize()}
+
+    return jsonify(results), 200
 
 @api.route("/seller/products/<int:user_id>", methods=["GET"])
 def get_seller_products(user_id):

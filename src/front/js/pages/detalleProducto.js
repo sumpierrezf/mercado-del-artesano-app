@@ -61,6 +61,7 @@ export const DetalleProducto = ({ id }) => {
 
   // ___________________Cierre de: Calificación del vendedor__________________________
 
+  console.log(store.detalleProducto);
   return (
     <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
@@ -93,7 +94,7 @@ export const DetalleProducto = ({ id }) => {
             <p className="me-1">Estado: {store.detalleProducto.condition}</p>
             {/*aca tengo q traer la condicion del producto*/}
             <p className="me-1">|</p>
-            <p>Nro. veces vendido</p>
+            <p>N° de ventas: {store.detalleProducto.sales}</p>
           </div>
           <div className="producto">
             <h4>

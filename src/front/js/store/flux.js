@@ -128,6 +128,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         });
       },
+      updateProductSales: (product_id, sales) => {
+        fetch(back + "/api/sales", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: product_id,
+            sales: sales,
+          }),
+        });
+      },
       getUserInfo: () => {
         let id = localStorage.getItem("user_id");
         console.log(id);
