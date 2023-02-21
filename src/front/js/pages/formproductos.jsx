@@ -16,6 +16,7 @@ export const Productos = (props) => {
   const [loading, setLoading] = useState(false);
   const { store, actions } = useContext(Context);
   const [image, setImage] = useState("");
+  const [urls, setUrls] = useState([]);
 
   async function enviarForm(e) {
     e.preventDefault();
@@ -26,8 +27,8 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      image
-      // localStorage.user_id
+      urls
+      // store.user_id
     );
     await actions.createProduct(
       nombre,
@@ -36,7 +37,7 @@ export const Productos = (props) => {
       stock,
       descripcion,
       condicion,
-      image,
+      urls,
       localStorage.user_id
     );
   }
@@ -48,22 +49,52 @@ export const Productos = (props) => {
   // dwxvlozfr - cloudname
   // upload - ml_default
   const submitImage = async (e) => {
+    e.preventDefault();
     const files = e.target.files;
     const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "pdnsjg41");
-    data.append("cloud_name", "dlesv1phq");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImage(file.secure_url);
-    setLoading(false);
+    try {
+      const imagenes = Object.values(files);
+      console.log(files);
+
+      console.log(imagenes);
+      const response = await Promise.all(
+        imagenes.map((item) => {
+          data.append("file", item);
+          data.append("upload_preset", "pdnsjg41");
+          return fetch(
+            "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+            {
+              method: "POST",
+              body: data,
+            }
+          ).then((respons) => respons.json());
+        })
+      );
+      console.log(files);
+      const uploadUrls = response.map((res) => res.secure_url);
+      setUrls(uploadUrls);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // for (let i = 0; i < files.length; i++) {
+    //   data.append("file", files[i]);
+    //   data.append("upload_preset", "pdnsjg41");
+    //   data.append("cloud_name", "dlesv1phq");
+    //   const res = await fetch(
+    //     "https://api.cloudinary.com/v1_1/dlesv1phq/image/upload",
+    //     {
+    //       method: "POST",
+    //       body: data,
+    //     }
+    //   );
+    //   const file = await res.json();
+    //   console.log(file.secure_url);
+    //   imagenes.concat(file.secure_url);
+    //   // setUrl(file.secure_url);
+    // }
+    // setUrls(imagenes);
+    // console.log(imagenes);
   };
   const handleChange = (event) => {
     setCondicion(event.target.value);
@@ -71,10 +102,11 @@ export const Productos = (props) => {
   const handleCategoria = (event) => {
     setCategoria(event.target.value);
   };
+  console.log(urls);
   return (
     <>
       {localStorage.user_id === null ? (
-        <Navigate to="/login" />
+        <Navigate to="/" />
       ) : (
         <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4">
           <h2 className="d-flex justify-content-center">Publica tu producto</h2>
@@ -210,6 +242,7 @@ export const Productos = (props) => {
                   }}
                   type="file"
                   name="Subir imagen "
+                  multiple
                   className="btn text-marron bg-naranja-100 w-100 border-marron"
                 />
               </div>

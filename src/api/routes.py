@@ -50,7 +50,7 @@ def get_user(user_id):
 def get_product():
     allproducts = Products.query.all()
     print(allproducts)
-    results = list(map(lambda item: {**item.serializeUser(), **item.serialize()}, allproducts))
+    results = list(map(lambda item: item.serialize(), allproducts))
     print(results)
     return jsonify(results), 200
 
@@ -60,9 +60,7 @@ def get_info_product(product_id):
     product = Products.query.filter_by(id=product_id).first()
     print(product.serialize())
 
-    results = {**product.serializeUser(), **product.serialize()}
-
-    return jsonify(results), 200
+    return jsonify(product.serialize()), 200
 
 @api.route("/seller/products/<int:user_id>", methods=["GET"])
 def get_seller_products(user_id):
@@ -151,6 +149,7 @@ def add_new_user():
 def add_new_product(user_id):
     request_body = json.loads(request.data)
     print(request_body)
+    print(request_body["img1"][0])
 
     products = Products(
         name=request_body["name"],
@@ -159,13 +158,13 @@ def add_new_product(user_id):
         amount=request_body["amount"],
         description=request_body["description"],
         condition=request_body["condition"],
-        img1=request_body["img1"],
-        # img2=request_body["img2"] or None,
-        # img3=request_body["img3"] or None,
-        # img4=request_body["img4"] or None,
+        img1=request_body["img1"][0],
+        img2=request_body["img2"][1] or None,
+        img3=request_body["img3"][2] or None,
+        img4=request_body["img4"][3] or None,
         user_id=user_id,
     )
-    print(products.serialize())
+    # print(products.serialize())
 
     db.session.add(products)
     db.session.commit()

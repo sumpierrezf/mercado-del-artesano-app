@@ -37,8 +37,6 @@ export const DetalleProducto = ({ id }) => {
     actions.obtenerReviews(params.theid);
     actions.getSellerProducts(store.detalleProducto.user_id);
   }, []);
-  console.log(store.sellerProducts);
-  console.log(store.detalleProducto.user_id);
 
   // ___________________Calificación del vendedor__________________________
 
@@ -60,8 +58,6 @@ export const DetalleProducto = ({ id }) => {
     sellerCalificationCount > 0
       ? sellerCalificationSum / sellerCalificationCount
       : 0;
-
-  console.log(sellerCalificationAverage);
 
   // ___________________Cierre de: Calificación del vendedor__________________________
 
