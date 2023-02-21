@@ -100,6 +100,7 @@ class Products(db.Model):
     img2 = db.Column(db.String(120), unique=False)
     img3 = db.Column(db.String(120), unique=False)
     img4 = db.Column(db.String(120), unique=False)
+    sales = db.Column(db.Integer, unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='products', lazy=True)
     cart = db.relationship('Cart', backref='products', lazy=True)
     reviews = db.relationship('Reviews', backref='products', lazy=True)
@@ -120,6 +121,7 @@ class Products(db.Model):
             "user_id": self.user_id,
             "img1": self.img1,
             "reviews": list(map(lambda item: item.serialize(), self.reviews)),
+            "sales": self.sales,
             # "img2": self.img2,
             # "img3": self.img3,
             # "img4": self.img4
