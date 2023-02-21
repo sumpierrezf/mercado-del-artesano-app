@@ -150,8 +150,8 @@ export const Cart = () => {
                 <button
                   type="button"
                   className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-1"
-                  onClick={() => {
-                    pagar();
+                  onClick={(e) => {
+                    pagar(e);
                     updateSales();
                   }}
                 >
