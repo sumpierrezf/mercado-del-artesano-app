@@ -153,4 +153,9 @@ class Reviews(db.Model):
             "user_id": self.user_id,
             # do not serialize the password, its a security breach
         }
+    def serializeUser(self):
+        results = User.query.filter_by(id = self.user_id).first()
+        return{
+            "userInfo": results.serialize()
+        }
     

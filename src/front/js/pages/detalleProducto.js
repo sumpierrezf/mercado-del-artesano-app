@@ -198,7 +198,7 @@ export const DetalleProducto = ({ id }) => {
             {/* ICONO barra de progreso? */}
             <p>
               <i className="fas fa-bars m-1"></i>
-              Calificación: {sellerCalificationAverage} /5
+              Calificación: {Math.round(sellerCalificationAverage)} /5
             </p>
           </div>
           <div>
@@ -280,7 +280,7 @@ export const DetalleProducto = ({ id }) => {
                   className="container col-sm-12 rounded-1 bg-naranja-100 text-start px-2 mb-3 py-1"
                   key={index}
                 >
-                  {store.user_info.first_name} calificó {""}
+                  {item.userInfo.first_name} calificó {""}
                   {item.calification} estrellas
                   <br />
                   {item.reviews}

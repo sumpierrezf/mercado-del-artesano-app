@@ -360,8 +360,9 @@ def get_product_reviews(product_id):
     reviews = Reviews.query.filter_by(product_id=product_id).all()
 
     results = list(
-        map(lambda item:item.serialize(), reviews)
+        map(lambda item:{**item.serializeUser(), **item.serialize()}, reviews)
     )
+
     return jsonify(results), 200
 
 @api.route('/reviews/product/<int:product_id>', methods=['POST'])
