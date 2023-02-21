@@ -340,7 +340,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             console.log(data);
             if (data.msg === "Bad email or password")
-              swal("Cuidado!", "Error en el email o la contraseña", "warning");
+              swal(
+                "Cuidado!",
+                "Error en el email o en la contraseña",
+                "warning"
+              );
             // alert(data.msg);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user_id", data.user_id);
@@ -415,10 +419,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             amount: amount,
           });
           console.log(response.data);
-          alert("Producto agregado al carrito");
+          swal(
+            "Genial!",
+            "El producto ha sido agregado al carrito!",
+            "success"
+          );
+          // alert("Producto agregado al carrito");
         } catch (error) {
           console.log(error);
-          alert("Ya tienes ese producto en el carrito");
+          swal("Cuidado!", "Ya tienes ese producto en el carrito!", "warning");
+          // alert("Ya tienes ese producto en el carrito");
         }
       },
       vaciarCarrito: async (user_id) => {
@@ -427,6 +437,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             back + "/api/user/cart/delete/" + user_id
           );
           console.log(response.data);
+          // swal("Que pena!", "Has vaciado el carrito", "info");
           //   alert("Has vaciado el carrito");
         } catch (error) {
           console.log(error);
@@ -480,6 +491,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             console.log(data);
             if (data.msg === "Comentario subido") {
+              swal("Gracias!", "Comentario subido!", "success");
               getActions().obtenerReviews(product_id);
             }
           })
