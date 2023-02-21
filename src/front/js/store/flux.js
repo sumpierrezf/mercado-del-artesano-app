@@ -395,12 +395,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             back + "/api/user/cart/delete/" + user_id
           );
           console.log(response.data);
-          alert("Has vaciado el carrito");
+          //   alert("Has vaciado el carrito");
         } catch (error) {
           console.log(error);
         }
       },
-      pagoMercadoPago: async (total) => {
+      pagoMercadoPago: async (total, user_id) => {
+        let store = getStore();
         try {
           const response = await axios.post(back + "/api/preference", {
             total: total,
@@ -409,15 +410,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             mercadoPago: response.data,
           });
-          //   if (response.data.status === "approved") {
-          //     vaciarCarrito(user_id);
-          //     // setStore({
-          //     //   products_in_cart: [],
-          //     // });
-          //   }
+          if (store.mercadoPago.auto_return === "approved") {
+            // setStore({
+            //   products_in_cart: [],
+            // });
+            //NO ESTA FUNCIONANDO CORRECTAMENTE PORQUE VACIA EL CARRITO ANTES DE HACER EL PAGO.
+            getActions().vaciarCarrito(user_id);
+          }
         } catch (error) {
           console.log(error);
         }
+        console.log(store.mercadoPago.auto_return);
       },
       obtenerReviews: (product_id) => {
         fetch(back + "/api/reviews/product/" + product_id)
