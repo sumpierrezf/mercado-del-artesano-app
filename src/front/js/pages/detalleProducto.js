@@ -61,6 +61,15 @@ export const DetalleProducto = ({ id }) => {
 
   // ___________________Cierre de: Calificación del vendedor__________________________
 
+  // ___________________Ventas del vendedor_________________________________________
+  let sellerSales = 0;
+
+  for (let i = 0; i < store.sellerProducts.length; i++) {
+    sellerSales += store.sellerProducts[i].sales;
+  }
+  console.log(sellerSales);
+  // ___________________Cierre de: Ventas del vendedor__________________________
+
   console.log(store.detalleProducto);
   return (
     <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
@@ -193,7 +202,7 @@ export const DetalleProducto = ({ id }) => {
             </p>
           </div>
           <div>
-            <p>Ventas:</p>
+            <p>Ventas: {sellerSales}</p>
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
