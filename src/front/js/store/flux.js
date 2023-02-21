@@ -30,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       image: "",
       url: "",
       getReviews: [],
+      sellerProducts: [],
     },
 
     actions: {
@@ -124,6 +125,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             user_id: user_id,
             product_id: product_id,
             amount: amount,
+          }),
+        });
+      },
+      updateProductSales: (product_id, sales) => {
+        fetch(back + "/api/sales", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: product_id,
+            sales: sales,
           }),
         });
       },
@@ -352,6 +365,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error.response.data.msg);
           }
         }
+      },
+      getSellerProducts: (id) => {
+        fetch(back + "/api/seller/products/" + id)
+          .then((res) => res.json())
+          .then((data) =>
+            setStore({
+              sellerProducts: data,
+            })
+          )
+          .catch((err) => console.error(err));
       },
       //FUNCIONES AGREGADAS POR VIQUI
       obtenerInfoProductos: () => {
