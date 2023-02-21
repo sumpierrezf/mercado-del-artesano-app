@@ -230,6 +230,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             description: descripcion,
             condition: condicion,
             img1: imagen,
+            img2: imagen,
+            img3: imagen,
+            img4: imagen,
             // user_id: user_id,
           }),
         })
