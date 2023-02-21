@@ -60,7 +60,7 @@ export const Home = () => {
                 .map((cadaProducto, index) => (
                   <Catalogo
                     key={index}
-                    id={index + 1}
+                    id={cadaProducto.id}
                     name={cadaProducto.name}
                     category={cadaProducto.category}
                     price={cadaProducto.price}

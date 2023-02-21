@@ -60,7 +60,19 @@ def get_info_product(product_id):
     product = Products.query.filter_by(id=product_id).first()
     print(product.serialize())
 
-    return jsonify(product.serialize()), 200
+    results = {**product.serializeUser(), **product.serialize()}
+
+    return jsonify(results), 200
+
+@api.route("/seller/products/<int:user_id>", methods=["GET"])
+def get_seller_products(user_id):
+    products = Products.query.filter_by(user_id=user_id).all()
+    print(products)
+
+    results = list(map(lambda item: {**item.serializeUser(), **item.serialize()}, products))
+    print(results)
+
+    return jsonify(results), 200
 
 
 @api.route("/user/favorites/<int:user_id>", methods=["GET"])
@@ -348,8 +360,9 @@ def get_product_reviews(product_id):
     reviews = Reviews.query.filter_by(product_id=product_id).all()
 
     results = list(
-        map(lambda item:item.serialize(), reviews)
+        map(lambda item:{**item.serializeUser(), **item.serialize()}, reviews)
     )
+
     return jsonify(results), 200
 
 @api.route('/reviews/product/<int:product_id>', methods=['POST'])
@@ -376,7 +389,7 @@ def update_product_sales():
     if product is None:
         return jsonify({"msg":"Producto no encontrado"}),404
 
-    product.sales=request_body["sales"]
+    product.sales+=request_body["sales"]
     db.session.commit()
     return jsonify(product.serialize()), 200
     
