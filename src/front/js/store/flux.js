@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-bbmztxwdm6h.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-rhzm57l68mt.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -229,10 +229,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             amount: stock,
             description: descripcion,
             condition: condicion,
-            img1: imagen,
-            img2: imagen,
-            img3: imagen,
-            img4: imagen,
+            img1: imagen[0],
+            img2: imagen[1],
+            img3: imagen[2],
+            img4: imagen[3],
             // user_id: user_id,
           }),
         })
