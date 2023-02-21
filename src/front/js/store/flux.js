@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 let back = "https://3001-sumpierrezf-mercadodela-1mjegrv9qxx.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -61,14 +62,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => {
             if (response.status === 200) {
-              alert("Producto agregado a favoritos");
+              swal(
+                "Buen trabajo!",
+                "Producto agregado a favoritos!",
+                "success"
+              );
+              // alert("Producto agregado a favoritos");
             }
             return response.json();
           })
           .then((data) => {
             console.log(data);
             if (data.msg === "Ya tienes ese producto en favoritos")
-              alert(data.msg);
+              swal("Cuidado!", "Ya tienes ese producto en favoritos!", "error");
+            // alert(data.msg);
           })
           .catch((err) => console.log(err));
       },
@@ -332,7 +339,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             console.log(data);
-            if (data.msg === "Bad email or password") alert(data.msg);
+            if (data.msg === "Bad email or password")
+              swal("Cuidado!", "Error en el email o la contraseña", "warning");
+            // alert(data.msg);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user_id", data.user_id);
             setStore({
