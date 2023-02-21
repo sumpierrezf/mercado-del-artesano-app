@@ -106,7 +106,7 @@ export const Productos = (props) => {
   return (
     <>
       {localStorage.user_id === null ? (
-        <Navigate to="/login" />
+        <Navigate to="/" />
       ) : (
         <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4">
           <h2 className="d-flex justify-content-center">Publica tu producto</h2>
