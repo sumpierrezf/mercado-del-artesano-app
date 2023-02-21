@@ -72,7 +72,7 @@ export const DetalleProducto = ({ id }) => {
 
   console.log(store.detalleProducto);
   return (
-    <div className="container flex-wrap p-3 m-3 rounded-1 bg-naranja-200 border-marron text-marron">
+    <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
       <div className="row">
         {/* PRIMER COLUMNA */}
@@ -206,7 +206,7 @@ export const DetalleProducto = ({ id }) => {
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
-        <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100">
+        <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100 pt-2">
           <h3>
             Califica este producto
             <form>
@@ -254,9 +254,9 @@ export const DetalleProducto = ({ id }) => {
               </p>
             </form>
           </h3>
-          <div className="form-floating border-marron bg-naranja-100 mb-2">
+          <div className="form-floating bg-naranja-100 mb-1">
             <textarea
-              className="form-control"
+              className="form-control border-marron"
               placeholder="Leave a comment here"
               id="floatingTextarea"
               value={comment}
@@ -267,17 +267,17 @@ export const DetalleProducto = ({ id }) => {
             <label htmlFor="floatingTextarea">Comentarios</label>
           </div>
           <button
-            className="btn bg-naranja-200 mb-2"
+            className="btn bg-naranja-200 my-2"
             onClick={agregarComentario}
           >
             <small>Agregar comentario.</small>
           </button>
-          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 m-1 pb-2">
+          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pb-3 pt-2">
             <div className="container">
               <p>Comentarios de los clientes:</p>
               {store.getReviews.map((item, index) => (
                 <div
-                  className="container col-sm-12 rounded-1 bg-naranja-100 m-1 text-start p-1"
+                  className="container col-sm-12 rounded-1 bg-naranja-100 text-start px-2 py-1"
                   key={index}
                 >
                   {store.user_info.first_name} calificó {""}
