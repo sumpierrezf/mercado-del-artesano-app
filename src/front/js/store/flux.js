@@ -86,7 +86,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             product_id: id_product,
           }), // body data type must match "Content-Type" header
-        }).catch((err) => console.log(err));
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              swal("Listo!", "El favorito ha sido eliminado!", "success");
+            }
+            return response.json();
+          })
+          .catch((err) => console.log(err));
       },
       handleCategory: (e) => {
         const opcion = e.target.value;
@@ -118,7 +125,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             product_id: id_product,
           }), // body data type must match "Content-Type" header
-        }).catch((err) => console.log(err));
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              swal(
+                "Listo!",
+                "El producto ha sido eliminado del carrito!",
+                "success"
+              );
+            }
+            return response.json();
+          })
+          .catch((err) => console.log(err));
       },
       setAmountInCart: (user_id, product_id, amount) => {
         fetch(back + "/api/cart", {
@@ -541,10 +559,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.msg === "Comentario subido") {
               swal("Gracias!", "Comentario subido!", "success");
               getActions().obtenerReviews(product_id);
+            } else if (
+              data.msg === "Ya hiciste un comentario sobre este producto"
+            ) {
+              swal(
+                "Ya comentaste este producto!",
+                "Tu comentario fue agregado anteriormente!",
+                "warning"
+              );
             }
           })
           .catch((err) => console.error(err));

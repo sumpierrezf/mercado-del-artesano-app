@@ -113,7 +113,11 @@ export const DetalleProducto = ({ id }) => {
                 className="btn text-danger float-end"
                 onClick={() =>
                   localStorage.user_id == null
-                    ? swal("Cuidado!", "Debes iniciar sesión!", "warning")
+                    ? swal(
+                        "No es posible!",
+                        "Debes iniciar sesión para agregar tus favoritos!",
+                        "warning"
+                      )
                     : actions.addToFavorites(
                         localStorage.user_id,
                         store.detalleProducto.id
@@ -161,7 +165,11 @@ export const DetalleProducto = ({ id }) => {
               className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
                 localStorage.user_id == null
-                  ? swal("Cuidado!", "Debes iniciar sesión!", "warning")
+                  ? swal(
+                      "Alto!",
+                      "Debes iniciar sesión para agregar productos al carrito!",
+                      "warning"
+                    )
                   : actions.agregarAlCarrito(
                       localStorage.user_id,
                       store.detalleProducto.id,
