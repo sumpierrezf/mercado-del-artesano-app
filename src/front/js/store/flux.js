@@ -228,6 +228,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         user_id
       ) => {
         console.log(user_id);
+        // console.log(imagen[1]);
+
+        let img1 = null;
+        let img2 = null;
+        let img3 = null;
+        let img4 = null;
+
+        if (imagen.length > 0) {
+          img1 = imagen[0];
+        }
+
+        if (imagen.length > 1) {
+          img2 = imagen[1];
+        }
+
+        if (imagen.length > 2) {
+          img3 = imagen[2];
+        }
+
+        if (imagen.length > 3) {
+          img4 = imagen[3];
+        }
+
         fetch(back + "/api/upload_product/" + user_id, {
           method: "POST",
           // mode: "no-cors",
@@ -242,10 +265,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             amount: stock,
             description: descripcion,
             condition: condicion,
-            img1: imagen,
-            img2: imagen,
-            img3: imagen,
-            img4: imagen,
+            img1: img1,
+            img2: img2,
+            img3: img3,
+            img4: img4,
             // user_id: user_id,
           }),
         })
@@ -332,10 +355,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             console.log(data);
-            if (data.msg === "Bad email or password") {
-              alert(data.msg);
-              return null;
-            }
+            if (data.msg === "Bad email or password") alert(data.msg);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user_id", data.user_id);
             setStore({
