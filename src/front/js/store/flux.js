@@ -261,26 +261,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (imagen.length > 0) {
           img1 = imagen[0];
         }
-        if (imagen.length > 0) {
-          img1 = imagen[0];
-        }
-
         if (imagen.length > 1) {
           img2 = imagen[1];
         }
-        if (imagen.length > 1) {
-          img2 = imagen[1];
-        }
-
         if (imagen.length > 2) {
           img3 = imagen[2];
-        }
-        if (imagen.length > 2) {
-          img3 = imagen[2];
-        }
-
-        if (imagen.length > 3) {
-          img4 = imagen[3];
         }
         if (imagen.length > 3) {
           img4 = imagen[3];
@@ -593,9 +578,5 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
     },
   };
-  //reset the global store
-  setStore({
-    demo: demo,
-  });
 };
 export default getState;
