@@ -264,7 +264,7 @@ def select_product_amount():
     
     request_body = request.json
 
-    cart_filter = Cart.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).first()
+    cart_filter = Cart.query.filter_by(user_id=request_body["user_id"],product_id=request_body["product_id"]).firs()
     
     if cart_filter is None:
         return jsonify({"msg":"No tienes ese producto en el carrito"}),404
