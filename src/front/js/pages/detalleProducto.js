@@ -206,72 +206,77 @@ export const DetalleProducto = ({ id }) => {
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
+
         <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100 pt-2">
-          <h3>
-            Califica este producto
-            <form>
-              <p className="clasificacion">
-                <input
-                  id="radio1"
-                  type="radio"
-                  name="estrellas"
-                  onClick={calificar}
-                  value={5}
-                />
-                <label htmlFor="radio1">★</label>
-                <input
-                  id="radio2"
-                  type="radio"
-                  name="estrellas"
-                  onClick={calificar}
-                  value={4}
-                />
-                <label htmlFor="radio2">★</label>
-                <input
-                  id="radio3"
-                  type="radio"
-                  name="estrellas"
-                  onClick={calificar}
-                  value={3}
-                />
-                <label htmlFor="radio3">★</label>
-                <input
-                  id="radio4"
-                  type="radio"
-                  name="estrellas"
-                  onClick={calificar}
-                  value={2}
-                />
-                <label htmlFor="radio4">★</label>
-                <input
-                  id="radio5"
-                  type="radio"
-                  name="estrellas"
-                  onClick={calificar}
-                  value={1}
-                />
-                <label htmlFor="radio5">★</label>
-              </p>
-            </form>
-          </h3>
-          <div className="form-floating bg-naranja-100 mb-1">
-            <textarea
-              className="form-control border-marron"
-              placeholder="Leave a comment here"
-              id="floatingTextarea"
-              value={comment}
-              onChange={(e) => {
-                setComment(e.target.value);
-              }}
-            ></textarea>
-            <label htmlFor="floatingTextarea">Comentarios</label>
-          </div>
-          <button
-            className="btn bg-naranja-200 my-2"
-            onClick={agregarComentario}
-          >
-            <small>Agregar comentario.</small>
-          </button>
+          {localStorage.user_id == null ? null : (
+            <>
+              <h3>
+                Califica este producto
+                <form>
+                  <p className="clasificacion">
+                    <input
+                      id="radio1"
+                      type="radio"
+                      name="estrellas"
+                      onClick={calificar}
+                      value={5}
+                    />
+                    <label htmlFor="radio1">★</label>
+                    <input
+                      id="radio2"
+                      type="radio"
+                      name="estrellas"
+                      onClick={calificar}
+                      value={4}
+                    />
+                    <label htmlFor="radio2">★</label>
+                    <input
+                      id="radio3"
+                      type="radio"
+                      name="estrellas"
+                      onClick={calificar}
+                      value={3}
+                    />
+                    <label htmlFor="radio3">★</label>
+                    <input
+                      id="radio4"
+                      type="radio"
+                      name="estrellas"
+                      onClick={calificar}
+                      value={2}
+                    />
+                    <label htmlFor="radio4">★</label>
+                    <input
+                      id="radio5"
+                      type="radio"
+                      name="estrellas"
+                      onClick={calificar}
+                      value={1}
+                    />
+                    <label htmlFor="radio5">★</label>
+                  </p>
+                </form>
+              </h3>
+              <div className="form-floating bg-naranja-100 mb-1">
+                <textarea
+                  className="form-control border-marron"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea"
+                  value={comment}
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                  }}
+                ></textarea>
+                <label htmlFor="floatingTextarea">Comentarios</label>
+              </div>
+              <button
+                className="btn bg-naranja-200 my-2"
+                onClick={agregarComentario}
+              >
+                <small>Agregar comentario.</small>
+              </button>
+            </>
+          )}
           <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pt-2">
             <div className="container">
               <p>Comentarios de los clientes:</p>

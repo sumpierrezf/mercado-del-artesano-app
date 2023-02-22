@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
 import banner1 from "../../img/banner1.jpg";
+import logo6_white_nobg from "../../img/logo6_white_nobg.png";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -14,7 +15,7 @@ export const Home = () => {
   return (
     <>
       <div
-        className="w-100"
+        className="banner sw-100"
         style={{
           // backgroundImage: `url(${banner1})`,
           // backgroundImage:
@@ -26,15 +27,23 @@ export const Home = () => {
           // backgroundImage:
           //   "url(https://img.freepik.com/fotos-premium/textura-lana-tejido-punto-cerca_110241-247.jpg?w=2000)",
           backgroundSize: "100%",
-          height: "465px",
         }}
       >
-        <div className="text-light my-auto text-center h-100 d-flex align-items-center">
-          <h1 className="mx-auto">Mercado del Artesano</h1>
+        <div className="text-light text-center h-100 d-flex justify-content-center align-items-center">
+          <div className="mb-5 w-75">
+            <img src={logo6_white_nobg} alt="" width={"150"} height={"auto"} />
+            <h1>Mercado del Artesano</h1>
+            <h5>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam
+              cupiditate at harum dolorum sit numquam tenetur dolores culpa
+              tempora reprehenderit! At et magnam eos tempora nemo id
+              praesentium soluta eveniet!
+            </h5>
+          </div>
         </div>
       </div>
       <div className="container-fluid bg-naranja-100">
-        <div className="row">
+        <div className="row" style={{ minHeight: "500px" }}>
           {/* COLUMNA IZQUIERDA */}
           <div className="col-sm-3 col-lg-2 bg-naranja-200 border-marron-end">
             <h4 className="text-center py-3 mx-auto px-1">Categorías:</h4>
