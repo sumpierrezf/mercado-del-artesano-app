@@ -137,9 +137,11 @@ const Login = () => {
                     >
                       Login
                     </button>
+
                     {/* {formularioEnviado && (
-                      <p className="exito">Login realizado con exito!</p>
-                      
+                      <div className="alert alert-success mt-3">
+                        Gracias por conectarte con nosotros!
+                      </div>
                     )} */}
                   </div>
                 </Form>
