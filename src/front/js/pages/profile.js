@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { Navigate, useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 export const Profile = () => {
   const [password, setPassword] = useState("");
@@ -122,8 +123,10 @@ export const Profile = () => {
                       className="btn bg-naranja-200 border-marron text-marron"
                       onClick={() => {
                         actions.uploadImage();
-                        alert(
-                          "Debes darle a guardar en el fondo del formulario para actualizar tu foto"
+                        swal(
+                          "Recomendación",
+                          "Debes darle a guardar en el botón del formulario para actualizar tu foto",
+                          "warning"
                         );
                       }}
                     >
@@ -305,8 +308,10 @@ export const Profile = () => {
               <button
                 onClick={(e) => {
                   enviarDatos(e);
-                  alert(
-                    "Puede que tengas que recargar la página para que se actualice tu foto de perfil"
+                  swal(
+                    "Recomendación",
+                    "Puede que tengas que recargar la página para que se actualice tu foto de perfil",
+                    "warning"
                   );
                 }}
                 type="submit"
