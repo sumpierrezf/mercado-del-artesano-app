@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import swal from "sweetalert";
 
 export const DetalleProducto = ({ id }) => {
   const { store, actions } = useContext(Context);
@@ -113,8 +114,7 @@ export const DetalleProducto = ({ id }) => {
                 onClick={() =>
                   localStorage.user_id == null
                     ? swal("Cuidado!", "Debes iniciar sesión!", "warning")
-                    : // alert("Debes iniciar sesión")
-                      actions.addToFavorites(
+                    : actions.addToFavorites(
                         localStorage.user_id,
                         store.detalleProducto.id
                       )
@@ -162,8 +162,7 @@ export const DetalleProducto = ({ id }) => {
               onClick={() =>
                 localStorage.user_id == null
                   ? swal("Cuidado!", "Debes iniciar sesión!", "warning")
-                  : // alert("Debes iniciar sesión")
-                    actions.agregarAlCarrito(
+                  : actions.agregarAlCarrito(
                       localStorage.user_id,
                       store.detalleProducto.id,
                       cantidad
