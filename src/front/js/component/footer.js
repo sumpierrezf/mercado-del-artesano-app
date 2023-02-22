@@ -4,7 +4,7 @@ export const Footer = () => (
   <footer className="footer bg-naranja-200 shadow-lg mt-auto py-3 text-center w-100 h-auto d-flex">
     <div className="col-6 d-flex align-items-center">
       <p className="my-auto mx-auto">
-        Made with 🧡 by{" "}
+        Hecho con 🧡 por{" "}
         <a className="text-warning" href="http://www.mercadodelartesano.com">
           Mercado del Artesano
         </a>

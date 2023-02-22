@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import swal from "sweetalert";
 
 export const DetalleProducto = ({ id }) => {
   const { store, actions } = useContext(Context);
@@ -16,14 +17,14 @@ export const DetalleProducto = ({ id }) => {
     await actions.crearReviews(params.theid, comment, stars);
     setComment("");
   }
-  console.log(comment);
+  // console.log(comment);
 
   function calificar(e) {
     setStars(e.target.value);
   }
-  console.log(stars);
+  // console.log(stars);
 
-  console.log(store.getReviews);
+  // console.log(store.getReviews);
   // console.log(store.detalleProducto.id);
   // function agregarAlCarrito() {
   //   // console.log("funciona");
@@ -31,7 +32,7 @@ export const DetalleProducto = ({ id }) => {
   //   setCarrito([...carrito, producto]);
   //   console.log(producto);
   // }
-  console.log(cantidad);
+  // console.log(cantidad);
   useEffect(() => {
     actions.obtenerDetalleProducto(params.theid);
     actions.obtenerReviews(params.theid);
@@ -67,10 +68,10 @@ export const DetalleProducto = ({ id }) => {
   for (let i = 0; i < store.sellerProducts.length; i++) {
     sellerSales += store.sellerProducts[i].sales;
   }
-  console.log(sellerSales);
+  // console.log(sellerSales);
   // ___________________Cierre de: Ventas del vendedor__________________________
 
-  console.log(store.detalleProducto);
+  // console.log(store.detalleProducto);
   return (
     <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
@@ -112,7 +113,11 @@ export const DetalleProducto = ({ id }) => {
                 className="btn text-danger float-end"
                 onClick={() =>
                   localStorage.user_id == null
-                    ? alert("Debes iniciar sesión")
+                    ? swal(
+                        "No es posible!",
+                        "Debes iniciar sesión para agregar tus favoritos!",
+                        "warning"
+                      )
                     : actions.addToFavorites(
                         localStorage.user_id,
                         store.detalleProducto.id
@@ -160,7 +165,11 @@ export const DetalleProducto = ({ id }) => {
               className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
                 localStorage.user_id == null
-                  ? alert("Debes iniciar sesión")
+                  ? swal(
+                      "Alto!",
+                      "Debes iniciar sesión para agregar productos al carrito!",
+                      "warning"
+                    )
                   : actions.agregarAlCarrito(
                       localStorage.user_id,
                       store.detalleProducto.id,

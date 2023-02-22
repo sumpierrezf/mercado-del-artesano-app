@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import swal from "sweetalert";
 
 export const Catalogo = ({
   id,
@@ -48,7 +49,11 @@ export const Catalogo = ({
               className="btn text-warning"
               onClick={() =>
                 localStorage.user_id == null
-                  ? alert("Debes iniciar sesión")
+                  ? swal(
+                      "Atención!",
+                      "Debes iniciar sesión para agregar productos al carrito",
+                      "warning"
+                    )
                   : actions.agregarAlCarrito(user_id, product_id, 1)
               }
             >
@@ -58,7 +63,11 @@ export const Catalogo = ({
               className="btn text-danger"
               onClick={() =>
                 localStorage.user_id == null
-                  ? alert("Debes iniciar sesión")
+                  ? swal(
+                      "Atención!",
+                      "Debes iniciar sesión para guardar tus productos favoritos",
+                      "warning"
+                    )
                   : actions.addToFavorites(user_id, product_id)
               }
             >

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Redirect, Navigate } from "react-router-dom";
+import swal from "sweetalert";
 
 export const SignUp = (props) => {
   const [email, setEmail] = useState("");
@@ -16,9 +17,9 @@ export const SignUp = (props) => {
 
   const { store, actions } = useContext(Context);
 
-  function enviarDatos(e) {
+  async function enviarDatos(e) {
     e.preventDefault();
-    actions.signup(
+    let isLoged = await actions.signup(
       email,
       password,
       nombre,
@@ -30,17 +31,25 @@ export const SignUp = (props) => {
       postal,
       telefono
     );
-    actions.login(email, password);
-    setEmail("");
-    setPassword("");
-    setNombre("");
-    setApellido("");
-    setNacimiento("");
-    setDireccion("");
-    setPais("");
-    setCiudad("");
-    setPostal("");
-    setTelefono("");
+    if (isLoged) {
+      actions.login(email, password);
+      setEmail("");
+      setPassword("");
+      setNombre("");
+      setApellido("");
+      setNacimiento("");
+      setDireccion("");
+      setPais("");
+      setCiudad("");
+      setPostal("");
+      setTelefono("");
+    } else {
+      swal(
+        "Error!",
+        "Ese email ya está registrado, recupera tu contraseña si la has olvidado",
+        "error"
+      );
+    }
   }
 
   return (

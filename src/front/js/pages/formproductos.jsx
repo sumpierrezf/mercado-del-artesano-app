@@ -102,7 +102,7 @@ export const Productos = (props) => {
   const handleCategoria = (event) => {
     setCategoria(event.target.value);
   };
-  console.log(urls);
+  // console.log(urls);
   return (
     <>
       {localStorage.user_id === null ? (

@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 let back = "https://3001-sumpierrezf-mercadodela-nk0odempzv4.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -61,14 +62,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => {
             if (response.status === 200) {
-              alert("Producto agregado a favoritos");
+              swal(
+                "Buen trabajo!",
+                "Producto agregado a favoritos!",
+                "success"
+              );
             }
             return response.json();
           })
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.msg === "Ya tienes ese producto en favoritos")
-              alert(data.msg);
+              swal("Cuidado!", "Ya tienes ese producto en favoritos!", "error");
           })
           .catch((err) => console.log(err));
       },
@@ -81,7 +86,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             product_id: id_product,
           }), // body data type must match "Content-Type" header
-        }).catch((err) => console.log(err));
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              swal("Listo!", "El favorito ha sido eliminado!", "success");
+            }
+            return response.json();
+          })
+          .catch((err) => console.log(err));
       },
       handleCategory: (e) => {
         const opcion = e.target.value;
@@ -113,7 +125,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             product_id: id_product,
           }), // body data type must match "Content-Type" header
-        }).catch((err) => console.log(err));
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              swal(
+                "Listo!",
+                "El producto ha sido eliminado del carrito!",
+                "success"
+              );
+            }
+            return response.json();
+          })
+          .catch((err) => console.log(err));
       },
       setAmountInCart: (user_id, product_id, amount) => {
         fetch(back + "/api/cart", {
@@ -142,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getUserInfo: () => {
         let id = localStorage.getItem("user_id");
-        console.log(id);
+        // console.log(id);
         fetch(back + "/api/user/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -227,7 +250,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         imagen,
         user_id
       ) => {
-        console.log(user_id);
+        // console.log(user_id);
         // console.log(imagen[1]);
 
         let img1 = null;
@@ -238,15 +261,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (imagen.length > 0) {
           img1 = imagen[0];
         }
-
         if (imagen.length > 1) {
           img2 = imagen[1];
         }
-
         if (imagen.length > 2) {
           img3 = imagen[2];
         }
-
         if (imagen.length > 3) {
           img4 = imagen[3];
         }
@@ -274,12 +294,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            if (data.msg === "Producto subido") {
+              swal(
+                "Genial!",
+                "Has subido tu producto correctamente",
+                "success"
+              );
+            }
+            // console.log(data.msg);
           })
           .catch((error) => console.log(error));
       },
 
-      signup: (
+      signup: async (
         email,
         password,
         nombre,
@@ -291,14 +318,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         postal,
         telefono
       ) => {
-        fetch(back + "/api/signup", {
-          method: "POST",
-          mode: "no-cors",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        try {
+          let response = await axios.post(back + "/api/signup", {
             email: email,
             password: password,
             first_name: nombre,
@@ -309,8 +330,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             city: ciudad,
             postal_code: postal,
             phone_number: telefono,
-          }),
-        });
+          });
+          // console.log(response);
+          if (response.status === 200) {
+            // alert(response.data.msg);
+            swal("Genial!", "Has creado tu cuenta correctamente", "success");
+            return true;
+          }
+        } catch (error) {
+          if (error.response.status === 401) {
+            return false;
+          }
+        }
       },
       filterProducts(searchTerm) {
         const store = getStore();
@@ -323,6 +354,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
       },
 
+      // filterProducts: () => {
+      //   fetch(back + "/api/products")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       setStore({
+      //         productos: data.results,
+      //       });
+      //     });
+      // },
       // filterProducts: () => {
       //   fetch(back + "/api/products")
       //     .then((response) => response.json())
@@ -355,7 +395,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             console.log(data);
-            if (data.msg === "Bad email or password") alert(data.msg);
+            if (data.msg === "Bad email or password") {
+              swal(
+                "Cuidado!",
+                "Error en el email o en la contraseña",
+                "warning"
+              );
+              // alert(data.msg);
+              return null;
+            }
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user_id", data.user_id);
             setStore({
@@ -428,11 +476,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             product_id: product_id,
             amount: amount,
           });
-          console.log(response.data);
-          alert("Producto agregado al carrito");
+          // console.log(response.data);
+          swal(
+            "Genial!",
+            "El producto ha sido agregado al carrito!",
+            "success"
+          );
         } catch (error) {
-          console.log(error);
-          alert("Ya tienes ese producto en el carrito");
+          // console.log(error);
+          swal("Cuidado!", "Ya tienes ese producto en el carrito!", "warning");
         }
       },
       vaciarCarrito: async (user_id) => {
@@ -441,7 +493,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             back + "/api/user/cart/delete/" + user_id
           );
           console.log(response.data);
-          //   alert("Has vaciado el carrito");
+          // swal("Que pena!", "Has vaciado el carrito", "info");
         } catch (error) {
           console.log(error);
         }
@@ -492,9 +544,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.msg === "Comentario subido") {
+              swal("Gracias!", "Comentario subido!", "success");
               getActions().obtenerReviews(product_id);
+            } else if (
+              data.msg === "Ya hiciste un comentario sobre este producto"
+            ) {
+              swal(
+                "Ya comentaste este producto!",
+                "Tu comentario fue agregado anteriormente!",
+                "warning"
+              );
             }
           })
           .catch((err) => console.error(err));
@@ -510,7 +571,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
-
         //reset the global store
         setStore({
           demo: demo,
