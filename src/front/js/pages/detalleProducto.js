@@ -17,14 +17,14 @@ export const DetalleProducto = ({ id }) => {
     await actions.crearReviews(params.theid, comment, stars);
     setComment("");
   }
-  console.log(comment);
+  // console.log(comment);
 
   function calificar(e) {
     setStars(e.target.value);
   }
-  console.log(stars);
+  // console.log(stars);
 
-  console.log(store.getReviews);
+  // console.log(store.getReviews);
   // console.log(store.detalleProducto.id);
   // function agregarAlCarrito() {
   //   // console.log("funciona");
@@ -32,7 +32,7 @@ export const DetalleProducto = ({ id }) => {
   //   setCarrito([...carrito, producto]);
   //   console.log(producto);
   // }
-  console.log(cantidad);
+  // console.log(cantidad);
   useEffect(() => {
     actions.obtenerDetalleProducto(params.theid);
     actions.obtenerReviews(params.theid);
@@ -68,10 +68,10 @@ export const DetalleProducto = ({ id }) => {
   for (let i = 0; i < store.sellerProducts.length; i++) {
     sellerSales += store.sellerProducts[i].sales;
   }
-  console.log(sellerSales);
+  // console.log(sellerSales);
   // ___________________Cierre de: Ventas del vendedor__________________________
 
-  console.log(store.detalleProducto);
+  // console.log(store.detalleProducto);
   return (
     <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}

@@ -67,15 +67,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                 "Producto agregado a favoritos!",
                 "success"
               );
-              // alert("Producto agregado a favoritos");
             }
             return response.json();
           })
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.msg === "Ya tienes ese producto en favoritos")
               swal("Cuidado!", "Ya tienes ese producto en favoritos!", "error");
-            // alert(data.msg);
           })
           .catch((err) => console.log(err));
       },
@@ -149,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getUserInfo: () => {
         let id = localStorage.getItem("user_id");
-        console.log(id);
+        // console.log(id);
         fetch(back + "/api/user/" + id)
           .then((res) => res.json())
           .then((data) =>
@@ -234,7 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         imagen,
         user_id
       ) => {
-        console.log(user_id);
+        // console.log(user_id);
         // console.log(imagen[1]);
 
         let img1 = null;
@@ -281,12 +279,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            if (data.msg === "Producto subido") {
+              swal(
+                "Genial!",
+                "Has subido tu producto correctamente",
+                "success"
+              );
+            }
+            // console.log(data.msg);
           })
           .catch((error) => console.log(error));
       },
 
-      signup: (
+      signup: async (
         email,
         password,
         nombre,
@@ -298,14 +303,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         postal,
         telefono
       ) => {
-        fetch(back + "/api/signup", {
-          method: "POST",
-          mode: "no-cors",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        try {
+          let response = await axios.post(back + "/api/signup", {
             email: email,
             password: password,
             first_name: nombre,
@@ -316,8 +315,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             city: ciudad,
             postal_code: postal,
             phone_number: telefono,
-          }),
-        });
+          });
+          // console.log(response);
+          if (response.status === 200) {
+            // alert(response.data.msg);
+            swal("Genial!", "Has creado tu cuenta correctamente", "success");
+            return true;
+          }
+        } catch (error) {
+          if (error.response.status === 401) {
+            return false;
+          }
+        }
       },
       filterProducts(searchTerm) {
         const store = getStore();
@@ -443,17 +452,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             product_id: product_id,
             amount: amount,
           });
-          console.log(response.data);
+          // console.log(response.data);
           swal(
             "Genial!",
             "El producto ha sido agregado al carrito!",
             "success"
           );
-          // alert("Producto agregado al carrito");
         } catch (error) {
-          console.log(error);
+          // console.log(error);
           swal("Cuidado!", "Ya tienes ese producto en el carrito!", "warning");
-          // alert("Ya tienes ese producto en el carrito");
         }
       },
       vaciarCarrito: async (user_id) => {
@@ -463,7 +470,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           console.log(response.data);
           // swal("Que pena!", "Has vaciado el carrito", "info");
-          //   alert("Has vaciado el carrito");
         } catch (error) {
           console.log(error);
         }
