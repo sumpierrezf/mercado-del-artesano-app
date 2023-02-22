@@ -8,7 +8,7 @@ import { Single } from "./pages/single";
 import { Favs } from "./pages/favs";
 import { Productos } from "./pages/formproductos.jsx";
 import injectContext from "./store/appContext";
-import { Login } from "./pages/login.jsx";
+import Login from "./pages/login.jsx";
 import { SignUp } from "./pages/signup.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
