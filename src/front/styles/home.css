@@ -5,10 +5,12 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
 
 body {
   background-color: #fdeedc;
   color: #7b4812;
+  font-family: "Roboto Slab", serif;
 }
 
 body::-webkit-scrollbar {
