@@ -1,5 +1,5 @@
 import axios from "axios";
-let back = "https://3001-sumpierrezf-mercadodela-mqzzyuv2l9f.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-qhkeikcyfr4.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -332,7 +332,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             console.log(data);
-            if (data.msg === "Bad email or password") alert(data.msg);
+            if (data.msg === "Bad email or password") {
+              alert(data.msg);
+              return null;
+            }
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user_id", data.user_id);
             setStore({
