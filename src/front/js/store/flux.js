@@ -1,6 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert";
-let back = "https://3001-sumpierrezf-mercadodela-1mjegrv9qxx.ws-us87.gitpod.io";
+let back = "https://3001-sumpierrezf-mercadodela-ml3k02fd1qi.ws-us87.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -339,13 +339,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             console.log(data);
-            if (data.msg === "Bad email or password")
+            if (data.msg === "Bad email or password") {
               swal(
                 "Cuidado!",
                 "Error en el email o en la contraseña",
                 "warning"
               );
-            // alert(data.msg);
+              // alert(data.msg);
+              return null;
+            }
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user_id", data.user_id);
             setStore({
