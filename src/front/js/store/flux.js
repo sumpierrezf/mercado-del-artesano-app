@@ -335,7 +335,10 @@ const getState = ({
                     })
                     .then((data) => {
                         console.log(data);
-                        if (data.msg === "Bad email or password") alert(data.msg);
+                        if (data.msg === "Bad email or password") {
+                            alert(data.msg);
+                            return null;
+                        }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("user_id", data.user_id);
                         setStore({
