@@ -243,7 +243,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (imagen.length > 0) {
           img1 = imagen[0];
         }
+        if (imagen.length > 0) {
+          img1 = imagen[0];
+        }
 
+        if (imagen.length > 1) {
+          img2 = imagen[1];
+        }
         if (imagen.length > 1) {
           img2 = imagen[1];
         }
@@ -251,7 +257,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (imagen.length > 2) {
           img3 = imagen[2];
         }
+        if (imagen.length > 2) {
+          img3 = imagen[2];
+        }
 
+        if (imagen.length > 3) {
+          img4 = imagen[3];
+        }
         if (imagen.length > 3) {
           img4 = imagen[3];
         }
@@ -339,6 +351,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
       },
 
+      // filterProducts: () => {
+      //   fetch(back + "/api/products")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       setStore({
+      //         productos: data.results,
+      //       });
+      //     });
+      // },
       // filterProducts: () => {
       //   fetch(back + "/api/products")
       //     .then((response) => response.json())
@@ -539,7 +560,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
-
         //reset the global store
         setStore({
           demo: demo,
@@ -547,5 +567,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
     },
   };
+  //reset the global store
+  setStore({
+    demo: demo,
+  });
 };
 export default getState;

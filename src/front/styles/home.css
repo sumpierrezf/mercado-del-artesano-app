@@ -31,3 +31,14 @@ body::-webkit-scrollbar-thumb:hover {
   background: #fae3c8;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
+
+@media only screen and (min-height: 700px) {
+  .banner {
+    height: 954px;
+  }
+}
+@media only screen and (max-height: 699px) {
+  .banner {
+    height: 466px;
+  }
+}
