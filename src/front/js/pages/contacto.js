@@ -60,19 +60,71 @@ export const Contacto = () => {
           <h6>Luciana Marín Pérez</h6>
           <p>
             <button type="button" className="btn btn-link">
-              <Link
-                to={
-                  "https://www.linkedin.com/in/luciana-marin-fullstackdeveloper/"
-                }
+              <a
+                href="https://www.linkedin.com/in/luciana-marin-fullstackdeveloper/"
+                target="_blank"
               >
                 <i className="fab fa-linkedin fs-4"></i>
-              </Link>
+              </a>
+            </button>
+            <button type="button" className="btn btn-link">
+              <a href="https://github.com/lumarin2802" target="_blank">
+                <i className="fab fa-github fs-4"></i>
+              </a>
             </button>
           </p>
         </div>
-        <p>Camila Burgueño</p>
-        <p>Luis Píriz</p>
-        <p>Virginia Umpiérrez</p>
+        <div>
+          <h6>Camila Burgueño</h6>
+          <p>
+            <button type="button" className="btn btn-link">
+              <a
+                href="https://www.linkedin.com/in/camila-nayelli-burgue%C3%B1o-ense%C3%B1at-7b0850251/"
+                target="_blank"
+              >
+                <i className="fab fa-linkedin fs-4"></i>
+              </a>
+            </button>
+            <button type="button" className="btn btn-link">
+              <a href="https://github.com/CamilaBur" target="_blank">
+                <i className="fab fa-github fs-4"></i>
+              </a>
+            </button>
+          </p>
+        </div>
+        <div>
+          <h6>Luis Píriz</h6>
+          <p>
+            <button type="button" className="btn btn-link">
+              <a href="https://www.linkedin.com/in/luis-piriz/" target="_blank">
+                <i className="fab fa-linkedin fs-4"></i>
+              </a>
+            </button>
+            <button type="button" className="btn btn-link">
+              <a href="https://github.com/LuisPiriz" target="_blank">
+                <i className="fab fa-github fs-4"></i>
+              </a>
+            </button>
+          </p>
+        </div>
+        <div>
+          <h6>Virginia Umpiérrez</h6>
+          <p>
+            <button type="button" className="btn btn-link">
+              <a
+                href="https://www.linkedin.com/in/shirley-virginia-umpierrez-sumpierrezf/"
+                target="_blank"
+              >
+                <i className="fab fa-linkedin fs-4"></i>
+              </a>
+            </button>
+            <button type="button" className="btn btn-link">
+              <a href="https://github.com/sumpierrezf" target="_blank">
+                <i className="fab fa-github fs-4"></i>
+              </a>
+            </button>
+          </p>
+        </div>
       </div>
     </>
   );
