@@ -80,7 +80,7 @@ export const Navbar = () => {
             <>
               <div className="float-end dropdown my-auto">
                 <button
-                  className="btn text-marron dropdown-toggle"
+                  className="btn text-marron dropdown-toggle navbar-btns"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -95,7 +95,7 @@ export const Navbar = () => {
                     />
                   ) : (
                     <img
-                      className="rounded-circle border-marron me-2 px-0"
+                      className="rounded-circle border-marron me-1 px-0"
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
                       alt=""
                       width={"25"}
@@ -137,10 +137,10 @@ export const Navbar = () => {
               </div>
 
               <Link
-                className="btn text-marron mx-2 my-auto border-2"
+                className="btn text-marron mx-2 my-auto border-2 p-0"
                 to="/cart"
               >
-                <i className="fa fa-cart-arrow-down">
+                <i className="fa fa-cart-arrow-down navbar-btns">
                   {" "}
                   {store.products_in_cart.length}
                 </i>
