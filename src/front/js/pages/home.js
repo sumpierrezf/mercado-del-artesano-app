@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
 import banner1 from "../../img/banner1.jpg";
@@ -75,6 +76,15 @@ export const Home = () => {
                 </option>
                 <option value="Pinturas">Pinturas</option>
               </select>
+            </div>
+            <h4 className="text-center py-3 mx-auto px-1">Sobre nosotros:</h4>
+            <div className="d-grid gap-2 col-12 mx-auto">
+              <Link
+                to={"/contacto/"}
+                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded"
+              >
+                Contacto
+              </Link>
             </div>
           </div>
           {/* COLUMNA DERECHA */}
