@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import logo6 from "../../img/logo6.png";
+import logo6_nobg from "../../img/logo6_nobg.png";
 import { Catalogo } from "./catalogo";
 
 export const Navbar = () => {
@@ -36,7 +36,7 @@ export const Navbar = () => {
       <div className="container-fluid d-flex">
         <Link className="justify-content-center" to="/">
           <span className="navbar-brand mb-0 h1 mx-5">
-            <img className="logo" src={logo6} width="90" height="90" />
+            <img className="logo" src={logo6_nobg} width="90" height="90" />
           </span>
           {/* <h5 className="text-marron w-75">Mercado del artesano</h5> */}
         </Link>

@@ -18,15 +18,8 @@ export const Home = () => {
       <div
         className="banner sw-100"
         style={{
-          // backgroundImage: `url(${banner1})`,
-          // backgroundImage:
-          //   "url(https://previews.123rf.com/images/malven/malven1711/malven171100034/90439031-fondo-y-textura-de-lana-tejida-o-tela-de-algod%C3%B3n-color-marr%C3%B3n-de-primer-plano.jpg)",
-          // backgroundImage:
-          //   "url(https://static.vecteezy.com/system/resources/previews/005/273/505/non_2x/light-brown-knitted-fabric-texture-background-top-view-copy-empty-space-for-text-photo.jpg)",
           backgroundImage:
             "url(https://img.freepik.com/fotos-premium/detalle-textura-ratan-artesania-bambu-tejido-textura-fondo-textura-tejido-artesanal_298352-891.jpg?w=2000)",
-          // backgroundImage:
-          //   "url(https://img.freepik.com/fotos-premium/textura-lana-tejido-punto-cerca_110241-247.jpg?w=2000)",
           backgroundSize: "100%",
         }}
       >
@@ -44,20 +37,26 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="container-fluid bg-naranja-100">
-        <div className="row" style={{ minHeight: "500px" }}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="bg-naranja-300 shadow">
+            <h1 className="text-light text-center mt-1 text-shadow">
+              Catálogo de productos
+            </h1>
+          </div>
           {/* COLUMNA IZQUIERDA */}
-          <div className="col-sm-3 col-lg-2 bg-naranja-200 border-marron-end">
-            <h4 className="text-center py-3 mx-auto px-1">Categorías:</h4>
+          <div className="col-sm-3 col-lg-2 bg-naranja-200 shadow">
+            <h4 className="text-center pt-3 mx-auto px-1">Categorías:</h4>
+            <hr className="mb-3 mt-2 border-marron opacity-75" />
             <div className="d-grid gap-2 col-12 mx-auto">
               <button
-                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded"
+                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded shadow"
                 onClick={actions.eliminarFiltro}
               >
                 Todas
               </button>
               <select
-                className="scroll-select w-75 d-grid gap-2 col-6 bg-naranja-100 text-marron form-select m-auto py-3 text-center"
+                className="scroll-select w-75 d-grid gap-2 col-6 bg-naranja-100 text-marron form-select m-auto py-3 text-center shadow"
                 size="6"
                 multiple
                 aria-label="multiple select example"
@@ -89,12 +88,9 @@ export const Home = () => {
             </div>
           </div>
           {/* COLUMNA DERECHA */}
-          <div className="col-sm-9 col-lg-10">
-            <h2 className="col-sm-8 col-lg-10 p-3 pb-0 mx-auto text-center">
-              Catálogo de productos
-            </h2>
+          <div className="col-sm-9 col-lg-10" style={{ minHeight: "500px" }}>
             <div
-              className="d-flex justify-content-center mx-auto w-100 col-sm-8 col-lg-10 p-3 pt-0"
+              className="d-flex justify-content-center mx-auto w-100 col-sm-8 col-lg-10 p-3"
               // style={{ overflowX: "scroll", height: "55 0px" }}
             >
               <div className="d-flex justify-content-center row">
