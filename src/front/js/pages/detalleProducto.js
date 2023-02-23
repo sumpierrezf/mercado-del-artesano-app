@@ -71,7 +71,7 @@ export const DetalleProducto = ({ id }) => {
   // console.log(sellerSales);
   // ___________________Cierre de: Ventas del vendedor__________________________
 
-  // console.log(store.detalleProducto);
+  console.log(store.detalleProducto);
   return (
     <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
@@ -211,7 +211,7 @@ export const DetalleProducto = ({ id }) => {
             </p>
           </div>
           <div>
-            <p>Ventas: {sellerSales}</p>
+            <p>Ventas: {sellerSales || "0"}</p>
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}
