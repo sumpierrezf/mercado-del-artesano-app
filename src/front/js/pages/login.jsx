@@ -13,7 +13,7 @@ const Login = () => {
   const [formularioEnviado, cambiarFormularioEnviado] = useState(false);
   return (
     <>
-      <div className="h-100">
+      <div className="h-100 d-flex align-items-center">
         <div
           className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4"
           style={{ height: "auto" }}

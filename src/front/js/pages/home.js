@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Catalogo } from "../component/catalogo";
-import banner1 from "../../img/banner1.jpg";
 import logo6_white_nobg from "../../img/logo6_white_nobg.png";
 
 export const Home = () => {
@@ -81,7 +80,7 @@ export const Home = () => {
             <div className="d-grid gap-2 col-12 mx-auto">
               <Link
                 to={"/contacto/"}
-                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded"
+                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded mb-3"
               >
                 Contacto
               </Link>
