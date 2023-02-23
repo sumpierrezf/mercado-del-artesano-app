@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Context } from "../store/appContext.js";
 import { Navigate } from "react-router-dom";
 // Importar la clase Cloudinary.
 // import { Cloudinary } from " @cloudinary/url-gen ";
 
 export const Productos = (props) => {
+  const inputRef = useRef(null);
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
   const [precio, setPrecio] = useState("");
@@ -21,13 +22,14 @@ export const Productos = (props) => {
   async function enviarForm(e) {
     e.preventDefault();
     console.log(
-      nombre,
-      categoria,
-      precio,
-      stock,
-      descripcion,
-      condicion,
-      urls
+      setNombre(""),
+      setCategoria(""),
+      setPrecio(""),
+      setStock(""),
+      setDescripcion(""),
+      setCondicion(""),
+      setUrls(""),
+      setImage("")
       // store.user_id
     );
     await actions.createProduct(
@@ -42,6 +44,9 @@ export const Productos = (props) => {
     );
   }
 
+  const resetFileInput = () => {
+    inputRef.current.value = null;
+  };
   // catch (err) {
   //   console.error(err);
   // }
@@ -147,7 +152,7 @@ export const Productos = (props) => {
                   value={categoria}
                   onChange={handleCategoria}
                 >
-                  <option value>Selecciona la categoría</option>
+                  <option value>Categoría</option>
                   <option value="Tazas">Tazas</option>
                   <option value="Gorros">Gorros</option>
                   <option value="Madera">Madera</option>
@@ -235,11 +240,11 @@ export const Productos = (props) => {
                 encType="multipart/formdata"
               >
                 <input
-                  // value={image}
                   onChange={(e) => {
                     setImage(e.target.files);
                     submitImage(e);
                   }}
+                  ref={inputRef}
                   type="file"
                   name="Subir imagen "
                   multiple
@@ -264,7 +269,7 @@ export const Productos = (props) => {
                   Cancelar
                 </button>
                 <button
-                  // onClick={(e) => enviarForm(e)}
+                  onClick={resetFileInput}
                   type="submit"
                   className="btn text-marron bg-naranja-100 border-marron"
                 >
