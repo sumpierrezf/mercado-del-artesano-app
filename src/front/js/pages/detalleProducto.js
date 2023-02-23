@@ -165,7 +165,13 @@ export const DetalleProducto = ({ id }) => {
               type="button"
               className="btn btn-sm rounded-1 bg-naranja-200"
               onClick={() =>
-                localStorage.user_id == null
+                store.detalleProducto.amount == 0
+                  ? swal(
+                      "Atención!",
+                      "No queda stock de este producto",
+                      "warning"
+                    )
+                  : localStorage.user_id == null
                   ? swal(
                       "Alto!",
                       "Debes iniciar sesión para agregar productos al carrito!",

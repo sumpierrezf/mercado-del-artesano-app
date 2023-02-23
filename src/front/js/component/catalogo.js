@@ -48,7 +48,13 @@ export const Catalogo = ({
             <button
               className="btn text-warning text-shadow"
               onClick={() =>
-                localStorage.user_id == null
+                amount == 0
+                  ? swal(
+                      "Atención!",
+                      "No queda stock de este producto",
+                      "warning"
+                    )
+                  : localStorage.user_id == null
                   ? swal(
                       "Atención!",
                       "Debes iniciar sesión para agregar productos al carrito",

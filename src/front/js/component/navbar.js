@@ -34,14 +34,18 @@ export const Navbar = () => {
   return (
     <nav className="bg-naranja-200 border-marron-bot navbar-light">
       <div className="container-fluid d-flex">
-        <Link className="justify-content-center" to="/">
-          <span className="navbar-brand mb-0 h1 mx-5">
-            <img className="logo" src={logo6_nobg} width="90" height="90" />
-          </span>
-          {/* <h5 className="text-marron w-75">Mercado del artesano</h5> */}
-        </Link>
-        <div className="d-flex w-100 justify-content-center my-auto mx-auto w-100">
-          <form className="form-inline w-75">
+        <div className="d-flex justify-content-center col-lg-3 col-sm-2">
+          <Link className="d-flex mx-auto" to="/">
+            <img
+              className="logo mx-auto"
+              src={logo6_nobg}
+              width="90"
+              height="90"
+            />
+          </Link>
+        </div>
+        <div className="d-flex col-lg-6 col-sm-8 justify-content-center my-auto mx-auto">
+          <form className="form-inline w-100">
             <input
               className="form-control mr-sm-2"
               type="search"
@@ -54,19 +58,19 @@ export const Navbar = () => {
         </div>
 
         {/* ----------------Opciones------------------------- */}
-        <div className="d-flex w-50 justify-content-end me-5">
+        <div className="d-flex col-lg-3 col-sm-2 justify-content-end">
           {localStorage.user_id == null ? (
             <>
               {/* --------------- iniciar sesion -------------- */}
               <Link
-                className="btn text-marron my-auto me-2 border-2 justify-content-end"
+                className="navbar-btns btn text-marron my-auto border-2 justify-content-end"
                 to="/login"
               >
                 Iniciar sesión
               </Link>
               {/* --------------- signup -------------- */}
               <Link
-                className="btn text-marron my-auto me-2 border-2 justify-content-end"
+                className="navbar-btns btn text-marron my-auto border-2 justify-content-end"
                 to="/signup"
               >
                 Crear usuario
@@ -76,7 +80,7 @@ export const Navbar = () => {
             <>
               <div className="float-end dropdown my-auto">
                 <button
-                  className="btn text-marron dropdown-toggle"
+                  className="btn text-marron dropdown-toggle navbar-btns"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -91,7 +95,7 @@ export const Navbar = () => {
                     />
                   ) : (
                     <img
-                      className="rounded-circle border-marron me-2 px-0"
+                      className="rounded-circle border-marron me-1 px-0"
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
                       alt=""
                       width={"25"}
@@ -133,10 +137,10 @@ export const Navbar = () => {
               </div>
 
               <Link
-                className="btn text-marron mx-2 my-auto border-2"
+                className="btn text-marron mx-2 my-auto border-2 p-0"
                 to="/cart"
               >
-                <i className="fa fa-cart-arrow-down">
+                <i className="fa fa-cart-arrow-down navbar-btns">
                   {" "}
                   {store.products_in_cart.length}
                 </i>
