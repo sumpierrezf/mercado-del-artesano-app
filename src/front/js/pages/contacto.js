@@ -7,7 +7,7 @@ export const Contacto = () => {
     <>
       <div className="container m-5">
         <h3>Sobre nosotros.</h3>
-        <p>Hola! Queremos presentarnos!</p>
+        <p>¡Hola! ¡Queremos presentarnos!</p>
         <p>
           Somos un equipo conformado por cuatro personas: Luciana, Camila, Luis
           y Virginia. Todos hemos cursado juntos la carrera de Full Stack
