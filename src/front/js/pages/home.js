@@ -35,10 +35,11 @@ export const Home = () => {
             <img src={logo6_white_nobg} alt="" width={"150"} height={"auto"} />
             <h1>Mercado del Artesano</h1>
             <h5>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam
-              cupiditate at harum dolorum sit numquam tenetur dolores culpa
-              tempora reprehenderit! At et magnam eos tempora nemo id
-              praesentium soluta eveniet!
+              Descubre la magia de los objetos artesanales y culturales en
+              nuestro mercado en línea. Conoce a los artistas detrás de cada
+              creación y apoya su trabajo mientras decoras tu hogar y vida con
+              piezas únicas e irrepetibles. ¡Encuentra inspiración en nuestra
+              comunidad de arte y crea tu propio estilo!
             </h5>
           </div>
         </div>
