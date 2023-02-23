@@ -7,6 +7,7 @@ export const CartLi = (props) => {
       <div className="mx-3 col-lg-8 col-sm-7">
         <h6>{props.nombre}</h6>
         <p>${props.precio}</p>
+        <p>Stock: {props.stock}</p>
       </div>
     </div>
   );

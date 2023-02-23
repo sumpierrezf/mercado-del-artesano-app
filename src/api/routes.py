@@ -389,7 +389,14 @@ def update_product_sales():
     if product is None:
         return jsonify({"msg":"Producto no encontrado"}),404
 
+    if product.sales is None:
+        product.sales=request_body["sales"]
+        product.amount-=request_body["sales"]
+        db.session.commit()
+        return jsonify(product.serialize()), 200
+
     product.sales+=request_body["sales"]
+    product.amount-=request_body["sales"]
     db.session.commit()
     return jsonify(product.serialize()), 200
     
