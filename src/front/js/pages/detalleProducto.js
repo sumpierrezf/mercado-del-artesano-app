@@ -6,7 +6,7 @@ import swal from "sweetalert";
 
 export const DetalleProducto = ({ id }) => {
   const { store, actions } = useContext(Context);
-  const [cantidad, setCantidad] = useState(0);
+  const [cantidad, setCantidad] = useState(1);
   const [carrito, setCarrito] = useState([]);
   const [comment, setComment] = useState("");
   const [stars, setStars] = useState("");
@@ -71,7 +71,7 @@ export const DetalleProducto = ({ id }) => {
   // console.log(sellerSales);
   // ___________________Cierre de: Ventas del vendedor__________________________
 
-  // console.log(store.detalleProducto);
+  console.log(store.detalleProducto);
   return (
     <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
       {/* PRIMERA SECCION O FILA*/}
@@ -138,7 +138,7 @@ export const DetalleProducto = ({ id }) => {
             </p>
             {/* Seleccionar cantidad */}
             <div className="input-group mb-3 rounded-1">
-              <button
+              {/* <button
                 className="btn btn-outline-secondary"
                 type="button"
                 id="button-addon1"
@@ -155,7 +155,7 @@ export const DetalleProducto = ({ id }) => {
                 }}
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
-              />
+              /> */}
             </div>
           </div>
           {/* Boton de agregar al carrito */}
@@ -211,7 +211,7 @@ export const DetalleProducto = ({ id }) => {
             </p>
           </div>
           <div>
-            <p>Ventas: {sellerSales}</p>
+            <p>Ventas: {sellerSales || "0"}</p>
           </div>
         </div>
         {/* CALIFICACIONES DE CLIENTES */}

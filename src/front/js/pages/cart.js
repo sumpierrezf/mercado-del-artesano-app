@@ -73,6 +73,7 @@ export const Cart = () => {
                       nombre={item.productsInfo.name}
                       precio={item.productsInfo.price}
                       imagen={item.productsInfo.img1}
+                      stock={item.productsInfo.amount}
                     />
                     <div className="col-lg-6 col-sm-4 d-flex justify-content-end">
                       <input
@@ -82,14 +83,16 @@ export const Cart = () => {
                         placeholder="Cantidad"
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        min={1}
+                        max={item.productsInfo.amount}
                         value={item.amount == null ? 0 : item.amount}
-                        onChange={(e) =>
+                        onChange={(e) => {
                           actions.setAmountInCart(
                             item.user_id,
                             item.product_id,
                             e.target.value
-                          )
-                        }
+                          );
+                        }}
                       />
                       <button
                         className="float-end my-auto rounded bg-naranja-200 text-marron border-marron"
@@ -125,7 +128,7 @@ export const Cart = () => {
             <br />
             <div className="d-flex">
               <h6 className="w-50">Impuestos:</h6>
-              <h5 className="text-end w-50">${subtotal * 0.22}</h5>
+              <h5 className="text-end w-50">${Math.round(subtotal * 0.22)}</h5>
             </div>
             <hr className="my-3 border-marron opacity-75" />
             <div
@@ -135,7 +138,7 @@ export const Cart = () => {
               }}
             >
               <h4 className="w-50">TOTAL:</h4>
-              <h4 className="text-end w-50">${subtotal * 1.22}</h4>
+              <h4 className="text-end w-50">${Math.round(subtotal * 1.22)}</h4>
             </div>
             <hr className="border-marron opacity-75" />
             <div className="d-flex row">
