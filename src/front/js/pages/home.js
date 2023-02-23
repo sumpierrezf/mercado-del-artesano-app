@@ -17,15 +17,8 @@ export const Home = () => {
       <div
         className="banner sw-100"
         style={{
-          // backgroundImage: `url(${banner1})`,
-          // backgroundImage:
-          //   "url(https://previews.123rf.com/images/malven/malven1711/malven171100034/90439031-fondo-y-textura-de-lana-tejida-o-tela-de-algod%C3%B3n-color-marr%C3%B3n-de-primer-plano.jpg)",
-          // backgroundImage:
-          //   "url(https://static.vecteezy.com/system/resources/previews/005/273/505/non_2x/light-brown-knitted-fabric-texture-background-top-view-copy-empty-space-for-text-photo.jpg)",
           backgroundImage:
             "url(https://img.freepik.com/fotos-premium/detalle-textura-ratan-artesania-bambu-tejido-textura-fondo-textura-tejido-artesanal_298352-891.jpg?w=2000)",
-          // backgroundImage:
-          //   "url(https://img.freepik.com/fotos-premium/textura-lana-tejido-punto-cerca_110241-247.jpg?w=2000)",
           backgroundSize: "100%",
         }}
       >
