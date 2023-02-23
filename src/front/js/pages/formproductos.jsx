@@ -147,7 +147,7 @@ export const Productos = (props) => {
                   value={categoria}
                   onChange={handleCategoria}
                 >
-                  <option value>Selecciona la categoría</option>
+                  <option value>Categoría</option>
                   <option value="Tazas">Tazas</option>
                   <option value="Gorros">Gorros</option>
                   <option value="Madera">Madera</option>

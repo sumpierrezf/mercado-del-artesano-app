@@ -93,3 +93,6 @@ input[type="radio"]:checked ~ label {
 .text-verde {
   color: #00a650;
 }
+.bg-naranja-300 {
+  background-color: #f1a661;
+}

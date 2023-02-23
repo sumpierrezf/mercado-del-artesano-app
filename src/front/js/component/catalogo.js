@@ -34,10 +34,10 @@ export const Catalogo = ({
           alt="..."
         />
         <div className="card-body">
-          <h5 className="card-title">Nombre: {name} </h5>
+          <h5 className="card-title">{name} </h5>
           <p className="card-text">Categoría: {category}</p>
           <p className="card-text text-verde">Precio: $ {price} </p>
-          <p className="card-text">Cantidad: {amount} </p>
+          <p className="card-text">Stock: {amount} </p>
           <div className="justify-content-between">
             <Link
               to={"/detalleProducto/" + id}

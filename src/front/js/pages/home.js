@@ -44,8 +44,10 @@ export const Home = () => {
       </div>
       <div className="container-fluid">
         <div className="row">
-          <div className="bg-warning shadow">
-            <h1 className="text-light text-center mt-1">Catálogo de productos</h1>
+          <div className="bg-naranja-300 shadow">
+            <h1 className="text-light text-center mt-1">
+              Catálogo de productos
+            </h1>
           </div>
           {/* COLUMNA IZQUIERDA */}
           <div className="col-sm-3 col-lg-2 bg-naranja-200 shadow">
