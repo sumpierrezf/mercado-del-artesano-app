@@ -11,6 +11,7 @@ export const Home = () => {
   useEffect(() => {
     actions.obtenerInfoProductos();
     actions.getUserInfo(localStorage.user_id);
+    actions.getUserProductsInCart(localStorage.user_id);
   }, []);
   // console.log(store.productos[0]);
   return (
@@ -78,6 +79,7 @@ export const Home = () => {
               </select>
             </div>
             <h4 className="text-center py-3 mx-auto px-1">Sobre nosotros:</h4>
+            <hr className="mb-3 mt-2 border-marron opacity-75" />
             <div className="d-grid gap-2 col-12 mx-auto">
               <Link
                 to={"/contacto/"}
