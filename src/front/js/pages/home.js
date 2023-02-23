@@ -80,7 +80,7 @@ export const Home = () => {
             <div className="d-grid gap-2 col-12 mx-auto">
               <Link
                 to={"/contacto/"}
-                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded mb-3"
+                className="btn mx-auto w-75 text-marron bg-naranja-100 rounded mb-3 shadow"
               >
                 Contacto
               </Link>
