@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { Context } from "../store/appContext.js";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export const Contacto = () => {
+  const { store, actions } = useContext(Context);
+  useEffect(() => {
+    actions.getUserProductsInCart(localStorage.user_id);
+  }, []);
+
   return (
     <>
       <div className="mt-4">
@@ -153,6 +159,14 @@ export const Contacto = () => {
               </p>
             </div>
           </div>
+        </div>
+        <div className="d-grid gap-2 col-sm-3 mx-auto">
+          <Link
+            to={"/"}
+            className="btn mx-auto w-75 text-marron bg-naranja-200 rounded"
+          >
+            Volver al catálogo
+          </Link>
         </div>
       </div>
     </>

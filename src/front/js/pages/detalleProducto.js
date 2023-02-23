@@ -37,6 +37,7 @@ export const DetalleProducto = ({ id }) => {
     actions.obtenerDetalleProducto(params.theid);
     actions.obtenerReviews(params.theid);
     actions.getSellerProducts(store.detalleProducto.user_id);
+    actions.getUserProductsInCart(localStorage.user_id);
   }, []);
 
   // ___________________Calificación del vendedor__________________________

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { Navigate } from "react-router-dom";
 // Importar la clase Cloudinary.
@@ -108,6 +108,10 @@ export const Productos = (props) => {
     setCategoria(event.target.value);
   };
   // console.log(urls);
+  useEffect(() => {
+    actions.getUserProductsInCart(localStorage.user_id);
+  }, []);
+
   return (
     <>
       {localStorage.user_id === null ? (

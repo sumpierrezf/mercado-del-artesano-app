@@ -140,7 +140,10 @@ export const Navbar = () => {
                 className="btn text-marron mx-2 my-auto border-2"
                 to="/cart"
               >
-                <i className="fa fa-cart-arrow-down"></i>
+                <i className="fa fa-cart-arrow-down">
+                  {" "}
+                  {store.products_in_cart.length}
+                </i>
               </Link>
             </>
           )}
