@@ -71,7 +71,7 @@ export const Contacto = () => {
             </strong>
           </p>
         </div>
-        <div className="bg-naranja-100 p-5">
+        <div className="bg-naranja-100 p-5 pb-2">
           <h3 className="text-shadow">Contacto</h3>
           <p>
             Nuestra info de contacto para quienes deseen comunicarse con
@@ -160,7 +160,7 @@ export const Contacto = () => {
             </div>
           </div>
         </div>
-        <div className="d-grid gap-2 col-sm-3 mx-auto">
+        <div className="d-grid gap-2 col-sm-3 mx-auto mb-3">
           <Link
             to={"/"}
             className="btn mx-auto w-75 text-marron bg-naranja-200 rounded"

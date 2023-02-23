@@ -77,7 +77,7 @@ export const Home = () => {
                 <option value="Pinturas">Pinturas</option>
               </select>
             </div>
-            <h4 className="text-center py-3 mx-auto px-1">Sobre nosotros:</h4>
+            <h4 className="text-center pt-3 mx-auto px-1">Sobre nosotros:</h4>
             <hr className="mb-3 mt-2 border-marron opacity-75" />
             <div className="d-grid gap-2 col-12 mx-auto">
               <Link
