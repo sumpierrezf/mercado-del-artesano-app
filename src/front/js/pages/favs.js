@@ -11,6 +11,7 @@ export const Favs = () => {
 
   useEffect(() => {
     actions.getUserFavs(localStorage.user_id);
+    actions.getUserProductsInCart(localStorage.user_id);
   }, [store.fav_products]);
 
   return (

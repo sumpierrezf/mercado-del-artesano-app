@@ -21,6 +21,7 @@ export const Profile = () => {
 
   useEffect(() => {
     actions.getUserInfo(localStorage.user_id);
+    actions.getUserProductsInCart(localStorage.user_id);
   }, []);
 
   function enviarDatos(e) {
