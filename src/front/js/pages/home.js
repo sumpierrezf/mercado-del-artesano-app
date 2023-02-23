@@ -39,7 +39,7 @@ export const Home = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="bg-naranja-300 shadow">
-            <h1 className="text-light text-center mt-1">
+            <h1 className="text-light text-center mt-1 text-shadow">
               Catálogo de productos
             </h1>
           </div>

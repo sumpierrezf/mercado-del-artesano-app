@@ -41,12 +41,12 @@ export const Catalogo = ({
           <div className="justify-content-between">
             <Link
               to={"/detalleProducto/" + id}
-              className="btn bg-naranja-200 text-marron shadow"
+              className="btn bg-naranja-300 text-marron shadow text-shadow"
             >
               + Info
             </Link>
             <button
-              className="btn text-warning"
+              className="btn text-warning text-shadow"
               onClick={() =>
                 localStorage.user_id == null
                   ? swal(
@@ -60,7 +60,7 @@ export const Catalogo = ({
               <i className="fa fa-cart-arrow-down"></i>
             </button>
             <button
-              className="btn text-danger"
+              className="btn text-danger text-shadow"
               onClick={() =>
                 localStorage.user_id == null
                   ? swal(
