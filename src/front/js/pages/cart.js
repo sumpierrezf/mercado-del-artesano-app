@@ -54,7 +54,7 @@ export const Cart = () => {
             {store.products_in_cart.length} productos en el carrito
           </p>
 
-          <div className="col-sm-8 ps-0">
+          <div className="col-sm-8 ps-0 dvi">
             <div className="bg-naranja-100 border-marron rounded h-100">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
