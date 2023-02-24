@@ -74,33 +74,33 @@ export const DetalleProducto = ({ id }) => {
 
   console.log(store.detalleProducto);
   return (
-    <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron">
+    <div className="container flex-wrap p-3 my-4 mx-auto rounded-1 bg-naranja-200 border-marron text-marron dvi7 shadow">
       {/* PRIMERA SECCION O FILA*/}
       <div className="row">
         {/* PRIMER COLUMNA */}
         <div className="container flex-direction-column col-sm-2 rounded-1">
           <img
-            className="img-fluid m-1 rounded-1 border-marron"
+            className="img-fluid m-1 rounded-1 border-marron shadow"
             src={store.detalleProducto.img4}
           />
           <img
-            className="img-fluid m-1 rounded-1 border-marron"
+            className="img-fluid m-1 rounded-1 border-marron shadow"
             src={store.detalleProducto.img2}
           />
           <img
-            className="img-fluid m-1 rounded-1 border-marron"
+            className="img-fluid m-1 rounded-1 border-marron shadow"
             src={store.detalleProducto.img3}
           />
         </div>
         {/* SEGUNDA COLUMNA, IMAGEN CENTRAL */}
         <div className="d-flex container col-sm-4 rounded-1">
           <img
-            className="img-fluid m-1 rounded-1 border-marron"
+            className="img-fluid m-1 rounded-1 border-marron shadow"
             src={store.detalleProducto.img1}
           />
         </div>
         {/* TERCER COLUMNA, NOMBRE DEL PRODUCTO Y DEMAS INFO */}
-        <div className="col-sm-4 me-4 mb-3 rounded-1 border-marron bg-naranja-100">
+        <div className="col-sm-4 me-4 mb-3 rounded-1 border-marron bg-naranja-100 shadow">
           <div className="d-flex p-1 m-1">
             <p className="me-1">Estado: {store.detalleProducto.condition}</p>
             {/*aca tengo q traer la condicion del producto*/}
@@ -108,10 +108,10 @@ export const DetalleProducto = ({ id }) => {
             <p>N° de ventas: {store.detalleProducto.sales || "0"}</p>
           </div>
           <div className="producto">
-            <h4>
+            <h4 className="text-shadow">
               {store.detalleProducto.name}
               <button
-                className="btn text-danger float-end"
+                className="btn text-danger float-end text-shadow"
                 onClick={() =>
                   localStorage.user_id == null
                     ? swal(
@@ -163,7 +163,7 @@ export const DetalleProducto = ({ id }) => {
           <div className=" text-center m-3">
             <button
               type="button"
-              className="btn btn-sm rounded-1 bg-naranja-200"
+              className="btn btn-sm rounded-1 bg-naranja-200 shadow"
               onClick={() =>
                 store.detalleProducto.amount == 0
                   ? swal(
@@ -193,14 +193,16 @@ export const DetalleProducto = ({ id }) => {
       {/* SEGUNDA SECCION O FILA*/}
       <div className="row justify-content-between">
         <div className="col-sm-7 m-2 p-3">
-          <h4>
+          <h4 className="text-shadow">
             Descripción: {/*aca tengo q traer la descripcion del producto*/}
           </h4>
           <p>{store.detalleProducto.description}</p>
         </div>
         {/* INFO DEL VENDEDOR */}
-        <div className="col-sm-4 me-4 mb-3 p-2 rounded-1 border-marron bg-naranja-100">
-          <h4>{store.detalleProducto.sellerInfo?.first_name}</h4>
+        <div className="col-sm-4 me-4 mb-3 p-2 rounded-1 border-marron bg-naranja-100 shadow">
+          <h4 className="text-shadow">
+            {store.detalleProducto.sellerInfo?.first_name}
+          </h4>
           <div>
             {/* ICONO UBICACION */}
             <p>
@@ -226,7 +228,7 @@ export const DetalleProducto = ({ id }) => {
         <div className="container col-sm-12 text-center rounded-1 border-marron bg-naranja-100 pt-2">
           {localStorage.user_id == null ? null : (
             <>
-              <h3>
+              <h3 className="text-shadow">
                 Califica este producto
                 <form>
                   <p className="clasificacion">
@@ -286,16 +288,16 @@ export const DetalleProducto = ({ id }) => {
                 <label htmlFor="floatingTextarea">Comentarios</label>
               </div>
               <button
-                className="btn bg-naranja-200 my-2"
+                className="btn bg-naranja-200 my-2 shadow"
                 onClick={agregarComentario}
               >
                 <small>Agregar comentario.</small>
               </button>
             </>
           )}
-          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pt-2">
+          <div className="container col-sm-12 rounded-1 border-marron bg-naranja-200 mt-1 mb-3 pt-2 shadow">
             <div className="container">
-              <p>Comentarios de los clientes:</p>
+              <p className="text-shadow">Comentarios de los clientes:</p>
               {store.getReviews.map((item, index) => (
                 <div
                   className="container col-sm-12 rounded-1 bg-naranja-100 text-start px-2 mb-3 py-1"
