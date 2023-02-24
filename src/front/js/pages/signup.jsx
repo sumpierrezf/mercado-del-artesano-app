@@ -57,8 +57,8 @@ export const SignUp = (props) => {
       {store.auth === true ? (
         <Navigate to="/" />
       ) : (
-        <div className="container dvi7 col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-5">
-          <h2 className="d-flex text-marron justify-content-center">
+        <div className="container dvi7 col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-5 shadow">
+          <h2 className="d-flex text-marron justify-content-center text-shadow">
             Registro de usuario
           </h2>
           <div className="d-flex container w-75">
@@ -243,14 +243,14 @@ export const SignUp = (props) => {
               <div className="d-flex justify-content-center mt-2">
                 <button
                   type="submit"
-                  className="btn me-3 text-marron bg-naranja-100 border-marron"
+                  className="btn me-3 text-marron bg-naranja-100 border-marron shadow text-shadow"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={(e) => enviarDatos(e)}
                   type="submit"
-                  className="btn text-marron bg-naranja-100 border-marron"
+                  className="btn text-marron bg-naranja-100 border-marron shadow text-shadow"
                 >
                   Enviar
                 </button>
