@@ -19,16 +19,13 @@ export const Favs = () => {
       {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div className="h-100 d-flex align-items-center">
-          <div className="col-11 row bg-naranja-200 border-marron m-auto rounded p-5 pt-4 my-4">
+        <div className="d-flex align-items-center">
+          <div className="col-11 row bg-naranja-200 border-marron m-auto rounded p-5 pt-4 my-4 shadow">
             <p className="col-12 text-end mb-3" style={{ height: "20px" }}>
               {store.fav_products.length} favoritos
             </p>
-            <div
-              className="bg-naranja-100 border-marron col-sm-3 col-lg-2 rounded"
-              style={{ minHeight: "300px" }}
-            >
-              <h5 className="mt-3 text-center">Categoría</h5>
+            <div className="bg-naranja-100 border-marron col-sm-3 col-lg-2 rounded dvi3 shadow">
+              <h5 className="mt-3 text-center text-shadow">Categoría</h5>
               <hr className="my-1 border-marron" />
               <div className="w-100 d-flex justify-content-center">
                 <button
@@ -56,12 +53,12 @@ export const Favs = () => {
               </select>
             </div>
 
-            <div className="col-sm-9 col-lg-10">
-              <div className="bg-naranja-100 border-marron rounded h-100">
+            <div className="dvi2 col-sm-9 col-lg-10">
+              <div className="bg-naranja-100 border-marron rounded h-100 shadow">
                 {/* __________________Lista_de_favoritos________________________ */}
                 <ul className=" list-group list-group-flush m-auto my-1 p-0">
                   <li className="list-group-item bg-naranja-100 text-marron border-marron">
-                    <h4>Favoritos</h4>
+                    <h4 className="text-shadow">Favoritos</h4>
                   </li>
                   <hr className="m-0 border-marron opacity-0" />
 

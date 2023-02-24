@@ -13,9 +13,9 @@ const Login = () => {
   const [formularioEnviado, cambiarFormularioEnviado] = useState(false);
   return (
     <>
-      <div className="h-100 d-flex align-items-center">
+      <div className="d-flex align-items-center" style={{ minHeight: "800px" }}>
         <div
-          className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4"
+          className="container dvi7 d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-3  border-marron bg-naranja-200 rounded py-4 shadow"
           style={{ height: "auto" }}
         >
           <div className="d-flex justify-content-center w-75">
@@ -66,7 +66,7 @@ const Login = () => {
                   <Form className="login pt-3 w-100 pb-3">
                     {console.log(errors)}
                     <div className="mb-3">
-                      <h2 className="text-center mb-2">Login</h2>
+                      <h2 className="text-center mb-2 text-shadow">Login</h2>
                       <hr className="border-marron" />
                       <label
                         htmlFor="exampleInputEmail1"
@@ -108,7 +108,7 @@ const Login = () => {
                         id="exampleInputPassword"
                       />
                       <i
-                        className={`far fa-eye${
+                        className={`text-shadow far fa-eye${
                           switchShown === true ? "" : "-slash"
                         } `}
                         onClick={() =>
@@ -127,14 +127,17 @@ const Login = () => {
                     </div>
                     <br />
                     <div className="mb-3 resetpassword">
-                      <Link className="text-naranja-400" to={"/resetPassword"}>
+                      <Link
+                        className="text-naranja-400 text-shadow"
+                        to={"/resetPassword"}
+                      >
                         Olvidé mi contraseña
                       </Link>
                     </div>
                     <div className="d-flex justify-content-center">
                       <button
                         type="submit"
-                        className="boton-login bg-naranja-400 btn text-white fw-bold mt-4 p-3 align-items-center rounded-pill w-50 text-uppercase"
+                        className="boton-login bg-naranja-400 btn text-white fw-bold mt-4 p-3 align-items-center rounded-pill w-50 text-uppercase shadow text-shadow"
                       >
                         Login
                       </button>

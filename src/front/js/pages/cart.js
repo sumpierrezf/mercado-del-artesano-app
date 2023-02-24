@@ -49,17 +49,17 @@ export const Cart = () => {
       {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div className="bg-naranja-200 border-marron m-auto rounded row col-sm-11 col-lg-10 p-4 pt-4 my-4">
+        <div className="bg-naranja-200 border-marron m-auto rounded row col-sm-11 col-lg-10 p-4 pt-4 my-4 dvi6 shadow">
           <p className="mb-3" style={{ height: "20px" }}>
             {store.products_in_cart.length} productos en el carrito
           </p>
 
-          <div className="col-sm-8 ps-0">
-            <div className="bg-naranja-100 border-marron rounded h-100">
+          <div className="col-sm-8 ps-0 dvi">
+            <div className="bg-naranja-100 border-marron rounded h-100 shadow">
               {/* __________________Lista_de_favoritos________________________ */}
               <ul className=" list-group list-group-flush m-auto my-1 p-0">
                 <li className="list-group-item bg-naranja-100 text-marron border-marron-bot">
-                  <h4>Carrito de compras</h4>
+                  <h4 className="text-shadow">Carrito de compras</h4>
                 </li>
                 <hr className="m-0 border-marron opacity-0" />
 
@@ -116,18 +116,18 @@ export const Cart = () => {
               {/* __________________Cierre_de_lista_de_favoritos________________________ */}
             </div>
           </div>
-          <div className="bg-naranja-100 border-marron col-sm-4 rounded">
-            <h4 className="mt-3 text-center">Total</h4>
+          <div className="bg-naranja-100 border-marron col-sm-4 rounded shadow">
+            <h4 className="mt-3 text-center text-shadow">Total</h4>
             <hr className="my-1 border-marron opacity-75" />
             <br />
             <div className="d-flex">
-              <h5 className="w-50">Subtotal:</h5>
+              <h5 className="w-50 text-shadow">Subtotal:</h5>
               <h5 className="text-end w-50">${subtotal}</h5>
             </div>
 
             <br />
             <div className="d-flex">
-              <h6 className="w-50">Impuestos:</h6>
+              <h6 className="w-50 text-shadow">Impuestos:</h6>
               <h5 className="text-end w-50">${Math.round(subtotal * 0.22)}</h5>
             </div>
             <hr className="my-3 border-marron opacity-75" />
@@ -137,14 +137,14 @@ export const Cart = () => {
                 marginTop: "160px",
               }}
             >
-              <h4 className="w-50">TOTAL:</h4>
+              <h4 className="w-50 text-shadow">TOTAL:</h4>
               <h4 className="text-end w-50">${Math.round(subtotal * 1.22)}</h4>
             </div>
             <hr className="border-marron opacity-75" />
             <div className="d-flex row">
               <div className="logo col-lg-4 col-sm-12">
                 <img
-                  className="img-fluid"
+                  className="img-fluid shadow"
                   src="https://www.leccionesdearmonica.com/wp-content/uploads/2018/03/Logo-Mercado-Pago-fondocrema.png"
                   alt="Logo de Mercado Pago"
                 />
@@ -152,7 +152,7 @@ export const Cart = () => {
               <div className="container col-lg-8 row mx-auto justify-content-center">
                 <button
                   type="button"
-                  className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-1"
+                  className="btn btn-sm rounded-1 bg-naranja-200 border-marron m-1 shadow"
                   onClick={(e) => {
                     pagar(e);
                     updateSales();
@@ -162,7 +162,7 @@ export const Cart = () => {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-sm rounded-1 bg-naranja-100 border-marron m-1 mb-3"
+                  className="btn btn-sm rounded-1 bg-naranja-100 border-marron m-1 mb-3 shadow"
                   onClick={() => actions.vaciarCarrito(localStorage.user_id)}
                 >
                   Vaciar carrito.

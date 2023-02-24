@@ -47,7 +47,7 @@ export const Navbar = () => {
         <div className="d-flex col-lg-6 col-sm-8 justify-content-center my-auto mx-auto">
           <form className="form-inline w-100">
             <input
-              className="form-control mr-sm-2"
+              className="form-control mx-auto mr-sm-2 dvi5"
               type="search"
               placeholder="Buscar"
               aria-label="Search"
