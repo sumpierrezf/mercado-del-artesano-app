@@ -75,3 +75,18 @@ body::-webkit-scrollbar-thumb:hover {
     min-height: 300px;
   }
 }
+@media only screen and (min-width: 576px) {
+  .dvi4 {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 900px) {
+  .dvi4 {
+    width: 65%;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .dvi4 {
+    width: 90%;
+  }
+}

@@ -117,10 +117,10 @@ export const Productos = (props) => {
       {localStorage.user_id === null ? (
         <Navigate to="/" />
       ) : (
-        <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4">
+        <div className="container dvi4 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4">
           <h2 className="d-flex justify-content-center">Publica tu producto</h2>
 
-          <div className="container w-75">
+          <div className="container w-75 px-0">
             <form className="mx-auto row" onSubmit={enviarForm}>
               <hr className="border-marron mt-4"></hr>
               {/* ______________________Nombre_______________________________________ */}
