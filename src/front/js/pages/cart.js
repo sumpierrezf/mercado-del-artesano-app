@@ -49,7 +49,7 @@ export const Cart = () => {
       {localStorage.user_id === null ? (
         <Navigate to="/login" />
       ) : (
-        <div className="bg-naranja-200 border-marron m-auto rounded row col-sm-11 col-lg-10 p-4 pt-4 my-4">
+        <div className="bg-naranja-200 border-marron m-auto rounded row col-sm-11 col-lg-10 p-4 pt-4 my-4 dvi6">
           <p className="mb-3" style={{ height: "20px" }}>
             {store.products_in_cart.length} productos en el carrito
           </p>

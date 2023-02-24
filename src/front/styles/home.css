@@ -90,3 +90,23 @@ body::-webkit-scrollbar-thumb:hover {
     width: 90%;
   }
 }
+@media only screen and (max-width: 810px) {
+  .dvi5 {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .dvi6 {
+    width: 80%;
+  }
+}
+/* @media only screen and (min-width: 900px) {
+  .dvi6 {
+    width: 65%;
+  }
+} */
+@media only screen and (max-width: 575px) {
+  .dvi6 {
+    width: 90%;
+  }
+}
