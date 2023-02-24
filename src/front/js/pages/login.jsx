@@ -15,7 +15,7 @@ const Login = () => {
     <>
       <div className="h-100 d-flex align-items-center">
         <div
-          className="container d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4"
+          className="container dvi7 d-flex col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-4"
           style={{ height: "auto" }}
         >
           <div className="d-flex justify-content-center w-75">

@@ -57,7 +57,7 @@ export const SignUp = (props) => {
       {store.auth === true ? (
         <Navigate to="/" />
       ) : (
-        <div className="container col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-5">
+        <div className="container dvi7 col-lg-6 col-sm-8 align-items-center justify-content-center my-5  border-marron bg-naranja-200 rounded py-5">
           <h2 className="d-flex text-marron justify-content-center">
             Registro de usuario
           </h2>
